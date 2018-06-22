@@ -322,7 +322,6 @@ public class CwApisServiceImp implements CwApisService {
 		if (request.getShStatus() == 1) {
 			Preconditions.checkArgument(request.getCwTotal().compareTo(BigDecimal.ZERO) > 0, "批准金额必须大于0!");
 		}
-		QCbhsReim query_ = QCbhsReim.cbhsReim;
 		synchronized (this) {
 			CbhsReim reim = queryFactory.findOne(CbhsReim.class, request.getOid());
 			Preconditions.checkArgument(reim != null, "未找到报销记录!");

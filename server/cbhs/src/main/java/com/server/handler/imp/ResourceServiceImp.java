@@ -3,18 +3,18 @@ package com.server.handler.imp;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.UUID;
-
-import org.springframework.beans.factory.annotation.Value;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.jmimemagic.Magic;
+
 import org.apache.commons.io.FileUtils;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -30,8 +30,6 @@ import com.server.exception.ServiceException;
 import com.server.handler.ResourceService;
 import com.server.jpa.MyQueryFactory;
 import com.server.pojo.bean.CbhsResource;
-
-import net.sf.jmimemagic.Magic;
 
 @Service
 @Transactional(isolation = Isolation.DEFAULT, propagation = Propagation.REQUIRES_NEW, timeout = 60)

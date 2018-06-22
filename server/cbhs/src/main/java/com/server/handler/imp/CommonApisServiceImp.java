@@ -32,9 +32,9 @@ import com.server.exception.ServiceException;
 import com.server.handler.CommonApisService;
 import com.server.jpa.MyJPAQuery;
 import com.server.jpa.MyJPAQuery.PagerResult;
+import com.server.jpa.MyQueryFactory;
 import com.server.manager.PushManager;
 import com.server.manager.TokenManager;
-import com.server.jpa.MyQueryFactory;
 import com.server.pojo.bean.CbhsAccount;
 import com.server.pojo.bean.CbhsDept;
 import com.server.pojo.bean.CbhsResource;
@@ -42,15 +42,6 @@ import com.server.pojo.bean.CbhsRole;
 import com.server.pojo.bean.CbhsUser;
 import com.server.pojo.bean.CbhsVersion;
 import com.server.pojo.bean.QCbhsAccount;
-import com.server.pojo.bean.QCbhsCailiao;
-import com.server.pojo.bean.QCbhsCb;
-import com.server.pojo.bean.QCbhsCbExaminer;
-import com.server.pojo.bean.QCbhsCbExaminerRule;
-import com.server.pojo.bean.QCbhsDaysFbGclTj;
-import com.server.pojo.bean.QCbhsDaysFbLjxmCb;
-import com.server.pojo.bean.QCbhsDaysGclSr;
-import com.server.pojo.bean.QCbhsDaysGlfyYs;
-import com.server.pojo.bean.QCbhsDaysJjcb;
 import com.server.pojo.bean.QCbhsDept;
 import com.server.pojo.bean.QCbhsResource;
 import com.server.pojo.bean.QCbhsRole;
@@ -267,9 +258,13 @@ public class CommonApisServiceImp implements CommonApisService {
 	public ResponseGetUser getUser(RequestGetUser request, HttpServletRequest httpServletRequest) throws Exception {
 		QCbhsUser query_ = QCbhsUser.cbhsUser;
 		// 查询对象
-		MyJPAQuery<uiGetUser> jpaquery = (MyJPAQuery<uiGetUser>) queryFactory.select(Projections.bean(uiGetUser.class, query_.oid, query_.name, query_.phoneNumber, query_.sex, query_.menuids, query_.roleids, query_.roleNames, query_.deptOid, query_.deptName, query_.isAdmin, query_.avatarOid, query_.avatar, QCbhsAccount.cbhsAccount.account)).from(query_, QCbhsAccount.cbhsAccount).where(QCbhsAccount.cbhsAccount.user.oid.eq(query_.oid));
+		MyJPAQuery<uiGetUser> jpaquery = (MyJPAQuery<uiGetUser>) queryFactory
+				.select(Projections.bean(uiGetUser.class, query_.oid, query_.name, query_.phoneNumber, query_.sex, query_.menuids, query_.roleids, query_.roleNames, query_.deptOid, query_.deptName,
+						query_.isAdmin, query_.avatarOid, query_.avatar, QCbhsAccount.cbhsAccount.account)).from(query_, QCbhsAccount.cbhsAccount)
+				.where(QCbhsAccount.cbhsAccount.user.oid.eq(query_.oid));
 		// 条件组合
-		jpaquery.where(request.getAccount(), query_.oid.in(JPAExpressions.select(QCbhsAccount.cbhsAccount.user.oid).from(QCbhsAccount.cbhsAccount).where(QCbhsAccount.cbhsAccount.account.eq(request.getAccount()))));
+		jpaquery.where(request.getAccount(),
+				query_.oid.in(JPAExpressions.select(QCbhsAccount.cbhsAccount.user.oid).from(QCbhsAccount.cbhsAccount).where(QCbhsAccount.cbhsAccount.account.eq(request.getAccount()))));
 		jpaquery.where(request.getName(), query_.name.containsIgnoreCase(request.getName()));
 		jpaquery.where(request.getDeptOid(), query_.deptOid.eq(request.getDeptOid()));
 		jpaquery.where(request.getRoleOid(), query_.roleids.contains("|" + request.getRoleOid() + "|"));
@@ -388,7 +383,11 @@ public class CommonApisServiceImp implements CommonApisService {
 	@Override
 	public JSONObject modifyPwd(RequestModifyPwd request, HttpServletRequest httpServletRequest) throws Exception {
 		// TODO Auto-generated method stub
-		if (queryFactory.update(QCbhsAccount.cbhsAccount).set(QCbhsAccount.cbhsAccount.password, org.apache.commons.codec.digest.DigestUtils.md5Hex(request.getNewPwd())).where(QCbhsAccount.cbhsAccount.accountKey.eq(request.getAccountKey()).and(QCbhsAccount.cbhsAccount.password.eq(org.apache.commons.codec.digest.DigestUtils.md5Hex(request.getOldPwd())))).execute() > 0) {
+		if (queryFactory
+				.update(QCbhsAccount.cbhsAccount)
+				.set(QCbhsAccount.cbhsAccount.password, org.apache.commons.codec.digest.DigestUtils.md5Hex(request.getNewPwd()))
+				.where(QCbhsAccount.cbhsAccount.accountKey.eq(request.getAccountKey()).and(
+						QCbhsAccount.cbhsAccount.password.eq(org.apache.commons.codec.digest.DigestUtils.md5Hex(request.getOldPwd())))).execute() > 0) {
 			return CbhsResUtils.suc();
 		} else {
 			throw new ServiceException(new ExceptionResponse(-1, "修改密码失败,密码不正确!"));
@@ -423,7 +422,8 @@ public class CommonApisServiceImp implements CommonApisService {
 		Preconditions.checkArgument(request.getAvatarOid() > 0, "资源ID不能为空!");
 		CbhsResource resource = queryFactory.findOne(CbhsResource.class, request.getAvatarOid());
 		Preconditions.checkArgument(resource != null, "资源不存在!");
-		queryFactory.update(QCbhsUser.cbhsUser).set(QCbhsUser.cbhsUser.avatarOid, resource.getOid()).set(QCbhsUser.cbhsUser.avatar, resource.getUrl()).where(QCbhsUser.cbhsUser.oid.eq(TokenUtils.getTokenInfo(httpServletRequest).getUserOid())).execute();
+		queryFactory.update(QCbhsUser.cbhsUser).set(QCbhsUser.cbhsUser.avatarOid, resource.getOid()).set(QCbhsUser.cbhsUser.avatar, resource.getUrl())
+				.where(QCbhsUser.cbhsUser.oid.eq(TokenUtils.getTokenInfo(httpServletRequest).getUserOid())).execute();
 		return CbhsResUtils.suc();
 	}
 

@@ -43,7 +43,6 @@ import com.server.pojo.url.tjbb.RequestZybb;
 import com.server.pojo.url.tjbb.ResponseCbsrbb;
 import com.server.pojo.url.tjbb.ResponseZybb;
 
-@SuppressWarnings({ "unchecked", "rawtypes" })
 @Service
 @Transactional(isolation = Isolation.DEFAULT, propagation = Propagation.REQUIRES_NEW, timeout = 60)
 // 分包商结算产值收入 ， 是直接成本中的分包成本。 分包商直接成本，是资源统计中的总金额

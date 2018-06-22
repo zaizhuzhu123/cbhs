@@ -18,7 +18,6 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
-import com.querydsl.jpa.JPAExpressions;
 import com.server.common.BeanValidation;
 import com.server.common.CbhsResUtils;
 import com.server.common.DateObj;
@@ -846,12 +845,10 @@ public class DaysCbApisServiceImp implements DaysCbApisService {
 		ys.setShStatus(0);
 		// 监测是否超出总预算
 		long time = ys.getDateTimeStamp() > 0 ? ys.getDateTimeStamp() : System.currentTimeMillis();
-		String ext = null;
 		RequestMbYsFetch r1 = new RequestMbYsFetch();
 		r1.setProjectOid(ys.getProjectOid());
 		r1.setDeptOid(ys.getDeptOid());
 		r1.setMonth(new SimpleDateFormat("yyyy-MM-01").parse(new SimpleDateFormat("yyyy-MM-01").format(new Date(time))).getTime());
-		ExceedException exception = null;
 		try {
 			List<Integer> globalGclOids = Lists.newArrayList();
 			globalGclOids.add(ys.getFbGclYsOid());
