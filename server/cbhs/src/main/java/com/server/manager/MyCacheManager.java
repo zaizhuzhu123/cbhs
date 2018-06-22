@@ -1,9 +1,5 @@
 package com.server.manager;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.Cache.ValueWrapper;
-import org.springframework.cache.CacheManager;
-
 public class MyCacheManager {
 
 	// @Autowired

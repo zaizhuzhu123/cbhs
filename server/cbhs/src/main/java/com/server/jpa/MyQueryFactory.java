@@ -157,6 +157,7 @@ public class MyQueryFactory extends JPAQueryFactory {
 		}
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void batchRemove(Class entityClass, List<Integer> oids) {
 		if (oids != null && oids.size() > 0) {
 			EntityManager em = this.entityManager.get();
