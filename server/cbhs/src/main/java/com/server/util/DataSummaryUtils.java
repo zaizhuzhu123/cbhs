@@ -950,19 +950,19 @@ public class DataSummaryUtils {
 	 * @return
 	 */
 	public static Map<String, BigDecimal> getThisMonthFbCailiaoCbYs(MyQueryFactory queryFactory, RequestMbYsFetch request, List<Integer> deptOids, List<Integer> fbGclOids) {
-		JPAQuery<Tuple> jqcbhsMonthZyCailiaoCbYsTuple = queryFactory.select(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.deptOid, QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.globalGclYsOid, QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.cailiaoOid, QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.count.sum()).from(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs).where(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.projectOid.eq(request.getProjectOid()).and(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.monthTimeStamp.eq(request.getMonth())));
+		JPAQuery<Tuple> jqcbhsMonthZyCailiaoCbYsTuple = queryFactory.select(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.globalGclYsOid, QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.cailiaoOid, QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.count.sum()).from(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs).where(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.projectOid.eq(request.getProjectOid()).and(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.monthTimeStamp.eq(request.getMonth())));
 		if (deptOids != null && deptOids.size() > 0) {
 			jqcbhsMonthZyCailiaoCbYsTuple.where(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.deptOid.in(deptOids));
 		}
 		if (fbGclOids != null & fbGclOids.size() > 0) {
 			jqcbhsMonthZyCailiaoCbYsTuple.where(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.globalGclYsOid.in(fbGclOids));
 		}
-		jqcbhsMonthZyCailiaoCbYsTuple.groupBy(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.deptOid, QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.globalGclYsOid, QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.cailiaoOid);
+		jqcbhsMonthZyCailiaoCbYsTuple.groupBy(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.globalGclYsOid, QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.cailiaoOid);
 		List<Tuple> list = jqcbhsMonthZyCailiaoCbYsTuple.fetch();
 		Map<String, BigDecimal> map = Maps.newHashMap();
 		if (list.size() > 0) {
 			for (Tuple tp : list) {
-				map.put(tp.get(0, Integer.class) + "@" + tp.get(1, Integer.class) + "@" + tp.get(2, Integer.class), tp.get(3, BigDecimal.class));
+				map.put(tp.get(0, Integer.class) + "@" + tp.get(1, Integer.class), tp.get(2, BigDecimal.class));
 			}
 		}
 		return map;
@@ -981,19 +981,19 @@ public class DataSummaryUtils {
 		DateTime dt = new DateTime(request.getMonth());
 		long startTime = dt.getMillis();
 		long endTime = dt.plusMonths(1).getMillis();
-		JPAQuery<Tuple> jqcbhsMonthZyCailiaoCbYsTuple = queryFactory.select(QCbhsZytj.cbhsZytj.deptOid, QCbhsZytj.cbhsZytj.globalGclYsOid, QCbhsZytjZC.cbhsZytjZC.clOid, QCbhsZytjZC.cbhsZytjZC.clCount.sum()).from(QCbhsZytj.cbhsZytj, QCbhsZytjZC.cbhsZytjZC).where(QCbhsZytjZC.cbhsZytjZC.zytjOid.eq(QCbhsZytj.cbhsZytj.oid)).where(QCbhsZytj.cbhsZytj.projectOid.eq(request.getProjectOid()).and(QCbhsZytj.cbhsZytj.dateTimeStamp.goe(startTime).and(QCbhsZytj.cbhsZytj.dateTimeStamp.loe(endTime))).and(QCbhsZytj.cbhsZytj.shStatus.eq(0)));
+		JPAQuery<Tuple> jqcbhsMonthZyCailiaoCbYsTuple = queryFactory.select(QCbhsZytj.cbhsZytj.globalGclYsOid, QCbhsZytjZC.cbhsZytjZC.clOid, QCbhsZytjZC.cbhsZytjZC.clCount.sum()).from(QCbhsZytj.cbhsZytj, QCbhsZytjZC.cbhsZytjZC).where(QCbhsZytjZC.cbhsZytjZC.zytjOid.eq(QCbhsZytj.cbhsZytj.oid)).where(QCbhsZytj.cbhsZytj.projectOid.eq(request.getProjectOid()).and(QCbhsZytj.cbhsZytj.dateTimeStamp.goe(startTime).and(QCbhsZytj.cbhsZytj.dateTimeStamp.loe(endTime))).and(QCbhsZytj.cbhsZytj.shStatus.eq(0)));
 		if (deptOids != null && deptOids.size() > 0) {
 			jqcbhsMonthZyCailiaoCbYsTuple.where(QCbhsZytj.cbhsZytj.deptOid.in(deptOids));
 		}
 		if (globalGclOids != null & globalGclOids.size() > 0) {
 			jqcbhsMonthZyCailiaoCbYsTuple.where(QCbhsZytj.cbhsZytj.globalGclYsOid.in(globalGclOids));
 		}
-		jqcbhsMonthZyCailiaoCbYsTuple.groupBy(QCbhsZytj.cbhsZytj.deptOid, QCbhsZytj.cbhsZytj.globalGclYsOid, QCbhsZytjZC.cbhsZytjZC.clOid);
+		jqcbhsMonthZyCailiaoCbYsTuple.groupBy(QCbhsZytj.cbhsZytj.globalGclYsOid, QCbhsZytjZC.cbhsZytjZC.clOid);
 		List<Tuple> list = jqcbhsMonthZyCailiaoCbYsTuple.fetch();
 		Map<String, BigDecimal> map = Maps.newHashMap();
 		if (list.size() > 0) {
 			for (Tuple tp : list) {
-				map.put(tp.get(0, Integer.class) + "@" + tp.get(1, Integer.class) + "@" + tp.get(2, Integer.class), tp.get(3, BigDecimal.class));
+				map.put(tp.get(0, Integer.class) + "@" + tp.get(1, Integer.class), tp.get(2, BigDecimal.class));
 			}
 		}
 		return map;
@@ -1015,9 +1015,9 @@ public class DataSummaryUtils {
 		List<uiExceedInfo> exceedInfos = Lists.newArrayList();
 		if (cailiaos != null && cailiaos.size() > 0) {
 			for (CbhsZytjZC cailiao : cailiaos) {
-				BigDecimal ysCount = ys.get(deptOids.get(0) + "@" + globalGclOids.get(0) + "@" + cailiao.getClOid());
+				BigDecimal ysCount = ys.get(globalGclOids.get(0) + "@" + cailiao.getClOid());
 				ysCount = ysCount != null ? ysCount : new BigDecimal(0);
-				BigDecimal cbCount = cb.get(deptOids.get(0) + "@" + globalGclOids.get(0) + "@" + cailiao.getClOid());
+				BigDecimal cbCount = cb.get(globalGclOids.get(0) + "@" + cailiao.getClOid());
 				cbCount = cbCount != null ? cbCount : new BigDecimal(0);
 				BigDecimal subJG = BigDecimalUtils.getSub(ysCount, cbCount, cailiao.getClCount());
 				if (BigDecimalUtils.gt(cailiao.getClCount(), 0) && BigDecimalUtils.lt(subJG, 0)) {
