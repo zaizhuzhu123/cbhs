@@ -5,6 +5,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class BeanTools implements ApplicationContextAware {
 	private static ApplicationContext applicationContext;
 
@@ -12,10 +13,8 @@ public class BeanTools implements ApplicationContextAware {
 		applicationContext = context;
 	}
 
-	@SuppressWarnings("rawtypes")
 	public static Object getBean(Class classname) {
 		try {
-			@SuppressWarnings("unchecked")
 			Object _restTemplate = applicationContext.getBean(classname);
 			return _restTemplate;
 		} catch (Exception e) {
