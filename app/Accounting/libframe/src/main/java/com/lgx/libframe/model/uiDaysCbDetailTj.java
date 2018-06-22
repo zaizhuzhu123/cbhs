@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.io.Serializable;
 import com.lgx.libframe.*;
 public class uiDaysCbDetailTj implements Serializable{
-private static final long serialVersionUID = 100000005L;
+private static final long serialVersionUID = 1000000005L;
 
 private double jjcb;// 间接成本
 private double zycailiaocb;// 自营材料成本

@@ -16,6 +16,7 @@ import com.alibaba.fastjson.annotation.JSONField;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.DynamicInsert;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiModel;
 public class uiCbhsMonthWebTotal implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Column(name = "monthStr", length = 50, nullable = true, unique = false,columnDefinition="varchar(50) default ''")

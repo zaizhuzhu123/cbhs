@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.io.Serializable;
 import com.lgx.libframe.*;
 public class uiGetUser implements Serializable{
-private static final long serialVersionUID = 100000008L;
+private static final long serialVersionUID = 1000000008L;
 
 private int oid;// 主键
 private String  name;// 名称

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.io.Serializable;
 import com.lgx.libframe.*;
 public class uiExceedInfo implements Serializable{
-private static final long serialVersionUID = 100000003L;
+private static final long serialVersionUID = 1000000003L;
 
 private String  name;// 超标项名称
 private double value;// 超标值

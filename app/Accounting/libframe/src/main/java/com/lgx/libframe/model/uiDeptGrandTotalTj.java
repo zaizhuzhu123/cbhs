@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.io.Serializable;
 import com.lgx.libframe.*;
 public class uiDeptGrandTotalTj implements Serializable{
-private static final long serialVersionUID = 100000007L;
+private static final long serialVersionUID = 1000000007L;
 
 private double cbTotal;// 总支出
 private int deptOid;// 部门ID

@@ -16,12 +16,14 @@ import com.alibaba.fastjson.annotation.JSONField;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.DynamicInsert;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiModel;
 
 @DynamicUpdate
 @DynamicInsert
 @Entity
 @Table(name = "CbhsProject")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@ApiModel(value="工程项目对象",description="工程项目对象")
 public class CbhsProject implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id

@@ -16,6 +16,7 @@ import com.alibaba.fastjson.annotation.JSONField;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.DynamicInsert;
 import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiModel;
 public class uiCbhsFbGcGlobalXm implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Column(name = "oid", nullable = true, unique = false,columnDefinition="Integer default 0")

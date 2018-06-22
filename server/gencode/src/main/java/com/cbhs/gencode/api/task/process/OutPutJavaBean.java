@@ -10,6 +10,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.cbhs.gencode.api.task.MagicConstant;
 import com.cbhs.gencode.api.task.api.ILevelObj;
 import com.cbhs.gencode.api.task.entity.FieldObj;
@@ -29,6 +31,7 @@ public class OutPutJavaBean extends AbstractProcess {
 	private BufferedWriter bw = null;
 	private String packageName = null;
 	public String curFileName = null;
+	public String descName = null;
 	private boolean isBean;
 	boolean dbBean = true;
 	protected boolean hasArray = false;
@@ -79,8 +82,13 @@ public class OutPutJavaBean extends AbstractProcess {
 	}
 
 	public Iterator<ILevelObj> processProto(final ProtoObj proto, int index) throws Exception {
-
-		curFileName = proto.getTableName();
+		String tableName = proto.getTableName();
+		descName = null;
+		curFileName = tableName;
+		if (tableName.indexOf("(") != -1) {
+			curFileName = tableName.substring(0, tableName.indexOf("("));
+			descName = tableName.substring(tableName.indexOf("(") + 1, tableName.indexOf(")"));
+		}
 		if (curFileName.startsWith("G") || curFileName.startsWith("ui") || curFileName.startsWith("Farmer") || curFileName.startsWith("Request") || curFileName.startsWith("Response")) {
 			dbBean = false;
 		} else {
@@ -137,24 +145,14 @@ public class OutPutJavaBean extends AbstractProcess {
 		FiledObjWriteUtil.generatorGetAndSetByServer(getterSetter, field, dbBean);
 
 		/*
-		 * String filedName = field.getFieldName(); String filedNameFistUpCase =
-		 * filedName.substring(0, 1).toUpperCase() + filedName.substring(1,
-		 * filedName.length()); String smalllType = ""; String objType = ""; if
-		 * (type.toLowerCase().equals("int32")) { smalllType = "int"; objType =
-		 * "Integer"; } else if (type.toLowerCase().equals("int64")) {
-		 * smalllType = "long"; objType = "Long"; } else if
-		 * (type.toLowerCase().equals("string")) { smalllType = "String";
-		 * objType = "String"; } else if (type.toLowerCase().equals("double")) {
-		 * smalllType = "double"; objType = "Double"; }else if
-		 * (type.toLowerCase().equals("boolean")) { smalllType = "boolean";
-		 * objType = "Boolean"; }else { smalllType = type; objType = type; } if
-		 * (field.isList()) { properties.add("private List<"+objType+ "> "+
-		 * filedName+ ";"); }else{ properties.add("private "+smalllType+ " "+
-		 * filedName+ ";"); }
+		 * String filedName = field.getFieldName(); String filedNameFistUpCase = filedName.substring(0, 1).toUpperCase() + filedName.substring(1, filedName.length()); String smalllType = ""; String
+		 * objType = ""; if (type.toLowerCase().equals("int32")) { smalllType = "int"; objType = "Integer"; } else if (type.toLowerCase().equals("int64")) { smalllType = "long"; objType = "Long"; }
+		 * else if (type.toLowerCase().equals("string")) { smalllType = "String"; objType = "String"; } else if (type.toLowerCase().equals("double")) { smalllType = "double"; objType = "Double"; }else
+		 * if (type.toLowerCase().equals("boolean")) { smalllType = "boolean"; objType = "Boolean"; }else { smalllType = type; objType = type; } if (field.isList()) {
+		 * properties.add("private List<"+objType+ "> "+ filedName+ ";"); }else{ properties.add("private "+smalllType+ " "+ filedName+ ";"); }
 		 * 
 		 * 
-		 * createGetAndSet(smalllType, objType,field.getFieldName(),
-		 * filedNameFistUpCase, field.isList());
+		 * createGetAndSet(smalllType, objType,field.getFieldName(), filedNameFistUpCase, field.isList());
 		 */
 
 		String bmInfo = field.getBmInfo();
@@ -207,10 +205,11 @@ public class OutPutJavaBean extends AbstractProcess {
 			bw.write("import org.hibernate.annotations.DynamicInsert;");
 			bw.newLine();
 			bw.write("import io.swagger.annotations.ApiModelProperty;");
+			bw.newLine();
+			bw.write("import io.swagger.annotations.ApiModel;");
+
 			/*
-			 * if(hasByteArray){ bw.write("import java.io.IOException;");
-			 * bw.newLine(); bw.write("import sun.misc.BASE64Decoder;");
-			 * bw.newLine(); }
+			 * if(hasByteArray){ bw.write("import java.io.IOException;"); bw.newLine(); bw.write("import sun.misc.BASE64Decoder;"); bw.newLine(); }
 			 */
 			if (curFileName.startsWith("G") || curFileName.startsWith("ui") || curFileName.startsWith("Farmer") || curFileName.startsWith("Request") || curFileName.startsWith("Response")) {
 			} else {
@@ -225,6 +224,10 @@ public class OutPutJavaBean extends AbstractProcess {
 				bw.write("@Table(name = \"" + curFileName + "\")");
 				bw.newLine();
 				bw.write("@JsonIgnoreProperties({\"hibernateLazyInitializer\", \"handler\"})");
+			}
+			if (StringUtils.isNoneBlank(descName)) {
+				bw.newLine();
+				bw.write("@ApiModel(value=\"" + descName + "对象\",description=\"" + descName + "对象\")");
 			}
 		} else {
 			bw.newLine();

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.io.Serializable;
 import com.lgx.libframe.*;
 public class uiGrandTotalTj implements Serializable{
-private static final long serialVersionUID = 100000006L;
+private static final long serialVersionUID = 1000000006L;
 
 private double cbTotal;// 总支出
 private double srTotal;// 总收入

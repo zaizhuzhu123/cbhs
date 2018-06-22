@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.io.Serializable;
 import com.lgx.libframe.*;
 public class uiCbhsMonthWebTotal implements Serializable{
-private static final long serialVersionUID = 100000001L;
+private static final long serialVersionUID = 1000000001L;
 
 private String  monthStr;// 月份
 private int deptOid;// 部门ID

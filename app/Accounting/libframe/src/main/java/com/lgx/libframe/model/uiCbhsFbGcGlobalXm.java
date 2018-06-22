@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.io.Serializable;
 import com.lgx.libframe.*;
 public class uiCbhsFbGcGlobalXm implements Serializable{
-private static final long serialVersionUID = 100000002L;
+private static final long serialVersionUID = 1000000002L;
 
 private int oid;// ID
 private String  name;// 名称

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.io.Serializable;
 import com.lgx.libframe.*;
 public class uiClhxTj implements Serializable{
-private static final long serialVersionUID = 100000009L;
+private static final long serialVersionUID = 1000000009L;
 
 private String  gclName;// 工程量名称
 private int gclOid;// 工程量id

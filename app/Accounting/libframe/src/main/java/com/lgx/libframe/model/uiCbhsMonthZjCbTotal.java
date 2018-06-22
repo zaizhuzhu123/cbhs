@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.io.Serializable;
 import com.lgx.libframe.*;
 public class uiCbhsMonthZjCbTotal implements Serializable{
-private static final long serialVersionUID = 100000000L;
+private static final long serialVersionUID = 10000000000L;
 
 private double p_zyCailiaoCb;// 自营材料费
 private double p_zyJxCb;// 机械费

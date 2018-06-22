@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.io.Serializable;
 import com.lgx.libframe.*;
 public class uiCbSrTj implements Serializable{
-private static final long serialVersionUID = 100000004L;
+private static final long serialVersionUID = 1000000004L;
 
 private String  dateStr;// 日期
 private double total;// 值

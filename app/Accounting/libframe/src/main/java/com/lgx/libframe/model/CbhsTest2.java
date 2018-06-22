@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.io.Serializable;
 import com.lgx.libframe.*;
 public class CbhsTest2 implements Serializable{
-private static final long serialVersionUID = 80000002L;
+private static final long serialVersionUID = 100000002L;
 
 private int oid;// 主键
 private String  test2name;// 名称
