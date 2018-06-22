@@ -192,10 +192,10 @@ public class ZytjApisServiceImp implements ZytjApisService {
 				// 监测是否超出总预算
 				RequestMbYsFetch r1 = new RequestMbYsFetch();
 				r1.setProjectOid(cb.getProjectOid());
-				r1.setDeptOid(cb.getDeptOid());
+				// r1.setDeptOid(cb.getDeptOid());
 				r1.setMonth(new SimpleDateFormat("yyyy-MM-01").parse(new SimpleDateFormat("yyyy-MM-01").format(new Date(cb.getDateTimeStamp()))).getTime());
 				try {
-					DataSummaryUtils.checkFbCailiaoCbIsExceed(queryFactory, r1, cb, cb.getZcs(), Lists.newArrayList(cb.getDeptOid()), Lists.newArrayList(cb.getGlobalGclYsOid()));
+					DataSummaryUtils.checkFbCailiaoCbIsExceed(queryFactory, r1, cb, cb.getZcs(), Lists.newArrayList(), Lists.newArrayList(cb.getGlobalGclYsOid()));
 				} catch (ExceedException e) {
 					throw e;
 				}
