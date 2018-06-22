@@ -139,7 +139,8 @@ public class GlobalYsApisServiceImp implements GlobalYsApisService {
 		Preconditions.checkArgument(StringUtils.isNotBlank(ys.getName()), "预算名称不能为空!");
 		ys.setIsGlobal(true);
 		queryFactory.saveOrUpdate(ys);
-		queryFactory.update(QCbhsGclQdXm.cbhsGclQdXm).set(QCbhsGclQdXm.cbhsGclQdXm.name, ys.getName()).set(QCbhsGclQdXm.cbhsGclQdXm.unit, ys.getUnit()).where(QCbhsGclQdXm.cbhsGclQdXm.nodeId.eq(ys.getNodeId()));
+		queryFactory.update(QCbhsGclQdXm.cbhsGclQdXm).set(QCbhsGclQdXm.cbhsGclQdXm.name, ys.getName()).set(QCbhsGclQdXm.cbhsGclQdXm.unit, ys.getUnit())
+				.where(QCbhsGclQdXm.cbhsGclQdXm.nodeId.eq(ys.getNodeId()));
 		return ys;
 	}
 
@@ -264,7 +265,8 @@ public class GlobalYsApisServiceImp implements GlobalYsApisService {
 				} else {
 					globalys.setTotaPrice(new BigDecimal(0.00));
 				}
-				Integer oid = queryFactory.select(QCbhsGclQdYs.cbhsGclQdYs.oid).from(QCbhsGclQdYs.cbhsGclQdYs).where(QCbhsGclQdYs.cbhsGclQdYs.nodeId.eq(globalys.getNodeId()).and(QCbhsGclQdYs.cbhsGclQdYs.projectOid.eq(projectOid))).fetchFirst();
+				Integer oid = queryFactory.select(QCbhsGclQdYs.cbhsGclQdYs.oid).from(QCbhsGclQdYs.cbhsGclQdYs)
+						.where(QCbhsGclQdYs.cbhsGclQdYs.nodeId.eq(globalys.getNodeId()).and(QCbhsGclQdYs.cbhsGclQdYs.projectOid.eq(projectOid))).fetchFirst();
 				globalys.setOid(oid);
 				globalyss.add(globalys);
 			}
@@ -600,7 +602,8 @@ public class GlobalYsApisServiceImp implements GlobalYsApisService {
 				} else {
 					zhlys.setJ_wjjyy(new BigDecimal(0.00));
 				}
-				Integer oid = queryFactory.select(QCbhsGlobalRcjzhlYs.cbhsGlobalRcjzhlYs.oid).from(QCbhsGlobalRcjzhlYs.cbhsGlobalRcjzhlYs).where(QCbhsGlobalRcjzhlYs.cbhsGlobalRcjzhlYs.nodeId.eq(zhlys.getNodeId()).and(QCbhsGlobalRcjzhlYs.cbhsGlobalRcjzhlYs.projectOid.eq(projectOid))).fetchFirst();
+				Integer oid = queryFactory.select(QCbhsGlobalRcjzhlYs.cbhsGlobalRcjzhlYs.oid).from(QCbhsGlobalRcjzhlYs.cbhsGlobalRcjzhlYs)
+						.where(QCbhsGlobalRcjzhlYs.cbhsGlobalRcjzhlYs.nodeId.eq(zhlys.getNodeId()).and(QCbhsGlobalRcjzhlYs.cbhsGlobalRcjzhlYs.projectOid.eq(projectOid))).fetchFirst();
 				zhlys.setOid(oid);
 				zhlyss.add(zhlys);
 			}
@@ -784,7 +787,8 @@ public class GlobalYsApisServiceImp implements GlobalYsApisService {
 				} else {
 					cbhsGlobalFyzYs.setRemark("");
 				}
-				Integer oid = queryFactory.select(QCbhsGlobalFyzYs.cbhsGlobalFyzYs.oid).from(QCbhsGlobalFyzYs.cbhsGlobalFyzYs).where(QCbhsGlobalFyzYs.cbhsGlobalFyzYs.nodeId.eq(cbhsGlobalFyzYs.getNodeId()).and(QCbhsGlobalFyzYs.cbhsGlobalFyzYs.projectOid.eq(projectOid))).fetchFirst();
+				Integer oid = queryFactory.select(QCbhsGlobalFyzYs.cbhsGlobalFyzYs.oid).from(QCbhsGlobalFyzYs.cbhsGlobalFyzYs)
+						.where(QCbhsGlobalFyzYs.cbhsGlobalFyzYs.nodeId.eq(cbhsGlobalFyzYs.getNodeId()).and(QCbhsGlobalFyzYs.cbhsGlobalFyzYs.projectOid.eq(projectOid))).fetchFirst();
 				cbhsGlobalFyzYs.setOid(oid);
 				cbhsGlobalFyzYss.add(cbhsGlobalFyzYs);
 			}

@@ -42,7 +42,6 @@ import com.server.pojo.bean.QCbhsReim;
 import com.server.pojo.bean.QCbhsSettleDown;
 import com.server.pojo.bean.QCbhsSettleUp;
 import com.server.pojo.bean.uiExceedInfo;
-import com.server.pojo.url.cw.RequestReimAdd;
 import com.server.pojo.url.cw.RequestReimDel;
 import com.server.pojo.url.cw.RequestReimFetch;
 import com.server.pojo.url.cw.RequestReimShe;
