@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.io.Serializable;
 import com.lgx.libframe.*;
 public class CbhsZdgxhsGZ implements Serializable{
-private static final long serialVersionUID = 1000000005L;
+private static final long serialVersionUID = 10000000005L;
 
 private int oid;// 主键
 private int zytjOid;// (重点工序核算)

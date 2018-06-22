@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.io.Serializable;
 import com.lgx.libframe.*;
 public class CbhsMachinery implements Serializable{
-private static final long serialVersionUID = 100000010L;
+private static final long serialVersionUID = 10000006L;
 
 private int oid;// 机械设备主键ID(创建不填|修改必填)
 private String  machineryTypeName;// 必填|种类名称

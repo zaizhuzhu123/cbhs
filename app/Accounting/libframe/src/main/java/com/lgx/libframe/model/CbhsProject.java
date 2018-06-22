@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.io.Serializable;
 import com.lgx.libframe.*;
 public class CbhsProject implements Serializable{
-private static final long serialVersionUID = 10000006L;
+private static final long serialVersionUID = 10000002L;
 
 private int oid;// 工程项目主键ID(创建不填|修改必填)
 private String  name;// 必填|项目名称

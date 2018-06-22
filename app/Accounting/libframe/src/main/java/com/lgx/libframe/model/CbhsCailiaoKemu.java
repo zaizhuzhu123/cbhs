@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.io.Serializable;
 import com.lgx.libframe.*;
 public class CbhsCailiaoKemu implements Serializable{
-private static final long serialVersionUID = 10000008L;
+private static final long serialVersionUID = 10000004L;
 
 private int oid;// 材料科目主键ID(创建不填|修改必填)
 private String  name;// 必填|材料科目名称

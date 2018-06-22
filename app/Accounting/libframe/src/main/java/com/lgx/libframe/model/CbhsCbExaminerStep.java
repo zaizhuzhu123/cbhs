@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.io.Serializable;
 import com.lgx.libframe.*;
 public class CbhsCbExaminerStep implements Serializable{
-private static final long serialVersionUID = 70000008L;
+private static final long serialVersionUID = 30000006L;
 
 private int oid;// 主键（审核信息）
 private int taskOid;// 审核任务ID

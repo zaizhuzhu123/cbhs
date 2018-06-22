@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.io.Serializable;
 import com.lgx.libframe.*;
 public class CbhsAccount implements Serializable{
-private static final long serialVersionUID = 70000000L;
+private static final long serialVersionUID = 30000000L;
 
 private String  accountKey;// 帐号主键
 private String  account;// 登录帐号

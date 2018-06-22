@@ -89,8 +89,11 @@ public class OutPutAndroidBean extends AbstractProcess {
 	}
 
 	public Iterator<ILevelObj> processProto(final ProtoObj proto, int index) throws Exception {
-
-		curFileName = proto.getTableName();
+		String tableName = proto.getTableName();
+		curFileName = tableName;
+		if (tableName.indexOf("(") != -1) {
+			curFileName = tableName.substring(0, tableName.indexOf("("));
+		}
 
 		String targetFile = targetDir + File.separator + curFileName;
 
@@ -130,29 +133,17 @@ public class OutPutAndroidBean extends AbstractProcess {
 		FiledObjWriteUtil.generatorGetAndSetByAndriod(getterSetter, field);
 
 		/*
-		 * String ListType = ""; if (type.toLowerCase().equals("int32")) { type
-		 * = "private int " + field.getFieldName(); ListType = "Integer";
+		 * String ListType = ""; if (type.toLowerCase().equals("int32")) { type = "private int " + field.getFieldName(); ListType = "Integer";
 		 * 
-		 * } else if (type.toLowerCase().equals("int64")) { type =
-		 * "private long " + field.getFieldName(); ListType = "Long"; } else if
-		 * (type.toLowerCase().equals("string")) { type = "private String  " +
-		 * field.getFieldName(); ListType = "String"; } else if
-		 * (type.toLowerCase().equals("double")) { type = "private double " +
-		 * field.getFieldName(); ListType = "Double"; } else if
-		 * (type.toLowerCase().equals("boolean")) { type = "private  boolean " +
-		 * field.getFieldName(); ListType = "Boolean"; } else if
-		 * (type.toLowerCase().equals("byte[]")) { type = "private  String " +
-		 * field.getFieldName(); ListType = "byte[]"; }else { ListType = type;
-		 * type = "private  " + type + "  " + field.getFieldName();
+		 * } else if (type.toLowerCase().equals("int64")) { type = "private long " + field.getFieldName(); ListType = "Long"; } else if (type.toLowerCase().equals("string")) { type =
+		 * "private String  " + field.getFieldName(); ListType = "String"; } else if (type.toLowerCase().equals("double")) { type = "private double " + field.getFieldName(); ListType = "Double"; }
+		 * else if (type.toLowerCase().equals("boolean")) { type = "private  boolean " + field.getFieldName(); ListType = "Boolean"; } else if (type.toLowerCase().equals("byte[]")) { type =
+		 * "private  String " + field.getFieldName(); ListType = "byte[]"; }else { ListType = type; type = "private  " + type + "  " + field.getFieldName();
 		 * 
-		 * } if (field.isList()) { type = "private List<" + ListType + ">" +
-		 * field.getFieldName() + "= new ArrayList<" + ListType + ">();"; }
-		 * properties.add(type + ";");
+		 * } if (field.isList()) { type = "private List<" + ListType + ">" + field.getFieldName() + "= new ArrayList<" + ListType + ">();"; } properties.add(type + ";");
 		 * 
-		 * String filedName = field.getFieldName(); String filedNameFistUpCase =
-		 * filedName.substring(0, 1).toUpperCase() + filedName.substring(1,
-		 * filedName.length()); createGetAndSet(ListType, field.getFieldName(),
-		 * filedNameFistUpCase, field.isList());
+		 * String filedName = field.getFieldName(); String filedNameFistUpCase = filedName.substring(0, 1).toUpperCase() + filedName.substring(1, filedName.length()); createGetAndSet(ListType,
+		 * field.getFieldName(), filedNameFistUpCase, field.isList());
 		 */
 
 		String bmInfo = field.getBmInfo();

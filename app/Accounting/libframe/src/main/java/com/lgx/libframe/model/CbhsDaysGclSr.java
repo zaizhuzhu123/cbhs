@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.io.Serializable;
 import com.lgx.libframe.*;
 public class CbhsDaysGclSr implements Serializable{
-private static final long serialVersionUID = 40000000L;
+private static final long serialVersionUID = 60000000L;
 
 private int oid;// 主键（工程）(创建不填|修改必填)
 private int globalGclYsOid;// 必填|对应的总工程量ID 

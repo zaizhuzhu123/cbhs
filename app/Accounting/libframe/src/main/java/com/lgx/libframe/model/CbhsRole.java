@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.io.Serializable;
 import com.lgx.libframe.*;
 public class CbhsRole implements Serializable{
-private static final long serialVersionUID = 70000003L;
+private static final long serialVersionUID = 30000003L;
 
 private int oid;// 主键
 private String  name;// 必填|角色名称

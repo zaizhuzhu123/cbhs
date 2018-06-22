@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.io.Serializable;
 import com.lgx.libframe.*;
 public class CbhsMonthFbCailiaoCbYs implements Serializable{
-private static final long serialVersionUID = 50000007L;
+private static final long serialVersionUID = 80000007L;
 
 private int oid;// 主键（分包材料）(创建不填|修改必填)
 private int globalGclYsOid;// 必填|对应的分包工程量ID 大项

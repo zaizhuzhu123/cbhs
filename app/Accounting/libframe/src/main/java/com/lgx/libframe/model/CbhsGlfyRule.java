@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.io.Serializable;
 import com.lgx.libframe.*;
 public class CbhsGlfyRule implements Serializable{
-private static final long serialVersionUID = 30000008L;
+private static final long serialVersionUID = 100000011L;
 
 private int oid;// 主键（临建项目）(创建不填|修改必填)
 private int projectOid;// 必填|所属工程项目ID CbhsProject

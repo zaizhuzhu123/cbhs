@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.io.Serializable;
 import com.lgx.libframe.*;
 public class CbhsVersion implements Serializable{
-private static final long serialVersionUID = 100000013L;
+private static final long serialVersionUID = 10000009L;
 
 private int oid;// 主键ID
 private String  opTimeStr;// 操作时间

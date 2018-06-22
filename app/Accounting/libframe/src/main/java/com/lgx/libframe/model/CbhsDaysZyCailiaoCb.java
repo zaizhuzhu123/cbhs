@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.io.Serializable;
 import com.lgx.libframe.*;
 public class CbhsDaysZyCailiaoCb implements Serializable{
-private static final long serialVersionUID = 30000002L;
+private static final long serialVersionUID = 50000002L;
 
 private int oid;// 主键（材料成本）(创建不填|修改必填)
 private int projectOid;// 必填|所属工程项目ID CbhsProject

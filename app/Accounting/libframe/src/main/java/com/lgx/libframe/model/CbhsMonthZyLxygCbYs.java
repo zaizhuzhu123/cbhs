@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.io.Serializable;
 import com.lgx.libframe.*;
 public class CbhsMonthZyLxygCbYs implements Serializable{
-private static final long serialVersionUID = 50000003L;
+private static final long serialVersionUID = 80000003L;
 
 private int oid;// 主键（零星用工成本）(创建不填|修改必填)
 private int projectOid;// 必填|所属工程项目ID CbhsProject

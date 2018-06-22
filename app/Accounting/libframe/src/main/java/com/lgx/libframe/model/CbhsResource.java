@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.io.Serializable;
 import com.lgx.libframe.*;
 public class CbhsResource implements Serializable{
-private static final long serialVersionUID = 700000010L;
+private static final long serialVersionUID = 30000008L;
 
 private int oid;// 主键(资源ID)
 private String  filePath;// 文件路径
