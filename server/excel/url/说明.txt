@@ -1,0 +1,26 @@
+一。使用actor还是Spring
+如果“处理服务对象”这一栏有值，使用actor，如果为空使用Spring-nvc，但是不能删除这一列
+
+二. Rest实现类实现接口com.farmer.api.inf.IMessageHandle，实现类的命令规则如下
+例com.farmer.att.rest.RestPollInputState
+其中
+2.1.包名=com.farmer.模块名.rest
+如att=com.farmer.att.rest
+2.2.类名Rest+(url最后一部分).firstNameUperCase()
+如pollInputState=RestPollInputState
+
+三.请求对象和返回对象隐式定义规则，类似json格式定义
+ 1字段间分隔符用逗号,
+ 2字段内用冒号:分割
+ 3数组用[]加在类型后面
+ 4字段类型用java的字段类型
+ 5不支持对象嵌套
+ 6对象说明中，不要出现特殊字符：冒号，逗号，空格
+例：
+请求对象 name:String,age:long,friends:String[],period:int[]
+请求说明 name:名字,age:年龄,friends:朋友们,period:经历	
+
+四.事务
+get默认不需要事务，post默认需要事务
+如果不适用默认规则，参考test_url.xlsx
+

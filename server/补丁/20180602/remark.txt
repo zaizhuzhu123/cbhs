@@ -1,0 +1,4 @@
+##更新用户表的部门名称
+UPDATE cbhs_user
+JOIN cbhs_dept ON cbhs_dept.oid = cbhs_user.dept_oid
+SET cbhs_user.dept_name = cbhs_dept. NAME

@@ -1,0 +1,71 @@
+package com.server.pojo.bean;
+
+import static com.querydsl.core.types.PathMetadataFactory.*;
+
+import com.querydsl.core.types.dsl.*;
+
+import com.querydsl.core.types.PathMetadata;
+import javax.annotation.Generated;
+import com.querydsl.core.types.Path;
+
+
+/**
+ * QCbhsDaysZyLxygCb is a Querydsl query type for CbhsDaysZyLxygCb
+ */
+@Generated("com.querydsl.codegen.EntitySerializer")
+public class QCbhsDaysZyLxygCb extends EntityPathBase<CbhsDaysZyLxygCb> {
+
+    private static final long serialVersionUID = 1408910347L;
+
+    public static final QCbhsDaysZyLxygCb cbhsDaysZyLxygCb = new QCbhsDaysZyLxygCb("cbhsDaysZyLxygCb");
+
+    public final StringPath dateStr = createString("dateStr");
+
+    public final NumberPath<Long> dateTimeStamp = createNumber("dateTimeStamp", Long.class);
+
+    public final StringPath deptName = createString("deptName");
+
+    public final NumberPath<Integer> deptOid = createNumber("deptOid", Integer.class);
+
+    public final StringPath monthStr = createString("monthStr");
+
+    public final NumberPath<Long> monthTimeStamp = createNumber("monthTimeStamp", Long.class);
+
+    public final NumberPath<Integer> oid = createNumber("oid", Integer.class);
+
+    public final NumberPath<Long> opTime = createNumber("opTime", Long.class);
+
+    public final StringPath opTimeStr = createString("opTimeStr");
+
+    public final StringPath opUserName = createString("opUserName");
+
+    public final NumberPath<Integer> opUserOid = createNumber("opUserOid", Integer.class);
+
+    public final NumberPath<Integer> personCount = createNumber("personCount", Integer.class);
+
+    public final NumberPath<Integer> projectOid = createNumber("projectOid", Integer.class);
+
+    public final StringPath remark = createString("remark");
+
+    public final StringPath shId = createString("shId");
+
+    public final NumberPath<Integer> shStatus = createNumber("shStatus", Integer.class);
+
+    public final NumberPath<java.math.BigDecimal> total = createNumber("total", java.math.BigDecimal.class);
+
+    public final NumberPath<java.math.BigDecimal> unitPrice = createNumber("unitPrice", java.math.BigDecimal.class);
+
+    public QCbhsDaysZyLxygCb(String variable) {
+        super(CbhsDaysZyLxygCb.class, forVariable(variable));
+    }
+
+    public QCbhsDaysZyLxygCb(Path<? extends CbhsDaysZyLxygCb> path) {
+        super(path.getType(), path.getMetadata());
+    }
+
+    public QCbhsDaysZyLxygCb(PathMetadata metadata) {
+        super(CbhsDaysZyLxygCb.class, metadata);
+    }
+
+}
+

@@ -1,0 +1,66 @@
+﻿{
+    "specialty": ["@NotNull(message='专业编号不能为空')","@Size(min=4, max=15,message='专业编号长度必须为4-15位之间')"],
+    "title": ["@NotBlank(message='标题不能为空')","@Size(min=1, max=50,message='标题长度必须为1-50位之间')"],
+    "rewardPrice":["@NotNull(message='悬赏金额不能为空')","@DecimalMin(value='0',message='悬赏金额不能小于0')","@DecimalMax(value='999999',message='悬赏金额不能超过999999')"],
+    "rewardType": ["@NotNull(message='赏金类型不能为空')","@Min(value=1,message='赏金类型不能小于1')","@Max(value=999999,message='赏金类型不能超过999999')"],
+	"content": ["@Size(min=1, max=500,message='内容长度必须为1-500位之间')"]
+}
+{
+    "oid": ["@NotNull(message='提问编号不能为空')","@Min(value=1,message='提问编号不能小于1')","@Max(value=999999,message='提问编号不能超过999999')"]
+}
+{
+    "oid": ["@NotNull(message='提问编号不能为空')","@Min(value=1,message='提问编号不能小于1')","@Max(value=999999,message='提问编号不能超过999999')"],
+    "rewardPrice":["@DecimalMin(value='0',message='悬赏金额不能小于0')","@DecimalMax(value='999999',message='悬赏金额不能超过999999')"],
+    "rewardType": ["@Min(value=1,message='赏金类型不能小于1')","@Max(value=999999,message='赏金类型不能超过999999')"],
+	"content": ["@Size(min=1, max=500,message='内容长度必须为1-500位之间')"]
+}
+{
+    "subject": ["@Min(value=1,message='学科编号不能小于1')","@Max(value=999999,message='学科编号不能超过999999')"],
+    "specialtyClass": ["@Min(value=1,message='专业类不能小于1')","@Max(value=999999,message='专业类不能超过999999')"],
+	"specialty": ["@Min(value=1,message='专业编号不能小于1')","@Max(value=999999,message='专业编号不能超过999999')"],
+	"rewardType": ["@Min(value=1,message='赏金类型不能小于1')","@Max(value=999999,message='赏金类型不能超过999999')"],
+	"status":["@Min(value=1,message='提问状态不能小于1')","@Max(value=999999,message='提问状态不能超过999999')"],
+	"pageNum":["@NotNull(message='页码不能为空')","@Min(value=1,message='页码不能小于1')","@Max(value=999999,message='页码不能超过999999')"],
+	"pageSize":["@NotNull(message='每页数量不能为空')","@Min(value=1,message='每页数量不能小于1')","@Max(value=50,message='每页数量不能超过50')"]
+}
+{
+    "oid": ["@NotNull(message='提问编号不能为空')","@Min(value=1,message='提问编号不能小于1')","@Max(value=999999,message='提问编号不能超过999999')"]
+}
+{
+    "ask_oid": ["@NotNull(message='提问编号不能为空')","@Min(value=1,message='提问编号不能小于1')","@Max(value=999999,message='提问编号不能超过999999')"],
+	"answer_oid": ["@NotNull(message='回答编号不能为空')","@Min(value=1,message='回答编号不能小于1')","@Max(value=999999,message='回答编号不能超过999999')"]
+}
+{
+    "ask_oid": ["@NotNull(message='提问编号不能为空')","@Min(value=1,message='提问编号不能小于1')","@Max(value=999999,message='提问编号不能超过999999')"],
+	"content": ["@Size(min=1, max=500,message='内容长度必须为1-500位之间')"]
+}
+{
+    "oid": ["@NotNull(message='回答编号不能为空')","@Min(value=1,message='回答编号不能小于1')","@Max(value=999999,message='回答编号不能超过999999')"]
+}
+{
+    "oid": ["@NotNull(message='回答编号不能为空')","@Min(value=1,message='回答编号不能小于1')","@Max(value=999999,message='回答编号不能超过999999')"]
+	"content": ["@Size(min=1, max=500,message='内容长度必须为1-500位之间')"]
+}
+{
+    "ask_oid": ["@NotNull(message='提问编号不能为空')","@Min(value=1,message='提问编号不能小于1')","@Max(value=999999,message='提问编号不能超过999999')"],
+	"pageNum":["@NotNull(message='页码不能为空')","@Min(value=1,message='页码不能小于1')","@Max(value=999999,message='页码不能超过999999')"],
+	"pageSize":["@NotNull(message='每页数量不能为空')","@Min(value=1,message='每页数量不能小于1')","@Max(value=50,message='每页数量不能超过50')"]
+}
+{
+	"answer_oid": ["@NotNull(message='回答编号不能为空')","@Min(value=1,message='回答编号不能小于1')","@Max(value=999999,message='回答编号不能超过999999')"],
+    "reply_oid": ["@Min(value=1,message='评论编号不能小于1')","@Max(value=999999,message='评论编号不能超过999999')"],
+	"reply_type": ["@NotNull(message='回复类型不能为空')","@Min(value=1,message='回复类型不能小于1')","@Max(value=999999,message='回复类型不能超过999999')"],
+	"content": ["@Size(min=1, max=500,message='内容长度必须为1-500位之间')"]
+}
+{
+    "oid": ["@NotNull(message='评论编号不能为空')","@Min(value=1,message='评论编号不能小于1')","@Max(value=999999,message='评论编号不能超过999999')"]
+}
+{
+    "oid": ["@NotNull(message='评论编号不能为空')","@Min(value=1,message='评论编号不能小于1')","@Max(value=999999,message='评论编号不能超过999999')"],
+	"content": ["@Size(min=1, max=500,message='内容长度必须为1-500位之间')"]
+}
+{
+    "answer_oid": ["@NotNull(message='回答编号不能为空')","@Min(value=1,message='回答编号不能小于1')","@Max(value=999999,message='回答编号不能超过999999')"],
+	"pageNum":["@NotNull(message='页码不能为空')","@Min(value=1,message='页码不能小于1')","@Max(value=999999,message='页码不能超过999999')"],
+	"pageSize":["@NotNull(message='每页数量不能为空')","@Min(value=1,message='每页数量不能小于1')","@Max(value=50,message='每页数量不能超过50')"]
+}
