@@ -601,7 +601,7 @@ public class DataSummaryUtils {
 			jqcbhsMonthZyCailiaoCbYsTuple.where(QCbhsDaysZyCailiaoCb.cbhsDaysZyCailiaoCb.globalGclYsOid.in(dso.getGlobalGclOids()));
 		}
 		if (dso.getDeptOids() != null && dso.getDeptOids().size() > 0) {
-			jqcbhsMonthZyCailiaoCbYsTuple.where(QCbhsMonthZyCailiaoCbYs.cbhsMonthZyCailiaoCbYs.deptOid.in(dso.getDeptOids()));
+			jqcbhsMonthZyCailiaoCbYsTuple.where(QCbhsDaysZyCailiaoCb.cbhsDaysZyCailiaoCb.deptOid.in(dso.getDeptOids()));
 		}
 		jqcbhsMonthZyCailiaoCbYsTuple.groupBy(QCbhsDaysZyCailiaoCb.cbhsDaysZyCailiaoCb.globalGclYsOid, QCbhsDaysZyCailiaoCb.cbhsDaysZyCailiaoCb.cailiaoOid);
 		List<CbhsDaysZyCailiaoCb> list = jqcbhsMonthZyCailiaoCbYsTuple.fetch();
