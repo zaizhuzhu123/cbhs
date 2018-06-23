@@ -111,8 +111,7 @@ public class CbsheApisServiceImp implements CbsheApisService {
 	public JSONObject examCb(RequestExamCb request, HttpServletRequest httpServletRequest) throws Exception {
 		CbhsCbExaminer task = queryFactory.selectFrom(QCbhsCbExaminer.cbhsCbExaminer).where(QCbhsCbExaminer.cbhsCbExaminer.oid.eq(request.getExamOid())).fetchFirst();
 		Preconditions.checkArgument(task != null, "未找到审核请求");
-		CbhsCbExaminerStep step = queryFactory.selectFrom(QCbhsCbExaminerStep.cbhsCbExaminerStep)
-				.where(QCbhsCbExaminerStep.cbhsCbExaminerStep.taskOid.eq(task.getOid()).and(QCbhsCbExaminerStep.cbhsCbExaminerStep.shorder.eq(task.getShorder()))).fetchFirst();
+		CbhsCbExaminerStep step = queryFactory.selectFrom(QCbhsCbExaminerStep.cbhsCbExaminerStep).where(QCbhsCbExaminerStep.cbhsCbExaminerStep.taskOid.eq(task.getOid()).and(QCbhsCbExaminerStep.cbhsCbExaminerStep.shorder.eq(task.getShorder()))).fetchFirst();
 		Preconditions.checkArgument(step != null, "未找到审核请求");
 		Preconditions.checkArgument(task.getCompleteState() == 1, "请求已结束");
 		if (step.getShPersonOid() != TokenUtils.getTokenInfo(httpServletRequest).getUserOid()) {
@@ -156,17 +155,13 @@ public class CbsheApisServiceImp implements CbsheApisService {
 		Integer personOid = TokenUtils.getTokenInfo(httpServletRequest).getUserOid();
 		if (request.getType() == 1) {
 			// 轮到用户自己审核的
-			jpaquery.where(query_.oid.in(JPAExpressions.select(QCbhsCbExaminerStep.cbhsCbExaminerStep.taskOid).from(QCbhsCbExaminerStep.cbhsCbExaminerStep)
-					.where(QCbhsCbExaminerStep.cbhsCbExaminerStep.shPersonOid.eq(personOid).and(QCbhsCbExaminerStep.cbhsCbExaminerStep.stepStatus.eq(2)))));
+			jpaquery.where(query_.oid.in(JPAExpressions.select(QCbhsCbExaminerStep.cbhsCbExaminerStep.taskOid).from(QCbhsCbExaminerStep.cbhsCbExaminerStep).where(QCbhsCbExaminerStep.cbhsCbExaminerStep.shPersonOid.eq(personOid).and(QCbhsCbExaminerStep.cbhsCbExaminerStep.stepStatus.eq(2)))));
 		} else if (request.getType() == 2) {
 			// 审核完成的
-			jpaquery.where(query_.oid.in(
-					JPAExpressions.select(QCbhsCbExaminerStep.cbhsCbExaminerStep.taskOid).from(QCbhsCbExaminerStep.cbhsCbExaminerStep)
-							.where(QCbhsCbExaminerStep.cbhsCbExaminerStep.shPersonOid.eq(personOid))).and(query_.completeState.goe(2)));
+			jpaquery.where(query_.oid.in(JPAExpressions.select(QCbhsCbExaminerStep.cbhsCbExaminerStep.taskOid).from(QCbhsCbExaminerStep.cbhsCbExaminerStep).where(QCbhsCbExaminerStep.cbhsCbExaminerStep.shPersonOid.eq(personOid))).and(query_.completeState.goe(2)));
 		} else {
 			// 用户所有参与的审核
-			jpaquery.where(query_.oid.in(JPAExpressions.select(QCbhsCbExaminerStep.cbhsCbExaminerStep.taskOid).from(QCbhsCbExaminerStep.cbhsCbExaminerStep)
-					.where(QCbhsCbExaminerStep.cbhsCbExaminerStep.shPersonOid.eq(personOid))));
+			jpaquery.where(query_.oid.in(JPAExpressions.select(QCbhsCbExaminerStep.cbhsCbExaminerStep.taskOid).from(QCbhsCbExaminerStep.cbhsCbExaminerStep).where(QCbhsCbExaminerStep.cbhsCbExaminerStep.shPersonOid.eq(personOid))));
 		}
 		// 查询总数
 		ResponseExamTaskFetch response = new ResponseExamTaskFetch();
@@ -218,6 +213,7 @@ public class CbsheApisServiceImp implements CbsheApisService {
 		}
 		task.setCompleteState(4);
 		queryFactory.saveOrUpdate(task);
+		examinerManager.completeExaminer(queryFactory, task, false);
 		return CbhsResUtils.suc();
 	}
 
