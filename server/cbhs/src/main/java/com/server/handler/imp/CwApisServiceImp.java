@@ -107,8 +107,7 @@ public class CwApisServiceImp implements CwApisService {
 			CbhsGclQdYs gclQdYs = queryFactory.findOne(CbhsGclQdYs.class, request.getGlobalGclYsOid());
 			Preconditions.checkArgument(gclQdYs != null, "总工程量清单不存在!");
 			QCbhsSettleUp query_ = QCbhsSettleUp.cbhsSettleUp;
-			BigDecimal submitCount = queryFactory.select(query_.count.sum()).from(query_).where(query_.globalGclYsOid.eq(request.getGlobalGclYsOid()).and(query_.oid.ne(request.getOid())))
-					.fetchFirst();
+			BigDecimal submitCount = queryFactory.select(query_.count.sum()).from(query_).where(query_.globalGclYsOid.eq(request.getGlobalGclYsOid()).and(query_.oid.ne(request.getOid()))).fetchFirst();
 			submitCount = submitCount != null ? submitCount : BigDecimal.ZERO;
 			BigDecimal result = gclQdYs.getCount().subtract(submitCount).subtract(request.getCount());
 			if (result.compareTo(BigDecimal.ZERO) < 0) {
@@ -187,9 +186,7 @@ public class CwApisServiceImp implements CwApisService {
 					// 创建审核
 					settle.setShStatus(1);
 					settle = queryFactory.saveOrUpdate(settle);
-					examinerManager.createExaminer(queryFactory, settle.getProjectOid(), SheObject.shType_ssd, settle.getOid(), settle.getDeptOid(), settle.getDeptName(), ext, exception.getInfo()
-							.getErrorMessage(), exception.getInfo().getErrorMessage(), TokenUtils.getTokenInfo(httpServletRequest).getUserOid(), TokenUtils.getTokenInfo(httpServletRequest)
-							.getUserName());
+					examinerManager.createExaminer(queryFactory, settle.getProjectOid(), SheObject.shType_ssd, settle.getOid(), settle.getDeptOid(), settle.getDeptName(), ext, exception.getInfo().getErrorMessage(), exception.getInfo().getErrorMessage(), TokenUtils.getTokenInfo(httpServletRequest).getUserOid(), TokenUtils.getTokenInfo(httpServletRequest).getUserName());
 				}
 			} else {
 				queryFactory.saveOrUpdate(settle);
@@ -261,8 +258,7 @@ public class CwApisServiceImp implements CwApisService {
 		// 创建审核
 		reim.setShStatus(1);
 		reim = queryFactory.saveOrUpdate(reim);
-		examinerManager.createExaminer(queryFactory, reim.getProjectOid(), SheObject.shType_reim, reim.getOid(), reim.getDeptOid(), reim.getDeptName(), "", "财务报销", "财务报销",
-				TokenUtils.getTokenInfo(httpServletRequest).getUserOid(), TokenUtils.getTokenInfo(httpServletRequest).getUserName());
+		examinerManager.createExaminer(queryFactory, reim.getProjectOid(), SheObject.shType_reim, reim.getOid(), reim.getDeptOid(), reim.getDeptName(), "", "财务报销", "财务报销", TokenUtils.getTokenInfo(httpServletRequest).getUserOid(), TokenUtils.getTokenInfo(httpServletRequest).getUserName());
 		return reim;
 	}
 
@@ -294,7 +290,7 @@ public class CwApisServiceImp implements CwApisService {
 		MyJPAQuery<CbhsReim> jpaquery = queryFactory.selectFrom(query_);
 		// 条件组合
 		jpaquery.where(request.getProjectOid(), query_.projectOid.eq(request.getProjectOid()));
-		jpaquery.where(request.getDeptOid(), query_.projectOid.eq(request.getDeptOid()));
+		jpaquery.where(request.getDeptOid(), query_.deptOid.eq(request.getDeptOid()));
 		jpaquery.where(request.getOid(), query_.oid.eq(request.getOid()));
 		jpaquery.where(request.getStartOid(), query_.oid.gt(request.getStartOid()));
 		if (request.getShStatus() != null && request.getShStatus() > 0) {
@@ -337,11 +333,9 @@ public class CwApisServiceImp implements CwApisService {
 				reim.setProcess(3);
 				queryFactory.saveOrUpdate(reim);
 			}
-			CbhsCbExaminer task = queryFactory.selectFrom(QCbhsCbExaminer.cbhsCbExaminer)
-					.where(QCbhsCbExaminer.cbhsCbExaminer.cbOid.eq(request.getOid()).and(QCbhsCbExaminer.cbhsCbExaminer.type.eq(SheObject.shType_reim))).fetchFirst();
+			CbhsCbExaminer task = queryFactory.selectFrom(QCbhsCbExaminer.cbhsCbExaminer).where(QCbhsCbExaminer.cbhsCbExaminer.cbOid.eq(request.getOid()).and(QCbhsCbExaminer.cbhsCbExaminer.type.eq(SheObject.shType_reim))).fetchFirst();
 			Preconditions.checkArgument(task != null, "未找到审核请求");
-			CbhsCbExaminerStep step = queryFactory.selectFrom(QCbhsCbExaminerStep.cbhsCbExaminerStep)
-					.where(QCbhsCbExaminerStep.cbhsCbExaminerStep.taskOid.eq(task.getOid()).and(QCbhsCbExaminerStep.cbhsCbExaminerStep.shorder.eq(task.getShorder()))).fetchFirst();
+			CbhsCbExaminerStep step = queryFactory.selectFrom(QCbhsCbExaminerStep.cbhsCbExaminerStep).where(QCbhsCbExaminerStep.cbhsCbExaminerStep.taskOid.eq(task.getOid()).and(QCbhsCbExaminerStep.cbhsCbExaminerStep.shorder.eq(task.getShorder()))).fetchFirst();
 			Preconditions.checkArgument(step != null, "未找到审核请求");
 			Preconditions.checkArgument(task.getCompleteState() == 1, "请求已结束");
 			Preconditions.checkArgument(step.getStepStatus() == 2, "已审核");

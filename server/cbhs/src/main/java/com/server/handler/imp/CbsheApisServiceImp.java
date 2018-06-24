@@ -125,7 +125,7 @@ public class CbsheApisServiceImp implements CbsheApisService {
 			if (task.getType() == SheObject.shType_reim) {
 				if (step.getShorder() == 1) { // 部门主管批准同意
 					queryFactory.update(QCbhsReim.cbhsReim).set(QCbhsReim.cbhsReim.process, 1).where(QCbhsReim.cbhsReim.oid.eq(task.getCbOid())).execute();
-				} else if (step.getShorder() == 1) { // 项目经理批准同意
+				} else if (step.getShorder() == 3) { // 项目经理批准同意
 					queryFactory.update(QCbhsReim.cbhsReim).set(QCbhsReim.cbhsReim.process, 3).where(QCbhsReim.cbhsReim.oid.eq(task.getCbOid())).execute();
 				}
 			}
