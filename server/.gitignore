@@ -1,1 +1,5 @@
 /cbhs/
+target
+.settings
+.classpath
+.project

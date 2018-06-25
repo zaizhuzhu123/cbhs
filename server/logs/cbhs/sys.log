@@ -2291,3 +2291,7 @@ com.server.exception.ExceedException: null
 2018-06-25 11:01:47,660 INFO (StartupInfoLogger.java:57)- Started ServletInitializer in 13.764 seconds (JVM running for 14.05)
 2018-06-25 11:02:00,002 INFO (QuartzService.java:51)- 启动日志定时写入任务------>
 2018-06-25 11:02:00,049 INFO (QuartzService.java:63)- <-------日志定时写入任务完成
+2018-06-25 23:34:20,439 INFO (StartupInfoLogger.java:48)- Starting ServletInitializer on qmf-PC with PID 10140 (C:\Users\qmf\git\cbhs\server\cbhs\target\classes started by qmf in C:\Users\qmf\git\cbhs\server\cbhs)
+2018-06-25 23:34:20,442 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.5.RELEASE, Spring v4.3.10.RELEASE
+2018-06-25 23:34:20,442 INFO (SpringApplication.java:597)- The following profiles are active: prod,test
+2018-06-25 23:34:35,844 INFO (StartupInfoLogger.java:57)- Started ServletInitializer in 15.811 seconds (JVM running for 16.197)
