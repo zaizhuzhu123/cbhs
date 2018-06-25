@@ -98,8 +98,17 @@
 											"action":"",
 											"chidren":[],
 											"icon":"",
+											"menuId":"2,1,2,2,4",
+											"menuName":"临建项目价格统计",
+											"menuOpName":"tj_cbtj_zjcb_fbcb_ljxmjg_app",
+											"parentMenuId":"2,1,2,2"
+										},
+										{
+											"action":"",
+											"chidren":[],
+											"icon":"",
 											"menuId":"2,1,2,2,3",
-											"menuName":"临建项目成本",
+											"menuName":"临建项目量统计",
 											"menuOpName":"tj_cbtj_zjcb_fbcb_ljxmcb_app",
 											"parentMenuId":"2,1,2,2"
 										}
@@ -178,8 +187,17 @@
 							"action":"",
 							"chidren":[],
 							"icon":"",
+							"menuId":"2,2,3",
+							"menuName":"新增收入价格统计",
+							"menuOpName":"tj_srtj_xzsrjg_app",
+							"parentMenuId":"2,2"
+						},
+						{
+							"action":"",
+							"chidren":[],
+							"icon":"",
 							"menuId":"2,2,2",
-							"menuName":"新增收入统计",
+							"menuName":"新增收入量统计",
 							"menuOpName":"tj_srtj_xzsrtj_app",
 							"parentMenuId":"2,2"
 						}
@@ -414,7 +432,17 @@
 								},
 								{
 									"action":"../account/overall/projectList.html",
-									"chidren":[],
+									"chidren":[
+										{
+											"action":"",
+											"chidren":[],
+											"icon":"",
+											"menuId":"1,1,1,1,1",
+											"menuName":"查看金额",
+											"menuOpName":"zgcllb_web_price",
+											"parentMenuId":"1,1,1,1"
+										}
+									],
 									"icon":"left2",
 									"menuId":"1,1,1,1",
 									"menuName":"总工程量列表",
@@ -794,7 +822,7 @@
 							],
 							"icon":"left1",
 							"menuId":"2,1,2",
-							"menuName":"新增收入",
+							"menuName":"新增收入量统计",
 							"menuOpName":"xzsr_web",
 							"parentMenuId":"2,1"
 						},
@@ -809,12 +837,40 @@
 									"menuName":"删除",
 									"menuOpName":"jssr_web_del",
 									"parentMenuId":"2,1,1"
+								},
+								{
+									"action":"",
+									"chidren":[],
+									"icon":"",
+									"menuId":"2,1,1,2",
+									"menuName":"查看金额",
+									"menuOpName":"jssr_web_price",
+									"parentMenuId":"2,1,1"
 								}
 							],
 							"icon":"left1",
 							"menuId":"2,1,1",
 							"menuName":"结算收入",
 							"menuOpName":"jssr_web",
+							"parentMenuId":"2,1"
+						},
+						{
+							"action":"../budget/income/otherIncomePriceList.html",
+							"chidren":[
+								{
+									"action":"",
+									"chidren":[],
+									"icon":"",
+									"menuId":"2,1,3,1",
+									"menuName":"删除",
+									"menuOpName":"xzsr_web_del",
+									"parentMenuId":"2,1,3"
+								}
+							],
+							"icon":"left1",
+							"menuId":"2,1,3",
+							"menuName":"新增收入价格统计",
+							"menuOpName":"xzsrjg_web",
 							"parentMenuId":"2,1"
 						}
 					],
@@ -880,7 +936,17 @@
 								},
 								{
 									"action":"../budget/expenses/directCost/fbCost/fbPriceList.html",
-									"chidren":[],
+									"chidren":[
+										{
+											"action":"",
+											"chidren":[],
+											"icon":"",
+											"menuId":"2,3,2,2,1",
+											"menuName":"删除",
+											"menuOpName":"fbjggl_web_del",
+											"parentMenuId":"2,3,2,2"
+										}
+									],
 									"icon":"left2",
 									"menuId":"2,3,2,2",
 									"menuName":"分包价格管理",
@@ -902,8 +968,27 @@
 									],
 									"icon":"left2",
 									"menuId":"2,3,2,3",
-									"menuName":"临建支出",
+									"menuName":"临建支出量",
 									"menuOpName":"ljzc_web",
+									"parentMenuId":"2,3,2"
+								},
+								{
+									"action":"../budget/expenses/directCost/fbCost/tempProjectPriceList.html",
+									"chidren":[
+										{
+											"action":"",
+											"chidren":[],
+											"icon":"",
+											"menuId":"2,3,2,4,1",
+											"menuName":"删除",
+											"menuOpName":"ljzcjg_web",
+											"parentMenuId":"2,3,2,4"
+										}
+									],
+									"icon":"left2",
+									"menuId":"2,3,2,4",
+									"menuName":"临建支出价格",
+									"menuOpName":"ljzcjg_web",
 									"parentMenuId":"2,3,2"
 								}
 							],
@@ -1275,17 +1360,27 @@
 					"action":"",
 					"chidren":[
 						{
-							"action":"../finance/reimburseRecord.html",
+							"action":"../finance/PrintList.html",
 							"chidren":[],
 							"icon":"left1",
 							"menuId":"5,2,2",
-							"menuName":"报销记录",
-							"menuOpName":"bxjl_web",
+							"menuName":"单据打印",
+							"menuOpName":"djdy_web",
 							"parentMenuId":"5,2"
 						},
 						{
 							"action":"../finance/reimburse.html",
-							"chidren":[],
+							"chidren":[
+								{
+									"action":"",
+									"chidren":[],
+									"icon":"",
+									"menuId":"5,2,1,1",
+									"menuName":"删除",
+									"menuOpName":"cwbx_web_del",
+									"parentMenuId":"5,2,1"
+								}
+							],
 							"icon":"left1",
 							"menuId":"5,2,1",
 							"menuName":"财务报销",
