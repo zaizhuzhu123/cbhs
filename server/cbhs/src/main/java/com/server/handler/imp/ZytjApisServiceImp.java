@@ -37,6 +37,7 @@ import com.server.pojo.bean.CbhsCb;
 import com.server.pojo.bean.CbhsZdgxhs;
 import com.server.pojo.bean.CbhsZdgxhsFC;
 import com.server.pojo.bean.CbhsZdgxhsGZ;
+import com.server.pojo.bean.CbhsZdgxhsMachine;
 import com.server.pojo.bean.CbhsZdgxhsZC;
 import com.server.pojo.bean.CbhsZytj;
 import com.server.pojo.bean.CbhsZytjFC;
@@ -45,6 +46,7 @@ import com.server.pojo.bean.CbhsZytjZC;
 import com.server.pojo.bean.QCbhsZdgxhs;
 import com.server.pojo.bean.QCbhsZdgxhsFC;
 import com.server.pojo.bean.QCbhsZdgxhsGZ;
+import com.server.pojo.bean.QCbhsZdgxhsMachine;
 import com.server.pojo.bean.QCbhsZdgxhsZC;
 import com.server.pojo.bean.QCbhsZytj;
 import com.server.pojo.bean.QCbhsZytjFC;
@@ -304,7 +306,8 @@ public class ZytjApisServiceImp implements ZytjApisService {
 				queryFactory.batchSaveOrUpdate(cb.getFcs());
 			}
 			if (cb.getShStatus() == 1) {
-				examinerManager.createExaminer(queryFactory, cb.getProjectOid(), SheObject.shType_zytj, cb.getOid(), cb.getDeptOid(), cb.getDeptName(), ext, exception.getInfo().getErrorMessage(), exception.getInfo().getErrorMessage(), TokenUtils.getTokenInfo(httpServletRequest).getUserOid(), TokenUtils.getTokenInfo(httpServletRequest).getUserName());
+				examinerManager.createExaminer(queryFactory, cb.getProjectOid(), SheObject.shType_zytj, cb.getOid(), cb.getDeptOid(), cb.getDeptName(), ext, exception.getInfo().getErrorMessage(),
+						exception.getInfo().getErrorMessage(), TokenUtils.getTokenInfo(httpServletRequest).getUserOid(), TokenUtils.getTokenInfo(httpServletRequest).getUserName());
 			} else {
 				CbhsCb cb_ = JSON.parseObject(JSON.toJSONString(cb), CbhsCb.class);
 				cb_.setOid(null);
@@ -387,6 +390,13 @@ public class ZytjApisServiceImp implements ZytjApisService {
 					cbsMap.get(fc.getZytjOid()).getFcs().add(fc);
 				}
 			}
+			// 所有机械设备
+			List<CbhsZdgxhsMachine> machines = queryFactory.selectFrom(QCbhsZdgxhsMachine.cbhsZdgxhsMachine).where(QCbhsZdgxhsMachine.cbhsZdgxhsMachine.zytjOid.in(zytjOids)).fetch();
+			if (machines.size() > 0) {
+				for (CbhsZdgxhsMachine ma : machines) {
+					cbsMap.get(ma.getZytjOid()).getMachinerys().add(ma);
+				}
+			}
 		}
 		return response;
 	}
@@ -402,6 +412,7 @@ public class ZytjApisServiceImp implements ZytjApisService {
 		queryFactory.delete(QCbhsZdgxhsGZ.cbhsZdgxhsGZ).where(QCbhsZdgxhsGZ.cbhsZdgxhsGZ.zytjOid.in(zdgxhs.getOid())).execute();
 		queryFactory.delete(QCbhsZdgxhsZC.cbhsZdgxhsZC).where(QCbhsZdgxhsZC.cbhsZdgxhsZC.zytjOid.in(zdgxhs.getOid())).execute();
 		queryFactory.delete(QCbhsZdgxhsFC.cbhsZdgxhsFC).where(QCbhsZdgxhsFC.cbhsZdgxhsFC.zytjOid.in(zdgxhs.getOid())).execute();
+		queryFactory.delete(QCbhsZdgxhsMachine.cbhsZdgxhsMachine).where(QCbhsZdgxhsMachine.cbhsZdgxhsMachine.zytjOid.in(zdgxhs.getOid())).execute();
 		if (zdgxhs.getGzs() != null && zdgxhs.getGzs().size() > 0) {
 			for (CbhsZdgxhsGZ gz : zdgxhs.getGzs()) {
 				gz.setZytjOid(zdgxhs.getOid());
@@ -420,6 +431,12 @@ public class ZytjApisServiceImp implements ZytjApisService {
 			}
 			queryFactory.batchSaveOrUpdate(zdgxhs.getFcs());
 		}
+		if (zdgxhs.getMachinerys() != null && zdgxhs.getMachinerys().size() > 0) {
+			for (CbhsZdgxhsMachine machinery : zdgxhs.getMachinerys()) {
+				machinery.setZytjOid(zdgxhs.getOid());
+			}
+			queryFactory.batchSaveOrUpdate(zdgxhs.getMachinerys());
+		}
 		return zdgxhs;
 	}
 
@@ -430,6 +447,7 @@ public class ZytjApisServiceImp implements ZytjApisService {
 		queryFactory.delete(QCbhsZdgxhsGZ.cbhsZdgxhsGZ).where(QCbhsZdgxhsGZ.cbhsZdgxhsGZ.zytjOid.in(request.getOids())).execute();
 		queryFactory.delete(QCbhsZdgxhsZC.cbhsZdgxhsZC).where(QCbhsZdgxhsZC.cbhsZdgxhsZC.zytjOid.in(request.getOids())).execute();
 		queryFactory.delete(QCbhsZdgxhsFC.cbhsZdgxhsFC).where(QCbhsZdgxhsFC.cbhsZdgxhsFC.zytjOid.in(request.getOids())).execute();
+		queryFactory.delete(QCbhsZdgxhsMachine.cbhsZdgxhsMachine).where(QCbhsZdgxhsMachine.cbhsZdgxhsMachine.zytjOid.in(request.getOids())).execute();
 		return CbhsResUtils.suc();
 	}
 
@@ -468,6 +486,12 @@ public class ZytjApisServiceImp implements ZytjApisService {
 				fc.setZytjOid(cbOid);
 			}
 			queryFactory.batchSaveOrUpdate(zdgxhs.getFcs());
+		}
+		if (zdgxhs.getMachinerys() != null && zdgxhs.getMachinerys().size() > 0) {
+			for (CbhsZdgxhsMachine machinery : zdgxhs.getMachinerys()) {
+				machinery.setZytjOid(cbOid);
+			}
+			queryFactory.batchSaveOrUpdate(zdgxhs.getMachinerys());
 		}
 		return zdgxhs;
 	}

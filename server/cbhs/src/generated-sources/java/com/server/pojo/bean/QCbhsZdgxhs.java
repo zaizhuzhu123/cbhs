@@ -7,6 +7,7 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
+import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
@@ -18,8 +19,6 @@ public class QCbhsZdgxhs extends EntityPathBase<CbhsZdgxhs> {
     private static final long serialVersionUID = -779004990L;
 
     public static final QCbhsZdgxhs cbhsZdgxhs = new QCbhsZdgxhs("cbhsZdgxhs");
-
-    public final NumberPath<java.math.BigDecimal> completeTotal = createNumber("completeTotal", java.math.BigDecimal.class);
 
     public final StringPath dateStr = createString("dateStr");
 
@@ -45,9 +44,7 @@ public class QCbhsZdgxhs extends EntityPathBase<CbhsZdgxhs> {
 
     public final NumberPath<java.math.BigDecimal> gzTotal = createNumber("gzTotal", java.math.BigDecimal.class);
 
-    public final StringPath machineryName = createString("machineryName");
-
-    public final NumberPath<Integer> machineryOid = createNumber("machineryOid", Integer.class);
+    public final ListPath<CbhsZdgxhsMachine, QCbhsZdgxhsMachine> machinerys = this.<CbhsZdgxhsMachine, QCbhsZdgxhsMachine>createList("machinerys", CbhsZdgxhsMachine.class, QCbhsZdgxhsMachine.class, PathInits.DIRECT2);
 
     public final StringPath monthStr = createString("monthStr");
 
@@ -63,33 +60,9 @@ public class QCbhsZdgxhs extends EntityPathBase<CbhsZdgxhs> {
 
     public final NumberPath<Integer> opUserOid = createNumber("opUserOid", Integer.class);
 
-    public final NumberPath<java.math.BigDecimal> p_jxdxf = createNumber("p_jxdxf", java.math.BigDecimal.class);
-
-    public final NumberPath<java.math.BigDecimal> p_jxysf = createNumber("p_jxysf", java.math.BigDecimal.class);
-
-    public final NumberPath<java.math.BigDecimal> p_zjf = createNumber("p_zjf", java.math.BigDecimal.class);
-
     public final NumberPath<Integer> projectOid = createNumber("projectOid", Integer.class);
 
-    public final NumberPath<Integer> ryID = createNumber("ryID", Integer.class);
-
-    public final StringPath ryKemuName = createString("ryKemuName");
-
-    public final StringPath ryName = createString("ryName");
-
-    public final NumberPath<java.math.BigDecimal> ryPrice = createNumber("ryPrice", java.math.BigDecimal.class);
-
-    public final StringPath ryStyle = createString("ryStyle");
-
-    public final StringPath ryUnit = createString("ryUnit");
-
-    public final NumberPath<java.math.BigDecimal> ryUnitPrice = createNumber("ryUnitPrice", java.math.BigDecimal.class);
-
-    public final NumberPath<java.math.BigDecimal> ryUseCount = createNumber("ryUseCount", java.math.BigDecimal.class);
-
     public final NumberPath<java.math.BigDecimal> total = createNumber("total", java.math.BigDecimal.class);
-
-    public final NumberPath<Float> workTime = createNumber("workTime", Float.class);
 
     public final NumberPath<java.math.BigDecimal> zcTotal = createNumber("zcTotal", java.math.BigDecimal.class);
 

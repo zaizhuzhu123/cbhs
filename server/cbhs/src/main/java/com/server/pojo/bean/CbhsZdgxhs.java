@@ -57,51 +57,6 @@ public class CbhsZdgxhs implements Serializable {
 	@Column(name = "deptName", length = 50, nullable = true, unique = false,columnDefinition="varchar(50) default ''")
 	@ApiModelProperty(value = "必填|部门名称",required=false)
 	private String deptName= "";// 必填|部门名称
-	@Column(name = "machineryOid", nullable = true, unique = false,columnDefinition="Integer default 0")
-	@ApiModelProperty(value = "必填|设备ID",required=false)
-	private Integer machineryOid= 0;// 必填|设备ID
-	@Column(name = "machineryName", length = 50, nullable = true, unique = false,columnDefinition="varchar(50) default ''")
-	@ApiModelProperty(value = "必填|设备名称",required=false)
-	private String machineryName= "";// 必填|设备名称
-	@Column(name = "completeTotal",precision = 19, scale = 4, columnDefinition="decimal(19,4) default 0", nullable = true, unique = false)
-	@ApiModelProperty(value = "必填|完成方量",required=false)
-	private BigDecimal completeTotal= new BigDecimal(0);// 必填|完成方量
-	@Column(name = "workTime", nullable = true, unique = false,columnDefinition="float(11) default 0")
-	@ApiModelProperty(value = "必填|工作时间",required=false)
-	private float  workTime;// 必填|工作时间
-	@Column(name = "p_zjf",precision = 19, scale = 4, columnDefinition="decimal(19,4) default 0", nullable = true, unique = false)
-	@ApiModelProperty(value = "必填|折旧费或租赁费",required=false)
-	private BigDecimal p_zjf= new BigDecimal(0);// 必填|折旧费或租赁费
-	@Column(name = "p_jxysf",precision = 19, scale = 4, columnDefinition="decimal(19,4) default 0", nullable = true, unique = false)
-	@ApiModelProperty(value = "必填|机械运输费",required=false)
-	private BigDecimal p_jxysf= new BigDecimal(0);// 必填|机械运输费
-	@Column(name = "p_jxdxf",precision = 19, scale = 4, columnDefinition="decimal(19,4) default 0", nullable = true, unique = false)
-	@ApiModelProperty(value = "必填|机械大修费",required=false)
-	private BigDecimal p_jxdxf= new BigDecimal(0);// 必填|机械大修费
-	@Column(name = "ryID", nullable = true, unique = false,columnDefinition="Integer default 0")
-	@ApiModelProperty(value = "必填|燃油ID",required=false)
-	private Integer ryID= 0;// 必填|燃油ID
-	@Column(name = "ryKemuName", length = 50, nullable = true, unique = false,columnDefinition="varchar(50) default ''")
-	@ApiModelProperty(value = "选填|燃油科目名称",required=false)
-	private String ryKemuName= "";// 选填|燃油科目名称
-	@Column(name = "ryName", length = 50, nullable = true, unique = false,columnDefinition="varchar(50) default ''")
-	@ApiModelProperty(value = "必填|燃油名称",required=false)
-	private String ryName= "";// 必填|燃油名称
-	@Column(name = "ryUseCount",precision = 19, scale = 4, columnDefinition="decimal(19,4) default 0", nullable = true, unique = false)
-	@ApiModelProperty(value = "必填|燃油使用量 单位L",required=false)
-	private BigDecimal ryUseCount= new BigDecimal(0);// 必填|燃油使用量 单位L
-	@Column(name = "ryStyle", length = 50, nullable = true, unique = false,columnDefinition="varchar(50) default ''")
-	@ApiModelProperty(value = "选填|燃油规格",required=false)
-	private String ryStyle= "";// 选填|燃油规格
-	@Column(name = "ryUnit", length = 50, nullable = true, unique = false,columnDefinition="varchar(50) default ''")
-	@ApiModelProperty(value = "必填|燃油单位",required=false)
-	private String ryUnit= "";// 必填|燃油单位
-	@Column(name = "ryUnitPrice",precision = 19, scale = 4, columnDefinition="decimal(19,4) default 0", nullable = true, unique = false)
-	@ApiModelProperty(value = "必填|燃油单价",required=false)
-	private BigDecimal ryUnitPrice= new BigDecimal(0);// 必填|燃油单价
-	@Column(name = "ryPrice",precision = 19, scale = 4, columnDefinition="decimal(19,4) default 0", nullable = true, unique = false)
-	@ApiModelProperty(value = "必填|燃油金额",required=false)
-	private BigDecimal ryPrice= new BigDecimal(0);// 必填|燃油金额
 	@Column(name = "total",precision = 19, scale = 4, columnDefinition="decimal(19,4) default 0", nullable = true, unique = false)
 	@ApiModelProperty(value = "必填|总金额",required=false)
 	private BigDecimal total= new BigDecimal(0);// 必填|总金额
@@ -135,6 +90,9 @@ public class CbhsZdgxhs implements Serializable {
 	@Column(name = "fcTotal",precision = 19, scale = 4, columnDefinition="decimal(19,4) default 0", nullable = true, unique = false)
 	@ApiModelProperty(value = "必填|辅材总金额",required=false)
 	private BigDecimal fcTotal= new BigDecimal(0);// 必填|辅材总金额
+	@Column(name = "machinerys", nullable = true, unique = false)
+	@ApiModelProperty(value = "机械设备",required=false)
+	private ArrayList<CbhsZdgxhsMachine>  machinerys;// 机械设备
 	@Column(name = "dateStr", length = 50,updatable = false, nullable = true, unique = false,columnDefinition="varchar(50) default ''")
 	@ApiModelProperty(value = "日期 yyyy-MM-dd 便于展示",hidden=true,required=false)
 	private String dateStr= "";// 日期 yyyy-MM-dd 便于展示
@@ -268,186 +226,6 @@ public class CbhsZdgxhs implements Serializable {
 
 	}
 
-	public Integer getMachineryOid() { 
-
-    	return this.machineryOid;
-
-	}
-
-	public void setMachineryOid(Integer machineryOid) {
- 
-        this.machineryOid = machineryOid;
-
-	}
-
-	public String getMachineryName() { 
-
-    	return this.machineryName;
-
-	}
-
-	public void setMachineryName(String machineryName) {
- 
-        this.machineryName = machineryName;
-
-	}
-
-	public BigDecimal getCompleteTotal() { 
-
-    	return this.completeTotal;
-
-	}
-
-	public void setCompleteTotal(BigDecimal completeTotal) {
- 
-        this.completeTotal = completeTotal;
-
-	}
-
-	public float getWorkTime() { 
-
-    	return this.workTime;
-
-	}
-
-	public void setWorkTime(float workTime) {
- 
-        this.workTime = workTime;
-
-	}
-
-	public BigDecimal getP_zjf() { 
-
-    	return this.p_zjf;
-
-	}
-
-	public void setP_zjf(BigDecimal p_zjf) {
- 
-        this.p_zjf = p_zjf;
-
-	}
-
-	public BigDecimal getP_jxysf() { 
-
-    	return this.p_jxysf;
-
-	}
-
-	public void setP_jxysf(BigDecimal p_jxysf) {
- 
-        this.p_jxysf = p_jxysf;
-
-	}
-
-	public BigDecimal getP_jxdxf() { 
-
-    	return this.p_jxdxf;
-
-	}
-
-	public void setP_jxdxf(BigDecimal p_jxdxf) {
- 
-        this.p_jxdxf = p_jxdxf;
-
-	}
-
-	public Integer getRyID() { 
-
-    	return this.ryID;
-
-	}
-
-	public void setRyID(Integer ryID) {
- 
-        this.ryID = ryID;
-
-	}
-
-	public String getRyKemuName() { 
-
-    	return this.ryKemuName;
-
-	}
-
-	public void setRyKemuName(String ryKemuName) {
- 
-        this.ryKemuName = ryKemuName;
-
-	}
-
-	public String getRyName() { 
-
-    	return this.ryName;
-
-	}
-
-	public void setRyName(String ryName) {
- 
-        this.ryName = ryName;
-
-	}
-
-	public BigDecimal getRyUseCount() { 
-
-    	return this.ryUseCount;
-
-	}
-
-	public void setRyUseCount(BigDecimal ryUseCount) {
- 
-        this.ryUseCount = ryUseCount;
-
-	}
-
-	public String getRyStyle() { 
-
-    	return this.ryStyle;
-
-	}
-
-	public void setRyStyle(String ryStyle) {
- 
-        this.ryStyle = ryStyle;
-
-	}
-
-	public String getRyUnit() { 
-
-    	return this.ryUnit;
-
-	}
-
-	public void setRyUnit(String ryUnit) {
- 
-        this.ryUnit = ryUnit;
-
-	}
-
-	public BigDecimal getRyUnitPrice() { 
-
-    	return this.ryUnitPrice;
-
-	}
-
-	public void setRyUnitPrice(BigDecimal ryUnitPrice) {
- 
-        this.ryUnitPrice = ryUnitPrice;
-
-	}
-
-	public BigDecimal getRyPrice() { 
-
-    	return this.ryPrice;
-
-	}
-
-	public void setRyPrice(BigDecimal ryPrice) {
- 
-        this.ryPrice = ryPrice;
-
-	}
-
 	public BigDecimal getTotal() { 
 
     	return this.total;
@@ -577,6 +355,18 @@ public class CbhsZdgxhs implements Serializable {
 	public void setFcTotal(BigDecimal fcTotal) {
  
         this.fcTotal = fcTotal;
+
+	}
+
+	public ArrayList<CbhsZdgxhsMachine> getMachinerys() { 
+
+    	return this.machinerys;
+
+	}
+
+	public void setMachinerys(ArrayList<CbhsZdgxhsMachine> machinerys) {
+ 
+        this.machinerys = machinerys;
 
 	}
 
