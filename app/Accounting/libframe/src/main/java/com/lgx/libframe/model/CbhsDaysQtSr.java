@@ -18,6 +18,7 @@ private  long  dateTimeStamp;// 日期 每天00:00:00的时间戳 用于后期�
 private String  name;// 项目名称
 private String  unit;// 单位
 private double unitPrice;// 单价
+private double count;// 数量
 private double total;// 总金额
 private int opUserOid;// 操作人ID
 private String  opUserName;// 操作人姓名
@@ -153,6 +154,18 @@ public double  getUnitPrice(){
 public void setUnitPrice(double unitPrice){
  
         this.unitPrice=unitPrice;
+
+}
+
+public double  getCount(){ 
+
+    return this.count;
+
+}
+
+public void setCount(double count){
+ 
+        this.count=count;
 
 }
 

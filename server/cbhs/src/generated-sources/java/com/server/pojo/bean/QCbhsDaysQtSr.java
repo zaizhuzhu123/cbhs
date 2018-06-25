@@ -19,6 +19,8 @@ public class QCbhsDaysQtSr extends EntityPathBase<CbhsDaysQtSr> {
 
     public static final QCbhsDaysQtSr cbhsDaysQtSr = new QCbhsDaysQtSr("cbhsDaysQtSr");
 
+    public final NumberPath<java.math.BigDecimal> count = createNumber("count", java.math.BigDecimal.class);
+
     public final StringPath dateStr = createString("dateStr");
 
     public final NumberPath<Long> dateTimeStamp = createNumber("dateTimeStamp", Long.class);

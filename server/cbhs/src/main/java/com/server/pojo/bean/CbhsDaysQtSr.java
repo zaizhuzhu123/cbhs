@@ -60,6 +60,9 @@ public class CbhsDaysQtSr implements Serializable {
 	@Column(name = "unitPrice",precision = 19, scale = 4, columnDefinition="decimal(19,4) default 0", nullable = true, unique = false)
 	@ApiModelProperty(value = "单价",required=false)
 	private BigDecimal unitPrice= new BigDecimal(0);// 单价
+	@Column(name = "count",precision = 19, scale = 4, columnDefinition="decimal(19,4) default 0", nullable = true, unique = false)
+	@ApiModelProperty(value = "数量",required=false)
+	private BigDecimal count= new BigDecimal(0);// 数量
 	@Column(name = "total",precision = 19, scale = 4, columnDefinition="decimal(19,4) default 0", nullable = true, unique = false)
 	@ApiModelProperty(value = "总金额",required=false)
 	private BigDecimal total= new BigDecimal(0);// 总金额
@@ -208,6 +211,18 @@ public class CbhsDaysQtSr implements Serializable {
 	public void setUnitPrice(BigDecimal unitPrice) {
  
         this.unitPrice = unitPrice;
+
+	}
+
+	public BigDecimal getCount() { 
+
+    	return this.count;
+
+	}
+
+	public void setCount(BigDecimal count) {
+ 
+        this.count = count;
 
 	}
 
