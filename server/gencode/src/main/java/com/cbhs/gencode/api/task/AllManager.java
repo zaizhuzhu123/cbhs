@@ -23,7 +23,7 @@ public class AllManager {
 	private String path = null;
 	String xlsxPath = null;
 
-	public AllManager(String inputPath) throws Exception {
+	public AllManager(String inputPath) throws Exception {  
 		System.out.println("");
 		System.out.println("--------------------------------------------------------------------------------");
 		System.out.println("gen code begin...." + inputPath);
