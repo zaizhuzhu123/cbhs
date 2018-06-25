@@ -1,5 +1,6 @@
 package com.server.handler.imp;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +27,7 @@ import com.server.jpa.MyJPAQuery;
 import com.server.jpa.MyJPAQuery.PagerResult;
 import com.server.jpa.MyQueryFactory;
 import com.server.manager.CbSrManager;
+import com.server.pojo.bean.CbhsDaysFbLjxmCb;
 import com.server.pojo.bean.CbhsDaysGclSr;
 import com.server.pojo.bean.CbhsDaysQtSr;
 import com.server.pojo.bean.CbhsGclQdYs;
@@ -36,6 +38,7 @@ import com.server.pojo.bean.QCbhsGclQdYs;
 import com.server.pojo.url.daysSr.RequestGcsrAdd;
 import com.server.pojo.url.daysSr.RequestGcsrDel;
 import com.server.pojo.url.daysSr.RequestGcsrFetch;
+import com.server.pojo.url.daysSr.RequestNewsrAddPrice;
 import com.server.pojo.url.daysSr.RequestNewsrDel;
 import com.server.pojo.url.daysSr.RequestNewsrFetch;
 import com.server.pojo.url.daysSr.ResponseGcsrAdd;
@@ -170,7 +173,11 @@ public class DaysSrApisServiceImp implements DaysSrApisService {
 		bv.vali(BeanValidation.beanType.project, BeanValidation.valiType.all, ys.getProjectOid());
 		bv.vali(BeanValidation.beanType.dept, BeanValidation.valiType.all, ys.getDeptOid());
 		ys = queryFactory.saveOrUpdate(ys);
-		cbSrManager.updateSr(queryFactory, 2, ys.getOid(), ys.getTotal());
+		CbhsSr sr = JSON.parseObject(JSON.toJSONString(ys), CbhsSr.class);
+		sr.setCbOid(ys.getOid());
+		sr.setType(2);
+		sr.setOid(null);
+		cbSrManager.createSr(queryFactory, sr);
 		return ys;
 	}
 
@@ -183,7 +190,7 @@ public class DaysSrApisServiceImp implements DaysSrApisService {
 	}
 
 	@Override
-	public CbhsDaysQtSr newsrAdd(CbhsDaysQtSr ys, HttpServletRequest httpServletRequest) throws Exception {
+	public CbhsDaysQtSr newsrAddCount(CbhsDaysQtSr ys, HttpServletRequest httpServletRequest) throws Exception {
 		BeanValidation bv = new BeanValidation(queryFactory);
 		bv.vali(BeanValidation.beanType.project, BeanValidation.valiType.all, ys.getProjectOid());
 		bv.vali(BeanValidation.beanType.dept, BeanValidation.valiType.all, ys.getDeptOid());
@@ -198,6 +205,8 @@ public class DaysSrApisServiceImp implements DaysSrApisService {
 		ys.setOpUserName(TokenUtils.getTokenInfo(httpServletRequest).getUserName());
 		ys.setOpTimeStr(curDt.toString("yyyy-MM-dd HH:mm:ss"));
 		ys.setOpTime(curDt.getMillis());
+		ys.setUnitPrice(BigDecimal.ZERO);
+		ys.setTotal(BigDecimal.ZERO);
 		ys = queryFactory.saveOrUpdate(ys);
 		CbhsSr sr = JSON.parseObject(JSON.toJSONString(ys), CbhsSr.class);
 		sr.setCbOid(ys.getOid());
@@ -205,6 +214,21 @@ public class DaysSrApisServiceImp implements DaysSrApisService {
 		sr.setOid(null);
 		cbSrManager.createSr(queryFactory, sr);
 		return ys;
+	}
+
+	@Override
+	public CbhsDaysQtSr newsrAddPrice(RequestNewsrAddPrice request, HttpServletRequest httpServletRequest) throws Exception {
+		Preconditions.checkArgument(request.getCbhsDaysQtSrOid() > 0, "收入ID不能为空!");
+		CbhsDaysQtSr qtsr = queryFactory.findOne(CbhsDaysQtSr.class, request.getCbhsDaysQtSrOid());
+		Preconditions.checkArgument(qtsr != null, "收入不存在!");
+		qtsr.setUnitPrice(request.getUnitPrice());
+		qtsr.setTotal(request.getPrice());
+		CbhsSr sr = JSON.parseObject(JSON.toJSONString(qtsr), CbhsSr.class);
+		sr.setCbOid(qtsr.getOid());
+		sr.setType(2);
+		sr.setOid(null);
+		cbSrManager.createSr(queryFactory, sr);
+		return qtsr;
 	}
 
 }

@@ -31,6 +31,8 @@ public class QCbhsDaysQtSr extends EntityPathBase<CbhsDaysQtSr> {
 
     public final NumberPath<Long> monthTimeStamp = createNumber("monthTimeStamp", Long.class);
 
+    public final StringPath name = createString("name");
+
     public final NumberPath<Integer> oid = createNumber("oid", Integer.class);
 
     public final NumberPath<Long> opTime = createNumber("opTime", Long.class);
@@ -46,6 +48,10 @@ public class QCbhsDaysQtSr extends EntityPathBase<CbhsDaysQtSr> {
     public final StringPath remark = createString("remark");
 
     public final NumberPath<java.math.BigDecimal> total = createNumber("total", java.math.BigDecimal.class);
+
+    public final StringPath unit = createString("unit");
+
+    public final NumberPath<java.math.BigDecimal> unitPrice = createNumber("unitPrice", java.math.BigDecimal.class);
 
     public QCbhsDaysQtSr(String variable) {
         super(CbhsDaysQtSr.class, forVariable(variable));

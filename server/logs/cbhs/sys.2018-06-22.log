@@ -1,0 +1,25 @@
+2018-06-22 16:01:46,563 INFO (StartupInfoLogger.java:48)- Starting ServletInitializer on kj08 with PID 12620 (C:\Users\Administrator\git\cbhs\server\cbhs\target\classes started by Administrator in C:\Users\Administrator\git\cbhs\server\cbhs)
+2018-06-22 16:01:46,567 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.5.RELEASE, Spring v4.3.10.RELEASE
+2018-06-22 16:01:46,567 INFO (SpringApplication.java:597)- The following profiles are active: prod,test
+2018-06-22 16:02:26,396 INFO (StartupInfoLogger.java:48)- Starting ServletInitializer on kj08 with PID 13132 (C:\Users\Administrator\git\cbhs\server\cbhs\target\classes started by Administrator in C:\Users\Administrator\git\cbhs\server\cbhs)
+2018-06-22 16:02:26,399 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.5.RELEASE, Spring v4.3.10.RELEASE
+2018-06-22 16:02:26,399 INFO (SpringApplication.java:597)- The following profiles are active: prod,test
+2018-06-22 16:02:57,334 INFO (StartupInfoLogger.java:48)- Starting ServletInitializer on kj08 with PID 11800 (C:\Users\Administrator\git\cbhs\server\cbhs\target\classes started by Administrator in C:\Users\Administrator\git\cbhs\server\cbhs)
+2018-06-22 16:02:57,336 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.5.RELEASE, Spring v4.3.10.RELEASE
+2018-06-22 16:02:57,336 INFO (SpringApplication.java:597)- The following profiles are active: prod,test
+2018-06-22 16:03:10,812 INFO (StartupInfoLogger.java:57)- Started ServletInitializer in 13.81 seconds (JVM running for 14.13)
+2018-06-22 16:14:31,184 INFO (StartupInfoLogger.java:48)- Starting ServletInitializer on kj08 with PID 13480 (C:\Users\Administrator\git\cbhs\server\cbhs\target\classes started by Administrator in C:\Users\Administrator\git\cbhs\server\cbhs)
+2018-06-22 16:14:31,187 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.5.RELEASE, Spring v4.3.10.RELEASE
+2018-06-22 16:14:31,187 INFO (SpringApplication.java:597)- The following profiles are active: prod,test
+2018-06-22 16:14:44,845 INFO (StartupInfoLogger.java:57)- Started ServletInitializer in 14.102 seconds (JVM running for 14.456)
+2018-06-22 16:17:24,406 INFO (StartupInfoLogger.java:48)- Starting ServletInitializer on kj08 with PID 14268 (C:\Users\Administrator\git\cbhs\server\cbhs\target\classes started by Administrator in C:\Users\Administrator\git\cbhs\server\cbhs)
+2018-06-22 16:17:24,408 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.5.RELEASE, Spring v4.3.10.RELEASE
+2018-06-22 16:17:24,409 INFO (SpringApplication.java:597)- The following profiles are active: prod,test
+2018-06-22 16:17:38,991 INFO (StartupInfoLogger.java:57)- Started ServletInitializer in 14.931 seconds (JVM running for 15.233)
+2018-06-22 16:49:55,064 INFO (StartupInfoLogger.java:48)- Starting ServletInitializer on kj08 with PID 15180 (C:\Users\Administrator\git\cbhs\server\cbhs\target\classes started by Administrator in C:\Users\Administrator\git\cbhs\server\cbhs)
+2018-06-22 16:49:55,066 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.5.RELEASE, Spring v4.3.10.RELEASE
+2018-06-22 16:49:55,066 INFO (SpringApplication.java:597)- The following profiles are active: prod,test
+2018-06-22 16:53:48,935 INFO (StartupInfoLogger.java:48)- Starting ServletInitializer on kj08 with PID 11560 (C:\Users\Administrator\git\cbhs\server\cbhs\target\classes started by Administrator in C:\Users\Administrator\git\cbhs\server\cbhs)
+2018-06-22 16:53:48,937 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.5.RELEASE, Spring v4.3.10.RELEASE
+2018-06-22 16:53:48,937 INFO (SpringApplication.java:597)- The following profiles are active: prod,test
+2018-06-22 16:54:02,920 INFO (StartupInfoLogger.java:57)- Started ServletInitializer in 14.347 seconds (JVM running for 14.647)

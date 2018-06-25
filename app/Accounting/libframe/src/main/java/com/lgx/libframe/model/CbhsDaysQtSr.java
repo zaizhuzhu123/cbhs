@@ -15,7 +15,10 @@ private String  monthStr;// 必填|月份 yyyy-MM 便于展示
 private long monthTimeStamp;// 必填|月份 时间戳 用于后期数据统计
 private String  dateStr;// 日期 yyyy-MM-dd 便于展示
 private  long  dateTimeStamp;// 日期 每天00:00:00的时间戳 用于后期数据统计
-private double total;// 必填|总金额
+private String  name;// 项目名称
+private String  unit;// 单位
+private double unitPrice;// 单价
+private double total;// 总金额
 private int opUserOid;// 操作人ID
 private String  opUserName;// 操作人姓名
 private String  opTimeStr;// 操作时间
@@ -114,6 +117,42 @@ public long  getDateTimeStamp(){
 public void setDateTimeStamp(long dateTimeStamp){
  
         this.dateTimeStamp=dateTimeStamp;
+
+}
+
+public String  getName(){ 
+
+    return this.name;
+
+}
+
+public void setName(String name){
+ 
+        this.name=name;
+
+}
+
+public String  getUnit(){ 
+
+    return this.unit;
+
+}
+
+public void setUnit(String unit){
+ 
+        this.unit=unit;
+
+}
+
+public double  getUnitPrice(){ 
+
+    return this.unitPrice;
+
+}
+
+public void setUnitPrice(double unitPrice){
+ 
+        this.unitPrice=unitPrice;
 
 }
 

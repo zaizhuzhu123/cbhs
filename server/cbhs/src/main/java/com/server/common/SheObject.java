@@ -17,6 +17,7 @@ public class SheObject {
 	public static final int shType_zytjzc = 13;// 资源统计 主材
 	public static final int shType_ssd = 14;// 对下结算
 	public static final int shType_reim = 15;// 财务报销
+	public static final int shType_fbljxmcount = 16;// 分包临建项目 数量
 
 	private String max; // 设定的最大值
 	private String used; // 已使用的值

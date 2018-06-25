@@ -42,6 +42,7 @@ public class CbSrManager {
 	}
 
 	public void createSr(MyQueryFactory queryFactory, CbhsSr sr) {
+		queryFactory.delete(QCbhsSr.cbhsSr).where(QCbhsSr.cbhsSr.type.eq(sr.getType()).and(QCbhsSr.cbhsSr.cbOid.eq(sr.getCbOid()))).execute();
 		DateTime dt = new DateTime(sr.getDateTimeStamp());
 		sr.setOpTimeStr(dt.toString("yyyy-MM-dd HH:mm:ss"));
 		sr.setOpTime(dt.getMillis());

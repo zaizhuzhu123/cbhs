@@ -271,16 +271,16 @@ public class ExaminerManager {
 				}
 			}
 		}
-		if (message.getType().intValue() == SheObject.shType_fbljxm) { // 分包临建项目
+		if (message.getType().intValue() == SheObject.shType_fbljxmcount) { // 分包临建项目 数量
 			queryFactory.update(QCbhsDaysFbLjxmCb.cbhsDaysFbLjxmCb).set(QCbhsDaysFbLjxmCb.cbhsDaysFbLjxmCb.shStatus, success ? 0 : 2)
 					.where(QCbhsDaysFbLjxmCb.cbhsDaysFbLjxmCb.oid.eq(message.getCbOid())).execute();
-			String title = "分包临建项目审核" + (success ? "成功" : "失败");
+			String title = "分包临建项目数量审核" + (success ? "成功" : "失败");
 			pushManager.pushExamMessage(Lists.newArrayList(message.getPersonOid()), title, title, title, message.getOid() + "");
 			if (success) {
 				CbhsDaysFbLjxmCb ys = queryFactory.selectFrom(QCbhsDaysFbLjxmCb.cbhsDaysFbLjxmCb).where(QCbhsDaysFbLjxmCb.cbhsDaysFbLjxmCb.oid.eq(message.getCbOid())).fetchFirst();
 				CbhsCb cb = JSON.parseObject(JSON.toJSONString(ys), CbhsCb.class);
 				cb.setOid(null);
-				cb.setType(SheObject.shType_fbljxm);
+				cb.setType(SheObject.shType_fbljxmcount);
 				cb.setCbOid(ys.getOid());
 				cbSrManager.createCb(queryFactory, cb);
 			}
@@ -352,6 +352,20 @@ public class ExaminerManager {
 			queryFactory.update(QCbhsReim.cbhsReim).set(QCbhsReim.cbhsReim.shStatus, success ? 0 : 2).where(QCbhsReim.cbhsReim.oid.eq(message.getCbOid())).execute();
 			String title = "财务报销审核" + (success ? "成功" : "失败");
 			pushManager.pushExamMessage(Lists.newArrayList(message.getPersonOid()), title, title, title, message.getOid() + "");
+		}
+		if (message.getType().intValue() == SheObject.shType_fbljxm) { // 分包临建项目价格
+			queryFactory.update(QCbhsDaysFbLjxmCb.cbhsDaysFbLjxmCb).set(QCbhsDaysFbLjxmCb.cbhsDaysFbLjxmCb.shStatus, success ? 0 : 2)
+					.where(QCbhsDaysFbLjxmCb.cbhsDaysFbLjxmCb.oid.eq(message.getCbOid())).execute();
+			String title = "分包临建项目价格审核" + (success ? "成功" : "失败");
+			pushManager.pushExamMessage(Lists.newArrayList(message.getPersonOid()), title, title, title, message.getOid() + "");
+			if (success) {
+				CbhsDaysFbLjxmCb ys = queryFactory.selectFrom(QCbhsDaysFbLjxmCb.cbhsDaysFbLjxmCb).where(QCbhsDaysFbLjxmCb.cbhsDaysFbLjxmCb.oid.eq(message.getCbOid())).fetchFirst();
+				CbhsCb cb = JSON.parseObject(JSON.toJSONString(ys), CbhsCb.class);
+				cb.setOid(null);
+				cb.setType(SheObject.shType_fbljxm);
+				cb.setCbOid(ys.getOid());
+				cbSrManager.createCb(queryFactory, cb);
+			}
 		}
 		message.setCompleteState(success ? 2 : 3);
 		queryFactory.saveOrUpdate(message);

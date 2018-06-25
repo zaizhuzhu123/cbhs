@@ -62,7 +62,9 @@ import com.server.pojo.url.daysCb.RequestFbLjxmCbFetch;
 import com.server.pojo.url.daysCb.ResponseFbLjxmCbFetch;
 import com.server.pojo.bean.CbhsDaysFbLjxmCb;
 import com.server.pojo.url.daysCb.RequestFbLjxmCbDel;
-import com.server.pojo.url.daysCb.RequestFbLjxmCbAdd;
+import com.server.pojo.url.daysCb.RequestFbLjxmCbAddCount;
+import com.server.pojo.url.daysCb.RequestFbLjxmCbAddJg;
+import com.server.pojo.url.daysCb.RequestFbLjxmCbUpdateJg;
 import com.server.pojo.url.daysCb.RequestFbJgUpdate;
 import com.server.pojo.url.daysCb.RequestFbJgAdd;
 
@@ -489,16 +491,42 @@ public class DaysCbApis {
 	}
 
 
-	@RequestMapping(value = "/daysCb/fbLjxmCbAdd", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "/daysCb/fbLjxmCbAddCount", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseStatus(code = HttpStatus.OK)
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = "token", value = "鉴权信息", required = true, dataType = "String", paramType = "header"),
 	})
-	@ApiOperation(value = "分包临建项目-新增", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ApiOperation(value = "分包临建项目-新增量", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ApiResponse(code = 200, message = "操作成功后返回的视图")
 	@ResponseBody
-	public CbhsDaysFbLjxmCb fbLjxmCbAdd(@Validated @RequestBody RequestFbLjxmCbAdd request, HttpServletRequest httpServletRequest) throws Exception{
-		return daysCbApisService.fbLjxmCbAdd(request, httpServletRequest);
+	public CbhsDaysFbLjxmCb fbLjxmCbAddCount(@Validated @RequestBody RequestFbLjxmCbAddCount request, HttpServletRequest httpServletRequest) throws Exception{
+		return daysCbApisService.fbLjxmCbAddCount(request, httpServletRequest);
+	}
+
+
+	@RequestMapping(value = "/daysCb/fbLjxmCbAddJg", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseStatus(code = HttpStatus.OK)
+	@ApiImplicitParams({
+		@ApiImplicitParam(name = "token", value = "鉴权信息", required = true, dataType = "String", paramType = "header"),
+	})
+	@ApiOperation(value = "分包临建项目-新增价格", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ApiResponse(code = 200, message = "操作成功后返回的视图")
+	@ResponseBody
+	public CbhsDaysFbLjxmCb fbLjxmCbAddJg(@Validated @RequestBody RequestFbLjxmCbAddJg request, HttpServletRequest httpServletRequest) throws Exception{
+		return daysCbApisService.fbLjxmCbAddJg(request, httpServletRequest);
+	}
+
+
+	@RequestMapping(value = "/daysCb/fbLjxmCbUpdateJg", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseStatus(code = HttpStatus.OK)
+	@ApiImplicitParams({
+		@ApiImplicitParam(name = "token", value = "鉴权信息", required = true, dataType = "String", paramType = "header"),
+	})
+	@ApiOperation(value = "分包临建项目-修改价格", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ApiResponse(code = 200, message = "操作成功后返回的视图")
+	@ResponseBody
+	public JSONObject fbLjxmCbUpdateJg(@Validated @RequestBody RequestFbLjxmCbUpdateJg request, HttpServletRequest httpServletRequest) throws Exception{
+		return daysCbApisService.fbLjxmCbUpdateJg(request, httpServletRequest);
 	}
 
 
@@ -523,7 +551,7 @@ public class DaysCbApis {
 	@ApiOperation(value = "分包价格-新增", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ApiResponse(code = 200, message = "操作成功后返回的视图")
 	@ResponseBody
-	public JSONObject fbJgAdd(@Validated @RequestBody RequestFbJgAdd request, HttpServletRequest httpServletRequest) throws Exception{
+	public CbhsDaysFbGclTj fbJgAdd(@Validated @RequestBody RequestFbJgAdd request, HttpServletRequest httpServletRequest) throws Exception{
 		return daysCbApisService.fbJgAdd(request, httpServletRequest);
 	}
 

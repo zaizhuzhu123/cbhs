@@ -9,10 +9,12 @@ import java.math.BigDecimal;
 import org.hibernate.validator.constraints.*;
 public class RequestFbJgUpdate implements Serializable {
 	private static final long serialVersionUID = 1L;
-	@ApiModelProperty(value = "分包工程ID")
+	@ApiModelProperty(value = "")
 	private Integer fbGclOid= 0;
-	@ApiModelProperty(value = "分包价格")
+	@ApiModelProperty(value = "")
 	private BigDecimal fbPrice= new BigDecimal(0);
+	@ApiModelProperty(value = "")
+	private BigDecimal fbUnitPrice= new BigDecimal(0);
 
 	public Integer getFbGclOid() { 
 
@@ -35,6 +37,18 @@ public class RequestFbJgUpdate implements Serializable {
 	public void setFbPrice(BigDecimal fbPrice) {
  
         this.fbPrice = fbPrice;
+
+	}
+
+	public BigDecimal getFbUnitPrice() { 
+
+    	return this.fbUnitPrice;
+
+	}
+
+	public void setFbUnitPrice(BigDecimal fbUnitPrice) {
+ 
+        this.fbUnitPrice = fbUnitPrice;
 
 	}
 

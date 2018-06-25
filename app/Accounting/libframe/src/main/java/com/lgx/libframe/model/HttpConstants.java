@@ -233,7 +233,11 @@ public class HttpConstants {
 
     public static Integer DAYSCB_FBLJXMCBDEL=50903;
 
-    public static Integer DAYSCB_FBLJXMCBADD=50904;
+    public static Integer DAYSCB_FBLJXMCBADDCOUNT=50904;
+
+    public static Integer DAYSCB_FBLJXMCBADDJG=50905;
+
+    public static Integer DAYSCB_FBLJXMCBUPDATEJG=50906;
 
     public static Integer DAYSCB_FBJGUPDATE=51001;
 
@@ -253,7 +257,9 @@ public class HttpConstants {
 
     public static Integer DAYSSR_NEWSRDEL=60203;
 
-    public static Integer DAYSSR_NEWSRADD=60204;
+    public static Integer DAYSSR_NEWSRADDCOUNT=60204;
+
+    public static Integer DAYSSR_NEWSRADDPRICE=60205;
 
     public static Integer GLOBALYS_GLOBALGCLYSFETCH=30101;
 
@@ -1192,564 +1198,585 @@ public class HttpConstants {
     httpObjs.put(DAYSCB_FBLJXMCBDEL,httpObj113);
 
     HttpObj httpObj114= new HttpObj();
-    httpObj114.setUrl("/daysCb/fbLjxmCbAdd");
+    httpObj114.setUrl("/daysCb/fbLjxmCbAddCount");
     httpObj114.setReqMethod("POST");
-    httpObj114.setReqObjName("com.lgx.libframe.model.RequestFbLjxmCbAdd");
+    httpObj114.setReqObjName("com.lgx.libframe.model.RequestFbLjxmCbAddCount");
     httpObj114.setRespObjName("com.lgx.libframe.model.CbhsDaysFbLjxmCb");
-    httpObjs.put(DAYSCB_FBLJXMCBADD,httpObj114);
+    httpObjs.put(DAYSCB_FBLJXMCBADDCOUNT,httpObj114);
 
     HttpObj httpObj115= new HttpObj();
-    httpObj115.setUrl("/daysCb/fbJgUpdate");
+    httpObj115.setUrl("/daysCb/fbLjxmCbAddJg");
     httpObj115.setReqMethod("POST");
-    httpObj115.setReqObjName("com.lgx.libframe.model.RequestFbJgUpdate");
-    httpObj115.setRespObjName("com.lgx.libframe.model.BaseObj");
-    httpObjs.put(DAYSCB_FBJGUPDATE,httpObj115);
+    httpObj115.setReqObjName("com.lgx.libframe.model.RequestFbLjxmCbAddJg");
+    httpObj115.setRespObjName("com.lgx.libframe.model.CbhsDaysFbLjxmCb");
+    httpObjs.put(DAYSCB_FBLJXMCBADDJG,httpObj115);
 
     HttpObj httpObj116= new HttpObj();
-    httpObj116.setUrl("/daysCb/fbJgAdd");
+    httpObj116.setUrl("/daysCb/fbLjxmCbUpdateJg");
     httpObj116.setReqMethod("POST");
-    httpObj116.setReqObjName("com.lgx.libframe.model.RequestFbJgAdd");
+    httpObj116.setReqObjName("com.lgx.libframe.model.RequestFbLjxmCbUpdateJg");
     httpObj116.setRespObjName("com.lgx.libframe.model.BaseObj");
-    httpObjs.put(DAYSCB_FBJGADD,httpObj116);
+    httpObjs.put(DAYSCB_FBLJXMCBUPDATEJG,httpObj116);
 
     HttpObj httpObj117= new HttpObj();
-    httpObj117.setUrl("/daysSr/gcsrFetch");
+    httpObj117.setUrl("/daysCb/fbJgUpdate");
     httpObj117.setReqMethod("POST");
-    httpObj117.setReqObjName("com.lgx.libframe.model.RequestGcsrFetch");
-    httpObj117.setRespObjName("com.lgx.libframe.model.ResponseGcsrFetch");
-    httpObjs.put(DAYSSR_GCSRFETCH,httpObj117);
+    httpObj117.setReqObjName("com.lgx.libframe.model.RequestFbJgUpdate");
+    httpObj117.setRespObjName("com.lgx.libframe.model.BaseObj");
+    httpObjs.put(DAYSCB_FBJGUPDATE,httpObj117);
 
     HttpObj httpObj118= new HttpObj();
-    httpObj118.setUrl("/daysSr/gcsrUpdate");
+    httpObj118.setUrl("/daysCb/fbJgAdd");
     httpObj118.setReqMethod("POST");
-    httpObj118.setReqObjName("com.lgx.libframe.model.CbhsDaysGclSr");
-    httpObj118.setRespObjName("com.lgx.libframe.model.CbhsDaysGclSr");
-    httpObjs.put(DAYSSR_GCSRUPDATE,httpObj118);
+    httpObj118.setReqObjName("com.lgx.libframe.model.RequestFbJgAdd");
+    httpObj118.setRespObjName("com.lgx.libframe.model.CbhsDaysFbGclTj");
+    httpObjs.put(DAYSCB_FBJGADD,httpObj118);
 
     HttpObj httpObj119= new HttpObj();
-    httpObj119.setUrl("/daysSr/gcsrDel");
+    httpObj119.setUrl("/daysSr/gcsrFetch");
     httpObj119.setReqMethod("POST");
-    httpObj119.setReqObjName("com.lgx.libframe.model.RequestGcsrDel");
-    httpObj119.setRespObjName("com.lgx.libframe.model.BaseObj");
-    httpObjs.put(DAYSSR_GCSRDEL,httpObj119);
+    httpObj119.setReqObjName("com.lgx.libframe.model.RequestGcsrFetch");
+    httpObj119.setRespObjName("com.lgx.libframe.model.ResponseGcsrFetch");
+    httpObjs.put(DAYSSR_GCSRFETCH,httpObj119);
 
     HttpObj httpObj120= new HttpObj();
-    httpObj120.setUrl("/daysSr/gcsrAdd");
+    httpObj120.setUrl("/daysSr/gcsrUpdate");
     httpObj120.setReqMethod("POST");
-    httpObj120.setReqObjName("com.lgx.libframe.model.RequestGcsrAdd");
-    httpObj120.setRespObjName("com.lgx.libframe.model.ResponseGcsrAdd");
-    httpObjs.put(DAYSSR_GCSRADD,httpObj120);
+    httpObj120.setReqObjName("com.lgx.libframe.model.CbhsDaysGclSr");
+    httpObj120.setRespObjName("com.lgx.libframe.model.CbhsDaysGclSr");
+    httpObjs.put(DAYSSR_GCSRUPDATE,httpObj120);
 
     HttpObj httpObj121= new HttpObj();
-    httpObj121.setUrl("/daysSr/newsrFetch");
+    httpObj121.setUrl("/daysSr/gcsrDel");
     httpObj121.setReqMethod("POST");
-    httpObj121.setReqObjName("com.lgx.libframe.model.RequestNewsrFetch");
-    httpObj121.setRespObjName("com.lgx.libframe.model.ResponseNewsrFetch");
-    httpObjs.put(DAYSSR_NEWSRFETCH,httpObj121);
+    httpObj121.setReqObjName("com.lgx.libframe.model.RequestGcsrDel");
+    httpObj121.setRespObjName("com.lgx.libframe.model.BaseObj");
+    httpObjs.put(DAYSSR_GCSRDEL,httpObj121);
 
     HttpObj httpObj122= new HttpObj();
-    httpObj122.setUrl("/daysSr/newsrUpdate");
+    httpObj122.setUrl("/daysSr/gcsrAdd");
     httpObj122.setReqMethod("POST");
-    httpObj122.setReqObjName("com.lgx.libframe.model.CbhsDaysQtSr");
-    httpObj122.setRespObjName("com.lgx.libframe.model.CbhsDaysQtSr");
-    httpObjs.put(DAYSSR_NEWSRUPDATE,httpObj122);
+    httpObj122.setReqObjName("com.lgx.libframe.model.RequestGcsrAdd");
+    httpObj122.setRespObjName("com.lgx.libframe.model.ResponseGcsrAdd");
+    httpObjs.put(DAYSSR_GCSRADD,httpObj122);
 
     HttpObj httpObj123= new HttpObj();
-    httpObj123.setUrl("/daysSr/newsrDel");
+    httpObj123.setUrl("/daysSr/newsrFetch");
     httpObj123.setReqMethod("POST");
-    httpObj123.setReqObjName("com.lgx.libframe.model.RequestNewsrDel");
-    httpObj123.setRespObjName("com.lgx.libframe.model.BaseObj");
-    httpObjs.put(DAYSSR_NEWSRDEL,httpObj123);
+    httpObj123.setReqObjName("com.lgx.libframe.model.RequestNewsrFetch");
+    httpObj123.setRespObjName("com.lgx.libframe.model.ResponseNewsrFetch");
+    httpObjs.put(DAYSSR_NEWSRFETCH,httpObj123);
 
     HttpObj httpObj124= new HttpObj();
-    httpObj124.setUrl("/daysSr/newsrAdd");
+    httpObj124.setUrl("/daysSr/newsrUpdate");
     httpObj124.setReqMethod("POST");
     httpObj124.setReqObjName("com.lgx.libframe.model.CbhsDaysQtSr");
     httpObj124.setRespObjName("com.lgx.libframe.model.CbhsDaysQtSr");
-    httpObjs.put(DAYSSR_NEWSRADD,httpObj124);
+    httpObjs.put(DAYSSR_NEWSRUPDATE,httpObj124);
 
     HttpObj httpObj125= new HttpObj();
-    httpObj125.setUrl("/globalYs/globalGclYsFetch");
+    httpObj125.setUrl("/daysSr/newsrDel");
     httpObj125.setReqMethod("POST");
-    httpObj125.setReqObjName("com.lgx.libframe.model.RequestGlobalGclYsFetch");
-    httpObj125.setRespObjName("com.lgx.libframe.model.ResponseGlobalGclYsFetch");
-    httpObjs.put(GLOBALYS_GLOBALGCLYSFETCH,httpObj125);
+    httpObj125.setReqObjName("com.lgx.libframe.model.RequestNewsrDel");
+    httpObj125.setRespObjName("com.lgx.libframe.model.BaseObj");
+    httpObjs.put(DAYSSR_NEWSRDEL,httpObj125);
 
     HttpObj httpObj126= new HttpObj();
-    httpObj126.setUrl("/globalYs/globalGclYsUpdate");
+    httpObj126.setUrl("/daysSr/newsrAddCount");
     httpObj126.setReqMethod("POST");
-    httpObj126.setReqObjName("com.lgx.libframe.model.CbhsGclQdYs");
-    httpObj126.setRespObjName("com.lgx.libframe.model.CbhsGclQdYs");
-    httpObjs.put(GLOBALYS_GLOBALGCLYSUPDATE,httpObj126);
+    httpObj126.setReqObjName("com.lgx.libframe.model.CbhsDaysQtSr");
+    httpObj126.setRespObjName("com.lgx.libframe.model.CbhsDaysQtSr");
+    httpObjs.put(DAYSSR_NEWSRADDCOUNT,httpObj126);
 
     HttpObj httpObj127= new HttpObj();
-    httpObj127.setUrl("/globalYs/globalGclYsDel");
+    httpObj127.setUrl("/daysSr/newsrAddPrice");
     httpObj127.setReqMethod("POST");
-    httpObj127.setReqObjName("com.lgx.libframe.model.RequestGlobalGclYsDel");
-    httpObj127.setRespObjName("com.lgx.libframe.model.BaseObj");
-    httpObjs.put(GLOBALYS_GLOBALGCLYSDEL,httpObj127);
+    httpObj127.setReqObjName("com.lgx.libframe.model.RequestNewsrAddPrice");
+    httpObj127.setRespObjName("com.lgx.libframe.model.CbhsDaysQtSr");
+    httpObjs.put(DAYSSR_NEWSRADDPRICE,httpObj127);
 
     HttpObj httpObj128= new HttpObj();
-    httpObj128.setUrl("/globalYs/globalGclYsImport");
+    httpObj128.setUrl("/globalYs/globalGclYsFetch");
     httpObj128.setReqMethod("POST");
-    httpObj128.setReqObjName("com.lgx.libframe.model.MultipartFile");
-    httpObj128.setRespObjName("com.lgx.libframe.model.BaseObj");
-    httpObjs.put(GLOBALYS_GLOBALGCLYSIMPORT,httpObj128);
+    httpObj128.setReqObjName("com.lgx.libframe.model.RequestGlobalGclYsFetch");
+    httpObj128.setRespObjName("com.lgx.libframe.model.ResponseGlobalGclYsFetch");
+    httpObjs.put(GLOBALYS_GLOBALGCLYSFETCH,httpObj128);
 
     HttpObj httpObj129= new HttpObj();
-    httpObj129.setUrl("/globalYs/globalGclYsAdd");
+    httpObj129.setUrl("/globalYs/globalGclYsUpdate");
     httpObj129.setReqMethod("POST");
     httpObj129.setReqObjName("com.lgx.libframe.model.CbhsGclQdYs");
     httpObj129.setRespObjName("com.lgx.libframe.model.CbhsGclQdYs");
-    httpObjs.put(GLOBALYS_GLOBALGCLYSADD,httpObj129);
+    httpObjs.put(GLOBALYS_GLOBALGCLYSUPDATE,httpObj129);
 
     HttpObj httpObj130= new HttpObj();
-    httpObj130.setUrl("/globalYs/globalRcjzhlYsFetch");
+    httpObj130.setUrl("/globalYs/globalGclYsDel");
     httpObj130.setReqMethod("POST");
-    httpObj130.setReqObjName("com.lgx.libframe.model.RequestGlobalRcjzhlYsFetch");
-    httpObj130.setRespObjName("com.lgx.libframe.model.ResponseGlobalRcjzhlYsFetch");
-    httpObjs.put(GLOBALYS_GLOBALRCJZHLYSFETCH,httpObj130);
+    httpObj130.setReqObjName("com.lgx.libframe.model.RequestGlobalGclYsDel");
+    httpObj130.setRespObjName("com.lgx.libframe.model.BaseObj");
+    httpObjs.put(GLOBALYS_GLOBALGCLYSDEL,httpObj130);
 
     HttpObj httpObj131= new HttpObj();
-    httpObj131.setUrl("/globalYs/globalRcjzhlYsUpdate");
+    httpObj131.setUrl("/globalYs/globalGclYsImport");
     httpObj131.setReqMethod("POST");
-    httpObj131.setReqObjName("com.lgx.libframe.model.CbhsGlobalRcjzhlYs");
-    httpObj131.setRespObjName("com.lgx.libframe.model.CbhsGlobalRcjzhlYs");
-    httpObjs.put(GLOBALYS_GLOBALRCJZHLYSUPDATE,httpObj131);
+    httpObj131.setReqObjName("com.lgx.libframe.model.MultipartFile");
+    httpObj131.setRespObjName("com.lgx.libframe.model.BaseObj");
+    httpObjs.put(GLOBALYS_GLOBALGCLYSIMPORT,httpObj131);
 
     HttpObj httpObj132= new HttpObj();
-    httpObj132.setUrl("/globalYs/globalRcjzhlYsDel");
+    httpObj132.setUrl("/globalYs/globalGclYsAdd");
     httpObj132.setReqMethod("POST");
-    httpObj132.setReqObjName("com.lgx.libframe.model.RequestGlobalRcjzhlYsDel");
-    httpObj132.setRespObjName("com.lgx.libframe.model.BaseObj");
-    httpObjs.put(GLOBALYS_GLOBALRCJZHLYSDEL,httpObj132);
+    httpObj132.setReqObjName("com.lgx.libframe.model.CbhsGclQdYs");
+    httpObj132.setRespObjName("com.lgx.libframe.model.CbhsGclQdYs");
+    httpObjs.put(GLOBALYS_GLOBALGCLYSADD,httpObj132);
 
     HttpObj httpObj133= new HttpObj();
-    httpObj133.setUrl("/globalYs/globalRcjzhlYsImport");
+    httpObj133.setUrl("/globalYs/globalRcjzhlYsFetch");
     httpObj133.setReqMethod("POST");
-    httpObj133.setReqObjName("com.lgx.libframe.model.MultipartFile");
-    httpObj133.setRespObjName("com.lgx.libframe.model.BaseObj");
-    httpObjs.put(GLOBALYS_GLOBALRCJZHLYSIMPORT,httpObj133);
+    httpObj133.setReqObjName("com.lgx.libframe.model.RequestGlobalRcjzhlYsFetch");
+    httpObj133.setRespObjName("com.lgx.libframe.model.ResponseGlobalRcjzhlYsFetch");
+    httpObjs.put(GLOBALYS_GLOBALRCJZHLYSFETCH,httpObj133);
 
     HttpObj httpObj134= new HttpObj();
-    httpObj134.setUrl("/globalYs/globalRcjzhlYsAdd");
+    httpObj134.setUrl("/globalYs/globalRcjzhlYsUpdate");
     httpObj134.setReqMethod("POST");
     httpObj134.setReqObjName("com.lgx.libframe.model.CbhsGlobalRcjzhlYs");
     httpObj134.setRespObjName("com.lgx.libframe.model.CbhsGlobalRcjzhlYs");
-    httpObjs.put(GLOBALYS_GLOBALRCJZHLYSADD,httpObj134);
+    httpObjs.put(GLOBALYS_GLOBALRCJZHLYSUPDATE,httpObj134);
 
     HttpObj httpObj135= new HttpObj();
-    httpObj135.setUrl("/globalYs/globalFyzYsFetch");
+    httpObj135.setUrl("/globalYs/globalRcjzhlYsDel");
     httpObj135.setReqMethod("POST");
-    httpObj135.setReqObjName("com.lgx.libframe.model.RequestGlobalFyzYsFetch");
-    httpObj135.setRespObjName("com.lgx.libframe.model.ResponseGlobalFyzYsFetch");
-    httpObjs.put(GLOBALYS_GLOBALFYZYSFETCH,httpObj135);
+    httpObj135.setReqObjName("com.lgx.libframe.model.RequestGlobalRcjzhlYsDel");
+    httpObj135.setRespObjName("com.lgx.libframe.model.BaseObj");
+    httpObjs.put(GLOBALYS_GLOBALRCJZHLYSDEL,httpObj135);
 
     HttpObj httpObj136= new HttpObj();
-    httpObj136.setUrl("/globalYs/globalFyzYsUpdate");
+    httpObj136.setUrl("/globalYs/globalRcjzhlYsImport");
     httpObj136.setReqMethod("POST");
-    httpObj136.setReqObjName("com.lgx.libframe.model.CbhsGlobalFyzYs");
-    httpObj136.setRespObjName("com.lgx.libframe.model.CbhsGlobalFyzYs");
-    httpObjs.put(GLOBALYS_GLOBALFYZYSUPDATE,httpObj136);
+    httpObj136.setReqObjName("com.lgx.libframe.model.MultipartFile");
+    httpObj136.setRespObjName("com.lgx.libframe.model.BaseObj");
+    httpObjs.put(GLOBALYS_GLOBALRCJZHLYSIMPORT,httpObj136);
 
     HttpObj httpObj137= new HttpObj();
-    httpObj137.setUrl("/globalYs/globalFyzYsDel");
+    httpObj137.setUrl("/globalYs/globalRcjzhlYsAdd");
     httpObj137.setReqMethod("POST");
-    httpObj137.setReqObjName("com.lgx.libframe.model.RequestGlobalFyzYsDel");
-    httpObj137.setRespObjName("com.lgx.libframe.model.BaseObj");
-    httpObjs.put(GLOBALYS_GLOBALFYZYSDEL,httpObj137);
+    httpObj137.setReqObjName("com.lgx.libframe.model.CbhsGlobalRcjzhlYs");
+    httpObj137.setRespObjName("com.lgx.libframe.model.CbhsGlobalRcjzhlYs");
+    httpObjs.put(GLOBALYS_GLOBALRCJZHLYSADD,httpObj137);
 
     HttpObj httpObj138= new HttpObj();
-    httpObj138.setUrl("/globalYs/globalFyzYsImport");
+    httpObj138.setUrl("/globalYs/globalFyzYsFetch");
     httpObj138.setReqMethod("POST");
-    httpObj138.setReqObjName("com.lgx.libframe.model.MultipartFile");
-    httpObj138.setRespObjName("com.lgx.libframe.model.BaseObj");
-    httpObjs.put(GLOBALYS_GLOBALFYZYSIMPORT,httpObj138);
+    httpObj138.setReqObjName("com.lgx.libframe.model.RequestGlobalFyzYsFetch");
+    httpObj138.setRespObjName("com.lgx.libframe.model.ResponseGlobalFyzYsFetch");
+    httpObjs.put(GLOBALYS_GLOBALFYZYSFETCH,httpObj138);
 
     HttpObj httpObj139= new HttpObj();
-    httpObj139.setUrl("/globalYs/globalFyzYsAdd");
+    httpObj139.setUrl("/globalYs/globalFyzYsUpdate");
     httpObj139.setReqMethod("POST");
     httpObj139.setReqObjName("com.lgx.libframe.model.CbhsGlobalFyzYs");
     httpObj139.setRespObjName("com.lgx.libframe.model.CbhsGlobalFyzYs");
-    httpObjs.put(GLOBALYS_GLOBALFYZYSADD,httpObj139);
+    httpObjs.put(GLOBALYS_GLOBALFYZYSUPDATE,httpObj139);
 
     HttpObj httpObj140= new HttpObj();
-    httpObj140.setUrl("/monthMbYs/jjcbYsFetch");
+    httpObj140.setUrl("/globalYs/globalFyzYsDel");
     httpObj140.setReqMethod("POST");
-    httpObj140.setReqObjName("com.lgx.libframe.model.RequestJjcbYsFetch");
-    httpObj140.setRespObjName("com.lgx.libframe.model.ResponseJjcbYsFetch");
-    httpObjs.put(MONTHMBYS_JJCBYSFETCH,httpObj140);
+    httpObj140.setReqObjName("com.lgx.libframe.model.RequestGlobalFyzYsDel");
+    httpObj140.setRespObjName("com.lgx.libframe.model.BaseObj");
+    httpObjs.put(GLOBALYS_GLOBALFYZYSDEL,httpObj140);
 
     HttpObj httpObj141= new HttpObj();
-    httpObj141.setUrl("/monthMbYs/jjcbYsUpdate");
+    httpObj141.setUrl("/globalYs/globalFyzYsImport");
     httpObj141.setReqMethod("POST");
-    httpObj141.setReqObjName("com.lgx.libframe.model.CbhsMonthJjcbYs");
-    httpObj141.setRespObjName("com.lgx.libframe.model.CbhsMonthJjcbYs");
-    httpObjs.put(MONTHMBYS_JJCBYSUPDATE,httpObj141);
+    httpObj141.setReqObjName("com.lgx.libframe.model.MultipartFile");
+    httpObj141.setRespObjName("com.lgx.libframe.model.BaseObj");
+    httpObjs.put(GLOBALYS_GLOBALFYZYSIMPORT,httpObj141);
 
     HttpObj httpObj142= new HttpObj();
-    httpObj142.setUrl("/monthMbYs/jjcbYsDel");
+    httpObj142.setUrl("/globalYs/globalFyzYsAdd");
     httpObj142.setReqMethod("POST");
-    httpObj142.setReqObjName("com.lgx.libframe.model.RequestJjcbYsDel");
-    httpObj142.setRespObjName("com.lgx.libframe.model.BaseObj");
-    httpObjs.put(MONTHMBYS_JJCBYSDEL,httpObj142);
+    httpObj142.setReqObjName("com.lgx.libframe.model.CbhsGlobalFyzYs");
+    httpObj142.setRespObjName("com.lgx.libframe.model.CbhsGlobalFyzYs");
+    httpObjs.put(GLOBALYS_GLOBALFYZYSADD,httpObj142);
 
     HttpObj httpObj143= new HttpObj();
-    httpObj143.setUrl("/monthMbYs/jjcbYsAdd");
+    httpObj143.setUrl("/monthMbYs/jjcbYsFetch");
     httpObj143.setReqMethod("POST");
-    httpObj143.setReqObjName("com.lgx.libframe.model.CbhsMonthJjcbYs");
-    httpObj143.setRespObjName("com.lgx.libframe.model.CbhsMonthJjcbYs");
-    httpObjs.put(MONTHMBYS_JJCBYSADD,httpObj143);
+    httpObj143.setReqObjName("com.lgx.libframe.model.RequestJjcbYsFetch");
+    httpObj143.setRespObjName("com.lgx.libframe.model.ResponseJjcbYsFetch");
+    httpObjs.put(MONTHMBYS_JJCBYSFETCH,httpObj143);
 
     HttpObj httpObj144= new HttpObj();
-    httpObj144.setUrl("/monthMbYs/glfyYsFetch");
+    httpObj144.setUrl("/monthMbYs/jjcbYsUpdate");
     httpObj144.setReqMethod("POST");
-    httpObj144.setReqObjName("com.lgx.libframe.model.RequestGlfyYsFetch");
-    httpObj144.setRespObjName("com.lgx.libframe.model.ResponseGlfyYsFetch");
-    httpObjs.put(MONTHMBYS_GLFYYSFETCH,httpObj144);
+    httpObj144.setReqObjName("com.lgx.libframe.model.CbhsMonthJjcbYs");
+    httpObj144.setRespObjName("com.lgx.libframe.model.CbhsMonthJjcbYs");
+    httpObjs.put(MONTHMBYS_JJCBYSUPDATE,httpObj144);
 
     HttpObj httpObj145= new HttpObj();
-    httpObj145.setUrl("/monthMbYs/glfyYsUpdate");
+    httpObj145.setUrl("/monthMbYs/jjcbYsDel");
     httpObj145.setReqMethod("POST");
-    httpObj145.setReqObjName("com.lgx.libframe.model.CbhsMonthGlfyYs");
-    httpObj145.setRespObjName("com.lgx.libframe.model.CbhsMonthGlfyYs");
-    httpObjs.put(MONTHMBYS_GLFYYSUPDATE,httpObj145);
+    httpObj145.setReqObjName("com.lgx.libframe.model.RequestJjcbYsDel");
+    httpObj145.setRespObjName("com.lgx.libframe.model.BaseObj");
+    httpObjs.put(MONTHMBYS_JJCBYSDEL,httpObj145);
 
     HttpObj httpObj146= new HttpObj();
-    httpObj146.setUrl("/monthMbYs/glfyYsDel");
+    httpObj146.setUrl("/monthMbYs/jjcbYsAdd");
     httpObj146.setReqMethod("POST");
-    httpObj146.setReqObjName("com.lgx.libframe.model.RequestGlfyYsDel");
-    httpObj146.setRespObjName("com.lgx.libframe.model.BaseObj");
-    httpObjs.put(MONTHMBYS_GLFYYSDEL,httpObj146);
+    httpObj146.setReqObjName("com.lgx.libframe.model.CbhsMonthJjcbYs");
+    httpObj146.setRespObjName("com.lgx.libframe.model.CbhsMonthJjcbYs");
+    httpObjs.put(MONTHMBYS_JJCBYSADD,httpObj146);
 
     HttpObj httpObj147= new HttpObj();
-    httpObj147.setUrl("/monthMbYs/glfyYsAdd");
+    httpObj147.setUrl("/monthMbYs/glfyYsFetch");
     httpObj147.setReqMethod("POST");
-    httpObj147.setReqObjName("com.lgx.libframe.model.CbhsMonthGlfyYs");
-    httpObj147.setRespObjName("com.lgx.libframe.model.CbhsMonthGlfyYs");
-    httpObjs.put(MONTHMBYS_GLFYYSADD,httpObj147);
+    httpObj147.setReqObjName("com.lgx.libframe.model.RequestGlfyYsFetch");
+    httpObj147.setRespObjName("com.lgx.libframe.model.ResponseGlfyYsFetch");
+    httpObjs.put(MONTHMBYS_GLFYYSFETCH,httpObj147);
 
     HttpObj httpObj148= new HttpObj();
-    httpObj148.setUrl("/monthMbYs/zyCailiaoCbYsFetch");
+    httpObj148.setUrl("/monthMbYs/glfyYsUpdate");
     httpObj148.setReqMethod("POST");
-    httpObj148.setReqObjName("com.lgx.libframe.model.RequestZyCailiaoCbYsFetch");
-    httpObj148.setRespObjName("com.lgx.libframe.model.ResponseZyCailiaoCbYsFetch");
-    httpObjs.put(MONTHMBYS_ZYCAILIAOCBYSFETCH,httpObj148);
+    httpObj148.setReqObjName("com.lgx.libframe.model.CbhsMonthGlfyYs");
+    httpObj148.setRespObjName("com.lgx.libframe.model.CbhsMonthGlfyYs");
+    httpObjs.put(MONTHMBYS_GLFYYSUPDATE,httpObj148);
 
     HttpObj httpObj149= new HttpObj();
-    httpObj149.setUrl("/monthMbYs/zyCailiaoCbYsUpdate");
+    httpObj149.setUrl("/monthMbYs/glfyYsDel");
     httpObj149.setReqMethod("POST");
-    httpObj149.setReqObjName("com.lgx.libframe.model.CbhsMonthZyCailiaoCbYs");
-    httpObj149.setRespObjName("com.lgx.libframe.model.CbhsMonthZyCailiaoCbYs");
-    httpObjs.put(MONTHMBYS_ZYCAILIAOCBYSUPDATE,httpObj149);
+    httpObj149.setReqObjName("com.lgx.libframe.model.RequestGlfyYsDel");
+    httpObj149.setRespObjName("com.lgx.libframe.model.BaseObj");
+    httpObjs.put(MONTHMBYS_GLFYYSDEL,httpObj149);
 
     HttpObj httpObj150= new HttpObj();
-    httpObj150.setUrl("/monthMbYs/zyCailiaoCbYsDel");
+    httpObj150.setUrl("/monthMbYs/glfyYsAdd");
     httpObj150.setReqMethod("POST");
-    httpObj150.setReqObjName("com.lgx.libframe.model.RequestZyCailiaoCbYsDel");
-    httpObj150.setRespObjName("com.lgx.libframe.model.BaseObj");
-    httpObjs.put(MONTHMBYS_ZYCAILIAOCBYSDEL,httpObj150);
+    httpObj150.setReqObjName("com.lgx.libframe.model.CbhsMonthGlfyYs");
+    httpObj150.setRespObjName("com.lgx.libframe.model.CbhsMonthGlfyYs");
+    httpObjs.put(MONTHMBYS_GLFYYSADD,httpObj150);
 
     HttpObj httpObj151= new HttpObj();
-    httpObj151.setUrl("/monthMbYs/zyCailiaoCbYsAdd");
+    httpObj151.setUrl("/monthMbYs/zyCailiaoCbYsFetch");
     httpObj151.setReqMethod("POST");
-    httpObj151.setReqObjName("com.lgx.libframe.model.RequestZyCailiaoCbYsAdd");
-    httpObj151.setRespObjName("com.lgx.libframe.model.ResponseZyCailiaoCbYsAdd");
-    httpObjs.put(MONTHMBYS_ZYCAILIAOCBYSADD,httpObj151);
+    httpObj151.setReqObjName("com.lgx.libframe.model.RequestZyCailiaoCbYsFetch");
+    httpObj151.setRespObjName("com.lgx.libframe.model.ResponseZyCailiaoCbYsFetch");
+    httpObjs.put(MONTHMBYS_ZYCAILIAOCBYSFETCH,httpObj151);
 
     HttpObj httpObj152= new HttpObj();
-    httpObj152.setUrl("/monthMbYs/zyCailiaoCbYsCailiaoFetch");
+    httpObj152.setUrl("/monthMbYs/zyCailiaoCbYsUpdate");
     httpObj152.setReqMethod("POST");
-    httpObj152.setReqObjName("com.lgx.libframe.model.RequestZyCailiaoCbYsCailiaoFetch");
-    httpObj152.setRespObjName("com.lgx.libframe.model.ResponseZyCailiaoCbYsCailiaoFetch");
-    httpObjs.put(MONTHMBYS_ZYCAILIAOCBYSCAILIAOFETCH,httpObj152);
+    httpObj152.setReqObjName("com.lgx.libframe.model.CbhsMonthZyCailiaoCbYs");
+    httpObj152.setRespObjName("com.lgx.libframe.model.CbhsMonthZyCailiaoCbYs");
+    httpObjs.put(MONTHMBYS_ZYCAILIAOCBYSUPDATE,httpObj152);
 
     HttpObj httpObj153= new HttpObj();
-    httpObj153.setUrl("/monthMbYs/zyLxygCbYsFetch");
+    httpObj153.setUrl("/monthMbYs/zyCailiaoCbYsDel");
     httpObj153.setReqMethod("POST");
-    httpObj153.setReqObjName("com.lgx.libframe.model.RequestZyLxygCbYsFetch");
-    httpObj153.setRespObjName("com.lgx.libframe.model.ResponseZyLxygCbYsFetch");
-    httpObjs.put(MONTHMBYS_ZYLXYGCBYSFETCH,httpObj153);
+    httpObj153.setReqObjName("com.lgx.libframe.model.RequestZyCailiaoCbYsDel");
+    httpObj153.setRespObjName("com.lgx.libframe.model.BaseObj");
+    httpObjs.put(MONTHMBYS_ZYCAILIAOCBYSDEL,httpObj153);
 
     HttpObj httpObj154= new HttpObj();
-    httpObj154.setUrl("/monthMbYs/zyLxygCbYsUpdate");
+    httpObj154.setUrl("/monthMbYs/zyCailiaoCbYsAdd");
     httpObj154.setReqMethod("POST");
-    httpObj154.setReqObjName("com.lgx.libframe.model.CbhsMonthZyLxygCbYs");
-    httpObj154.setRespObjName("com.lgx.libframe.model.CbhsMonthZyLxygCbYs");
-    httpObjs.put(MONTHMBYS_ZYLXYGCBYSUPDATE,httpObj154);
+    httpObj154.setReqObjName("com.lgx.libframe.model.RequestZyCailiaoCbYsAdd");
+    httpObj154.setRespObjName("com.lgx.libframe.model.ResponseZyCailiaoCbYsAdd");
+    httpObjs.put(MONTHMBYS_ZYCAILIAOCBYSADD,httpObj154);
 
     HttpObj httpObj155= new HttpObj();
-    httpObj155.setUrl("/monthMbYs/zyLxygCbYsDel");
+    httpObj155.setUrl("/monthMbYs/zyCailiaoCbYsCailiaoFetch");
     httpObj155.setReqMethod("POST");
-    httpObj155.setReqObjName("com.lgx.libframe.model.RequestZyLxygCbYsDel");
-    httpObj155.setRespObjName("com.lgx.libframe.model.BaseObj");
-    httpObjs.put(MONTHMBYS_ZYLXYGCBYSDEL,httpObj155);
+    httpObj155.setReqObjName("com.lgx.libframe.model.RequestZyCailiaoCbYsCailiaoFetch");
+    httpObj155.setRespObjName("com.lgx.libframe.model.ResponseZyCailiaoCbYsCailiaoFetch");
+    httpObjs.put(MONTHMBYS_ZYCAILIAOCBYSCAILIAOFETCH,httpObj155);
 
     HttpObj httpObj156= new HttpObj();
-    httpObj156.setUrl("/monthMbYs/zyLxygCbYsAdd");
+    httpObj156.setUrl("/monthMbYs/zyLxygCbYsFetch");
     httpObj156.setReqMethod("POST");
-    httpObj156.setReqObjName("com.lgx.libframe.model.CbhsMonthZyLxygCbYs");
-    httpObj156.setRespObjName("com.lgx.libframe.model.CbhsMonthZyLxygCbYs");
-    httpObjs.put(MONTHMBYS_ZYLXYGCBYSADD,httpObj156);
+    httpObj156.setReqObjName("com.lgx.libframe.model.RequestZyLxygCbYsFetch");
+    httpObj156.setRespObjName("com.lgx.libframe.model.ResponseZyLxygCbYsFetch");
+    httpObjs.put(MONTHMBYS_ZYLXYGCBYSFETCH,httpObj156);
 
     HttpObj httpObj157= new HttpObj();
-    httpObj157.setUrl("/monthMbYs/zyJxCbYsFetch");
+    httpObj157.setUrl("/monthMbYs/zyLxygCbYsUpdate");
     httpObj157.setReqMethod("POST");
-    httpObj157.setReqObjName("com.lgx.libframe.model.RequestZyJxCbYsFetch");
-    httpObj157.setRespObjName("com.lgx.libframe.model.ResponseZyJxCbYsFetch");
-    httpObjs.put(MONTHMBYS_ZYJXCBYSFETCH,httpObj157);
+    httpObj157.setReqObjName("com.lgx.libframe.model.CbhsMonthZyLxygCbYs");
+    httpObj157.setRespObjName("com.lgx.libframe.model.CbhsMonthZyLxygCbYs");
+    httpObjs.put(MONTHMBYS_ZYLXYGCBYSUPDATE,httpObj157);
 
     HttpObj httpObj158= new HttpObj();
-    httpObj158.setUrl("/monthMbYs/zyJxCbYsUpdate");
+    httpObj158.setUrl("/monthMbYs/zyLxygCbYsDel");
     httpObj158.setReqMethod("POST");
-    httpObj158.setReqObjName("com.lgx.libframe.model.CbhsMonthZyJxCbYs");
-    httpObj158.setRespObjName("com.lgx.libframe.model.CbhsMonthZyJxCbYs");
-    httpObjs.put(MONTHMBYS_ZYJXCBYSUPDATE,httpObj158);
+    httpObj158.setReqObjName("com.lgx.libframe.model.RequestZyLxygCbYsDel");
+    httpObj158.setRespObjName("com.lgx.libframe.model.BaseObj");
+    httpObjs.put(MONTHMBYS_ZYLXYGCBYSDEL,httpObj158);
 
     HttpObj httpObj159= new HttpObj();
-    httpObj159.setUrl("/monthMbYs/zyJxCbYsDel");
+    httpObj159.setUrl("/monthMbYs/zyLxygCbYsAdd");
     httpObj159.setReqMethod("POST");
-    httpObj159.setReqObjName("com.lgx.libframe.model.RequestZyJxCbYsDel");
-    httpObj159.setRespObjName("com.lgx.libframe.model.BaseObj");
-    httpObjs.put(MONTHMBYS_ZYJXCBYSDEL,httpObj159);
+    httpObj159.setReqObjName("com.lgx.libframe.model.CbhsMonthZyLxygCbYs");
+    httpObj159.setRespObjName("com.lgx.libframe.model.CbhsMonthZyLxygCbYs");
+    httpObjs.put(MONTHMBYS_ZYLXYGCBYSADD,httpObj159);
 
     HttpObj httpObj160= new HttpObj();
-    httpObj160.setUrl("/monthMbYs/zyJxCbYsAdd");
+    httpObj160.setUrl("/monthMbYs/zyJxCbYsFetch");
     httpObj160.setReqMethod("POST");
-    httpObj160.setReqObjName("com.lgx.libframe.model.CbhsMonthZyJxCbYs");
-    httpObj160.setRespObjName("com.lgx.libframe.model.CbhsMonthZyJxCbYs");
-    httpObjs.put(MONTHMBYS_ZYJXCBYSADD,httpObj160);
+    httpObj160.setReqObjName("com.lgx.libframe.model.RequestZyJxCbYsFetch");
+    httpObj160.setRespObjName("com.lgx.libframe.model.ResponseZyJxCbYsFetch");
+    httpObjs.put(MONTHMBYS_ZYJXCBYSFETCH,httpObj160);
 
     HttpObj httpObj161= new HttpObj();
-    httpObj161.setUrl("/monthMbYs/zyQtfyYsFetch");
+    httpObj161.setUrl("/monthMbYs/zyJxCbYsUpdate");
     httpObj161.setReqMethod("POST");
-    httpObj161.setReqObjName("com.lgx.libframe.model.RequestZyQtfyYsFetch");
-    httpObj161.setRespObjName("com.lgx.libframe.model.ResponseZyQtfyYsFetch");
-    httpObjs.put(MONTHMBYS_ZYQTFYYSFETCH,httpObj161);
+    httpObj161.setReqObjName("com.lgx.libframe.model.CbhsMonthZyJxCbYs");
+    httpObj161.setRespObjName("com.lgx.libframe.model.CbhsMonthZyJxCbYs");
+    httpObjs.put(MONTHMBYS_ZYJXCBYSUPDATE,httpObj161);
 
     HttpObj httpObj162= new HttpObj();
-    httpObj162.setUrl("/monthMbYs/zyQtfyYsUpdate");
+    httpObj162.setUrl("/monthMbYs/zyJxCbYsDel");
     httpObj162.setReqMethod("POST");
-    httpObj162.setReqObjName("com.lgx.libframe.model.CbhsMonthZyQtfyYs");
-    httpObj162.setRespObjName("com.lgx.libframe.model.CbhsMonthZyQtfyYs");
-    httpObjs.put(MONTHMBYS_ZYQTFYYSUPDATE,httpObj162);
+    httpObj162.setReqObjName("com.lgx.libframe.model.RequestZyJxCbYsDel");
+    httpObj162.setRespObjName("com.lgx.libframe.model.BaseObj");
+    httpObjs.put(MONTHMBYS_ZYJXCBYSDEL,httpObj162);
 
     HttpObj httpObj163= new HttpObj();
-    httpObj163.setUrl("/monthMbYs/zyQtfyYsDel");
+    httpObj163.setUrl("/monthMbYs/zyJxCbYsAdd");
     httpObj163.setReqMethod("POST");
-    httpObj163.setReqObjName("com.lgx.libframe.model.RequestZyQtfyYsDel");
-    httpObj163.setRespObjName("com.lgx.libframe.model.BaseObj");
-    httpObjs.put(MONTHMBYS_ZYQTFYYSDEL,httpObj163);
+    httpObj163.setReqObjName("com.lgx.libframe.model.CbhsMonthZyJxCbYs");
+    httpObj163.setRespObjName("com.lgx.libframe.model.CbhsMonthZyJxCbYs");
+    httpObjs.put(MONTHMBYS_ZYJXCBYSADD,httpObj163);
 
     HttpObj httpObj164= new HttpObj();
-    httpObj164.setUrl("/monthMbYs/zyQtfyYsAdd");
+    httpObj164.setUrl("/monthMbYs/zyQtfyYsFetch");
     httpObj164.setReqMethod("POST");
-    httpObj164.setReqObjName("com.lgx.libframe.model.CbhsMonthZyQtfyYs");
-    httpObj164.setRespObjName("com.lgx.libframe.model.CbhsMonthZyQtfyYs");
-    httpObjs.put(MONTHMBYS_ZYQTFYYSADD,httpObj164);
+    httpObj164.setReqObjName("com.lgx.libframe.model.RequestZyQtfyYsFetch");
+    httpObj164.setRespObjName("com.lgx.libframe.model.ResponseZyQtfyYsFetch");
+    httpObjs.put(MONTHMBYS_ZYQTFYYSFETCH,httpObj164);
 
     HttpObj httpObj165= new HttpObj();
-    httpObj165.setUrl("/monthMbYs/fbLjxmCbYsFetch");
+    httpObj165.setUrl("/monthMbYs/zyQtfyYsUpdate");
     httpObj165.setReqMethod("POST");
-    httpObj165.setReqObjName("com.lgx.libframe.model.RequestFbLjxmCbYsFetch");
-    httpObj165.setRespObjName("com.lgx.libframe.model.ResponseFbLjxmCbYsFetch");
-    httpObjs.put(MONTHMBYS_FBLJXMCBYSFETCH,httpObj165);
+    httpObj165.setReqObjName("com.lgx.libframe.model.CbhsMonthZyQtfyYs");
+    httpObj165.setRespObjName("com.lgx.libframe.model.CbhsMonthZyQtfyYs");
+    httpObjs.put(MONTHMBYS_ZYQTFYYSUPDATE,httpObj165);
 
     HttpObj httpObj166= new HttpObj();
-    httpObj166.setUrl("/monthMbYs/fbLjxmCbYsUpdate");
+    httpObj166.setUrl("/monthMbYs/zyQtfyYsDel");
     httpObj166.setReqMethod("POST");
-    httpObj166.setReqObjName("com.lgx.libframe.model.CbhsMonthFbLjxmCbYs");
-    httpObj166.setRespObjName("com.lgx.libframe.model.CbhsMonthFbLjxmCbYs");
-    httpObjs.put(MONTHMBYS_FBLJXMCBYSUPDATE,httpObj166);
+    httpObj166.setReqObjName("com.lgx.libframe.model.RequestZyQtfyYsDel");
+    httpObj166.setRespObjName("com.lgx.libframe.model.BaseObj");
+    httpObjs.put(MONTHMBYS_ZYQTFYYSDEL,httpObj166);
 
     HttpObj httpObj167= new HttpObj();
-    httpObj167.setUrl("/monthMbYs/fbLjxmCbYsDel");
+    httpObj167.setUrl("/monthMbYs/zyQtfyYsAdd");
     httpObj167.setReqMethod("POST");
-    httpObj167.setReqObjName("com.lgx.libframe.model.RequestFbLjxmCbYsDel");
-    httpObj167.setRespObjName("com.lgx.libframe.model.BaseObj");
-    httpObjs.put(MONTHMBYS_FBLJXMCBYSDEL,httpObj167);
+    httpObj167.setReqObjName("com.lgx.libframe.model.CbhsMonthZyQtfyYs");
+    httpObj167.setRespObjName("com.lgx.libframe.model.CbhsMonthZyQtfyYs");
+    httpObjs.put(MONTHMBYS_ZYQTFYYSADD,httpObj167);
 
     HttpObj httpObj168= new HttpObj();
-    httpObj168.setUrl("/monthMbYs/fbLjxmCbYsAdd");
+    httpObj168.setUrl("/monthMbYs/fbLjxmCbYsFetch");
     httpObj168.setReqMethod("POST");
-    httpObj168.setReqObjName("com.lgx.libframe.model.CbhsMonthFbLjxmCbYs");
-    httpObj168.setRespObjName("com.lgx.libframe.model.CbhsMonthFbLjxmCbYs");
-    httpObjs.put(MONTHMBYS_FBLJXMCBYSADD,httpObj168);
+    httpObj168.setReqObjName("com.lgx.libframe.model.RequestFbLjxmCbYsFetch");
+    httpObj168.setRespObjName("com.lgx.libframe.model.ResponseFbLjxmCbYsFetch");
+    httpObjs.put(MONTHMBYS_FBLJXMCBYSFETCH,httpObj168);
 
     HttpObj httpObj169= new HttpObj();
-    httpObj169.setUrl("/monthMbYs/fbGcCbYsFetch");
+    httpObj169.setUrl("/monthMbYs/fbLjxmCbYsUpdate");
     httpObj169.setReqMethod("POST");
-    httpObj169.setReqObjName("com.lgx.libframe.model.RequestFbGcCbYsFetch");
-    httpObj169.setRespObjName("com.lgx.libframe.model.ResponseFbGcCbYsFetch");
-    httpObjs.put(MONTHMBYS_FBGCCBYSFETCH,httpObj169);
+    httpObj169.setReqObjName("com.lgx.libframe.model.CbhsMonthFbLjxmCbYs");
+    httpObj169.setRespObjName("com.lgx.libframe.model.CbhsMonthFbLjxmCbYs");
+    httpObjs.put(MONTHMBYS_FBLJXMCBYSUPDATE,httpObj169);
 
     HttpObj httpObj170= new HttpObj();
-    httpObj170.setUrl("/monthMbYs/fbGcCbYsUpdate");
+    httpObj170.setUrl("/monthMbYs/fbLjxmCbYsDel");
     httpObj170.setReqMethod("POST");
-    httpObj170.setReqObjName("com.lgx.libframe.model.CbhsMonthFbGcCbYs");
-    httpObj170.setRespObjName("com.lgx.libframe.model.CbhsMonthFbGcCbYs");
-    httpObjs.put(MONTHMBYS_FBGCCBYSUPDATE,httpObj170);
+    httpObj170.setReqObjName("com.lgx.libframe.model.RequestFbLjxmCbYsDel");
+    httpObj170.setRespObjName("com.lgx.libframe.model.BaseObj");
+    httpObjs.put(MONTHMBYS_FBLJXMCBYSDEL,httpObj170);
 
     HttpObj httpObj171= new HttpObj();
-    httpObj171.setUrl("/monthMbYs/fbGcCbYsDel");
+    httpObj171.setUrl("/monthMbYs/fbLjxmCbYsAdd");
     httpObj171.setReqMethod("POST");
-    httpObj171.setReqObjName("com.lgx.libframe.model.RequestFbGcCbYsDel");
-    httpObj171.setRespObjName("com.lgx.libframe.model.BaseObj");
-    httpObjs.put(MONTHMBYS_FBGCCBYSDEL,httpObj171);
+    httpObj171.setReqObjName("com.lgx.libframe.model.CbhsMonthFbLjxmCbYs");
+    httpObj171.setRespObjName("com.lgx.libframe.model.CbhsMonthFbLjxmCbYs");
+    httpObjs.put(MONTHMBYS_FBLJXMCBYSADD,httpObj171);
 
     HttpObj httpObj172= new HttpObj();
-    httpObj172.setUrl("/monthMbYs/fbGcCbYsAdd");
+    httpObj172.setUrl("/monthMbYs/fbGcCbYsFetch");
     httpObj172.setReqMethod("POST");
-    httpObj172.setReqObjName("com.lgx.libframe.model.CbhsMonthFbGcCbYs");
-    httpObj172.setRespObjName("com.lgx.libframe.model.CbhsMonthFbGcCbYs");
-    httpObjs.put(MONTHMBYS_FBGCCBYSADD,httpObj172);
+    httpObj172.setReqObjName("com.lgx.libframe.model.RequestFbGcCbYsFetch");
+    httpObj172.setRespObjName("com.lgx.libframe.model.ResponseFbGcCbYsFetch");
+    httpObjs.put(MONTHMBYS_FBGCCBYSFETCH,httpObj172);
 
     HttpObj httpObj173= new HttpObj();
-    httpObj173.setUrl("/monthMbYs/fbGcGlobalXmFetch");
+    httpObj173.setUrl("/monthMbYs/fbGcCbYsUpdate");
     httpObj173.setReqMethod("POST");
-    httpObj173.setReqObjName("com.lgx.libframe.model.RequestFbGcGlobalXmFetch");
-    httpObj173.setRespObjName("com.lgx.libframe.model.ResponseFbGcGlobalXmFetch");
-    httpObjs.put(MONTHMBYS_FBGCGLOBALXMFETCH,httpObj173);
+    httpObj173.setReqObjName("com.lgx.libframe.model.CbhsMonthFbGcCbYs");
+    httpObj173.setRespObjName("com.lgx.libframe.model.CbhsMonthFbGcCbYs");
+    httpObjs.put(MONTHMBYS_FBGCCBYSUPDATE,httpObj173);
 
     HttpObj httpObj174= new HttpObj();
-    httpObj174.setUrl("/monthMbYs/fbGcFbCompanyFetch");
+    httpObj174.setUrl("/monthMbYs/fbGcCbYsDel");
     httpObj174.setReqMethod("POST");
-    httpObj174.setReqObjName("com.lgx.libframe.model.RequestFbGcFbCompanyFetch");
-    httpObj174.setRespObjName("com.lgx.libframe.model.ResponseFbGcFbCompanyFetch");
-    httpObjs.put(MONTHMBYS_FBGCFBCOMPANYFETCH,httpObj174);
+    httpObj174.setReqObjName("com.lgx.libframe.model.RequestFbGcCbYsDel");
+    httpObj174.setRespObjName("com.lgx.libframe.model.BaseObj");
+    httpObjs.put(MONTHMBYS_FBGCCBYSDEL,httpObj174);
 
     HttpObj httpObj175= new HttpObj();
-    httpObj175.setUrl("/monthMbYs/fbCailiaoCbYsFetch");
+    httpObj175.setUrl("/monthMbYs/fbGcCbYsAdd");
     httpObj175.setReqMethod("POST");
-    httpObj175.setReqObjName("com.lgx.libframe.model.RequestFbCailiaoCbYsFetch");
-    httpObj175.setRespObjName("com.lgx.libframe.model.ResponseFbCailiaoCbYsFetch");
-    httpObjs.put(MONTHMBYS_FBCAILIAOCBYSFETCH,httpObj175);
+    httpObj175.setReqObjName("com.lgx.libframe.model.CbhsMonthFbGcCbYs");
+    httpObj175.setRespObjName("com.lgx.libframe.model.CbhsMonthFbGcCbYs");
+    httpObjs.put(MONTHMBYS_FBGCCBYSADD,httpObj175);
 
     HttpObj httpObj176= new HttpObj();
-    httpObj176.setUrl("/monthMbYs/fbCailiaoCbYsUpdate");
+    httpObj176.setUrl("/monthMbYs/fbGcGlobalXmFetch");
     httpObj176.setReqMethod("POST");
-    httpObj176.setReqObjName("com.lgx.libframe.model.CbhsMonthFbCailiaoCbYs");
-    httpObj176.setRespObjName("com.lgx.libframe.model.CbhsMonthFbCailiaoCbYs");
-    httpObjs.put(MONTHMBYS_FBCAILIAOCBYSUPDATE,httpObj176);
+    httpObj176.setReqObjName("com.lgx.libframe.model.RequestFbGcGlobalXmFetch");
+    httpObj176.setRespObjName("com.lgx.libframe.model.ResponseFbGcGlobalXmFetch");
+    httpObjs.put(MONTHMBYS_FBGCGLOBALXMFETCH,httpObj176);
 
     HttpObj httpObj177= new HttpObj();
-    httpObj177.setUrl("/monthMbYs/fbCailiaoCbYsDel");
+    httpObj177.setUrl("/monthMbYs/fbGcFbCompanyFetch");
     httpObj177.setReqMethod("POST");
-    httpObj177.setReqObjName("com.lgx.libframe.model.RequestFbCailiaoCbYsDel");
-    httpObj177.setRespObjName("com.lgx.libframe.model.BaseObj");
-    httpObjs.put(MONTHMBYS_FBCAILIAOCBYSDEL,httpObj177);
+    httpObj177.setReqObjName("com.lgx.libframe.model.RequestFbGcFbCompanyFetch");
+    httpObj177.setRespObjName("com.lgx.libframe.model.ResponseFbGcFbCompanyFetch");
+    httpObjs.put(MONTHMBYS_FBGCFBCOMPANYFETCH,httpObj177);
 
     HttpObj httpObj178= new HttpObj();
-    httpObj178.setUrl("/monthMbYs/fbCailiaoCbYsAdd");
+    httpObj178.setUrl("/monthMbYs/fbCailiaoCbYsFetch");
     httpObj178.setReqMethod("POST");
-    httpObj178.setReqObjName("com.lgx.libframe.model.RequestFbCailiaoCbYsAdd");
-    httpObj178.setRespObjName("com.lgx.libframe.model.ResponseFbCailiaoCbYsAdd");
-    httpObjs.put(MONTHMBYS_FBCAILIAOCBYSADD,httpObj178);
+    httpObj178.setReqObjName("com.lgx.libframe.model.RequestFbCailiaoCbYsFetch");
+    httpObj178.setRespObjName("com.lgx.libframe.model.ResponseFbCailiaoCbYsFetch");
+    httpObjs.put(MONTHMBYS_FBCAILIAOCBYSFETCH,httpObj178);
 
     HttpObj httpObj179= new HttpObj();
-    httpObj179.setUrl("/monthMbYs/fbCailiaoCbYsCailiaoFetch");
+    httpObj179.setUrl("/monthMbYs/fbCailiaoCbYsUpdate");
     httpObj179.setReqMethod("POST");
-    httpObj179.setReqObjName("com.lgx.libframe.model.RequestFbCailiaoCbYsCailiaoFetch");
-    httpObj179.setRespObjName("com.lgx.libframe.model.ResponseFbCailiaoCbYsCailiaoFetch");
-    httpObjs.put(MONTHMBYS_FBCAILIAOCBYSCAILIAOFETCH,httpObj179);
+    httpObj179.setReqObjName("com.lgx.libframe.model.CbhsMonthFbCailiaoCbYs");
+    httpObj179.setRespObjName("com.lgx.libframe.model.CbhsMonthFbCailiaoCbYs");
+    httpObjs.put(MONTHMBYS_FBCAILIAOCBYSUPDATE,httpObj179);
 
     HttpObj httpObj180= new HttpObj();
-    httpObj180.setUrl("/monthMbYs/mbYsFetch");
+    httpObj180.setUrl("/monthMbYs/fbCailiaoCbYsDel");
     httpObj180.setReqMethod("POST");
-    httpObj180.setReqObjName("com.lgx.libframe.model.RequestMbYsFetch");
-    httpObj180.setRespObjName("com.lgx.libframe.model.ResponseMbYsFetch");
-    httpObjs.put(MONTHMBYS_MBYSFETCH,httpObj180);
+    httpObj180.setReqObjName("com.lgx.libframe.model.RequestFbCailiaoCbYsDel");
+    httpObj180.setRespObjName("com.lgx.libframe.model.BaseObj");
+    httpObjs.put(MONTHMBYS_FBCAILIAOCBYSDEL,httpObj180);
 
     HttpObj httpObj181= new HttpObj();
-    httpObj181.setUrl("/monthMbYs/mbYsTotalFetch");
+    httpObj181.setUrl("/monthMbYs/fbCailiaoCbYsAdd");
     httpObj181.setReqMethod("POST");
-    httpObj181.setReqObjName("com.lgx.libframe.model.RequestMbYsTotalFetch");
-    httpObj181.setRespObjName("com.lgx.libframe.model.ResponseMbYsTotalFetch");
-    httpObjs.put(MONTHMBYS_MBYSTOTALFETCH,httpObj181);
+    httpObj181.setReqObjName("com.lgx.libframe.model.RequestFbCailiaoCbYsAdd");
+    httpObj181.setRespObjName("com.lgx.libframe.model.ResponseFbCailiaoCbYsAdd");
+    httpObjs.put(MONTHMBYS_FBCAILIAOCBYSADD,httpObj181);
 
     HttpObj httpObj182= new HttpObj();
-    httpObj182.setUrl("/tjbb/cbsrbb");
+    httpObj182.setUrl("/monthMbYs/fbCailiaoCbYsCailiaoFetch");
     httpObj182.setReqMethod("POST");
-    httpObj182.setReqObjName("com.lgx.libframe.model.RequestCbsrbb");
-    httpObj182.setRespObjName("com.lgx.libframe.model.ResponseCbsrbb");
-    httpObjs.put(TJBB_CBSRBB,httpObj182);
+    httpObj182.setReqObjName("com.lgx.libframe.model.RequestFbCailiaoCbYsCailiaoFetch");
+    httpObj182.setRespObjName("com.lgx.libframe.model.ResponseFbCailiaoCbYsCailiaoFetch");
+    httpObjs.put(MONTHMBYS_FBCAILIAOCBYSCAILIAOFETCH,httpObj182);
 
     HttpObj httpObj183= new HttpObj();
-    httpObj183.setUrl("/tjbb/zybb");
+    httpObj183.setUrl("/monthMbYs/mbYsFetch");
     httpObj183.setReqMethod("POST");
-    httpObj183.setReqObjName("com.lgx.libframe.model.RequestZybb");
-    httpObj183.setRespObjName("com.lgx.libframe.model.ResponseZybb");
-    httpObjs.put(TJBB_ZYBB,httpObj183);
+    httpObj183.setReqObjName("com.lgx.libframe.model.RequestMbYsFetch");
+    httpObj183.setRespObjName("com.lgx.libframe.model.ResponseMbYsFetch");
+    httpObjs.put(MONTHMBYS_MBYSFETCH,httpObj183);
 
     HttpObj httpObj184= new HttpObj();
-    httpObj184.setUrl("/tjbb/daysDetails");
+    httpObj184.setUrl("/monthMbYs/mbYsTotalFetch");
     httpObj184.setReqMethod("POST");
-    httpObj184.setReqObjName("com.lgx.libframe.model.RequestDaysDetails");
-    httpObj184.setRespObjName("com.lgx.libframe.model.uiDaysCbDetailTj");
-    httpObjs.put(TJBB_DAYSDETAILS,httpObj184);
+    httpObj184.setReqObjName("com.lgx.libframe.model.RequestMbYsTotalFetch");
+    httpObj184.setRespObjName("com.lgx.libframe.model.ResponseMbYsTotalFetch");
+    httpObjs.put(MONTHMBYS_MBYSTOTALFETCH,httpObj184);
 
     HttpObj httpObj185= new HttpObj();
-    httpObj185.setUrl("/tjbb/grandTotal");
+    httpObj185.setUrl("/tjbb/cbsrbb");
     httpObj185.setReqMethod("POST");
-    httpObj185.setReqObjName("com.lgx.libframe.model.RequestGrandTotal");
-    httpObj185.setRespObjName("com.lgx.libframe.model.uiGrandTotalTj");
-    httpObjs.put(TJBB_GRANDTOTAL,httpObj185);
+    httpObj185.setReqObjName("com.lgx.libframe.model.RequestCbsrbb");
+    httpObj185.setRespObjName("com.lgx.libframe.model.ResponseCbsrbb");
+    httpObjs.put(TJBB_CBSRBB,httpObj185);
 
     HttpObj httpObj186= new HttpObj();
-    httpObj186.setUrl("/zytj/zytjFetch");
+    httpObj186.setUrl("/tjbb/zybb");
     httpObj186.setReqMethod("POST");
-    httpObj186.setReqObjName("com.lgx.libframe.model.RequestZytjFetch");
-    httpObj186.setRespObjName("com.lgx.libframe.model.ResponseZytjFetch");
-    httpObjs.put(ZYTJ_ZYTJFETCH,httpObj186);
+    httpObj186.setReqObjName("com.lgx.libframe.model.RequestZybb");
+    httpObj186.setRespObjName("com.lgx.libframe.model.ResponseZybb");
+    httpObjs.put(TJBB_ZYBB,httpObj186);
 
     HttpObj httpObj187= new HttpObj();
-    httpObj187.setUrl("/zytj/zytjUpdate");
+    httpObj187.setUrl("/tjbb/daysDetails");
     httpObj187.setReqMethod("POST");
-    httpObj187.setReqObjName("com.lgx.libframe.model.CbhsZytj");
-    httpObj187.setRespObjName("com.lgx.libframe.model.CbhsZytj");
-    httpObjs.put(ZYTJ_ZYTJUPDATE,httpObj187);
+    httpObj187.setReqObjName("com.lgx.libframe.model.RequestDaysDetails");
+    httpObj187.setRespObjName("com.lgx.libframe.model.uiDaysCbDetailTj");
+    httpObjs.put(TJBB_DAYSDETAILS,httpObj187);
 
     HttpObj httpObj188= new HttpObj();
-    httpObj188.setUrl("/zytj/zytjDel");
+    httpObj188.setUrl("/tjbb/grandTotal");
     httpObj188.setReqMethod("POST");
-    httpObj188.setReqObjName("com.lgx.libframe.model.RequestZytjDel");
-    httpObj188.setRespObjName("com.lgx.libframe.model.BaseObj");
-    httpObjs.put(ZYTJ_ZYTJDEL,httpObj188);
+    httpObj188.setReqObjName("com.lgx.libframe.model.RequestGrandTotal");
+    httpObj188.setRespObjName("com.lgx.libframe.model.uiGrandTotalTj");
+    httpObjs.put(TJBB_GRANDTOTAL,httpObj188);
 
     HttpObj httpObj189= new HttpObj();
-    httpObj189.setUrl("/zytj/zytjAdd");
+    httpObj189.setUrl("/zytj/zytjFetch");
     httpObj189.setReqMethod("POST");
-    httpObj189.setReqObjName("com.lgx.libframe.model.RequestZytjAdd");
-    httpObj189.setRespObjName("com.lgx.libframe.model.CbhsZytj");
-    httpObjs.put(ZYTJ_ZYTJADD,httpObj189);
+    httpObj189.setReqObjName("com.lgx.libframe.model.RequestZytjFetch");
+    httpObj189.setRespObjName("com.lgx.libframe.model.ResponseZytjFetch");
+    httpObjs.put(ZYTJ_ZYTJFETCH,httpObj189);
 
     HttpObj httpObj190= new HttpObj();
-    httpObj190.setUrl("/zytj/zdgxhsFetch");
+    httpObj190.setUrl("/zytj/zytjUpdate");
     httpObj190.setReqMethod("POST");
-    httpObj190.setReqObjName("com.lgx.libframe.model.RequestZdgxhsFetch");
-    httpObj190.setRespObjName("com.lgx.libframe.model.ResponseZdgxhsFetch");
-    httpObjs.put(ZYTJ_ZDGXHSFETCH,httpObj190);
+    httpObj190.setReqObjName("com.lgx.libframe.model.CbhsZytj");
+    httpObj190.setRespObjName("com.lgx.libframe.model.CbhsZytj");
+    httpObjs.put(ZYTJ_ZYTJUPDATE,httpObj190);
 
     HttpObj httpObj191= new HttpObj();
-    httpObj191.setUrl("/zytj/zdgxhsUpdate");
+    httpObj191.setUrl("/zytj/zytjDel");
     httpObj191.setReqMethod("POST");
-    httpObj191.setReqObjName("com.lgx.libframe.model.CbhsZdgxhs");
-    httpObj191.setRespObjName("com.lgx.libframe.model.CbhsZdgxhs");
-    httpObjs.put(ZYTJ_ZDGXHSUPDATE,httpObj191);
+    httpObj191.setReqObjName("com.lgx.libframe.model.RequestZytjDel");
+    httpObj191.setRespObjName("com.lgx.libframe.model.BaseObj");
+    httpObjs.put(ZYTJ_ZYTJDEL,httpObj191);
 
     HttpObj httpObj192= new HttpObj();
-    httpObj192.setUrl("/zytj/zdgxhsDel");
+    httpObj192.setUrl("/zytj/zytjAdd");
     httpObj192.setReqMethod("POST");
-    httpObj192.setReqObjName("com.lgx.libframe.model.RequestZdgxhsDel");
-    httpObj192.setRespObjName("com.lgx.libframe.model.BaseObj");
-    httpObjs.put(ZYTJ_ZDGXHSDEL,httpObj192);
+    httpObj192.setReqObjName("com.lgx.libframe.model.RequestZytjAdd");
+    httpObj192.setRespObjName("com.lgx.libframe.model.CbhsZytj");
+    httpObjs.put(ZYTJ_ZYTJADD,httpObj192);
 
     HttpObj httpObj193= new HttpObj();
-    httpObj193.setUrl("/zytj/zdgxhsAdd");
+    httpObj193.setUrl("/zytj/zdgxhsFetch");
     httpObj193.setReqMethod("POST");
-    httpObj193.setReqObjName("com.lgx.libframe.model.CbhsZdgxhs");
-    httpObj193.setRespObjName("com.lgx.libframe.model.CbhsZdgxhs");
-    httpObjs.put(ZYTJ_ZDGXHSADD,httpObj193);
+    httpObj193.setReqObjName("com.lgx.libframe.model.RequestZdgxhsFetch");
+    httpObj193.setRespObjName("com.lgx.libframe.model.ResponseZdgxhsFetch");
+    httpObjs.put(ZYTJ_ZDGXHSFETCH,httpObj193);
+
+    HttpObj httpObj194= new HttpObj();
+    httpObj194.setUrl("/zytj/zdgxhsUpdate");
+    httpObj194.setReqMethod("POST");
+    httpObj194.setReqObjName("com.lgx.libframe.model.CbhsZdgxhs");
+    httpObj194.setRespObjName("com.lgx.libframe.model.CbhsZdgxhs");
+    httpObjs.put(ZYTJ_ZDGXHSUPDATE,httpObj194);
+
+    HttpObj httpObj195= new HttpObj();
+    httpObj195.setUrl("/zytj/zdgxhsDel");
+    httpObj195.setReqMethod("POST");
+    httpObj195.setReqObjName("com.lgx.libframe.model.RequestZdgxhsDel");
+    httpObj195.setRespObjName("com.lgx.libframe.model.BaseObj");
+    httpObjs.put(ZYTJ_ZDGXHSDEL,httpObj195);
+
+    HttpObj httpObj196= new HttpObj();
+    httpObj196.setUrl("/zytj/zdgxhsAdd");
+    httpObj196.setReqMethod("POST");
+    httpObj196.setReqObjName("com.lgx.libframe.model.CbhsZdgxhs");
+    httpObj196.setRespObjName("com.lgx.libframe.model.CbhsZdgxhs");
+    httpObjs.put(ZYTJ_ZDGXHSADD,httpObj196);
 
    }
 }

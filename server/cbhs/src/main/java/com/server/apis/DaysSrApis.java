@@ -31,6 +31,7 @@ import com.server.pojo.url.daysSr.RequestNewsrFetch;
 import com.server.pojo.url.daysSr.ResponseNewsrFetch;
 import com.server.pojo.bean.CbhsDaysQtSr;
 import com.server.pojo.url.daysSr.RequestNewsrDel;
+import com.server.pojo.url.daysSr.RequestNewsrAddPrice;
 
 @Api(tags = { "收入统计接口" }, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @RestController
@@ -130,16 +131,29 @@ public class DaysSrApis {
 	}
 
 
-	@RequestMapping(value = "/daysSr/newsrAdd", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "/daysSr/newsrAddCount", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseStatus(code = HttpStatus.OK)
 	@ApiImplicitParams({
 		@ApiImplicitParam(name = "token", value = "鉴权信息", required = true, dataType = "String", paramType = "header"),
 	})
-	@ApiOperation(value = "新增收入-新增", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ApiOperation(value = "新增收入-新增数量", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ApiResponse(code = 200, message = "操作成功后返回的视图")
 	@ResponseBody
-	public CbhsDaysQtSr newsrAdd(@Validated @RequestBody CbhsDaysQtSr request, HttpServletRequest httpServletRequest) throws Exception{
-		return daysSrApisService.newsrAdd(request, httpServletRequest);
+	public CbhsDaysQtSr newsrAddCount(@Validated @RequestBody CbhsDaysQtSr request, HttpServletRequest httpServletRequest) throws Exception{
+		return daysSrApisService.newsrAddCount(request, httpServletRequest);
+	}
+
+
+	@RequestMapping(value = "/daysSr/newsrAddPrice", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseStatus(code = HttpStatus.OK)
+	@ApiImplicitParams({
+		@ApiImplicitParam(name = "token", value = "鉴权信息", required = true, dataType = "String", paramType = "header"),
+	})
+	@ApiOperation(value = "新增收入-新增价格", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ApiResponse(code = 200, message = "操作成功后返回的视图")
+	@ResponseBody
+	public CbhsDaysQtSr newsrAddPrice(@Validated @RequestBody RequestNewsrAddPrice request, HttpServletRequest httpServletRequest) throws Exception{
+		return daysSrApisService.newsrAddPrice(request, httpServletRequest);
 	}
 
 

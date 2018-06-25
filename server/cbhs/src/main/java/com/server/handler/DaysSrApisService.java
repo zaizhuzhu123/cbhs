@@ -19,6 +19,8 @@ import com.server.pojo.url.daysSr.RequestNewsrDel;
 import com.alibaba.fastjson.JSONObject;
 import com.server.pojo.bean.CbhsDaysQtSr;
 import com.server.pojo.bean.CbhsDaysQtSr;
+import com.server.pojo.url.daysSr.RequestNewsrAddPrice;
+import com.server.pojo.bean.CbhsDaysQtSr;
 
 public interface DaysSrApisService {
 
@@ -36,6 +38,8 @@ public interface DaysSrApisService {
 
 	public JSONObject newsrDel(RequestNewsrDel request, HttpServletRequest httpServletRequest) throws Exception;
 
-	public CbhsDaysQtSr newsrAdd(CbhsDaysQtSr request, HttpServletRequest httpServletRequest) throws Exception;
+	public CbhsDaysQtSr newsrAddCount(CbhsDaysQtSr request, HttpServletRequest httpServletRequest) throws Exception;
+
+	public CbhsDaysQtSr newsrAddPrice(RequestNewsrAddPrice request, HttpServletRequest httpServletRequest) throws Exception;
 
 }

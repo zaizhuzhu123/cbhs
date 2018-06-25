@@ -4,21 +4,21 @@ import java.util.ArrayList;
 
 import java.io.Serializable;
 import com.lgx.libframe.*;
-public class RequestFbJgUpdate implements Serializable{
+public class RequestFbLjxmCbJgUpdate implements Serializable{
 private static final long serialVersionUID = 10000000L;
 
-private int fbGclOid;// 
-private double fbPrice;// 
-private double fbUnitPrice;// 
-public int  getFbGclOid(){ 
+private int daysFbLjxmCbOid;// 数量统计ID
+private double fbPrice;// 总金额
+private double fbUnitPrice;// 单价
+public int  getDaysFbLjxmCbOid(){ 
 
-    return this.fbGclOid;
+    return this.daysFbLjxmCbOid;
 
 }
 
-public void setFbGclOid(int fbGclOid){
+public void setDaysFbLjxmCbOid(int daysFbLjxmCbOid){
  
-        this.fbGclOid=fbGclOid;
+        this.daysFbLjxmCbOid=daysFbLjxmCbOid;
 
 }
 

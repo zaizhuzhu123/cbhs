@@ -63,8 +63,13 @@ import com.server.pojo.url.daysCb.RequestFbGclTjCbFetch;
 import com.server.pojo.url.daysCb.RequestFbJgAdd;
 import com.server.pojo.url.daysCb.RequestFbJgUpdate;
 import com.server.pojo.url.daysCb.RequestFbLjxmCbAdd;
+import com.server.pojo.url.daysCb.RequestFbLjxmCbAddCount;
+import com.server.pojo.url.daysCb.RequestFbLjxmCbAddJg;
 import com.server.pojo.url.daysCb.RequestFbLjxmCbDel;
 import com.server.pojo.url.daysCb.RequestFbLjxmCbFetch;
+import com.server.pojo.url.daysCb.RequestFbLjxmCbJgAdd;
+import com.server.pojo.url.daysCb.RequestFbLjxmCbJgUpdate;
+import com.server.pojo.url.daysCb.RequestFbLjxmCbUpdateJg;
 import com.server.pojo.url.daysCb.RequestGlfyAdd;
 import com.server.pojo.url.daysCb.RequestGlfyDel;
 import com.server.pojo.url.daysCb.RequestGlfyFetch;
@@ -194,7 +199,8 @@ public class DaysCbApisServiceImp implements DaysCbApisService {
 		ys.setOpTime(curDt.getMillis());
 		ys = queryFactory.saveOrUpdate(ys);
 		if (ys.getShStatus() == 1) { // 审核提交 需要向审核者发送推送消息
-			examinerManager.createExaminer(queryFactory, ys.getProjectOid(), SheObject.shType_Jjcb, ys.getOid(), ys.getDeptOid(), ys.getDeptName(), ext, exception.getInfo().getErrorMessage(), exception.getInfo().getErrorMessage(), TokenUtils.getTokenInfo(httpServletRequest).getUserOid(), TokenUtils.getTokenInfo(httpServletRequest).getUserName());
+			examinerManager.createExaminer(queryFactory, ys.getProjectOid(), SheObject.shType_Jjcb, ys.getOid(), ys.getDeptOid(), ys.getDeptName(), ext, exception.getInfo().getErrorMessage(),
+					exception.getInfo().getErrorMessage(), TokenUtils.getTokenInfo(httpServletRequest).getUserOid(), TokenUtils.getTokenInfo(httpServletRequest).getUserName());
 		} else {
 			CbhsCb cb = JSON.parseObject(JSON.toJSONString(ys), CbhsCb.class);
 			cb.setOid(null);
@@ -289,7 +295,8 @@ public class DaysCbApisServiceImp implements DaysCbApisService {
 		ys.setOpTime(curDt.getMillis());
 		ys = queryFactory.saveOrUpdate(ys);
 		if (ys.getShStatus() == 1) { // 审核提交 需要向审核者发送推送消息
-			examinerManager.createExaminer(queryFactory, ys.getProjectOid(), SheObject.shType_glfycb, ys.getOid(), ys.getDeptOid(), ys.getDeptName(), ext, exception.getInfo().getErrorMessage(), exception.getInfo().getErrorMessage(), TokenUtils.getTokenInfo(httpServletRequest).getUserOid(), TokenUtils.getTokenInfo(httpServletRequest).getUserName());
+			examinerManager.createExaminer(queryFactory, ys.getProjectOid(), SheObject.shType_glfycb, ys.getOid(), ys.getDeptOid(), ys.getDeptName(), ext, exception.getInfo().getErrorMessage(),
+					exception.getInfo().getErrorMessage(), TokenUtils.getTokenInfo(httpServletRequest).getUserOid(), TokenUtils.getTokenInfo(httpServletRequest).getUserName());
 		} else {
 			CbhsCb cb = JSON.parseObject(JSON.toJSONString(ys), CbhsCb.class);
 			cb.setOid(null);
@@ -385,7 +392,8 @@ public class DaysCbApisServiceImp implements DaysCbApisService {
 		ys.setOpTime(curDt.getMillis());
 		ys = queryFactory.saveOrUpdate(ys);
 		if (ys.getShStatus() == 1) { // 审核提交 需要向审核者发送推送消息
-			examinerManager.createExaminer(queryFactory, ys.getProjectOid(), SheObject.shType_zylxyg, ys.getOid(), ys.getDeptOid(), ys.getDeptName(), ext, exception.getInfo().getErrorMessage(), exception.getInfo().getErrorMessage(), TokenUtils.getTokenInfo(httpServletRequest).getUserOid(), TokenUtils.getTokenInfo(httpServletRequest).getUserName());
+			examinerManager.createExaminer(queryFactory, ys.getProjectOid(), SheObject.shType_zylxyg, ys.getOid(), ys.getDeptOid(), ys.getDeptName(), ext, exception.getInfo().getErrorMessage(),
+					exception.getInfo().getErrorMessage(), TokenUtils.getTokenInfo(httpServletRequest).getUserOid(), TokenUtils.getTokenInfo(httpServletRequest).getUserName());
 		} else {
 			CbhsCb cb = JSON.parseObject(JSON.toJSONString(ys), CbhsCb.class);
 			cb.setOid(null);
@@ -502,7 +510,8 @@ public class DaysCbApisServiceImp implements DaysCbApisService {
 		}
 		ys = queryFactory.saveOrUpdate(ys);
 		if (ys.getShStatus() == 1) { // 审核提交 需要向审核者发送推送消息
-			examinerManager.createExaminer(queryFactory, ys.getProjectOid(), SheObject.shType_zyjxcb, ys.getOid(), ys.getDeptOid(), ys.getDeptName(), ext, exception.getInfo().getErrorMessage(), exception.getInfo().getErrorMessage(), TokenUtils.getTokenInfo(httpServletRequest).getUserOid(), TokenUtils.getTokenInfo(httpServletRequest).getUserName());
+			examinerManager.createExaminer(queryFactory, ys.getProjectOid(), SheObject.shType_zyjxcb, ys.getOid(), ys.getDeptOid(), ys.getDeptName(), ext, exception.getInfo().getErrorMessage(),
+					exception.getInfo().getErrorMessage(), TokenUtils.getTokenInfo(httpServletRequest).getUserOid(), TokenUtils.getTokenInfo(httpServletRequest).getUserName());
 		} else {
 			CbhsCb cb = JSON.parseObject(JSON.toJSONString(ys), CbhsCb.class);
 			cb.setOid(null);
@@ -607,7 +616,8 @@ public class DaysCbApisServiceImp implements DaysCbApisService {
 		ys.setOpTime(curDt.getMillis());
 		ys = queryFactory.saveOrUpdate(ys);
 		if (ys.getShStatus() == 1) { // 审核提交 需要向审核者发送推送消息
-			examinerManager.createExaminer(queryFactory, ys.getProjectOid(), SheObject.shType_qtcb, ys.getOid(), ys.getDeptOid(), ys.getDeptName(), ext, exception.getInfo().getErrorMessage(), exception.getInfo().getErrorMessage(), TokenUtils.getTokenInfo(httpServletRequest).getUserOid(), TokenUtils.getTokenInfo(httpServletRequest).getUserName());
+			examinerManager.createExaminer(queryFactory, ys.getProjectOid(), SheObject.shType_qtcb, ys.getOid(), ys.getDeptOid(), ys.getDeptName(), ext, exception.getInfo().getErrorMessage(),
+					exception.getInfo().getErrorMessage(), TokenUtils.getTokenInfo(httpServletRequest).getUserOid(), TokenUtils.getTokenInfo(httpServletRequest).getUserName());
 		} else {
 			CbhsCb cb = JSON.parseObject(JSON.toJSONString(ys), CbhsCb.class);
 			cb.setOid(null);
@@ -747,7 +757,9 @@ public class DaysCbApisServiceImp implements DaysCbApisService {
 					}
 					ys = queryFactory.saveOrUpdate(ys);
 					if (ys.getShStatus() == 1) {
-						examinerManager.createExaminer(queryFactory, ys.getProjectOid(), SheObject.shType_zycailiaocb, ys.getOid(), ys.getDeptOid(), ys.getDeptName(), ext, exception.getInfo().getErrorMessage(), exception.getInfo().getErrorMessage(), TokenUtils.getTokenInfo(httpServletRequest).getUserOid(), TokenUtils.getTokenInfo(httpServletRequest).getUserName());
+						examinerManager.createExaminer(queryFactory, ys.getProjectOid(), SheObject.shType_zycailiaocb, ys.getOid(), ys.getDeptOid(), ys.getDeptName(), ext, exception.getInfo()
+								.getErrorMessage(), exception.getInfo().getErrorMessage(), TokenUtils.getTokenInfo(httpServletRequest).getUserOid(), TokenUtils.getTokenInfo(httpServletRequest)
+								.getUserName());
 					} else {
 						CbhsCb cb = JSON.parseObject(JSON.toJSONString(ys), CbhsCb.class);
 						cb.setOid(null);
@@ -821,7 +833,7 @@ public class DaysCbApisServiceImp implements DaysCbApisService {
 		Preconditions.checkArgument(request.getOids().size() > 0, "分包工程量统计ID不能为空!");
 		queryFactory.delete(QCbhsDaysFbGclTj.cbhsDaysFbGclTj).where(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.oid.in(request.getOids())).execute();
 		cbSrManager.delCb(queryFactory, SheObject.shType_fbgcl, request.getOids());
-
+		cbSrManager.delCb(queryFactory, SheObject.shType_fbgcljg, request.getOids());
 		return CbhsResUtils.suc();
 	}
 
@@ -848,7 +860,8 @@ public class DaysCbApisServiceImp implements DaysCbApisService {
 			globalGclOids.add(ys.getFbGclYsOid());
 			DataSummaryUtils.checkFbGclIsExceed(queryFactory, r1, ys, globalGclOids);
 		} catch (ExceedException e) {
-			throw new ServiceException(new ExceptionResponse(-1, ys.getFbGclYsName() + "已超出本月预算总量" + e.getInfo().getExceedInfos().get(0).getValue().abs() + e.getInfo().getExceedInfos().get(0).getUnit()));
+			throw new ServiceException(new ExceptionResponse(-1, ys.getFbGclYsName() + "已超出本月预算总量" + e.getInfo().getExceedInfos().get(0).getValue().abs()
+					+ e.getInfo().getExceedInfos().get(0).getUnit()));
 		}
 		DateTime dt = new DateTime(time);
 		DateTime curDt = new DateTime(System.currentTimeMillis());
@@ -917,12 +930,12 @@ public class DaysCbApisServiceImp implements DaysCbApisService {
 		Preconditions.checkArgument(request.getOids().size() > 0, "分包工程量统计ID不能为空!");
 		queryFactory.delete(QCbhsDaysFbLjxmCb.cbhsDaysFbLjxmCb).where(QCbhsDaysFbLjxmCb.cbhsDaysFbLjxmCb.oid.in(request.getOids())).execute();
 		cbSrManager.delCb(queryFactory, SheObject.shType_fbljxm, request.getOids());
-
+		cbSrManager.delCb(queryFactory, SheObject.shType_fbljxmcount, request.getOids());
 		return CbhsResUtils.suc();
 	}
 
 	@Override
-	public CbhsDaysFbLjxmCb fbLjxmCbAdd(RequestFbLjxmCbAdd request, HttpServletRequest httpServletRequest) throws Exception {
+	public CbhsDaysFbLjxmCb fbLjxmCbAddCount(RequestFbLjxmCbAddCount request, HttpServletRequest httpServletRequest) throws Exception {
 		CbhsDaysFbLjxmCb ys = request.getCb();
 		BeanValidation bv = new BeanValidation(queryFactory);
 		bv.vali(BeanValidation.beanType.project, BeanValidation.valiType.all, ys.getProjectOid());
@@ -933,13 +946,15 @@ public class DaysCbApisServiceImp implements DaysCbApisService {
 		ys.setShStatus(0);
 		String ext = null;
 		ExceedException exception = null;
+		ys.setUnitPrice(BigDecimal.ZERO);
+		ys.setTotal(BigDecimal.ZERO);
 		long time = ys.getDateTimeStamp() > 0 ? ys.getDateTimeStamp() : System.currentTimeMillis();
 		try {
 			RequestMbYsFetch r1 = new RequestMbYsFetch();
 			r1.setProjectOid(ys.getProjectOid());
 			r1.setDeptOid(ys.getDeptOid());
 			r1.setMonth(new SimpleDateFormat("yyyy-MM-01").parse(new SimpleDateFormat("yyyy-MM-01").format(new Date(time))).getTime());
-			DataSummaryUtils.checkFbLjxmCbIsExceed(queryFactory, r1, ys);
+			DataSummaryUtils.checkFbLjxmCbCountIsExceed(queryFactory, r1, ys);
 		} catch (ExceedException e) {
 			if (request.getSubmitType() == 0) { // 默认提交
 				throw e;
@@ -961,11 +976,12 @@ public class DaysCbApisServiceImp implements DaysCbApisService {
 		ys.setOpTime(curDt.getMillis());
 		ys = queryFactory.saveOrUpdate(ys);
 		if (ys.getShStatus() == 1) { // 审核提交 需要向审核者发送推送消息
-			examinerManager.createExaminer(queryFactory, ys.getProjectOid(), SheObject.shType_fbljxm, ys.getOid(), ys.getDeptOid(), ys.getDeptName(), ext, exception.getInfo().getErrorMessage(), exception.getInfo().getErrorMessage(), TokenUtils.getTokenInfo(httpServletRequest).getUserOid(), TokenUtils.getTokenInfo(httpServletRequest).getUserName());
+			examinerManager.createExaminer(queryFactory, ys.getProjectOid(), SheObject.shType_fbljxmcount, ys.getOid(), ys.getDeptOid(), ys.getDeptName(), ext, exception.getInfo().getErrorMessage(),
+					exception.getInfo().getErrorMessage(), TokenUtils.getTokenInfo(httpServletRequest).getUserOid(), TokenUtils.getTokenInfo(httpServletRequest).getUserName());
 		} else {
 			CbhsCb cb = JSON.parseObject(JSON.toJSONString(ys), CbhsCb.class);
 			cb.setOid(null);
-			cb.setType(SheObject.shType_fbljxm);
+			cb.setType(SheObject.shType_fbljxmcount);
 			cb.setCbOid(ys.getOid());
 			cbSrManager.createCb(queryFactory, cb);
 		}
@@ -979,9 +995,11 @@ public class DaysCbApisServiceImp implements DaysCbApisService {
 		Preconditions.checkArgument(rule != null, "未配置管理费用上缴公式!");
 		DateTime dt = new DateTime(System.currentTimeMillis());
 		String dateStr = dt.toString("yyyy-MM-dd");
-		BigDecimal gcSrTotal = queryFactory.select(QCbhsDaysGclSr.cbhsDaysGclSr.total.sum()).from(QCbhsDaysGclSr.cbhsDaysGclSr).where(QCbhsDaysGclSr.cbhsDaysGclSr.projectOid.eq(request.getProjectOid()).and(QCbhsDaysGclSr.cbhsDaysGclSr.dateStr.eq(dateStr))).fetchFirst();
+		BigDecimal gcSrTotal = queryFactory.select(QCbhsDaysGclSr.cbhsDaysGclSr.total.sum()).from(QCbhsDaysGclSr.cbhsDaysGclSr)
+				.where(QCbhsDaysGclSr.cbhsDaysGclSr.projectOid.eq(request.getProjectOid()).and(QCbhsDaysGclSr.cbhsDaysGclSr.dateStr.eq(dateStr))).fetchFirst();
 		gcSrTotal = gcSrTotal == null ? new BigDecimal(0) : gcSrTotal;
-		BigDecimal qtSrTotal = queryFactory.select(QCbhsDaysQtSr.cbhsDaysQtSr.total.sum()).from(QCbhsDaysQtSr.cbhsDaysQtSr).where(QCbhsDaysQtSr.cbhsDaysQtSr.projectOid.eq(request.getProjectOid()).and(QCbhsDaysQtSr.cbhsDaysQtSr.dateStr.eq(dateStr))).fetchFirst();
+		BigDecimal qtSrTotal = queryFactory.select(QCbhsDaysQtSr.cbhsDaysQtSr.total.sum()).from(QCbhsDaysQtSr.cbhsDaysQtSr)
+				.where(QCbhsDaysQtSr.cbhsDaysQtSr.projectOid.eq(request.getProjectOid()).and(QCbhsDaysQtSr.cbhsDaysQtSr.dateStr.eq(dateStr))).fetchFirst();
 		qtSrTotal = qtSrTotal == null ? new BigDecimal(0) : qtSrTotal;
 		BigDecimal todayTotal = gcSrTotal.add(qtSrTotal);
 		CbhsDaysGlfyYs ys = new CbhsDaysGlfyYs();
@@ -995,13 +1013,14 @@ public class DaysCbApisServiceImp implements DaysCbApisService {
 	@Override
 	public JSONObject fbJgUpdate(RequestFbJgUpdate request, HttpServletRequest httpServletRequest) throws Exception {
 		Preconditions.checkArgument(request.getFbGclOid() > 0, "分包价格统计ID不能为空!");
-		queryFactory.update(QCbhsDaysFbGclTj.cbhsDaysFbGclTj).set(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.total, request.getFbPrice()).where(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.oid.eq(request.getFbGclOid())).execute();
+		queryFactory.update(QCbhsDaysFbGclTj.cbhsDaysFbGclTj).set(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.total, request.getFbPrice())
+				.set(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.unitPrice, request.getFbUnitPrice()).where(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.oid.eq(request.getFbGclOid())).execute();
 		cbSrManager.updateCb(queryFactory, SheObject.shType_fbgcljg, request.getFbGclOid(), request.getFbPrice());
 		return CbhsResUtils.suc();
 	}
 
 	@Override
-	public JSONObject fbJgAdd(RequestFbJgAdd request, HttpServletRequest httpServletRequest) throws Exception {
+	public CbhsDaysFbGclTj fbJgAdd(RequestFbJgAdd request, HttpServletRequest httpServletRequest) throws Exception {
 		Preconditions.checkArgument(request.getFbGclOid() > 0, "分包价格统计ID不能为空!");
 		CbhsDaysFbGclTj gclTj = queryFactory.findOne(CbhsDaysFbGclTj.class, request.getFbGclOid());
 		Preconditions.checkArgument(gclTj != null, "分包工程量不存在!");
@@ -1029,7 +1048,8 @@ public class DaysCbApisServiceImp implements DaysCbApisService {
 		gclTj = queryFactory.saveOrUpdate(gclTj);
 		if (gclTj.getShStatus() == 1) { // 审核提交 需要向审核者发送推送消息
 			queryFactory.update(QCbhsDaysFbGclTj.cbhsDaysFbGclTj).set(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.shStatus, 1).where(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.oid.eq(gclTj.getOid())).execute();
-			examinerManager.createExaminer(queryFactory, gclTj.getProjectOid(), SheObject.shType_fbgcljg, gclTj.getOid(), gclTj.getDeptOid(), gclTj.getDeptName(), ext, exception.getInfo().getErrorMessage(), exception.getInfo().getErrorMessage(), TokenUtils.getTokenInfo(httpServletRequest).getUserOid(), TokenUtils.getTokenInfo(httpServletRequest).getUserName());
+			examinerManager.createExaminer(queryFactory, gclTj.getProjectOid(), SheObject.shType_fbgcljg, gclTj.getOid(), gclTj.getDeptOid(), gclTj.getDeptName(), ext, exception.getInfo()
+					.getErrorMessage(), exception.getInfo().getErrorMessage(), TokenUtils.getTokenInfo(httpServletRequest).getUserOid(), TokenUtils.getTokenInfo(httpServletRequest).getUserName());
 		} else {
 			CbhsCb cb = JSON.parseObject(JSON.toJSONString(gclTj), CbhsCb.class);
 			cb.setOid(null);
@@ -1037,6 +1057,56 @@ public class DaysCbApisServiceImp implements DaysCbApisService {
 			cb.setCbOid(gclTj.getOid());
 			cbSrManager.createCb(queryFactory, cb);
 		}
+		return gclTj;
+	}
+
+	@Override
+	public CbhsDaysFbLjxmCb fbLjxmCbAddJg(RequestFbLjxmCbAddJg request, HttpServletRequest httpServletRequest) throws Exception {
+		Preconditions.checkArgument(request.getDaysFbLjxmCbOid() > 0, "临建项目订单ID不能为空!");
+		CbhsDaysFbLjxmCb ljxm = queryFactory.findOne(CbhsDaysFbLjxmCb.class, request.getDaysFbLjxmCbOid());
+		Preconditions.checkArgument(ljxm != null, "临建项目订单不存在!");
+		Preconditions.checkArgument(ljxm.getShStatus() == 0, "临建项目订单数量正在审核中!");
+		// 监测是否超出总预算
+		String ext = null;
+		RequestMbYsFetch r1 = new RequestMbYsFetch();
+		r1.setProjectOid(ljxm.getProjectOid());
+		r1.setDeptOid(ljxm.getDeptOid());
+		r1.setMonth(new SimpleDateFormat("yyyy-MM-01").parse(new SimpleDateFormat("yyyy-MM-01").format(new Date(ljxm.getDateTimeStamp()))).getTime());
+		ExceedException exception = null;
+		ljxm.setTotal(request.getFbPrice());
+		ljxm.setUnitPrice(request.getFbUnitPrice());
+		try {
+			DataSummaryUtils.checkFbLjxmCbIsExceed(queryFactory, r1, ljxm);
+		} catch (ExceedException e) {
+			if (request.getSubmitType() == 0) { // 默认提交
+				throw e;
+			} else {
+				ext = JSON.toJSONString(e.getInfo().getExceedInfos());
+				ljxm.setShStatus(1);
+				exception = e;
+			}
+		}
+		ljxm = queryFactory.saveOrUpdate(ljxm);
+		if (ljxm.getShStatus() == 1) { // 审核提交 需要向审核者发送推送消息
+			queryFactory.update(QCbhsDaysFbLjxmCb.cbhsDaysFbLjxmCb).set(QCbhsDaysFbLjxmCb.cbhsDaysFbLjxmCb.shStatus, 1).where(QCbhsDaysFbLjxmCb.cbhsDaysFbLjxmCb.oid.eq(ljxm.getOid())).execute();
+			examinerManager.createExaminer(queryFactory, ljxm.getProjectOid(), SheObject.shType_fbljxmcount, ljxm.getOid(), ljxm.getDeptOid(), ljxm.getDeptName(), ext, exception.getInfo()
+					.getErrorMessage(), exception.getInfo().getErrorMessage(), TokenUtils.getTokenInfo(httpServletRequest).getUserOid(), TokenUtils.getTokenInfo(httpServletRequest).getUserName());
+		} else {
+			CbhsCb cb = JSON.parseObject(JSON.toJSONString(ljxm), CbhsCb.class);
+			cb.setOid(null);
+			cb.setType(SheObject.shType_fbljxmcount);
+			cb.setCbOid(ljxm.getOid());
+			cbSrManager.createCb(queryFactory, cb);
+		}
+		return ljxm;
+	}
+
+	@Override
+	public JSONObject fbLjxmCbUpdateJg(RequestFbLjxmCbUpdateJg request, HttpServletRequest httpServletRequest) throws Exception {
+		Preconditions.checkArgument(request.getDaysFbLjxmCbOid() > 0, "临建项目ID不能为空!");
+		queryFactory.update(QCbhsDaysFbLjxmCb.cbhsDaysFbLjxmCb).set(QCbhsDaysFbLjxmCb.cbhsDaysFbLjxmCb.total, request.getFbPrice())
+				.set(QCbhsDaysFbLjxmCb.cbhsDaysFbLjxmCb.unitPrice, request.getFbUnitPrice()).where(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.oid.eq(request.getDaysFbLjxmCbOid())).execute();
+		cbSrManager.updateCb(queryFactory, SheObject.shType_fbljxm, request.getDaysFbLjxmCbOid(), request.getFbPrice());
 		return CbhsResUtils.suc();
 	}
 }

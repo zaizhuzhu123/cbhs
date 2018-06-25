@@ -67,12 +67,16 @@ import com.server.pojo.bean.CbhsDaysFbLjxmCb;
 import com.server.pojo.bean.CbhsDaysFbLjxmCb;
 import com.server.pojo.url.daysCb.RequestFbLjxmCbDel;
 import com.alibaba.fastjson.JSONObject;
-import com.server.pojo.url.daysCb.RequestFbLjxmCbAdd;
+import com.server.pojo.url.daysCb.RequestFbLjxmCbAddCount;
 import com.server.pojo.bean.CbhsDaysFbLjxmCb;
+import com.server.pojo.url.daysCb.RequestFbLjxmCbAddJg;
+import com.server.pojo.bean.CbhsDaysFbLjxmCb;
+import com.server.pojo.url.daysCb.RequestFbLjxmCbUpdateJg;
+import com.alibaba.fastjson.JSONObject;
 import com.server.pojo.url.daysCb.RequestFbJgUpdate;
 import com.alibaba.fastjson.JSONObject;
 import com.server.pojo.url.daysCb.RequestFbJgAdd;
-import com.alibaba.fastjson.JSONObject;
+import com.server.pojo.bean.CbhsDaysFbGclTj;
 
 public interface DaysCbApisService {
 
@@ -140,10 +144,14 @@ public interface DaysCbApisService {
 
 	public JSONObject fbLjxmCbDel(RequestFbLjxmCbDel request, HttpServletRequest httpServletRequest) throws Exception;
 
-	public CbhsDaysFbLjxmCb fbLjxmCbAdd(RequestFbLjxmCbAdd request, HttpServletRequest httpServletRequest) throws Exception;
+	public CbhsDaysFbLjxmCb fbLjxmCbAddCount(RequestFbLjxmCbAddCount request, HttpServletRequest httpServletRequest) throws Exception;
+
+	public CbhsDaysFbLjxmCb fbLjxmCbAddJg(RequestFbLjxmCbAddJg request, HttpServletRequest httpServletRequest) throws Exception;
+
+	public JSONObject fbLjxmCbUpdateJg(RequestFbLjxmCbUpdateJg request, HttpServletRequest httpServletRequest) throws Exception;
 
 	public JSONObject fbJgUpdate(RequestFbJgUpdate request, HttpServletRequest httpServletRequest) throws Exception;
 
-	public JSONObject fbJgAdd(RequestFbJgAdd request, HttpServletRequest httpServletRequest) throws Exception;
+	public CbhsDaysFbGclTj fbJgAdd(RequestFbJgAdd request, HttpServletRequest httpServletRequest) throws Exception;
 
 }

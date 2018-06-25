@@ -126,17 +126,23 @@ public class DataSummaryUtils {
 	/**
 	 * 获得总收入
 	 * 
-	 * @Title: getSr @Description: TODO(这里用一句话描述这个方法的作用) @param @param
-	 *         queryFactory @param @param dso @param @return 设定文件 @return
-	 *         BigDecimal 返回类型 @throws
+	 * @Title: getSr @Description: TODO(这里用一句话描述这个方法的作用) @param @param queryFactory @param @param dso @param @return 设定文件 @return BigDecimal 返回类型 @throws
 	 */
 	public static BigDecimal getSr(MyQueryFactory queryFactory, DataSummaryObj dso) {
-		JPAQuery<BigDecimal> jqaquery = queryFactory.select(QCbhsDaysGclSr.cbhsDaysGclSr.total.sum()).from(QCbhsDaysGclSr.cbhsDaysGclSr).where(QCbhsDaysGclSr.cbhsDaysGclSr.projectOid.eq(dso.getProjectOid()).and(QCbhsDaysGclSr.cbhsDaysGclSr.dateTimeStamp.goe(dso.getDt().getStartTime())).and(QCbhsDaysGclSr.cbhsDaysGclSr.dateTimeStamp.loe(dso.getDt().getEndTime())));
+		JPAQuery<BigDecimal> jqaquery = queryFactory
+				.select(QCbhsDaysGclSr.cbhsDaysGclSr.total.sum())
+				.from(QCbhsDaysGclSr.cbhsDaysGclSr)
+				.where(QCbhsDaysGclSr.cbhsDaysGclSr.projectOid.eq(dso.getProjectOid()).and(QCbhsDaysGclSr.cbhsDaysGclSr.dateTimeStamp.goe(dso.getDt().getStartTime()))
+						.and(QCbhsDaysGclSr.cbhsDaysGclSr.dateTimeStamp.loe(dso.getDt().getEndTime())));
 		if (dso.getDeptOids() != null && dso.getDeptOids().size() > 0) {
 			jqaquery.where(QCbhsDaysGclSr.cbhsDaysGclSr.deptOid.in(dso.getDeptOids()));
 		}
 		BigDecimal gcsrTotal = jqaquery.fetchFirst();
-		jqaquery = queryFactory.select(QCbhsDaysQtSr.cbhsDaysQtSr.total.sum()).from(QCbhsDaysQtSr.cbhsDaysQtSr).where(QCbhsDaysQtSr.cbhsDaysQtSr.projectOid.eq(dso.getProjectOid()).and(QCbhsDaysQtSr.cbhsDaysQtSr.dateTimeStamp.goe(dso.getDt().getStartTime())).and(QCbhsDaysQtSr.cbhsDaysQtSr.dateTimeStamp.loe(dso.getDt().getEndTime())));
+		jqaquery = queryFactory
+				.select(QCbhsDaysQtSr.cbhsDaysQtSr.total.sum())
+				.from(QCbhsDaysQtSr.cbhsDaysQtSr)
+				.where(QCbhsDaysQtSr.cbhsDaysQtSr.projectOid.eq(dso.getProjectOid()).and(QCbhsDaysQtSr.cbhsDaysQtSr.dateTimeStamp.goe(dso.getDt().getStartTime()))
+						.and(QCbhsDaysQtSr.cbhsDaysQtSr.dateTimeStamp.loe(dso.getDt().getEndTime())));
 		if (dso.getDeptOids() != null && dso.getDeptOids().size() > 0) {
 			jqaquery.where(QCbhsDaysQtSr.cbhsDaysQtSr.deptOid.in(dso.getDeptOids()));
 		}
@@ -159,11 +165,45 @@ public class DataSummaryUtils {
 		ResponseMbYsFetch response = new ResponseMbYsFetch();
 		CbhsMonthJjcbYs cbhsMonthJjcbYs = new CbhsMonthJjcbYs();
 		JPAQuery<CbhsMonthJjcbYs> jqcbhsMonthJjcbYsTuple = queryFactory
-				.select(Projections.bean(CbhsMonthJjcbYs.class, QCbhsMonthJjcbYs.cbhsMonthJjcbYs.total.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.total), QCbhsMonthJjcbYs.cbhsMonthJjcbYs.glry_gz.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.glry_gz), QCbhsMonthJjcbYs.cbhsMonthJjcbYs.glry_zjjf.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.glry_zjjf), QCbhsMonthJjcbYs.cbhsMonthJjcbYs.glry_ghjf.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.glry_ghjf), QCbhsMonthJjcbYs.cbhsMonthJjcbYs.glry_dwbx.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.glry_dwbx), QCbhsMonthJjcbYs.cbhsMonthJjcbYs.glry_qt.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.glry_qt), QCbhsMonthJjcbYs.cbhsMonthJjcbYs.glry_wp_gz.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.glry_wp_gz), QCbhsMonthJjcbYs.cbhsMonthJjcbYs.glry_wp_zjjf.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.glry_wp_zjjf), QCbhsMonthJjcbYs.cbhsMonthJjcbYs.glry_wp_ghjf.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.glry_wp_ghjf),
-						QCbhsMonthJjcbYs.cbhsMonthJjcbYs.glry_wp_qt.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.glry_wp_qt), QCbhsMonthJjcbYs.cbhsMonthJjcbYs.scry_gz.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.scry_gz), QCbhsMonthJjcbYs.cbhsMonthJjcbYs.scry_zjjf.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.scry_zjjf), QCbhsMonthJjcbYs.cbhsMonthJjcbYs.scry_ghjf.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.scry_ghjf), QCbhsMonthJjcbYs.cbhsMonthJjcbYs.scry_dwbx.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.scry_dwbx), QCbhsMonthJjcbYs.cbhsMonthJjcbYs.scry_qt.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.scry_qt), QCbhsMonthJjcbYs.cbhsMonthJjcbYs.scry_wp_gz.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.scry_wp_gz), QCbhsMonthJjcbYs.cbhsMonthJjcbYs.scry_wp_zjjf.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.scry_wp_zjjf), QCbhsMonthJjcbYs.cbhsMonthJjcbYs.scry_wp_ghjf.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.scry_wp_ghjf),
-						QCbhsMonthJjcbYs.cbhsMonthJjcbYs.scry_wp_qt.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.scry_wp_qt), QCbhsMonthJjcbYs.cbhsMonthJjcbYs.bg_bgyp.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.bg_bgyp), QCbhsMonthJjcbYs.cbhsMonthJjcbYs.bg_txf.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.bg_txf), QCbhsMonthJjcbYs.cbhsMonthJjcbYs.bg_dnhc.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.bg_dnhc), QCbhsMonthJjcbYs.cbhsMonthJjcbYs.bg_qt.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.bg_qt), QCbhsMonthJjcbYs.cbhsMonthJjcbYs.xlf_dxf.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.xlf_dxf), QCbhsMonthJjcbYs.cbhsMonthJjcbYs.xlf_ybxlf.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.xlf_ybxlf), QCbhsMonthJjcbYs.cbhsMonthJjcbYs.xlf_clf.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.xlf_clf), QCbhsMonthJjcbYs.cbhsMonthJjcbYs.xlf_cailiaofei.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.xlf_cailiaofei), QCbhsMonthJjcbYs.cbhsMonthJjcbYs.xlf_flf.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.xlf_flf),
-						QCbhsMonthJjcbYs.cbhsMonthJjcbYs.xlf_ywjf.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.xlf_ywjf), QCbhsMonthJjcbYs.cbhsMonthJjcbYs.xlf_sdf.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.xlf_sdf), QCbhsMonthJjcbYs.cbhsMonthJjcbYs.xlf_scf.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.xlf_scf), QCbhsMonthJjcbYs.cbhsMonthJjcbYs.xlf_kyjf.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.xlf_kyjf), QCbhsMonthJjcbYs.cbhsMonthJjcbYs.xlf_cljbxf.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.xlf_cljbxf), QCbhsMonthJjcbYs.cbhsMonthJjcbYs.xlf_qt.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.xlf_qt), QCbhsMonthJjcbYs.cbhsMonthJjcbYs.aqfy_ygsz.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.aqfy_ygsz), QCbhsMonthJjcbYs.cbhsMonthJjcbYs.aqfy_ygsztc.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.aqfy_ygsztc), QCbhsMonthJjcbYs.cbhsMonthJjcbYs.aqfy_qt.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.aqfy_qt)))
-				.from(QCbhsMonthJjcbYs.cbhsMonthJjcbYs).where(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.projectOid.eq(dso.getProjectOid()).and(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.monthTimeStamp.goe(dso.getDt().getStartTime())).and(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.monthTimeStamp.loe(dso.getDt().getEndTime())));
+				.select(Projections.bean(CbhsMonthJjcbYs.class, QCbhsMonthJjcbYs.cbhsMonthJjcbYs.total.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.total), QCbhsMonthJjcbYs.cbhsMonthJjcbYs.glry_gz.sum()
+						.as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.glry_gz), QCbhsMonthJjcbYs.cbhsMonthJjcbYs.glry_zjjf.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.glry_zjjf),
+						QCbhsMonthJjcbYs.cbhsMonthJjcbYs.glry_ghjf.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.glry_ghjf),
+						QCbhsMonthJjcbYs.cbhsMonthJjcbYs.glry_dwbx.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.glry_dwbx),
+						QCbhsMonthJjcbYs.cbhsMonthJjcbYs.glry_qt.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.glry_qt),
+						QCbhsMonthJjcbYs.cbhsMonthJjcbYs.glry_wp_gz.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.glry_wp_gz),
+						QCbhsMonthJjcbYs.cbhsMonthJjcbYs.glry_wp_zjjf.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.glry_wp_zjjf),
+						QCbhsMonthJjcbYs.cbhsMonthJjcbYs.glry_wp_ghjf.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.glry_wp_ghjf),
+						QCbhsMonthJjcbYs.cbhsMonthJjcbYs.glry_wp_qt.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.glry_wp_qt),
+						QCbhsMonthJjcbYs.cbhsMonthJjcbYs.scry_gz.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.scry_gz),
+						QCbhsMonthJjcbYs.cbhsMonthJjcbYs.scry_zjjf.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.scry_zjjf),
+						QCbhsMonthJjcbYs.cbhsMonthJjcbYs.scry_ghjf.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.scry_ghjf),
+						QCbhsMonthJjcbYs.cbhsMonthJjcbYs.scry_dwbx.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.scry_dwbx),
+						QCbhsMonthJjcbYs.cbhsMonthJjcbYs.scry_qt.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.scry_qt),
+						QCbhsMonthJjcbYs.cbhsMonthJjcbYs.scry_wp_gz.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.scry_wp_gz),
+						QCbhsMonthJjcbYs.cbhsMonthJjcbYs.scry_wp_zjjf.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.scry_wp_zjjf),
+						QCbhsMonthJjcbYs.cbhsMonthJjcbYs.scry_wp_ghjf.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.scry_wp_ghjf),
+						QCbhsMonthJjcbYs.cbhsMonthJjcbYs.scry_wp_qt.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.scry_wp_qt),
+						QCbhsMonthJjcbYs.cbhsMonthJjcbYs.bg_bgyp.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.bg_bgyp),
+						QCbhsMonthJjcbYs.cbhsMonthJjcbYs.bg_txf.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.bg_txf),
+						QCbhsMonthJjcbYs.cbhsMonthJjcbYs.bg_dnhc.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.bg_dnhc),
+						QCbhsMonthJjcbYs.cbhsMonthJjcbYs.bg_qt.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.bg_qt),
+						QCbhsMonthJjcbYs.cbhsMonthJjcbYs.xlf_dxf.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.xlf_dxf),
+						QCbhsMonthJjcbYs.cbhsMonthJjcbYs.xlf_ybxlf.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.xlf_ybxlf),
+						QCbhsMonthJjcbYs.cbhsMonthJjcbYs.xlf_clf.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.xlf_clf),
+						QCbhsMonthJjcbYs.cbhsMonthJjcbYs.xlf_cailiaofei.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.xlf_cailiaofei),
+						QCbhsMonthJjcbYs.cbhsMonthJjcbYs.xlf_flf.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.xlf_flf),
+						QCbhsMonthJjcbYs.cbhsMonthJjcbYs.xlf_ywjf.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.xlf_ywjf),
+						QCbhsMonthJjcbYs.cbhsMonthJjcbYs.xlf_sdf.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.xlf_sdf),
+						QCbhsMonthJjcbYs.cbhsMonthJjcbYs.xlf_scf.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.xlf_scf),
+						QCbhsMonthJjcbYs.cbhsMonthJjcbYs.xlf_kyjf.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.xlf_kyjf),
+						QCbhsMonthJjcbYs.cbhsMonthJjcbYs.xlf_cljbxf.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.xlf_cljbxf),
+						QCbhsMonthJjcbYs.cbhsMonthJjcbYs.xlf_qt.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.xlf_qt),
+						QCbhsMonthJjcbYs.cbhsMonthJjcbYs.aqfy_ygsz.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.aqfy_ygsz),
+						QCbhsMonthJjcbYs.cbhsMonthJjcbYs.aqfy_ygsztc.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.aqfy_ygsztc),
+						QCbhsMonthJjcbYs.cbhsMonthJjcbYs.aqfy_qt.sum().as(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.aqfy_qt)))
+				.from(QCbhsMonthJjcbYs.cbhsMonthJjcbYs)
+				.where(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.projectOid.eq(dso.getProjectOid()).and(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.monthTimeStamp.goe(dso.getDt().getStartTime()))
+						.and(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.monthTimeStamp.loe(dso.getDt().getEndTime())));
 		if (dso.getDeptOids().size() > 0) {
 			jqcbhsMonthJjcbYsTuple.where(QCbhsMonthJjcbYs.cbhsMonthJjcbYs.deptOid.in(dso.getDeptOids()));
 		}
@@ -183,10 +223,32 @@ public class DataSummaryUtils {
 	public static CbhsDaysJjcb getThisMonthSubmitJjCbTotalDetails(MyQueryFactory queryFactory, DataSummaryObj dso) {
 		// 间接成本
 		CbhsDaysJjcb cbhsDaysJjcb = new CbhsDaysJjcb();
-		JPAQuery<CbhsDaysJjcb> jqcbhsDaysJjcbTuple = queryFactory.select(Projections.bean(CbhsDaysJjcb.class, QCbhsDaysJjcb.cbhsDaysJjcb.total.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.total), QCbhsDaysJjcb.cbhsDaysJjcb.glry_gz.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.glry_gz), QCbhsDaysJjcb.cbhsDaysJjcb.glry_zjjf.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.glry_zjjf), QCbhsDaysJjcb.cbhsDaysJjcb.glry_ghjf.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.glry_ghjf), QCbhsDaysJjcb.cbhsDaysJjcb.glry_dwbx.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.glry_dwbx), QCbhsDaysJjcb.cbhsDaysJjcb.glry_qt.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.glry_qt), QCbhsDaysJjcb.cbhsDaysJjcb.glry_wp_gz.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.glry_wp_gz), QCbhsDaysJjcb.cbhsDaysJjcb.glry_wp_zjjf.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.glry_wp_zjjf), QCbhsDaysJjcb.cbhsDaysJjcb.glry_wp_ghjf.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.glry_wp_ghjf), QCbhsDaysJjcb.cbhsDaysJjcb.glry_wp_qt.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.glry_wp_qt),
-				QCbhsDaysJjcb.cbhsDaysJjcb.scry_gz.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.scry_gz), QCbhsDaysJjcb.cbhsDaysJjcb.scry_zjjf.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.scry_zjjf), QCbhsDaysJjcb.cbhsDaysJjcb.scry_ghjf.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.scry_ghjf), QCbhsDaysJjcb.cbhsDaysJjcb.scry_dwbx.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.scry_dwbx), QCbhsDaysJjcb.cbhsDaysJjcb.scry_qt.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.scry_qt), QCbhsDaysJjcb.cbhsDaysJjcb.scry_wp_gz.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.scry_wp_gz), QCbhsDaysJjcb.cbhsDaysJjcb.scry_wp_zjjf.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.scry_wp_zjjf), QCbhsDaysJjcb.cbhsDaysJjcb.scry_wp_ghjf.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.scry_wp_ghjf), QCbhsDaysJjcb.cbhsDaysJjcb.scry_wp_qt.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.scry_wp_qt), QCbhsDaysJjcb.cbhsDaysJjcb.bg_bgyp.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.bg_bgyp), QCbhsDaysJjcb.cbhsDaysJjcb.bg_txf.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.bg_txf),
-				QCbhsDaysJjcb.cbhsDaysJjcb.bg_dnhc.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.bg_dnhc), QCbhsDaysJjcb.cbhsDaysJjcb.bg_qt.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.bg_qt), QCbhsDaysJjcb.cbhsDaysJjcb.xlf_dxf.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.xlf_dxf), QCbhsDaysJjcb.cbhsDaysJjcb.xlf_ybxlf.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.xlf_ybxlf), QCbhsDaysJjcb.cbhsDaysJjcb.xlf_clf.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.xlf_clf), QCbhsDaysJjcb.cbhsDaysJjcb.xlf_cailiaofei.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.xlf_cailiaofei), QCbhsDaysJjcb.cbhsDaysJjcb.xlf_flf.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.xlf_flf), QCbhsDaysJjcb.cbhsDaysJjcb.xlf_ywjf.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.xlf_ywjf), QCbhsDaysJjcb.cbhsDaysJjcb.xlf_sdf.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.xlf_sdf), QCbhsDaysJjcb.cbhsDaysJjcb.xlf_scf.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.xlf_scf), QCbhsDaysJjcb.cbhsDaysJjcb.xlf_kyjf.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.xlf_kyjf),
-				QCbhsDaysJjcb.cbhsDaysJjcb.xlf_cljbxf.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.xlf_cljbxf), QCbhsDaysJjcb.cbhsDaysJjcb.xlf_qt.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.xlf_qt), QCbhsDaysJjcb.cbhsDaysJjcb.aqfy_ygsz.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.aqfy_ygsz), QCbhsDaysJjcb.cbhsDaysJjcb.aqfy_ygsztc.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.aqfy_ygsztc), QCbhsDaysJjcb.cbhsDaysJjcb.aqfy_qt.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.aqfy_qt))).from(QCbhsDaysJjcb.cbhsDaysJjcb).where(QCbhsDaysJjcb.cbhsDaysJjcb.projectOid.eq(dso.getProjectOid()).and(QCbhsDaysJjcb.cbhsDaysJjcb.dateTimeStamp.goe(dso.getDt().getStartTime()).and(QCbhsDaysJjcb.cbhsDaysJjcb.dateTimeStamp.loe(dso.getDt().getEndTime()))).and(QCbhsDaysJjcb.cbhsDaysJjcb.shStatus.eq(0)));
+		JPAQuery<CbhsDaysJjcb> jqcbhsDaysJjcbTuple = queryFactory
+				.select(Projections.bean(CbhsDaysJjcb.class, QCbhsDaysJjcb.cbhsDaysJjcb.total.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.total),
+						QCbhsDaysJjcb.cbhsDaysJjcb.glry_gz.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.glry_gz), QCbhsDaysJjcb.cbhsDaysJjcb.glry_zjjf.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.glry_zjjf),
+						QCbhsDaysJjcb.cbhsDaysJjcb.glry_ghjf.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.glry_ghjf), QCbhsDaysJjcb.cbhsDaysJjcb.glry_dwbx.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.glry_dwbx),
+						QCbhsDaysJjcb.cbhsDaysJjcb.glry_qt.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.glry_qt), QCbhsDaysJjcb.cbhsDaysJjcb.glry_wp_gz.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.glry_wp_gz),
+						QCbhsDaysJjcb.cbhsDaysJjcb.glry_wp_zjjf.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.glry_wp_zjjf),
+						QCbhsDaysJjcb.cbhsDaysJjcb.glry_wp_ghjf.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.glry_wp_ghjf), QCbhsDaysJjcb.cbhsDaysJjcb.glry_wp_qt.sum()
+								.as(QCbhsDaysJjcb.cbhsDaysJjcb.glry_wp_qt), QCbhsDaysJjcb.cbhsDaysJjcb.scry_gz.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.scry_gz), QCbhsDaysJjcb.cbhsDaysJjcb.scry_zjjf.sum()
+								.as(QCbhsDaysJjcb.cbhsDaysJjcb.scry_zjjf), QCbhsDaysJjcb.cbhsDaysJjcb.scry_ghjf.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.scry_ghjf), QCbhsDaysJjcb.cbhsDaysJjcb.scry_dwbx
+								.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.scry_dwbx), QCbhsDaysJjcb.cbhsDaysJjcb.scry_qt.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.scry_qt), QCbhsDaysJjcb.cbhsDaysJjcb.scry_wp_gz
+								.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.scry_wp_gz), QCbhsDaysJjcb.cbhsDaysJjcb.scry_wp_zjjf.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.scry_wp_zjjf),
+						QCbhsDaysJjcb.cbhsDaysJjcb.scry_wp_ghjf.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.scry_wp_ghjf), QCbhsDaysJjcb.cbhsDaysJjcb.scry_wp_qt.sum()
+								.as(QCbhsDaysJjcb.cbhsDaysJjcb.scry_wp_qt), QCbhsDaysJjcb.cbhsDaysJjcb.bg_bgyp.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.bg_bgyp), QCbhsDaysJjcb.cbhsDaysJjcb.bg_txf.sum()
+								.as(QCbhsDaysJjcb.cbhsDaysJjcb.bg_txf), QCbhsDaysJjcb.cbhsDaysJjcb.bg_dnhc.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.bg_dnhc),
+						QCbhsDaysJjcb.cbhsDaysJjcb.bg_qt.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.bg_qt), QCbhsDaysJjcb.cbhsDaysJjcb.xlf_dxf.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.xlf_dxf),
+						QCbhsDaysJjcb.cbhsDaysJjcb.xlf_ybxlf.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.xlf_ybxlf), QCbhsDaysJjcb.cbhsDaysJjcb.xlf_clf.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.xlf_clf),
+						QCbhsDaysJjcb.cbhsDaysJjcb.xlf_cailiaofei.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.xlf_cailiaofei), QCbhsDaysJjcb.cbhsDaysJjcb.xlf_flf.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.xlf_flf),
+						QCbhsDaysJjcb.cbhsDaysJjcb.xlf_ywjf.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.xlf_ywjf), QCbhsDaysJjcb.cbhsDaysJjcb.xlf_sdf.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.xlf_sdf),
+						QCbhsDaysJjcb.cbhsDaysJjcb.xlf_scf.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.xlf_scf), QCbhsDaysJjcb.cbhsDaysJjcb.xlf_kyjf.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.xlf_kyjf),
+						QCbhsDaysJjcb.cbhsDaysJjcb.xlf_cljbxf.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.xlf_cljbxf), QCbhsDaysJjcb.cbhsDaysJjcb.xlf_qt.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.xlf_qt),
+						QCbhsDaysJjcb.cbhsDaysJjcb.aqfy_ygsz.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.aqfy_ygsz), QCbhsDaysJjcb.cbhsDaysJjcb.aqfy_ygsztc.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.aqfy_ygsztc),
+						QCbhsDaysJjcb.cbhsDaysJjcb.aqfy_qt.sum().as(QCbhsDaysJjcb.cbhsDaysJjcb.aqfy_qt)))
+				.from(QCbhsDaysJjcb.cbhsDaysJjcb)
+				.where(QCbhsDaysJjcb.cbhsDaysJjcb.projectOid.eq(dso.getProjectOid())
+						.and(QCbhsDaysJjcb.cbhsDaysJjcb.dateTimeStamp.goe(dso.getDt().getStartTime()).and(QCbhsDaysJjcb.cbhsDaysJjcb.dateTimeStamp.loe(dso.getDt().getEndTime())))
+						.and(QCbhsDaysJjcb.cbhsDaysJjcb.shStatus.eq(0)));
 		if (dso.getDeptOids().size() > 0) {
 			jqcbhsDaysJjcbTuple.where(QCbhsDaysJjcb.cbhsDaysJjcb.deptOid.in(dso.getDeptOids()));
 		}
@@ -258,20 +320,25 @@ public class DataSummaryUtils {
 	 * 
 	 * @Description:TODO(这里用一句话描述这个方法的作用)
 	 * 
-	 * @param @param
-	 *            queryFactory
+	 * @param @param queryFactory
 	 * 
-	 * @param @param
-	 *            request
+	 * @param @param request
 	 * 
-	 * @param @return
-	 *            设定文件
+	 * @param @return 设定文件
 	 * 
 	 * @return CbhsMonthGlfyYs 返回类型 @throws
 	 */
 	public static CbhsMonthGlfyYs getThisMonthGlfyYs(MyQueryFactory queryFactory, DataSummaryObj dso) {
 		CbhsMonthGlfyYs cbhsMonthGlfyYs = new CbhsMonthGlfyYs();
-		JPAQuery<CbhsMonthGlfyYs> jqcbhsMonthGlfyYsTuple = queryFactory.select(Projections.bean(CbhsMonthGlfyYs.class, QCbhsMonthGlfyYs.cbhsMonthGlfyYs.p_sjgs.sum().as(QCbhsMonthGlfyYs.cbhsMonthGlfyYs.p_sjgs), QCbhsMonthGlfyYs.cbhsMonthGlfyYs.p_ztbfy.sum().as(QCbhsMonthGlfyYs.cbhsMonthGlfyYs.p_ztbfy), QCbhsMonthGlfyYs.cbhsMonthGlfyYs.p_sjzjjf.sum().as(QCbhsMonthGlfyYs.cbhsMonthGlfyYs.p_sjzjjf), QCbhsMonthGlfyYs.cbhsMonthGlfyYs.p_kdqqysds.sum().as(QCbhsMonthGlfyYs.cbhsMonthGlfyYs.p_kdqqysds), QCbhsMonthGlfyYs.cbhsMonthGlfyYs.total.sum().as(QCbhsMonthGlfyYs.cbhsMonthGlfyYs.total), QCbhsMonthGlfyYs.cbhsMonthGlfyYs.p_yhsjqtsj.sum().as(QCbhsMonthGlfyYs.cbhsMonthGlfyYs.p_yhsjqtsj))).from(QCbhsMonthGlfyYs.cbhsMonthGlfyYs).where(QCbhsMonthGlfyYs.cbhsMonthGlfyYs.projectOid.eq(dso.getProjectOid()).and(QCbhsMonthGlfyYs.cbhsMonthGlfyYs.monthTimeStamp.goe(dso.getDt().getStartTime())).and(QCbhsMonthGlfyYs.cbhsMonthGlfyYs.monthTimeStamp.loe(dso.getDt().getStartTime())));
+		JPAQuery<CbhsMonthGlfyYs> jqcbhsMonthGlfyYsTuple = queryFactory
+				.select(Projections.bean(CbhsMonthGlfyYs.class, QCbhsMonthGlfyYs.cbhsMonthGlfyYs.p_sjgs.sum().as(QCbhsMonthGlfyYs.cbhsMonthGlfyYs.p_sjgs), QCbhsMonthGlfyYs.cbhsMonthGlfyYs.p_ztbfy
+						.sum().as(QCbhsMonthGlfyYs.cbhsMonthGlfyYs.p_ztbfy), QCbhsMonthGlfyYs.cbhsMonthGlfyYs.p_sjzjjf.sum().as(QCbhsMonthGlfyYs.cbhsMonthGlfyYs.p_sjzjjf),
+						QCbhsMonthGlfyYs.cbhsMonthGlfyYs.p_kdqqysds.sum().as(QCbhsMonthGlfyYs.cbhsMonthGlfyYs.p_kdqqysds),
+						QCbhsMonthGlfyYs.cbhsMonthGlfyYs.total.sum().as(QCbhsMonthGlfyYs.cbhsMonthGlfyYs.total),
+						QCbhsMonthGlfyYs.cbhsMonthGlfyYs.p_yhsjqtsj.sum().as(QCbhsMonthGlfyYs.cbhsMonthGlfyYs.p_yhsjqtsj)))
+				.from(QCbhsMonthGlfyYs.cbhsMonthGlfyYs)
+				.where(QCbhsMonthGlfyYs.cbhsMonthGlfyYs.projectOid.eq(dso.getProjectOid()).and(QCbhsMonthGlfyYs.cbhsMonthGlfyYs.monthTimeStamp.goe(dso.getDt().getStartTime()))
+						.and(QCbhsMonthGlfyYs.cbhsMonthGlfyYs.monthTimeStamp.loe(dso.getDt().getStartTime())));
 		if (dso.getDeptOids().size() > 0) {
 			jqcbhsMonthGlfyYsTuple.where(QCbhsMonthGlfyYs.cbhsMonthGlfyYs.deptOid.in(dso.getDeptOids()));
 		}
@@ -286,14 +353,11 @@ public class DataSummaryUtils {
 	 * 
 	 * @Description:TODO(这里用一句话描述这个方法的作用)
 	 * 
-	 * @param @param
-	 *            queryFactory
+	 * @param @param queryFactory
 	 * 
-	 * @param @param
-	 *            request
+	 * @param @param request
 	 * 
-	 * @param @return
-	 *            设定文件
+	 * @param @return 设定文件
 	 * 
 	 * @return CbhsDaysGlfyYs
 	 * 
@@ -301,7 +365,16 @@ public class DataSummaryUtils {
 	 */
 	public static CbhsDaysGlfyYs getThisMonthSubmitGlfyTotalDetails(MyQueryFactory queryFactory, DataSummaryObj dso) {
 		CbhsDaysGlfyYs cbhsDaysGlfyYs = new CbhsDaysGlfyYs();
-		JPAQuery<CbhsDaysGlfyYs> jqcbhsMonthGlfyYsTuple = queryFactory.select(Projections.bean(CbhsDaysGlfyYs.class, QCbhsDaysGlfyYs.cbhsDaysGlfyYs.p_sjgs.sum().as(QCbhsDaysGlfyYs.cbhsDaysGlfyYs.p_sjgs), QCbhsDaysGlfyYs.cbhsDaysGlfyYs.p_ztbfy.sum().as(QCbhsDaysGlfyYs.cbhsDaysGlfyYs.p_ztbfy), QCbhsDaysGlfyYs.cbhsDaysGlfyYs.p_sjzjjf.sum().as(QCbhsDaysGlfyYs.cbhsDaysGlfyYs.p_sjzjjf), QCbhsDaysGlfyYs.cbhsDaysGlfyYs.p_kdqqysds.sum().as(QCbhsDaysGlfyYs.cbhsDaysGlfyYs.p_kdqqysds), QCbhsDaysGlfyYs.cbhsDaysGlfyYs.p_yhsjqtsj.sum().as(QCbhsDaysGlfyYs.cbhsDaysGlfyYs.p_yhsjqtsj))).from(QCbhsDaysGlfyYs.cbhsDaysGlfyYs).where(QCbhsDaysGlfyYs.cbhsDaysGlfyYs.projectOid.eq(dso.getProjectOid()).and(QCbhsDaysGlfyYs.cbhsDaysGlfyYs.dateTimeStamp.goe(dso.getDt().getStartTime()).and(QCbhsDaysGlfyYs.cbhsDaysGlfyYs.dateTimeStamp.loe(dso.getDt().getEndTime()))).and(QCbhsDaysGlfyYs.cbhsDaysGlfyYs.shStatus.eq(0)));
+		JPAQuery<CbhsDaysGlfyYs> jqcbhsMonthGlfyYsTuple = queryFactory
+				.select(Projections.bean(CbhsDaysGlfyYs.class, QCbhsDaysGlfyYs.cbhsDaysGlfyYs.p_sjgs.sum().as(QCbhsDaysGlfyYs.cbhsDaysGlfyYs.p_sjgs),
+						QCbhsDaysGlfyYs.cbhsDaysGlfyYs.p_ztbfy.sum().as(QCbhsDaysGlfyYs.cbhsDaysGlfyYs.p_ztbfy),
+						QCbhsDaysGlfyYs.cbhsDaysGlfyYs.p_sjzjjf.sum().as(QCbhsDaysGlfyYs.cbhsDaysGlfyYs.p_sjzjjf),
+						QCbhsDaysGlfyYs.cbhsDaysGlfyYs.p_kdqqysds.sum().as(QCbhsDaysGlfyYs.cbhsDaysGlfyYs.p_kdqqysds),
+						QCbhsDaysGlfyYs.cbhsDaysGlfyYs.p_yhsjqtsj.sum().as(QCbhsDaysGlfyYs.cbhsDaysGlfyYs.p_yhsjqtsj)))
+				.from(QCbhsDaysGlfyYs.cbhsDaysGlfyYs)
+				.where(QCbhsDaysGlfyYs.cbhsDaysGlfyYs.projectOid.eq(dso.getProjectOid())
+						.and(QCbhsDaysGlfyYs.cbhsDaysGlfyYs.dateTimeStamp.goe(dso.getDt().getStartTime()).and(QCbhsDaysGlfyYs.cbhsDaysGlfyYs.dateTimeStamp.loe(dso.getDt().getEndTime())))
+						.and(QCbhsDaysGlfyYs.cbhsDaysGlfyYs.shStatus.eq(0)));
 		cbhsDaysGlfyYs = jqcbhsMonthGlfyYsTuple.fetchOne();
 		if (dso.getDeptOids().size() > 0) {
 			jqcbhsMonthGlfyYsTuple.where(QCbhsDaysGlfyYs.cbhsDaysGlfyYs.deptOid.in(dso.getDeptOids()));
@@ -310,8 +383,9 @@ public class DataSummaryUtils {
 	}
 
 	/**
-	 * @throws IllegalAccessException @throws IllegalArgumentException
-	 * 校验当前提交的管理费用 是否已超出当月预算总费用
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 *             校验当前提交的管理费用 是否已超出当月预算总费用
 	 * 
 	 * @Title: checkGlfyIsExceed
 	 * 
@@ -354,7 +428,11 @@ public class DataSummaryUtils {
 	 * @return
 	 */
 	public static CbhsMonthZyLxygCbYs getThisMonthZyLxygCbYs(MyQueryFactory queryFactory, DataSummaryObj dso) {
-		JPAQuery<BigDecimal> jqp_zyLxygCb = queryFactory.select(QCbhsMonthZyLxygCbYs.cbhsMonthZyLxygCbYs.total.sum()).from(QCbhsMonthZyLxygCbYs.cbhsMonthZyLxygCbYs).where(QCbhsMonthZyLxygCbYs.cbhsMonthZyLxygCbYs.projectOid.eq(dso.getProjectOid()).and(QCbhsMonthZyLxygCbYs.cbhsMonthZyLxygCbYs.monthTimeStamp.goe(dso.getDt().getStartTime())).and(QCbhsMonthZyLxygCbYs.cbhsMonthZyLxygCbYs.monthTimeStamp.loe(dso.getDt().getEndTime())));
+		JPAQuery<BigDecimal> jqp_zyLxygCb = queryFactory
+				.select(QCbhsMonthZyLxygCbYs.cbhsMonthZyLxygCbYs.total.sum())
+				.from(QCbhsMonthZyLxygCbYs.cbhsMonthZyLxygCbYs)
+				.where(QCbhsMonthZyLxygCbYs.cbhsMonthZyLxygCbYs.projectOid.eq(dso.getProjectOid()).and(QCbhsMonthZyLxygCbYs.cbhsMonthZyLxygCbYs.monthTimeStamp.goe(dso.getDt().getStartTime()))
+						.and(QCbhsMonthZyLxygCbYs.cbhsMonthZyLxygCbYs.monthTimeStamp.loe(dso.getDt().getEndTime())));
 		if (dso.getDeptOids().size() > 0) {
 			jqp_zyLxygCb.where(QCbhsMonthZyLxygCbYs.cbhsMonthZyLxygCbYs.deptOid.in(dso.getDeptOids()));
 		}
@@ -373,7 +451,12 @@ public class DataSummaryUtils {
 	 * @return
 	 */
 	public static CbhsDaysZyLxygCb getThisMonthSubmitZyLxygCb(MyQueryFactory queryFactory, DataSummaryObj dso) {
-		JPAQuery<BigDecimal> jqp_zyLxygCb = queryFactory.select(QCbhsDaysZyLxygCb.cbhsDaysZyLxygCb.total.sum()).from(QCbhsDaysZyLxygCb.cbhsDaysZyLxygCb).where(QCbhsDaysZyLxygCb.cbhsDaysZyLxygCb.projectOid.eq(dso.getProjectOid()).and(QCbhsDaysZyLxygCb.cbhsDaysZyLxygCb.dateTimeStamp.goe(dso.getDt().getStartTime()).and(QCbhsDaysZyLxygCb.cbhsDaysZyLxygCb.dateTimeStamp.loe(dso.getDt().getEndTime()))).and(QCbhsDaysZyLxygCb.cbhsDaysZyLxygCb.shStatus.eq(0)));
+		JPAQuery<BigDecimal> jqp_zyLxygCb = queryFactory
+				.select(QCbhsDaysZyLxygCb.cbhsDaysZyLxygCb.total.sum())
+				.from(QCbhsDaysZyLxygCb.cbhsDaysZyLxygCb)
+				.where(QCbhsDaysZyLxygCb.cbhsDaysZyLxygCb.projectOid.eq(dso.getProjectOid())
+						.and(QCbhsDaysZyLxygCb.cbhsDaysZyLxygCb.dateTimeStamp.goe(dso.getDt().getStartTime()).and(QCbhsDaysZyLxygCb.cbhsDaysZyLxygCb.dateTimeStamp.loe(dso.getDt().getEndTime())))
+						.and(QCbhsDaysZyLxygCb.cbhsDaysZyLxygCb.shStatus.eq(0)));
 		if (dso.getDeptOids().size() > 0) {
 			jqp_zyLxygCb.where(QCbhsDaysZyLxygCb.cbhsDaysZyLxygCb.deptOid.in(dso.getDeptOids()));
 		}
@@ -420,7 +503,11 @@ public class DataSummaryUtils {
 	 * @return
 	 */
 	public static CbhsMonthZyQtfyYs getThisMonthZyQtCbYs(MyQueryFactory queryFactory, DataSummaryObj dso) {
-		JPAQuery<BigDecimal> jqp_zyLxygCb = queryFactory.select(QCbhsMonthZyQtfyYs.cbhsMonthZyQtfyYs.total.sum()).from(QCbhsMonthZyQtfyYs.cbhsMonthZyQtfyYs).where(QCbhsMonthZyQtfyYs.cbhsMonthZyQtfyYs.projectOid.eq(dso.getProjectOid()).and(QCbhsMonthZyQtfyYs.cbhsMonthZyQtfyYs.monthTimeStamp.goe(dso.getDt().getStartTime())).and(QCbhsMonthZyQtfyYs.cbhsMonthZyQtfyYs.monthTimeStamp.loe(dso.getDt().getEndTime())));
+		JPAQuery<BigDecimal> jqp_zyLxygCb = queryFactory
+				.select(QCbhsMonthZyQtfyYs.cbhsMonthZyQtfyYs.total.sum())
+				.from(QCbhsMonthZyQtfyYs.cbhsMonthZyQtfyYs)
+				.where(QCbhsMonthZyQtfyYs.cbhsMonthZyQtfyYs.projectOid.eq(dso.getProjectOid()).and(QCbhsMonthZyQtfyYs.cbhsMonthZyQtfyYs.monthTimeStamp.goe(dso.getDt().getStartTime()))
+						.and(QCbhsMonthZyQtfyYs.cbhsMonthZyQtfyYs.monthTimeStamp.loe(dso.getDt().getEndTime())));
 		if (dso.getDeptOids().size() > 0) {
 			jqp_zyLxygCb.where(QCbhsMonthZyQtfyYs.cbhsMonthZyQtfyYs.deptOid.in(dso.getDeptOids()));
 		}
@@ -439,7 +526,12 @@ public class DataSummaryUtils {
 	 * @return
 	 */
 	public static CbhsDaysZyQtCb getThisMonthSubmitZyQtCb(MyQueryFactory queryFactory, DataSummaryObj dso) {
-		JPAQuery<BigDecimal> jqp_zyLxygCb = queryFactory.select(QCbhsDaysZyQtCb.cbhsDaysZyQtCb.total.sum()).from(QCbhsDaysZyQtCb.cbhsDaysZyQtCb).where(QCbhsDaysZyQtCb.cbhsDaysZyQtCb.projectOid.eq(dso.getProjectOid()).and(QCbhsDaysZyQtCb.cbhsDaysZyQtCb.dateTimeStamp.goe(dso.getDt().getStartTime()).and(QCbhsDaysZyQtCb.cbhsDaysZyQtCb.dateTimeStamp.loe(dso.getDt().getEndTime()))).and(QCbhsDaysZyQtCb.cbhsDaysZyQtCb.shStatus.eq(0)));
+		JPAQuery<BigDecimal> jqp_zyLxygCb = queryFactory
+				.select(QCbhsDaysZyQtCb.cbhsDaysZyQtCb.total.sum())
+				.from(QCbhsDaysZyQtCb.cbhsDaysZyQtCb)
+				.where(QCbhsDaysZyQtCb.cbhsDaysZyQtCb.projectOid.eq(dso.getProjectOid())
+						.and(QCbhsDaysZyQtCb.cbhsDaysZyQtCb.dateTimeStamp.goe(dso.getDt().getStartTime()).and(QCbhsDaysZyQtCb.cbhsDaysZyQtCb.dateTimeStamp.loe(dso.getDt().getEndTime())))
+						.and(QCbhsDaysZyQtCb.cbhsDaysZyQtCb.shStatus.eq(0)));
 		if (dso.getDeptOids().size() > 0) {
 			jqp_zyLxygCb.where(QCbhsDaysZyQtCb.cbhsDaysZyQtCb.deptOid.in(dso.getDeptOids()));
 		}
@@ -486,7 +578,12 @@ public class DataSummaryUtils {
 	 * @return
 	 */
 	public static CbhsMonthZyJxCbYs getThisMonthZyJxCbYs(MyQueryFactory queryFactory, DataSummaryObj dso) {
-		JPAQuery<Tuple> jqcbhsMonthZyJxCbYsTuple = queryFactory.select(QCbhsMonthZyJxCbYs.cbhsMonthZyJxCbYs.p_zjf.sum(), QCbhsMonthZyJxCbYs.cbhsMonthZyJxCbYs.p_zpf.sum(), QCbhsMonthZyJxCbYs.cbhsMonthZyJxCbYs.p_clysf.sum(), QCbhsMonthZyJxCbYs.cbhsMonthZyJxCbYs.p_jxdxf.sum(), QCbhsMonthZyJxCbYs.cbhsMonthZyJxCbYs.total.sum()).from(QCbhsMonthZyJxCbYs.cbhsMonthZyJxCbYs).where(QCbhsMonthZyJxCbYs.cbhsMonthZyJxCbYs.projectOid.eq(dso.getProjectOid()).and(QCbhsMonthZyJxCbYs.cbhsMonthZyJxCbYs.monthTimeStamp.goe(dso.getDt().getStartTime())).and(QCbhsMonthZyJxCbYs.cbhsMonthZyJxCbYs.monthTimeStamp.loe(dso.getDt().getEndTime())));
+		JPAQuery<Tuple> jqcbhsMonthZyJxCbYsTuple = queryFactory
+				.select(QCbhsMonthZyJxCbYs.cbhsMonthZyJxCbYs.p_zjf.sum(), QCbhsMonthZyJxCbYs.cbhsMonthZyJxCbYs.p_zpf.sum(), QCbhsMonthZyJxCbYs.cbhsMonthZyJxCbYs.p_clysf.sum(),
+						QCbhsMonthZyJxCbYs.cbhsMonthZyJxCbYs.p_jxdxf.sum(), QCbhsMonthZyJxCbYs.cbhsMonthZyJxCbYs.total.sum())
+				.from(QCbhsMonthZyJxCbYs.cbhsMonthZyJxCbYs)
+				.where(QCbhsMonthZyJxCbYs.cbhsMonthZyJxCbYs.projectOid.eq(dso.getProjectOid()).and(QCbhsMonthZyJxCbYs.cbhsMonthZyJxCbYs.monthTimeStamp.goe(dso.getDt().getStartTime()))
+						.and(QCbhsMonthZyJxCbYs.cbhsMonthZyJxCbYs.monthTimeStamp.loe(dso.getDt().getEndTime())));
 		if (dso.getDeptOids().size() > 0) {
 			jqcbhsMonthZyJxCbYsTuple.where(QCbhsMonthZyJxCbYs.cbhsMonthZyJxCbYs.deptOid.in(dso.getDeptOids()));
 		}
@@ -509,7 +606,13 @@ public class DataSummaryUtils {
 	 * @return
 	 */
 	public static CbhsDaysZyJxCb getThisMonthSubmitZyJxCbYs(MyQueryFactory queryFactory, DataSummaryObj dso) {
-		JPAQuery<Tuple> jqcbhsMonthZyJxCbYsTuple = queryFactory.select(QCbhsDaysZyJxCb.cbhsDaysZyJxCb.p_zjf.sum(), QCbhsDaysZyJxCb.cbhsDaysZyJxCb.p_zpf.sum(), QCbhsDaysZyJxCb.cbhsDaysZyJxCb.p_clysf.sum(), QCbhsDaysZyJxCb.cbhsDaysZyJxCb.p_jxdxf.sum(), QCbhsDaysZyJxCb.cbhsDaysZyJxCb.total.sum()).from(QCbhsDaysZyJxCb.cbhsDaysZyJxCb).where(QCbhsDaysZyJxCb.cbhsDaysZyJxCb.projectOid.eq(dso.getProjectOid()).and(QCbhsDaysZyJxCb.cbhsDaysZyJxCb.dateTimeStamp.goe(dso.getDt().getStartTime()).and(QCbhsDaysZyJxCb.cbhsDaysZyJxCb.dateTimeStamp.loe(dso.getDt().getEndTime()))).and(QCbhsDaysZyJxCb.cbhsDaysZyJxCb.shStatus.eq(0)));
+		JPAQuery<Tuple> jqcbhsMonthZyJxCbYsTuple = queryFactory
+				.select(QCbhsDaysZyJxCb.cbhsDaysZyJxCb.p_zjf.sum(), QCbhsDaysZyJxCb.cbhsDaysZyJxCb.p_zpf.sum(), QCbhsDaysZyJxCb.cbhsDaysZyJxCb.p_clysf.sum(),
+						QCbhsDaysZyJxCb.cbhsDaysZyJxCb.p_jxdxf.sum(), QCbhsDaysZyJxCb.cbhsDaysZyJxCb.total.sum())
+				.from(QCbhsDaysZyJxCb.cbhsDaysZyJxCb)
+				.where(QCbhsDaysZyJxCb.cbhsDaysZyJxCb.projectOid.eq(dso.getProjectOid())
+						.and(QCbhsDaysZyJxCb.cbhsDaysZyJxCb.dateTimeStamp.goe(dso.getDt().getStartTime()).and(QCbhsDaysZyJxCb.cbhsDaysZyJxCb.dateTimeStamp.loe(dso.getDt().getEndTime())))
+						.and(QCbhsDaysZyJxCb.cbhsDaysZyJxCb.shStatus.eq(0)));
 		if (dso.getDeptOids().size() > 0) {
 			jqcbhsMonthZyJxCbYsTuple.where(QCbhsDaysZyJxCb.cbhsDaysZyJxCb.deptOid.in(dso.getDeptOids()));
 		}
@@ -568,7 +671,14 @@ public class DataSummaryUtils {
 	 * @return
 	 */
 	public static Map<String, CbhsMonthZyCailiaoCbYs> getThisMonthZyCailiaoCbYs(MyQueryFactory queryFactory, DataSummaryObj dso) {
-		JPAQuery<CbhsMonthZyCailiaoCbYs> jqcbhsMonthZyCailiaoCbYsTuple = queryFactory.select(Projections.bean(CbhsMonthZyCailiaoCbYs.class, QCbhsMonthZyCailiaoCbYs.cbhsMonthZyCailiaoCbYs.globalGclYsOid.as(QCbhsMonthZyCailiaoCbYs.cbhsMonthZyCailiaoCbYs.globalGclYsOid), QCbhsMonthZyCailiaoCbYs.cbhsMonthZyCailiaoCbYs.cailiaoOid.as(QCbhsMonthZyCailiaoCbYs.cbhsMonthZyCailiaoCbYs.cailiaoOid), QCbhsMonthZyCailiaoCbYs.cbhsMonthZyCailiaoCbYs.count.sum().as(QCbhsMonthZyCailiaoCbYs.cbhsMonthZyCailiaoCbYs.count))).from(QCbhsMonthZyCailiaoCbYs.cbhsMonthZyCailiaoCbYs).where(QCbhsMonthZyCailiaoCbYs.cbhsMonthZyCailiaoCbYs.projectOid.eq(dso.getProjectOid()).and(QCbhsMonthZyCailiaoCbYs.cbhsMonthZyCailiaoCbYs.monthTimeStamp.goe(dso.getDt().getStartTime())).and(QCbhsMonthZyCailiaoCbYs.cbhsMonthZyCailiaoCbYs.monthTimeStamp.loe(dso.getDt().getEndTime())));
+		JPAQuery<CbhsMonthZyCailiaoCbYs> jqcbhsMonthZyCailiaoCbYsTuple = queryFactory
+				.select(Projections.bean(CbhsMonthZyCailiaoCbYs.class, QCbhsMonthZyCailiaoCbYs.cbhsMonthZyCailiaoCbYs.globalGclYsOid.as(QCbhsMonthZyCailiaoCbYs.cbhsMonthZyCailiaoCbYs.globalGclYsOid),
+						QCbhsMonthZyCailiaoCbYs.cbhsMonthZyCailiaoCbYs.cailiaoOid.as(QCbhsMonthZyCailiaoCbYs.cbhsMonthZyCailiaoCbYs.cailiaoOid), QCbhsMonthZyCailiaoCbYs.cbhsMonthZyCailiaoCbYs.count
+								.sum().as(QCbhsMonthZyCailiaoCbYs.cbhsMonthZyCailiaoCbYs.count)))
+				.from(QCbhsMonthZyCailiaoCbYs.cbhsMonthZyCailiaoCbYs)
+				.where(QCbhsMonthZyCailiaoCbYs.cbhsMonthZyCailiaoCbYs.projectOid.eq(dso.getProjectOid())
+						.and(QCbhsMonthZyCailiaoCbYs.cbhsMonthZyCailiaoCbYs.monthTimeStamp.goe(dso.getDt().getStartTime()))
+						.and(QCbhsMonthZyCailiaoCbYs.cbhsMonthZyCailiaoCbYs.monthTimeStamp.loe(dso.getDt().getEndTime())));
 		if (dso.getGlobalGclOids() != null && dso.getGlobalGclOids().size() > 0) {
 			jqcbhsMonthZyCailiaoCbYsTuple.where(QCbhsMonthZyCailiaoCbYs.cbhsMonthZyCailiaoCbYs.globalGclYsOid.in(dso.getGlobalGclOids()));
 		}
@@ -596,7 +706,15 @@ public class DataSummaryUtils {
 	 * @return
 	 */
 	public static Map<String, CbhsDaysZyCailiaoCb> getThisMonthSubmitZyCailiaoCb(MyQueryFactory queryFactory, DataSummaryObj dso) {
-		JPAQuery<CbhsDaysZyCailiaoCb> jqcbhsMonthZyCailiaoCbYsTuple = queryFactory.select(Projections.bean(CbhsDaysZyCailiaoCb.class, QCbhsDaysZyCailiaoCb.cbhsDaysZyCailiaoCb.globalGclYsOid.as(QCbhsDaysZyCailiaoCb.cbhsDaysZyCailiaoCb.globalGclYsOid), QCbhsDaysZyCailiaoCb.cbhsDaysZyCailiaoCb.cailiaoOid.as(QCbhsDaysZyCailiaoCb.cbhsDaysZyCailiaoCb.cailiaoOid), QCbhsDaysZyCailiaoCb.cbhsDaysZyCailiaoCb.count.sum().as(QCbhsDaysZyCailiaoCb.cbhsDaysZyCailiaoCb.count))).from(QCbhsDaysZyCailiaoCb.cbhsDaysZyCailiaoCb).where(QCbhsDaysZyCailiaoCb.cbhsDaysZyCailiaoCb.projectOid.eq(dso.getProjectOid()).and(QCbhsDaysZyCailiaoCb.cbhsDaysZyCailiaoCb.dateTimeStamp.goe(dso.getDt().getStartTime()).and(QCbhsDaysZyCailiaoCb.cbhsDaysZyCailiaoCb.dateTimeStamp.loe(dso.getDt().getEndTime()))).and(QCbhsDaysZyCailiaoCb.cbhsDaysZyCailiaoCb.shStatus.eq(0)));
+		JPAQuery<CbhsDaysZyCailiaoCb> jqcbhsMonthZyCailiaoCbYsTuple = queryFactory
+				.select(Projections.bean(CbhsDaysZyCailiaoCb.class, QCbhsDaysZyCailiaoCb.cbhsDaysZyCailiaoCb.globalGclYsOid.as(QCbhsDaysZyCailiaoCb.cbhsDaysZyCailiaoCb.globalGclYsOid),
+						QCbhsDaysZyCailiaoCb.cbhsDaysZyCailiaoCb.cailiaoOid.as(QCbhsDaysZyCailiaoCb.cbhsDaysZyCailiaoCb.cailiaoOid),
+						QCbhsDaysZyCailiaoCb.cbhsDaysZyCailiaoCb.count.sum().as(QCbhsDaysZyCailiaoCb.cbhsDaysZyCailiaoCb.count)))
+				.from(QCbhsDaysZyCailiaoCb.cbhsDaysZyCailiaoCb)
+				.where(QCbhsDaysZyCailiaoCb.cbhsDaysZyCailiaoCb.projectOid
+						.eq(dso.getProjectOid())
+						.and(QCbhsDaysZyCailiaoCb.cbhsDaysZyCailiaoCb.dateTimeStamp.goe(dso.getDt().getStartTime()).and(
+								QCbhsDaysZyCailiaoCb.cbhsDaysZyCailiaoCb.dateTimeStamp.loe(dso.getDt().getEndTime()))).and(QCbhsDaysZyCailiaoCb.cbhsDaysZyCailiaoCb.shStatus.eq(0)));
 		if (dso.getGlobalGclOids() != null && dso.getGlobalGclOids().size() > 0) {
 			jqcbhsMonthZyCailiaoCbYsTuple.where(QCbhsDaysZyCailiaoCb.cbhsDaysZyCailiaoCb.globalGclYsOid.in(dso.getGlobalGclOids()));
 		}
@@ -664,7 +782,13 @@ public class DataSummaryUtils {
 	 * @return
 	 */
 	public static Map<Integer, CbhsMonthFbLjxmCbYs> getThisMonthFbLjxmYs(MyQueryFactory queryFactory, RequestMbYsFetch request, CbhsDaysFbLjxmCb ljxm) {
-		JPAQuery<CbhsMonthFbLjxmCbYs> jqcbhsMonthGlfyYsTuple = queryFactory.select(Projections.bean(CbhsMonthFbLjxmCbYs.class, QCbhsMonthFbLjxmCbYs.cbhsMonthFbLjxmCbYs.oid, QCbhsMonthFbLjxmCbYs.cbhsMonthFbLjxmCbYs.total.sum().as(QCbhsMonthFbLjxmCbYs.cbhsMonthFbLjxmCbYs.total))).from(QCbhsMonthFbLjxmCbYs.cbhsMonthFbLjxmCbYs).where(QCbhsMonthFbLjxmCbYs.cbhsMonthFbLjxmCbYs.projectOid.eq(request.getProjectOid()).and(QCbhsMonthFbLjxmCbYs.cbhsMonthFbLjxmCbYs.monthTimeStamp.eq(request.getMonth()).and(QCbhsMonthFbLjxmCbYs.cbhsMonthFbLjxmCbYs.oid.eq(ljxm.getLjxmYsOid())))).groupBy(QCbhsMonthFbLjxmCbYs.cbhsMonthFbLjxmCbYs.oid);
+		JPAQuery<CbhsMonthFbLjxmCbYs> jqcbhsMonthGlfyYsTuple = queryFactory
+				.select(Projections.bean(CbhsMonthFbLjxmCbYs.class, QCbhsMonthFbLjxmCbYs.cbhsMonthFbLjxmCbYs.oid,
+						QCbhsMonthFbLjxmCbYs.cbhsMonthFbLjxmCbYs.total.sum().as(QCbhsMonthFbLjxmCbYs.cbhsMonthFbLjxmCbYs.total)))
+				.from(QCbhsMonthFbLjxmCbYs.cbhsMonthFbLjxmCbYs)
+				.where(QCbhsMonthFbLjxmCbYs.cbhsMonthFbLjxmCbYs.projectOid.eq(request.getProjectOid()).and(
+						QCbhsMonthFbLjxmCbYs.cbhsMonthFbLjxmCbYs.monthTimeStamp.eq(request.getMonth()).and(QCbhsMonthFbLjxmCbYs.cbhsMonthFbLjxmCbYs.oid.eq(ljxm.getLjxmYsOid()))))
+				.groupBy(QCbhsMonthFbLjxmCbYs.cbhsMonthFbLjxmCbYs.oid);
 		List<CbhsMonthFbLjxmCbYs> yss = jqcbhsMonthGlfyYsTuple.fetch();
 		Map<Integer, CbhsMonthFbLjxmCbYs> maps = Maps.uniqueIndex(yss, new Function<CbhsMonthFbLjxmCbYs, Integer>() {
 			@Override
@@ -677,30 +801,72 @@ public class DataSummaryUtils {
 	}
 
 	/**
+	 * 获取该月临建项目预算
+	 * 
+	 * @param queryFactory
+	 * @param request
+	 * @return
+	 */
+	public static CbhsMonthFbLjxmCbYs getThisFbLjxmYs(MyQueryFactory queryFactory, RequestMbYsFetch request, CbhsDaysFbLjxmCb ljxm) {
+		CbhsMonthFbLjxmCbYs cbhsMonthFbLjxmCbYs = queryFactory.selectFrom(QCbhsMonthFbLjxmCbYs.cbhsMonthFbLjxmCbYs).where(QCbhsMonthFbLjxmCbYs.cbhsMonthFbLjxmCbYs.oid.eq(ljxm.getLjxmYsOid()))
+				.fetchFirst();
+		return cbhsMonthFbLjxmCbYs;
+	}
+
+	/**
 	 * 获取该月已提交的临建项目总成本
 	 * 
 	 * @param queryFactory
 	 * @param request
 	 * @return
 	 */
-	public static Map<Integer, CbhsDaysFbLjxmCb> getThisMonthSubmitFbLjxmTotalDetails(MyQueryFactory queryFactory, RequestMbYsFetch request, CbhsDaysFbLjxmCb ljxm) {
-		DateTime dt = new DateTime(request.getMonth());
-		long startTime = dt.getMillis();
-		long endTime = dt.plusMonths(1).getMillis();
-		JPAQuery<CbhsDaysFbLjxmCb> jqcbhsMonthGlfyYsTuple = queryFactory.select(Projections.bean(CbhsDaysFbLjxmCb.class, QCbhsDaysFbLjxmCb.cbhsDaysFbLjxmCb.ljxmYsOid, QCbhsDaysFbLjxmCb.cbhsDaysFbLjxmCb.total.sum().as(QCbhsDaysFbLjxmCb.cbhsDaysFbLjxmCb.total))).from(QCbhsDaysFbLjxmCb.cbhsDaysFbLjxmCb).where(QCbhsDaysFbLjxmCb.cbhsDaysFbLjxmCb.projectOid.eq(request.getProjectOid()).and(QCbhsDaysFbLjxmCb.cbhsDaysFbLjxmCb.dateTimeStamp.goe(startTime).and(QCbhsDaysFbLjxmCb.cbhsDaysFbLjxmCb.dateTimeStamp.loe(endTime))).and(QCbhsDaysFbLjxmCb.cbhsDaysFbLjxmCb.shStatus.eq(0)));
-		List<CbhsDaysFbLjxmCb> cbs = jqcbhsMonthGlfyYsTuple.fetch();
-		Map<Integer, CbhsDaysFbLjxmCb> maps = Maps.uniqueIndex(cbs, new Function<CbhsDaysFbLjxmCb, Integer>() {
-			@Override
-			public Integer apply(CbhsDaysFbLjxmCb input) {
-				// TODO Auto-generated method stub
-				return input.getLjxmYsOid().intValue();
-			}
-		});
-		return maps;
+	public static CbhsDaysFbLjxmCb getThisFbLjxmSubmitTotalDetails(MyQueryFactory queryFactory, RequestMbYsFetch request, CbhsDaysFbLjxmCb ljxm) {
+		JPAQuery<CbhsDaysFbLjxmCb> jqcbhsMonthGlfyYsTuple = queryFactory
+				.select(Projections.bean(CbhsDaysFbLjxmCb.class, QCbhsDaysFbLjxmCb.cbhsDaysFbLjxmCb.ljxmYsOid, QCbhsDaysFbLjxmCb.cbhsDaysFbLjxmCb.ljxmYsName, QCbhsDaysFbLjxmCb.cbhsDaysFbLjxmCb.total
+						.sum().as(QCbhsDaysFbLjxmCb.cbhsDaysFbLjxmCb.total), QCbhsDaysFbLjxmCb.cbhsDaysFbLjxmCb.count.sum().as(QCbhsDaysFbLjxmCb.cbhsDaysFbLjxmCb.count)))
+				.from(QCbhsDaysFbLjxmCb.cbhsDaysFbLjxmCb).where(QCbhsDaysFbLjxmCb.cbhsDaysFbLjxmCb.ljxmYsOid.eq(ljxm.getLjxmYsOid()).and(QCbhsDaysFbLjxmCb.cbhsDaysFbLjxmCb.shStatus.eq(0)));
+		if (ljxm.getOid() > 0) { // 修改
+			jqcbhsMonthGlfyYsTuple.where(QCbhsDaysFbLjxmCb.cbhsDaysFbLjxmCb.oid.ne(ljxm.getOid()));
+		}
+		CbhsDaysFbLjxmCb cbs = jqcbhsMonthGlfyYsTuple.fetchFirst();
+		return cbs;
 	}
 
 	/**
-	 * 校验临建成本是否超标
+	 * 校验临建成本数量是否超标
+	 * 
+	 * @param queryFactory
+	 * @param request
+	 * @param ljxm
+	 * @throws IllegalAccessException
+	 * @throws IllegalArgumentException
+	 */
+	public static synchronized void checkFbLjxmCbCountIsExceed(MyQueryFactory queryFactory, RequestMbYsFetch request, CbhsDaysFbLjxmCb ljxm) throws IllegalArgumentException, IllegalAccessException {
+		CbhsMonthFbLjxmCbYs ys = getThisFbLjxmYs(queryFactory, request, ljxm);
+		CbhsDaysFbLjxmCb cb = getThisFbLjxmSubmitTotalDetails(queryFactory, request, ljxm);
+		if (ys == null) {
+			ys = new CbhsMonthFbLjxmCbYs();
+		}
+		if (cb == null) {
+			cb = new CbhsDaysFbLjxmCb();
+		}
+		CbhsDaysFbLjxmCb sub = new CbhsDaysFbLjxmCb();
+		sub.setCount(BigDecimalUtils.getSub(ys.getCount(), cb.getCount(), ljxm.getCount()));
+		if (ljxm.getCount().compareTo(BigDecimal.ZERO) > 0 && !BigDecimalUtils.goe(sub.getCount(), 0)) {
+			List<uiExceedInfo> exceedInfos = Lists.newArrayList();
+			uiExceedInfo info = new uiExceedInfo();
+			info.setName("总数量");
+			info.setValue(sub.getCount().stripTrailingZeros());
+			info.setUnit(ys.getUnit());
+			exceedInfos.add(info);
+			if (sub.getCount().compareTo(BigDecimal.ZERO) < 0) {
+				throw new ExceedException("临建项目-" + ys.getName(), exceedInfos);
+			}
+		}
+	}
+
+	/**
+	 * 校验临建成本价格是否超标
 	 * 
 	 * @param queryFactory
 	 * @param request
@@ -709,10 +875,8 @@ public class DataSummaryUtils {
 	 * @throws IllegalArgumentException
 	 */
 	public static synchronized void checkFbLjxmCbIsExceed(MyQueryFactory queryFactory, RequestMbYsFetch request, CbhsDaysFbLjxmCb ljxm) throws IllegalArgumentException, IllegalAccessException {
-		Map<Integer, CbhsMonthFbLjxmCbYs> ysMap = getThisMonthFbLjxmYs(queryFactory, request, ljxm);
-		Map<Integer, CbhsDaysFbLjxmCb> cbMap = getThisMonthSubmitFbLjxmTotalDetails(queryFactory, request, ljxm);
-		CbhsMonthFbLjxmCbYs ys = ysMap.get(ljxm.getLjxmYsOid().intValue());
-		CbhsDaysFbLjxmCb cb = cbMap.get(ljxm.getLjxmYsOid().intValue());
+		CbhsMonthFbLjxmCbYs ys = getThisFbLjxmYs(queryFactory, request, ljxm);
+		CbhsDaysFbLjxmCb cb = getThisFbLjxmSubmitTotalDetails(queryFactory, request, ljxm);
 		if (ys == null) {
 			ys = new CbhsMonthFbLjxmCbYs();
 		}
@@ -727,9 +891,9 @@ public class DataSummaryUtils {
 			info.setName("总费用");
 			info.setValue(sub.getTotal().stripTrailingZeros());
 			info.setUnit("元");
-			boolean isExceed = getExceedInfo(sub, exceedInfos);
-			if (!isExceed) {
-				throw new ExceedException("临建项目", exceedInfos);
+			exceedInfos.add(info);
+			if (sub.getTotal().compareTo(BigDecimal.ZERO) < 0) {
+				throw new ExceedException("临建项目-" + ys.getName(), exceedInfos);
 			}
 		}
 	}
@@ -743,7 +907,9 @@ public class DataSummaryUtils {
 	 * @return
 	 */
 	public static Map<Integer, CbhsGclQdYs> getGlobalGclCbYs(MyQueryFactory queryFactory, RequestMbYsFetch request, List<Integer> fbGclOids) {
-		JPAQuery<CbhsGclQdYs> jqcbhsMonthZyCailiaoCbYsTuple = queryFactory.select(Projections.bean(CbhsGclQdYs.class, QCbhsGclQdYs.cbhsGclQdYs.oid, QCbhsGclQdYs.cbhsGclQdYs.count.sum().as(QCbhsGclQdYs.cbhsGclQdYs.count), QCbhsGclQdYs.cbhsGclQdYs.totaPrice.sum().as(QCbhsGclQdYs.cbhsGclQdYs.totaPrice))).from(QCbhsGclQdYs.cbhsGclQdYs).where(QCbhsGclQdYs.cbhsGclQdYs.projectOid.eq(request.getProjectOid()));
+		JPAQuery<CbhsGclQdYs> jqcbhsMonthZyCailiaoCbYsTuple = queryFactory
+				.select(Projections.bean(CbhsGclQdYs.class, QCbhsGclQdYs.cbhsGclQdYs.oid, QCbhsGclQdYs.cbhsGclQdYs.count.sum().as(QCbhsGclQdYs.cbhsGclQdYs.count), QCbhsGclQdYs.cbhsGclQdYs.totaPrice
+						.sum().as(QCbhsGclQdYs.cbhsGclQdYs.totaPrice))).from(QCbhsGclQdYs.cbhsGclQdYs).where(QCbhsGclQdYs.cbhsGclQdYs.projectOid.eq(request.getProjectOid()));
 		if (fbGclOids != null & fbGclOids.size() > 0) {
 			jqcbhsMonthZyCailiaoCbYsTuple.where(QCbhsGclQdYs.cbhsGclQdYs.oid.in(fbGclOids));
 		}
@@ -771,7 +937,13 @@ public class DataSummaryUtils {
 		DateTime dt = new DateTime(request.getMonth());
 		long startTime = dt.getMillis();
 		long endTime = dt.plusMonths(1).getMillis();
-		JPAQuery<CbhsDaysFbGclTj> jqcbhsMonthZyCailiaoCbYsTuple = queryFactory.select(Projections.bean(CbhsDaysFbGclTj.class, QCbhsDaysFbGclTj.cbhsDaysFbGclTj.fbGclYsOid, QCbhsDaysFbGclTj.cbhsDaysFbGclTj.count.sum().as(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.count), QCbhsDaysFbGclTj.cbhsDaysFbGclTj.total.sum().as(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.total))).from(QCbhsDaysFbGclTj.cbhsDaysFbGclTj).where(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.projectOid.eq(request.getProjectOid()).and(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.dateTimeStamp.goe(startTime).and(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.dateTimeStamp.loe(endTime))).and(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.shStatus.eq(0)));
+		JPAQuery<CbhsDaysFbGclTj> jqcbhsMonthZyCailiaoCbYsTuple = queryFactory
+				.select(Projections.bean(CbhsDaysFbGclTj.class, QCbhsDaysFbGclTj.cbhsDaysFbGclTj.fbGclYsOid, QCbhsDaysFbGclTj.cbhsDaysFbGclTj.count.sum().as(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.count),
+						QCbhsDaysFbGclTj.cbhsDaysFbGclTj.total.sum().as(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.total)))
+				.from(QCbhsDaysFbGclTj.cbhsDaysFbGclTj)
+				.where(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.projectOid.eq(request.getProjectOid())
+						.and(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.dateTimeStamp.goe(startTime).and(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.dateTimeStamp.loe(endTime)))
+						.and(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.shStatus.eq(0)));
 		if (globalGclOids != null & globalGclOids.size() > 0) {
 			jqcbhsMonthZyCailiaoCbYsTuple.where(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.fbGclYsOid.in(globalGclOids));
 		}
@@ -823,7 +995,10 @@ public class DataSummaryUtils {
 	 * @return
 	 */
 	public static Map<String, BigDecimal> getThisMonthFbGclPriceCbYs(MyQueryFactory queryFactory, RequestMbYsFetch request, List<Integer> fbGclOids) {
-		JPAQuery<Tuple> jqcbhsMonthZyCailiaoCbYsTuple = queryFactory.select(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.fbCompanyOid, QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.oid, QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.total.sum()).from(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs).where(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.projectOid.eq(request.getProjectOid()).and(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.monthTimeStamp.eq(request.getMonth())));
+		JPAQuery<Tuple> jqcbhsMonthZyCailiaoCbYsTuple = queryFactory
+				.select(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.fbCompanyOid, QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.oid, QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.total.sum())
+				.from(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs)
+				.where(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.projectOid.eq(request.getProjectOid()).and(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.monthTimeStamp.eq(request.getMonth())));
 		if (fbGclOids != null & fbGclOids.size() > 0) {
 			jqcbhsMonthZyCailiaoCbYsTuple.where(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.oid.in(fbGclOids));
 		}
@@ -839,7 +1014,11 @@ public class DataSummaryUtils {
 	}
 
 	public static Map<Integer, CbhsMonthFbGcCbYs> getThisMonthFbGclCbYs(MyQueryFactory queryFactory, RequestMbYsFetch request, List<Integer> fbGclOids) {
-		JPAQuery<CbhsMonthFbGcCbYs> jqcbhsMonthZyCailiaoCbYsTuple = queryFactory.select(Projections.bean(CbhsMonthFbGcCbYs.class, QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.oid, QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.count.sum().as(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.count), QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.total.sum().as(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.total))).from(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs).where(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.projectOid.eq(request.getProjectOid()).and(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.monthTimeStamp.eq(request.getMonth())));
+		JPAQuery<CbhsMonthFbGcCbYs> jqcbhsMonthZyCailiaoCbYsTuple = queryFactory
+				.select(Projections.bean(CbhsMonthFbGcCbYs.class, QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.oid,
+						QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.count.sum().as(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.count),
+						QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.total.sum().as(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.total))).from(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs)
+				.where(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.projectOid.eq(request.getProjectOid()).and(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.monthTimeStamp.eq(request.getMonth())));
 		if (fbGclOids != null & fbGclOids.size() > 0) {
 			jqcbhsMonthZyCailiaoCbYsTuple.where(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.oid.in(fbGclOids));
 		}
@@ -867,7 +1046,12 @@ public class DataSummaryUtils {
 		DateTime dt = new DateTime(request.getMonth());
 		long startTime = dt.getMillis();
 		long endTime = dt.plusMonths(1).getMillis();
-		JPAQuery<Tuple> jqcbhsMonthZyCailiaoCbYsTuple = queryFactory.select(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.fbCompanyOid, QCbhsDaysFbGclTj.cbhsDaysFbGclTj.fbGclYsOid, QCbhsDaysFbGclTj.cbhsDaysFbGclTj.total.sum()).from(QCbhsDaysFbGclTj.cbhsDaysFbGclTj).where(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.projectOid.eq(request.getProjectOid()).and(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.dateTimeStamp.goe(startTime).and(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.dateTimeStamp.loe(endTime))).and(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.shStatus.eq(0)));
+		JPAQuery<Tuple> jqcbhsMonthZyCailiaoCbYsTuple = queryFactory
+				.select(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.fbCompanyOid, QCbhsDaysFbGclTj.cbhsDaysFbGclTj.fbGclYsOid, QCbhsDaysFbGclTj.cbhsDaysFbGclTj.total.sum())
+				.from(QCbhsDaysFbGclTj.cbhsDaysFbGclTj)
+				.where(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.projectOid.eq(request.getProjectOid())
+						.and(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.dateTimeStamp.goe(startTime).and(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.dateTimeStamp.loe(endTime)))
+						.and(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.shStatus.eq(0)));
 		if (globalGclOids != null & globalGclOids.size() > 0) {
 			jqcbhsMonthZyCailiaoCbYsTuple.where(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.fbGclYsOid.in(globalGclOids));
 		}
@@ -950,7 +1134,10 @@ public class DataSummaryUtils {
 	 * @return
 	 */
 	public static Map<String, BigDecimal> getThisMonthFbCailiaoCbYs(MyQueryFactory queryFactory, RequestMbYsFetch request, List<Integer> deptOids, List<Integer> fbGclOids) {
-		JPAQuery<Tuple> jqcbhsMonthZyCailiaoCbYsTuple = queryFactory.select(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.globalGclYsOid, QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.cailiaoOid, QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.count.sum()).from(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs).where(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.projectOid.eq(request.getProjectOid()).and(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.monthTimeStamp.eq(request.getMonth())));
+		JPAQuery<Tuple> jqcbhsMonthZyCailiaoCbYsTuple = queryFactory
+				.select(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.globalGclYsOid, QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.cailiaoOid,
+						QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.count.sum()).from(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs)
+				.where(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.projectOid.eq(request.getProjectOid()).and(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.monthTimeStamp.eq(request.getMonth())));
 		if (deptOids != null && deptOids.size() > 0) {
 			jqcbhsMonthZyCailiaoCbYsTuple.where(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.deptOid.in(deptOids));
 		}
@@ -981,7 +1168,12 @@ public class DataSummaryUtils {
 		DateTime dt = new DateTime(request.getMonth());
 		long startTime = dt.getMillis();
 		long endTime = dt.plusMonths(1).getMillis();
-		JPAQuery<Tuple> jqcbhsMonthZyCailiaoCbYsTuple = queryFactory.select(QCbhsZytj.cbhsZytj.globalGclYsOid, QCbhsZytjZC.cbhsZytjZC.clOid, QCbhsZytjZC.cbhsZytjZC.clCount.sum()).from(QCbhsZytj.cbhsZytj, QCbhsZytjZC.cbhsZytjZC).where(QCbhsZytjZC.cbhsZytjZC.zytjOid.eq(QCbhsZytj.cbhsZytj.oid)).where(QCbhsZytj.cbhsZytj.projectOid.eq(request.getProjectOid()).and(QCbhsZytj.cbhsZytj.dateTimeStamp.goe(startTime).and(QCbhsZytj.cbhsZytj.dateTimeStamp.loe(endTime))).and(QCbhsZytj.cbhsZytj.shStatus.eq(0)));
+		JPAQuery<Tuple> jqcbhsMonthZyCailiaoCbYsTuple = queryFactory
+				.select(QCbhsZytj.cbhsZytj.globalGclYsOid, QCbhsZytjZC.cbhsZytjZC.clOid, QCbhsZytjZC.cbhsZytjZC.clCount.sum())
+				.from(QCbhsZytj.cbhsZytj, QCbhsZytjZC.cbhsZytjZC)
+				.where(QCbhsZytjZC.cbhsZytjZC.zytjOid.eq(QCbhsZytj.cbhsZytj.oid))
+				.where(QCbhsZytj.cbhsZytj.projectOid.eq(request.getProjectOid()).and(QCbhsZytj.cbhsZytj.dateTimeStamp.goe(startTime).and(QCbhsZytj.cbhsZytj.dateTimeStamp.loe(endTime)))
+						.and(QCbhsZytj.cbhsZytj.shStatus.eq(0)));
 		if (deptOids != null && deptOids.size() > 0) {
 			jqcbhsMonthZyCailiaoCbYsTuple.where(QCbhsZytj.cbhsZytj.deptOid.in(deptOids));
 		}
@@ -1008,7 +1200,8 @@ public class DataSummaryUtils {
 	 * @param deptOids
 	 * @param globalGclOids
 	 */
-	public static synchronized void checkFbCailiaoCbIsExceed(MyQueryFactory queryFactory, RequestMbYsFetch request, CbhsZytj zytj, ArrayList<CbhsZytjZC> cailiaos, List<Integer> deptOids, List<Integer> globalGclOids) {
+	public static synchronized void checkFbCailiaoCbIsExceed(MyQueryFactory queryFactory, RequestMbYsFetch request, CbhsZytj zytj, ArrayList<CbhsZytjZC> cailiaos, List<Integer> deptOids,
+			List<Integer> globalGclOids) {
 		Map<String, BigDecimal> ys = getThisMonthFbCailiaoCbYs(queryFactory, request, deptOids, globalGclOids);
 		Map<String, BigDecimal> cb = getThisMonthSubmitFbCailiaoCb(queryFactory, request, deptOids, globalGclOids);
 		boolean flag = true;

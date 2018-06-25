@@ -51,9 +51,18 @@ public class CbhsDaysQtSr implements Serializable {
 	@Column(name = "dateTimeStamp",updatable = false, nullable = true, unique = false)
 	@ApiModelProperty(value = "日期 每天00:00:00的时间戳 用于后期数据统计",required=false)
 	private long  dateTimeStamp;// 日期 每天00:00:00的时间戳 用于后期数据统计
+	@Column(name = "name", length = 50, nullable = true, unique = false,columnDefinition="varchar(50) default ''")
+	@ApiModelProperty(value = "项目名称",required=false)
+	private String name= "";// 项目名称
+	@Column(name = "unit", length = 50, nullable = true, unique = false,columnDefinition="varchar(50) default ''")
+	@ApiModelProperty(value = "单位",required=false)
+	private String unit= "";// 单位
+	@Column(name = "unitPrice",precision = 19, scale = 4, columnDefinition="decimal(19,4) default 0", nullable = true, unique = false)
+	@ApiModelProperty(value = "单价",required=false)
+	private BigDecimal unitPrice= new BigDecimal(0);// 单价
 	@Column(name = "total",precision = 19, scale = 4, columnDefinition="decimal(19,4) default 0", nullable = true, unique = false)
-	@ApiModelProperty(value = "必填|总金额",required=false)
-	private BigDecimal total= new BigDecimal(0);// 必填|总金额
+	@ApiModelProperty(value = "总金额",required=false)
+	private BigDecimal total= new BigDecimal(0);// 总金额
 	@Column(name = "opUserOid",updatable = false, nullable = true, unique = false,columnDefinition="Integer default 0")
 	@ApiModelProperty(value = "操作人ID",hidden=true,required=false)
 	private Integer opUserOid= 0;// 操作人ID
@@ -163,6 +172,42 @@ public class CbhsDaysQtSr implements Serializable {
 	public void setDateTimeStamp(long dateTimeStamp) {
  
         this.dateTimeStamp = dateTimeStamp;
+
+	}
+
+	public String getName() { 
+
+    	return this.name;
+
+	}
+
+	public void setName(String name) {
+ 
+        this.name = name;
+
+	}
+
+	public String getUnit() { 
+
+    	return this.unit;
+
+	}
+
+	public void setUnit(String unit) {
+ 
+        this.unit = unit;
+
+	}
+
+	public BigDecimal getUnitPrice() { 
+
+    	return this.unitPrice;
+
+	}
+
+	public void setUnitPrice(BigDecimal unitPrice) {
+ 
+        this.unitPrice = unitPrice;
 
 	}
 
