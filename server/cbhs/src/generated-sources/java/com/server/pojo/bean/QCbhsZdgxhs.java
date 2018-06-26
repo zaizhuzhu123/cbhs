@@ -7,7 +7,6 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
-import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
@@ -43,8 +42,6 @@ public class QCbhsZdgxhs extends EntityPathBase<CbhsZdgxhs> {
     public final NumberPath<Integer> globalGclYsOid = createNumber("globalGclYsOid", Integer.class);
 
     public final NumberPath<java.math.BigDecimal> gzTotal = createNumber("gzTotal", java.math.BigDecimal.class);
-
-    public final ListPath<CbhsZdgxhsMachine, QCbhsZdgxhsMachine> machinerys = this.<CbhsZdgxhsMachine, QCbhsZdgxhsMachine>createList("machinerys", CbhsZdgxhsMachine.class, QCbhsZdgxhsMachine.class, PathInits.DIRECT2);
 
     public final StringPath monthStr = createString("monthStr");
 

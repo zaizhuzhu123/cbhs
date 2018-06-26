@@ -90,7 +90,7 @@ public class CbhsZdgxhs implements Serializable {
 	@Column(name = "fcTotal",precision = 19, scale = 4, columnDefinition="decimal(19,4) default 0", nullable = true, unique = false)
 	@ApiModelProperty(value = "必填|辅材总金额",required=false)
 	private BigDecimal fcTotal= new BigDecimal(0);// 必填|辅材总金额
-	@Column(name = "machinerys", nullable = true, unique = false)
+	@Transient
 	@ApiModelProperty(value = "机械设备",required=false)
 	private ArrayList<CbhsZdgxhsMachine>  machinerys;// 机械设备
 	@Column(name = "dateStr", length = 50,updatable = false, nullable = true, unique = false,columnDefinition="varchar(50) default ''")
