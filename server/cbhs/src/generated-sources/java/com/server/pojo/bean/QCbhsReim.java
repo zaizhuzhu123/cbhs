@@ -54,6 +54,8 @@ public class QCbhsReim extends EntityPathBase<CbhsReim> {
 
     public final NumberPath<Integer> process = createNumber("process", Integer.class);
 
+    public final StringPath projectManagerName = createString("projectManagerName");
+
     public final NumberPath<Integer> projectOid = createNumber("projectOid", Integer.class);
 
     public final NumberPath<Integer> shStatus = createNumber("shStatus", Integer.class);

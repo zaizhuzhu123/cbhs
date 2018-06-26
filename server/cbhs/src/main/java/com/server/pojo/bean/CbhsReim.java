@@ -91,6 +91,9 @@ public class CbhsReim implements Serializable {
 	@JoinColumn(name = "reimOid", foreignKey = @ForeignKey(name = "none", value = ConstraintMode.NO_CONSTRAINT) )
 	@ApiModelProperty(value = "项目",required=false)
 	private List<CbhsReimTerm> terms= new ArrayList<>();;// 项目
+	@Column(name = "projectManagerName", length = 50, nullable = true, unique = false,columnDefinition="varchar(50) default ''")
+	@ApiModelProperty(value = "项目经理名称",required=false)
+	private String projectManagerName= "";// 项目经理名称
 
 	public Integer getOid() { 
 
@@ -337,6 +340,18 @@ public class CbhsReim implements Serializable {
 	}
 	public void setTerms(List<CbhsReimTerm> terms) {
     this.terms =terms;
+	}
+
+	public String getProjectManagerName() { 
+
+    	return this.projectManagerName;
+
+	}
+
+	public void setProjectManagerName(String projectManagerName) {
+ 
+        this.projectManagerName = projectManagerName;
+
 	}
 
 

@@ -135,6 +135,7 @@ public class ExaminerManager {
 				newSteps.add(entitySteps.get(1));
 				newSteps.get(2).setShorder(3);
 				entitySteps = newSteps;
+				queryFactory.update(QCbhsReim.cbhsReim).set(QCbhsReim.cbhsReim.projectManagerName, newSteps.get(2).getShPersonName()).execute();
 			}
 			queryFactory.batchSaveOrUpdate(entitySteps);
 		} else {

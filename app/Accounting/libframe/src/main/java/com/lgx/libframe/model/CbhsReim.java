@@ -29,6 +29,7 @@ private double cwTotal;// 财务审核时服务端加入|财务同意报销金�
 private int process;// 服务端用于流程步骤的状态 0 待部门领导审批 1待财务审批 2待项目经理审批 3結束 部门领导和项目经理为审核规则中配置的人 财务为财务部的员工
 private int examOid;// 审批任务编号，用于部门经理和项目经理审批 调用接口时使用
 private List<CbhsReimTerm> terms;;// 项目
+private String  projectManagerName;// 项目经理名称
 public int  getOid(){ 
 
     return this.oid;
@@ -274,6 +275,18 @@ public List<CbhsReimTerm>  getTerms(){
 }
 public void setTerms(List<CbhsReimTerm> terms){
     this.terms=terms;
+}
+
+public String  getProjectManagerName(){ 
+
+    return this.projectManagerName;
+
+}
+
+public void setProjectManagerName(String projectManagerName){
+ 
+        this.projectManagerName=projectManagerName;
+
 }
 
 
