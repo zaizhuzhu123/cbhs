@@ -306,8 +306,7 @@ public class ZytjApisServiceImp implements ZytjApisService {
 				queryFactory.batchSaveOrUpdate(cb.getFcs());
 			}
 			if (cb.getShStatus() == 1) {
-				examinerManager.createExaminer(queryFactory, cb.getProjectOid(), SheObject.shType_zytj, cb.getOid(), cb.getDeptOid(), cb.getDeptName(), ext, exception.getInfo().getErrorMessage(),
-						exception.getInfo().getErrorMessage(), TokenUtils.getTokenInfo(httpServletRequest).getUserOid(), TokenUtils.getTokenInfo(httpServletRequest).getUserName());
+				examinerManager.createExaminer(queryFactory, cb.getProjectOid(), SheObject.shType_zytj, cb.getOid(), cb.getDeptOid(), cb.getDeptName(), ext, exception.getInfo().getErrorMessage(), exception.getInfo().getErrorMessage(), TokenUtils.getTokenInfo(httpServletRequest).getUserOid(), TokenUtils.getTokenInfo(httpServletRequest).getUserName());
 			} else {
 				CbhsCb cb_ = JSON.parseObject(JSON.toJSONString(cb), CbhsCb.class);
 				cb_.setOid(null);
@@ -362,6 +361,7 @@ public class ZytjApisServiceImp implements ZytjApisService {
 				zytj.setGzs(Lists.newArrayList());
 				zytj.setZcs(Lists.newArrayList());
 				zytj.setFcs(Lists.newArrayList());
+				zytj.setMachinerys(Lists.newArrayList());
 				zytjOids.add(zytj.getOid());
 			}
 			Map<Integer, CbhsZdgxhs> cbsMap = Maps.uniqueIndex(response.getResult(), new Function<CbhsZdgxhs, Integer>() {
