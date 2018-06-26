@@ -24,6 +24,7 @@ private String  ryStyle;// 选填|燃油规格
 private String  ryUnit;// 必填|燃油单位
 private double ryUnitPrice;// 必填|燃油单价
 private double ryPrice;// 必填|燃油金额
+private double p_total;// 必填|机械总价
 public int  getOid(){ 
 
     return this.oid;
@@ -225,6 +226,18 @@ public double  getRyPrice(){
 public void setRyPrice(double ryPrice){
  
         this.ryPrice=ryPrice;
+
+}
+
+public double  getP_total(){ 
+
+    return this.p_total;
+
+}
+
+public void setP_total(double p_total){
+ 
+        this.p_total=p_total;
 
 }
 

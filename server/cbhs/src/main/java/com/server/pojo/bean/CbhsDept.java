@@ -28,7 +28,7 @@ public class CbhsDept implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@ApiModelProperty(value = "主键",required=false)  
+	@ApiModelProperty(value = "主键",required=false)
 	private Integer oid= 0;// 主键
 	@Column(name = "name", length = 50, nullable = true, unique = false,columnDefinition="varchar(50) default ''")
 	@ApiModelProperty(value = "必填|部门名称",required=false)
