@@ -12,3 +12,4 @@
 //开启logbin 日志 用于数据恢复
 在my.ini 中增加 log-bin=../logs/log_bin 重启mysql   默认路径为data下面
 并在 mysql目录中 创建logs文件夹 该文件夹与data文件夹同级
+转换 log-bin日志命令:mysqlbinlog log_bin.000001 > log_bin.000001.txt
