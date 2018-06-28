@@ -30,6 +30,8 @@ public class JiguangPush {
 
 	public static final int type_exam = 1; // 审核推送
 	public static final int type_upgrade = 2; // 版本推送
+	public static final int type_abnormal = 3; // 收入支出异常
+	public static final int type_zytjabnormal = 4; // 资源统计异常
 
 	public PushResult jiguangPush(List<String> registrationIds, int type, String title, String alert, String message, String extKey, String extValue) {
 		return push(registrationIds, type, title, alert, message, extKey, extValue);

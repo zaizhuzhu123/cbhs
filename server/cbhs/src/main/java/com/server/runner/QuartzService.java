@@ -22,9 +22,17 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.server.handler.SystemService;
+import com.server.handler.TjbbApisService;
 import com.server.handler.imp.SystemServiceImp;
 import com.server.jpa.MyQueryFactory;
+import com.server.manager.PushManager;
 import com.server.pojo.bean.CbhsLog;
+import com.server.pojo.bean.CbhsProject;
+import com.server.pojo.bean.QCbhsProject;
+import com.server.pojo.bean.uiAbnormal;
+import com.server.pojo.url.tjbb.RequestAbnormalFetch;
+import com.server.pojo.url.tjbb.RequestZybbAbnormalFetch;
+import com.server.util.JiguangPush;
 
 @Component
 public class QuartzService {
@@ -36,6 +44,9 @@ public class QuartzService {
 	@Autowired
 	private MyQueryFactory queryFactory;
 
+	@Autowired
+	private TjbbApisService tjbbApisService;
+
 	private String mysqlPath;
 
 	@Value("${spring.datasource.username}")
@@ -43,6 +54,9 @@ public class QuartzService {
 
 	@Value("${spring.datasource.password}")
 	private String password;
+
+	@Autowired
+	private PushManager pushManager;
 
 	// 每5分钟启动
 	@Scheduled(cron = "0 0/2 * * * ?")
@@ -63,6 +77,29 @@ public class QuartzService {
 			logger.info("<-------日志定时写入任务完成");
 		}
 
+	}
+
+	// 每天下午6点 统计当天的成本收入 以及资源成本
+	@Scheduled(cron = "0 0 18 * * ?")
+	public void tjcbsr() throws Exception {
+		List<CbhsProject> projects = queryFactory.selectFrom(QCbhsProject.cbhsProject).where(QCbhsProject.cbhsProject.status.eq(true).and(QCbhsProject.cbhsProject.state.ne(2))).fetch();
+		if (projects != null && projects.size() > 0) {
+			RequestAbnormalFetch r1 = new RequestAbnormalFetch();
+			RequestZybbAbnormalFetch r2 = new RequestZybbAbnormalFetch();
+			for (int i = 0; i < projects.size(); i++) {
+				CbhsProject p = projects.get(i);
+				r1.setProjectOid(p.getOid());
+				uiAbnormal abn = tjbbApisService.abnormalFetch(r1, null);
+				if (abn.getAbnormal()) {
+					pushManager.pushAllMessage(p.getName() + "-今日成本收入结果异常", JiguangPush.type_abnormal, "今日收入:" + abn.getSrTotal() + ",今日支出:" + abn.getCbTotal(), "");
+				}
+				r2.setProjectOid(p.getOid());
+				uiAbnormal abn2 = tjbbApisService.zybbAbnormalFetch(r2, null);
+				if (abn2.getAbnormal()) {
+					pushManager.pushAllMessage(p.getName() + "-今日资源统计结果异常", JiguangPush.type_abnormal, "今日收入:" + abn2.getSrTotal() + ",今日支出:" + abn2.getCbTotal(), "");
+				}
+			}
+		}
 	}
 
 	// 每12小时备份一次数据库

@@ -383,6 +383,10 @@ public class HttpConstants {
 
     public static Integer TJBB_grandTotal=100104;
 
+    public static Integer TJBB_abnormalFetch=100105;
+
+    public static Integer TJBB_zybbAbnormalFetch=100106;
+
     public static Integer ZYTJ_zytjFetch=80101;
 
     public static Integer ZYTJ_zytjUpdate=80102;
@@ -3055,106 +3059,106 @@ public class HttpConstants {
     codeOpMap.put(urlInfo188.getMsgCode(),urlInfo188);
 
     SimpleWebCommandOperationInfo urlInfo189= new SimpleWebCommandOperationInfo();
-    urlInfo189.setMsgCode(80101);
-    urlInfo189.setUrl("/cbhs/zytj/zytjFetch");
+    urlInfo189.setMsgCode(100105);
+    urlInfo189.setUrl("/cbhs/tjbb/abnormalFetch");
     urlInfo189.setOpCode("0");
     urlInfo189.setWorkClass("");
-    urlInfo189.setMsgReaquest("com.server.pojo.url.zytj.RequestZytjFetch");
-    urlInfo189.setReaquestDepict("主键,部门ID,工程项目ID,总工程量ID,分包公司ID,开始日期,结束日期,页码,数量,开始ID");
-    urlInfo189.setMsgResponse("com.server.pojo.url.zytj.ResponseZytjFetch");
-    urlInfo189.setResponseDepict("资源统计集合,总条数");
+    urlInfo189.setMsgReaquest("com.server.pojo.url.tjbb.RequestAbnormalFetch");
+    urlInfo189.setReaquestDepict("工程项目ID");
+    urlInfo189.setMsgResponse("com.server.pojo.bean.uiAbnormal");
+    urlInfo189.setResponseDepict("收支异常信息");
     urlInfo189.setTransation(true);
-    urlInfo189.setRestClass("zytjFetch");
+    urlInfo189.setRestClass("abnormalFetch");
     webCommands.put(urlInfo189.getUrl(),urlInfo189);
     codeOpMap.put(urlInfo189.getMsgCode(),urlInfo189);
 
     SimpleWebCommandOperationInfo urlInfo190= new SimpleWebCommandOperationInfo();
-    urlInfo190.setMsgCode(80102);
-    urlInfo190.setUrl("/cbhs/zytj/zytjUpdate");
+    urlInfo190.setMsgCode(100106);
+    urlInfo190.setUrl("/cbhs/tjbb/zybbAbnormalFetch");
     urlInfo190.setOpCode("0");
     urlInfo190.setWorkClass("");
-    urlInfo190.setMsgReaquest("com.server.pojo.bean.CbhsZytj");
-    urlInfo190.setReaquestDepict("资源统计");
-    urlInfo190.setMsgResponse("com.server.pojo.bean.CbhsZytj");
-    urlInfo190.setResponseDepict("资源统计");
+    urlInfo190.setMsgReaquest("com.server.pojo.url.tjbb.RequestZybbAbnormalFetch");
+    urlInfo190.setReaquestDepict("工程项目ID,分包商ID");
+    urlInfo190.setMsgResponse("com.server.pojo.bean.uiAbnormal");
+    urlInfo190.setResponseDepict("收支异常信息");
     urlInfo190.setTransation(true);
-    urlInfo190.setRestClass("zytjUpdate");
+    urlInfo190.setRestClass("zybbAbnormalFetch");
     webCommands.put(urlInfo190.getUrl(),urlInfo190);
     codeOpMap.put(urlInfo190.getMsgCode(),urlInfo190);
 
     SimpleWebCommandOperationInfo urlInfo191= new SimpleWebCommandOperationInfo();
-    urlInfo191.setMsgCode(80103);
-    urlInfo191.setUrl("/cbhs/zytj/zytjDel");
+    urlInfo191.setMsgCode(80101);
+    urlInfo191.setUrl("/cbhs/zytj/zytjFetch");
     urlInfo191.setOpCode("0");
     urlInfo191.setWorkClass("");
-    urlInfo191.setMsgReaquest("com.server.pojo.url.zytj.RequestZytjDel");
-    urlInfo191.setReaquestDepict("资源统计主键集合");
-    urlInfo191.setMsgResponse("com.alibaba.fastjson.JSONObject");
-    urlInfo191.setResponseDepict("响应状态码");
-    urlInfo191.setTransation(false);
-    urlInfo191.setRestClass("zytjDel");
+    urlInfo191.setMsgReaquest("com.server.pojo.url.zytj.RequestZytjFetch");
+    urlInfo191.setReaquestDepict("主键,部门ID,工程项目ID,总工程量ID,分包公司ID,开始日期,结束日期,页码,数量,开始ID");
+    urlInfo191.setMsgResponse("com.server.pojo.url.zytj.ResponseZytjFetch");
+    urlInfo191.setResponseDepict("资源统计集合,总条数");
+    urlInfo191.setTransation(true);
+    urlInfo191.setRestClass("zytjFetch");
     webCommands.put(urlInfo191.getUrl(),urlInfo191);
     codeOpMap.put(urlInfo191.getMsgCode(),urlInfo191);
 
     SimpleWebCommandOperationInfo urlInfo192= new SimpleWebCommandOperationInfo();
-    urlInfo192.setMsgCode(80104);
-    urlInfo192.setUrl("/cbhs/zytj/zytjAdd");
+    urlInfo192.setMsgCode(80102);
+    urlInfo192.setUrl("/cbhs/zytj/zytjUpdate");
     urlInfo192.setOpCode("0");
     urlInfo192.setWorkClass("");
-    urlInfo192.setMsgReaquest("com.server.pojo.url.zytj.RequestZytjAdd");
-    urlInfo192.setReaquestDepict("资源统计,提交方式(0默认提交 1审核提交)");
+    urlInfo192.setMsgReaquest("com.server.pojo.bean.CbhsZytj");
+    urlInfo192.setReaquestDepict("资源统计");
     urlInfo192.setMsgResponse("com.server.pojo.bean.CbhsZytj");
     urlInfo192.setResponseDepict("资源统计");
     urlInfo192.setTransation(true);
-    urlInfo192.setRestClass("zytjAdd");
+    urlInfo192.setRestClass("zytjUpdate");
     webCommands.put(urlInfo192.getUrl(),urlInfo192);
     codeOpMap.put(urlInfo192.getMsgCode(),urlInfo192);
 
     SimpleWebCommandOperationInfo urlInfo193= new SimpleWebCommandOperationInfo();
-    urlInfo193.setMsgCode(80201);
-    urlInfo193.setUrl("/cbhs/zytj/zdgxhsFetch");
+    urlInfo193.setMsgCode(80103);
+    urlInfo193.setUrl("/cbhs/zytj/zytjDel");
     urlInfo193.setOpCode("0");
     urlInfo193.setWorkClass("");
-    urlInfo193.setMsgReaquest("com.server.pojo.url.zytj.RequestZdgxhsFetch");
-    urlInfo193.setReaquestDepict("主键,部门ID,工程项目ID,分包工程量ID,分包公司ID,开始日期,结束日期,页码,数量,开始ID");
-    urlInfo193.setMsgResponse("com.server.pojo.url.zytj.ResponseZdgxhsFetch");
-    urlInfo193.setResponseDepict("重点工序核算集合,总条数");
-    urlInfo193.setTransation(true);
-    urlInfo193.setRestClass("zdgxhsFetch");
+    urlInfo193.setMsgReaquest("com.server.pojo.url.zytj.RequestZytjDel");
+    urlInfo193.setReaquestDepict("资源统计主键集合");
+    urlInfo193.setMsgResponse("com.alibaba.fastjson.JSONObject");
+    urlInfo193.setResponseDepict("响应状态码");
+    urlInfo193.setTransation(false);
+    urlInfo193.setRestClass("zytjDel");
     webCommands.put(urlInfo193.getUrl(),urlInfo193);
     codeOpMap.put(urlInfo193.getMsgCode(),urlInfo193);
 
     SimpleWebCommandOperationInfo urlInfo194= new SimpleWebCommandOperationInfo();
-    urlInfo194.setMsgCode(80202);
-    urlInfo194.setUrl("/cbhs/zytj/zdgxhsUpdate");
+    urlInfo194.setMsgCode(80104);
+    urlInfo194.setUrl("/cbhs/zytj/zytjAdd");
     urlInfo194.setOpCode("0");
     urlInfo194.setWorkClass("");
-    urlInfo194.setMsgReaquest("com.server.pojo.bean.CbhsZdgxhs");
-    urlInfo194.setReaquestDepict("重点工序核算");
-    urlInfo194.setMsgResponse("com.server.pojo.bean.CbhsZdgxhs");
-    urlInfo194.setResponseDepict("重点工序核算");
+    urlInfo194.setMsgReaquest("com.server.pojo.url.zytj.RequestZytjAdd");
+    urlInfo194.setReaquestDepict("资源统计,提交方式(0默认提交 1审核提交)");
+    urlInfo194.setMsgResponse("com.server.pojo.bean.CbhsZytj");
+    urlInfo194.setResponseDepict("资源统计");
     urlInfo194.setTransation(true);
-    urlInfo194.setRestClass("zdgxhsUpdate");
+    urlInfo194.setRestClass("zytjAdd");
     webCommands.put(urlInfo194.getUrl(),urlInfo194);
     codeOpMap.put(urlInfo194.getMsgCode(),urlInfo194);
 
     SimpleWebCommandOperationInfo urlInfo195= new SimpleWebCommandOperationInfo();
-    urlInfo195.setMsgCode(80203);
-    urlInfo195.setUrl("/cbhs/zytj/zdgxhsDel");
+    urlInfo195.setMsgCode(80201);
+    urlInfo195.setUrl("/cbhs/zytj/zdgxhsFetch");
     urlInfo195.setOpCode("0");
     urlInfo195.setWorkClass("");
-    urlInfo195.setMsgReaquest("com.server.pojo.url.zytj.RequestZdgxhsDel");
-    urlInfo195.setReaquestDepict("重点工序核算主键集合");
-    urlInfo195.setMsgResponse("com.alibaba.fastjson.JSONObject");
-    urlInfo195.setResponseDepict("响应状态码");
-    urlInfo195.setTransation(false);
-    urlInfo195.setRestClass("zdgxhsDel");
+    urlInfo195.setMsgReaquest("com.server.pojo.url.zytj.RequestZdgxhsFetch");
+    urlInfo195.setReaquestDepict("主键,部门ID,工程项目ID,分包工程量ID,分包公司ID,开始日期,结束日期,页码,数量,开始ID");
+    urlInfo195.setMsgResponse("com.server.pojo.url.zytj.ResponseZdgxhsFetch");
+    urlInfo195.setResponseDepict("重点工序核算集合,总条数");
+    urlInfo195.setTransation(true);
+    urlInfo195.setRestClass("zdgxhsFetch");
     webCommands.put(urlInfo195.getUrl(),urlInfo195);
     codeOpMap.put(urlInfo195.getMsgCode(),urlInfo195);
 
     SimpleWebCommandOperationInfo urlInfo196= new SimpleWebCommandOperationInfo();
-    urlInfo196.setMsgCode(80204);
-    urlInfo196.setUrl("/cbhs/zytj/zdgxhsAdd");
+    urlInfo196.setMsgCode(80202);
+    urlInfo196.setUrl("/cbhs/zytj/zdgxhsUpdate");
     urlInfo196.setOpCode("0");
     urlInfo196.setWorkClass("");
     urlInfo196.setMsgReaquest("com.server.pojo.bean.CbhsZdgxhs");
@@ -3162,9 +3166,37 @@ public class HttpConstants {
     urlInfo196.setMsgResponse("com.server.pojo.bean.CbhsZdgxhs");
     urlInfo196.setResponseDepict("重点工序核算");
     urlInfo196.setTransation(true);
-    urlInfo196.setRestClass("zdgxhsAdd");
+    urlInfo196.setRestClass("zdgxhsUpdate");
     webCommands.put(urlInfo196.getUrl(),urlInfo196);
     codeOpMap.put(urlInfo196.getMsgCode(),urlInfo196);
+
+    SimpleWebCommandOperationInfo urlInfo197= new SimpleWebCommandOperationInfo();
+    urlInfo197.setMsgCode(80203);
+    urlInfo197.setUrl("/cbhs/zytj/zdgxhsDel");
+    urlInfo197.setOpCode("0");
+    urlInfo197.setWorkClass("");
+    urlInfo197.setMsgReaquest("com.server.pojo.url.zytj.RequestZdgxhsDel");
+    urlInfo197.setReaquestDepict("重点工序核算主键集合");
+    urlInfo197.setMsgResponse("com.alibaba.fastjson.JSONObject");
+    urlInfo197.setResponseDepict("响应状态码");
+    urlInfo197.setTransation(false);
+    urlInfo197.setRestClass("zdgxhsDel");
+    webCommands.put(urlInfo197.getUrl(),urlInfo197);
+    codeOpMap.put(urlInfo197.getMsgCode(),urlInfo197);
+
+    SimpleWebCommandOperationInfo urlInfo198= new SimpleWebCommandOperationInfo();
+    urlInfo198.setMsgCode(80204);
+    urlInfo198.setUrl("/cbhs/zytj/zdgxhsAdd");
+    urlInfo198.setOpCode("0");
+    urlInfo198.setWorkClass("");
+    urlInfo198.setMsgReaquest("com.server.pojo.bean.CbhsZdgxhs");
+    urlInfo198.setReaquestDepict("重点工序核算");
+    urlInfo198.setMsgResponse("com.server.pojo.bean.CbhsZdgxhs");
+    urlInfo198.setResponseDepict("重点工序核算");
+    urlInfo198.setTransation(true);
+    urlInfo198.setRestClass("zdgxhsAdd");
+    webCommands.put(urlInfo198.getUrl(),urlInfo198);
+    codeOpMap.put(urlInfo198.getMsgCode(),urlInfo198);
 
    }
 }

@@ -1,0 +1,4 @@
+2018-06-26 00:02:42,396 INFO (StartupInfoLogger.java:48)- Starting ServletInitializer on qmf-PC with PID 7080 (C:\Users\qmf\git\cbhs\server\cbhs\target\classes started by qmf in C:\Users\qmf\git\cbhs\server\cbhs)
+2018-06-26 00:02:42,410 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.5.RELEASE, Spring v4.3.10.RELEASE
+2018-06-26 00:02:42,411 INFO (SpringApplication.java:597)- The following profiles are active: prod,test
+2018-06-26 00:02:56,455 INFO (StartupInfoLogger.java:57)- Started ServletInitializer in 14.455 seconds (JVM running for 14.828)

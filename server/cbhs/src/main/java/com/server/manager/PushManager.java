@@ -54,4 +54,14 @@ public class PushManager {
 			}
 		});
 	}
+
+	public void pushAllMessage(String title, int type, String alert, String ext) {
+		JiguangPush jp = new JiguangPush();
+		executor.submit(new Runnable() {
+			@Override
+			public void run() {
+				jp.jiguangPush(null, type, title, alert, alert, "", "");
+			}
+		});
+	}
 }

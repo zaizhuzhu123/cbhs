@@ -16,6 +16,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
+import com.querydsl.core.types.Projections;
 import com.server.common.BeanValidation;
 import com.server.common.CbhsResUtils;
 import com.server.common.DateObj;
@@ -27,14 +28,18 @@ import com.server.jpa.MyJPAQuery;
 import com.server.jpa.MyJPAQuery.PagerResult;
 import com.server.jpa.MyQueryFactory;
 import com.server.manager.CbSrManager;
+import com.server.pojo.bean.CbhsCb;
 import com.server.pojo.bean.CbhsDaysFbLjxmCb;
 import com.server.pojo.bean.CbhsDaysGclSr;
 import com.server.pojo.bean.CbhsDaysQtSr;
 import com.server.pojo.bean.CbhsGclQdYs;
 import com.server.pojo.bean.CbhsSr;
+import com.server.pojo.bean.QCbhsCb;
 import com.server.pojo.bean.QCbhsDaysGclSr;
 import com.server.pojo.bean.QCbhsDaysQtSr;
 import com.server.pojo.bean.QCbhsGclQdYs;
+import com.server.pojo.bean.uiAbnormal;
+import com.server.pojo.url.daysSr.RequestAbnormalFetch;
 import com.server.pojo.url.daysSr.RequestGcsrAdd;
 import com.server.pojo.url.daysSr.RequestGcsrDel;
 import com.server.pojo.url.daysSr.RequestGcsrFetch;
@@ -109,9 +114,7 @@ public class DaysSrApisServiceImp implements DaysSrApisService {
 					bv.vali(BeanValidation.beanType.project, BeanValidation.valiType.all, ys.getProjectOid());
 					bv.vali(BeanValidation.beanType.dept, BeanValidation.valiType.all, ys.getDeptOid());
 					Preconditions.checkArgument(ys.getGlobalGclYsOid() > 0, "工程量ID不能为空!");
-					Preconditions.checkArgument(
-							queryFactory.exists(QCbhsGclQdYs.cbhsGclQdYs, QCbhsGclQdYs.cbhsGclQdYs.oid.eq(ys.getGlobalGclYsOid()).and(QCbhsGclQdYs.cbhsGclQdYs.projectOid.eq(ys.getProjectOid()))),
-							"工程量项目不存在!");
+					Preconditions.checkArgument(queryFactory.exists(QCbhsGclQdYs.cbhsGclQdYs, QCbhsGclQdYs.cbhsGclQdYs.oid.eq(ys.getGlobalGclYsOid()).and(QCbhsGclQdYs.cbhsGclQdYs.projectOid.eq(ys.getProjectOid()))), "工程量项目不存在!");
 					long time = ys.getDateTimeStamp() > 0 ? ys.getDateTimeStamp() : System.currentTimeMillis();
 					DateTime dt = new DateTime(time);
 					DateTime curDt = new DateTime(System.currentTimeMillis());
@@ -129,8 +132,7 @@ public class DaysSrApisServiceImp implements DaysSrApisService {
 					if (cbhsGclQdYs.getCompleteCount().add(ys.getCount()).compareTo(cbhsGclQdYs.getCount()) > 0) {
 						throw new ServiceException(new ExceptionResponse(-1, ys.getGlobalGclYsName() + "结算量已合计超过总工程清单总数量" + ys.getCount().stripTrailingZeros()));
 					}
-					queryFactory.update(QCbhsGclQdYs.cbhsGclQdYs).set(QCbhsGclQdYs.cbhsGclQdYs.completeCount, QCbhsGclQdYs.cbhsGclQdYs.completeCount.add(ys.getTotal()))
-							.where(QCbhsGclQdYs.cbhsGclQdYs.oid.eq(ys.getGlobalGclYsOid())).execute();
+					queryFactory.update(QCbhsGclQdYs.cbhsGclQdYs).set(QCbhsGclQdYs.cbhsGclQdYs.completeCount, QCbhsGclQdYs.cbhsGclQdYs.completeCount.add(ys.getTotal())).where(QCbhsGclQdYs.cbhsGclQdYs.oid.eq(ys.getGlobalGclYsOid())).execute();
 					CbhsSr sr = JSON.parseObject(JSON.toJSONString(ys), CbhsSr.class);
 					sr.setCbOid(ys.getOid());
 					sr.setType(1);
