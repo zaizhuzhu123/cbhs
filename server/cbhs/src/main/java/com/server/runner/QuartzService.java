@@ -58,6 +58,8 @@ public class QuartzService {
 	@Autowired
 	private PushManager pushManager;
 
+	private int port = 3370;
+
 	// 每5分钟启动
 	@Scheduled(cron = "0 0/2 * * * ?")
 	public void timerToNow() {
@@ -104,7 +106,7 @@ public class QuartzService {
 
 	// 每12小时备份一次数据库
 	// @Scheduled(cron = "0 0 0/6 * * ?")
-	@Scheduled(cron = "0 0 0/12 * * ?")
+	@Scheduled(cron = "0 0 0/6 * * ?")
 	public void backDatabase() throws IOException, InterruptedException, SQLException {
 		synchronized (this) {
 			if (mysqlPath == null) {
@@ -128,7 +130,7 @@ public class QuartzService {
 		BufferedReader bufferedReader = null;
 		try {
 			printWriter = new PrintWriter(new OutputStreamWriter(new FileOutputStream(file), "utf8"));
-			Process process = Runtime.getRuntime().exec(mysqlPath + "mysqldump -u" + userName + " -p" + password + " --set-charset=UTF8 cbhs");
+			Process process = Runtime.getRuntime().exec(mysqlPath + "mysqldump -P " + port + " -u" + userName + " -p" + password + " --set-charset=UTF8 cbhs");
 			InputStreamReader inputStreamReader = new InputStreamReader(process.getInputStream(), "utf8");
 			bufferedReader = new BufferedReader(inputStreamReader);
 			String line;
@@ -139,7 +141,7 @@ public class QuartzService {
 			if (process.waitFor() == 0) {// 0 表示线程正常终止。
 				logger.info("数据库备份成功," + file.getCanonicalPath());
 			}
-			process = Runtime.getRuntime().exec(mysqlPath + "mysqladmin -u" + userName + " -p" + password + " flush-logs");
+			process = Runtime.getRuntime().exec(mysqlPath + "mysqladmin -P " + port + " -u" + userName + " -p" + password + " flush-logs");
 			inputStreamReader = new InputStreamReader(process.getInputStream(), "utf8");
 			bufferedReader = new BufferedReader(inputStreamReader);
 			while ((line = bufferedReader.readLine()) != null) {
