@@ -71,6 +71,14 @@ import com.server.pojo.url.base.RequestHtDel;
 import com.alibaba.fastjson.JSONObject;
 import com.server.pojo.url.base.RequestHtFetch;
 import com.server.pojo.url.base.ResponseHtFetch;
+import com.server.pojo.bean.CbhsContacts;
+import com.server.pojo.bean.CbhsContacts;
+import com.server.pojo.bean.CbhsContacts;
+import com.server.pojo.bean.CbhsContacts;
+import com.server.pojo.url.base.RequestContactsDel;
+import com.alibaba.fastjson.JSONObject;
+import com.server.pojo.url.base.RequestContactsFetch;
+import com.server.pojo.url.base.ResponseContactsFetch;
 
 public interface BaseApisService {
 
@@ -143,5 +151,15 @@ public interface BaseApisService {
 	public JSONObject htDel(RequestHtDel request, HttpServletRequest httpServletRequest) throws Exception;
 
 	public ResponseHtFetch htFetch(RequestHtFetch request, HttpServletRequest httpServletRequest) throws Exception;
+
+	public CbhsContacts contactsAdd(CbhsContacts request, HttpServletRequest httpServletRequest) throws Exception;
+
+	public CbhsContacts contactsUpdate(CbhsContacts request, HttpServletRequest httpServletRequest) throws Exception;
+
+	public JSONObject contactsDel(RequestContactsDel request, HttpServletRequest httpServletRequest) throws Exception;
+
+	public ResponseContactsFetch contactsFetch(RequestContactsFetch request, HttpServletRequest httpServletRequest) throws Exception;
+
+	public JSONObject contactsImport(MultipartFile request,Integer projectOid, HttpServletRequest httpServletRequest) throws Exception;
 
 }

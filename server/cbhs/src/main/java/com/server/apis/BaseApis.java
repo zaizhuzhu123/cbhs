@@ -54,6 +54,10 @@ import com.server.pojo.bean.CbhsHt;
 import com.server.pojo.url.base.RequestHtDel;
 import com.server.pojo.url.base.RequestHtFetch;
 import com.server.pojo.url.base.ResponseHtFetch;
+import com.server.pojo.bean.CbhsContacts;
+import com.server.pojo.url.base.RequestContactsDel;
+import com.server.pojo.url.base.RequestContactsFetch;
+import com.server.pojo.url.base.ResponseContactsFetch;
 
 @Api(tags = { "基础信息接口" }, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @RestController
@@ -514,6 +518,71 @@ public class BaseApis {
 	@ResponseBody
 	public ResponseHtFetch htFetch(@Validated @RequestBody RequestHtFetch request, HttpServletRequest httpServletRequest) throws Exception{
 		return baseApisService.htFetch(request, httpServletRequest);
+	}
+
+
+	@RequestMapping(value = "/base/contactsAdd", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseStatus(code = HttpStatus.OK)
+	@ApiImplicitParams({
+		@ApiImplicitParam(name = "token", value = "鉴权信息", required = true, dataType = "String", paramType = "header"),
+	})
+	@ApiOperation(value = "通讯录-创建联系人", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ApiResponse(code = 200, message = "操作成功后返回的视图")
+	@ResponseBody
+	public CbhsContacts contactsAdd(@Validated @RequestBody CbhsContacts request, HttpServletRequest httpServletRequest) throws Exception{
+		return baseApisService.contactsAdd(request, httpServletRequest);
+	}
+
+
+	@RequestMapping(value = "/base/contactsUpdate", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseStatus(code = HttpStatus.OK)
+	@ApiImplicitParams({
+		@ApiImplicitParam(name = "token", value = "鉴权信息", required = true, dataType = "String", paramType = "header"),
+	})
+	@ApiOperation(value = "通讯录-修改联系人", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ApiResponse(code = 200, message = "操作成功后返回的视图")
+	@ResponseBody
+	public CbhsContacts contactsUpdate(@Validated @RequestBody CbhsContacts request, HttpServletRequest httpServletRequest) throws Exception{
+		return baseApisService.contactsUpdate(request, httpServletRequest);
+	}
+
+
+	@RequestMapping(value = "/base/contactsDel", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseStatus(code = HttpStatus.OK)
+	@ApiImplicitParams({
+		@ApiImplicitParam(name = "token", value = "鉴权信息", required = true, dataType = "String", paramType = "header"),
+	})
+	@ApiOperation(value = "通讯录-删除联系人", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ApiResponse(code = 200, message = "操作成功后返回的视图")
+	@ResponseBody
+	public JSONObject contactsDel(@Validated @RequestBody RequestContactsDel request, HttpServletRequest httpServletRequest) throws Exception{
+		return baseApisService.contactsDel(request, httpServletRequest);
+	}
+
+
+	@RequestMapping(value = "/base/contactsFetch", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseStatus(code = HttpStatus.OK)
+	@ApiImplicitParams({
+		@ApiImplicitParam(name = "token", value = "鉴权信息", required = true, dataType = "String", paramType = "header"),
+	})
+	@ApiOperation(value = "通讯录-查询联系人", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ApiResponse(code = 200, message = "操作成功后返回的视图")
+	@ResponseBody
+	public ResponseContactsFetch contactsFetch(@Validated @RequestBody RequestContactsFetch request, HttpServletRequest httpServletRequest) throws Exception{
+		return baseApisService.contactsFetch(request, httpServletRequest);
+	}
+
+
+	@RequestMapping(value = "/base/contactsImport", method = RequestMethod.POST, consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseStatus(code = HttpStatus.OK)
+	@ApiImplicitParams({
+		@ApiImplicitParam(name = "token", value = "鉴权信息", required = true, dataType = "String", paramType = "header"),
+	})
+	@ApiOperation(value = "通讯录-导入联系人", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ApiResponse(code = 200, message = "操作成功后返回的视图")
+	@ResponseBody
+	public JSONObject contactsImport(@RequestParam(name = "file", required = true) MultipartFile request,Integer projectOid, HttpServletRequest httpServletRequest) throws Exception{
+		return baseApisService.contactsImport(request,projectOid, httpServletRequest);
 	}
 
 

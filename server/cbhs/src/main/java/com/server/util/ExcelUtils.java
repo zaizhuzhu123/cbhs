@@ -8,7 +8,7 @@ public class ExcelUtils {
 	@SuppressWarnings("unused")
 	public static String getCellValue(Cell cell) {
 		if (cell == null) {
-			return null;
+			return "";
 		}
 		int cellType = cell.getCellType();
 		String value = null;

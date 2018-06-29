@@ -35,6 +35,7 @@ import com.server.jpa.MyJPAQuery.PagerResult;
 import com.server.jpa.MyQueryFactory;
 import com.server.pojo.bean.CbhsCailiao;
 import com.server.pojo.bean.CbhsCailiaoKemu;
+import com.server.pojo.bean.CbhsContacts;
 import com.server.pojo.bean.CbhsFbCompany;
 import com.server.pojo.bean.CbhsGlfyRule;
 import com.server.pojo.bean.CbhsGz;
@@ -44,6 +45,7 @@ import com.server.pojo.bean.CbhsMachineryType;
 import com.server.pojo.bean.CbhsProject;
 import com.server.pojo.bean.QCbhsCailiao;
 import com.server.pojo.bean.QCbhsCailiaoKemu;
+import com.server.pojo.bean.QCbhsContacts;
 import com.server.pojo.bean.QCbhsFbCompany;
 import com.server.pojo.bean.QCbhsGlfyRule;
 import com.server.pojo.bean.QCbhsGz;
@@ -56,6 +58,8 @@ import com.server.pojo.url.base.RequestCailiaoFetch;
 import com.server.pojo.url.base.RequestCailiaoKemuDel;
 import com.server.pojo.url.base.RequestCailiaoKemuFetch;
 import com.server.pojo.url.base.RequestCbhsGlfyRuleFetch;
+import com.server.pojo.url.base.RequestContactsDel;
+import com.server.pojo.url.base.RequestContactsFetch;
 import com.server.pojo.url.base.RequestFbCompanyDel;
 import com.server.pojo.url.base.RequestFbCompanyFetch;
 import com.server.pojo.url.base.RequestGzDel;
@@ -69,6 +73,7 @@ import com.server.pojo.url.base.RequestMachineryTypeFetch;
 import com.server.pojo.url.base.RequestProjectFetch;
 import com.server.pojo.url.base.ResponseCailiaoFetch;
 import com.server.pojo.url.base.ResponseCailiaoKemuFetch;
+import com.server.pojo.url.base.ResponseContactsFetch;
 import com.server.pojo.url.base.ResponseFbCompanyFetch;
 import com.server.pojo.url.base.ResponseGzFetch;
 import com.server.pojo.url.base.ResponseHtFetch;
@@ -101,8 +106,7 @@ public class BaseApisServiceImp implements BaseApisService {
 	public CbhsProject projectUpdate(CbhsProject project, HttpServletRequest httpServletRequest) throws Exception {
 		Preconditions.checkArgument(project.getOid() > 0, "工程项目ID不能为空!");
 		Preconditions.checkArgument(StringUtils.isNotBlank(project.getName()), "工程项目名称不能为空!");
-		Preconditions.checkArgument(!queryFactory.exists(QCbhsProject.cbhsProject, QCbhsProject.cbhsProject.name.eq(project.getName().trim()).and(QCbhsProject.cbhsProject.oid.ne(project.getOid()))),
-				"工程项目名称已存在!");
+		Preconditions.checkArgument(!queryFactory.exists(QCbhsProject.cbhsProject, QCbhsProject.cbhsProject.name.eq(project.getName().trim()).and(QCbhsProject.cbhsProject.oid.ne(project.getOid()))), "工程项目名称已存在!");
 		project = queryFactory.saveOrUpdate(project);
 		return project;
 	}
@@ -133,13 +137,9 @@ public class BaseApisServiceImp implements BaseApisService {
 		Preconditions.checkArgument(StringUtils.isNotBlank(cailiao.getName()), "材料名称不能为空!");
 		BeanValidation bv = new BeanValidation(queryFactory);
 		bv.vali(BeanValidation.beanType.cailiaoKemu, BeanValidation.valiType.all, cailiao.getKemuOid());
-		String kemuName = queryFactory.select(QCbhsCailiaoKemu.cbhsCailiaoKemu.name).from(QCbhsCailiaoKemu.cbhsCailiaoKemu).where(QCbhsCailiaoKemu.cbhsCailiaoKemu.oid.eq(cailiao.getKemuOid()))
-				.fetchOne();
+		String kemuName = queryFactory.select(QCbhsCailiaoKemu.cbhsCailiaoKemu.name).from(QCbhsCailiaoKemu.cbhsCailiaoKemu).where(QCbhsCailiaoKemu.cbhsCailiaoKemu.oid.eq(cailiao.getKemuOid())).fetchOne();
 		cailiao.setKemuName(kemuName);
-		Preconditions.checkArgument(
-				!queryFactory.exists(QCbhsCailiao.cbhsCailiao,
-						QCbhsCailiao.cbhsCailiao.name.eq(cailiao.getName().trim()).and(QCbhsCailiao.cbhsCailiao.style.eq(cailiao.getStyle()).and(QCbhsCailiao.cbhsCailiao.status.eq(true)))),
-				"材料及规格已存在!");
+		Preconditions.checkArgument(!queryFactory.exists(QCbhsCailiao.cbhsCailiao, QCbhsCailiao.cbhsCailiao.name.eq(cailiao.getName().trim()).and(QCbhsCailiao.cbhsCailiao.style.eq(cailiao.getStyle()).and(QCbhsCailiao.cbhsCailiao.status.eq(true)))), "材料及规格已存在!");
 		cailiao = queryFactory.saveOrUpdate(cailiao);
 		return cailiao;
 	}
@@ -151,10 +151,7 @@ public class BaseApisServiceImp implements BaseApisService {
 		Preconditions.checkArgument(StringUtils.isNotBlank(cailiao.getName()), "材料名称不能为空!");
 		BeanValidation bv = new BeanValidation(queryFactory);
 		bv.vali(BeanValidation.beanType.cailiaoKemu, BeanValidation.valiType.all, cailiao.getKemuOid());
-		Preconditions.checkArgument(
-				!queryFactory.exists(QCbhsCailiao.cbhsCailiao,
-						QCbhsCailiao.cbhsCailiao.name.eq(cailiao.getName().trim()).and(QCbhsCailiao.cbhsCailiao.style.eq(cailiao.getStyle()).and(QCbhsCailiao.cbhsCailiao.oid.ne(cailiao.getOid())))),
-				"材料名称及规格已存在!");
+		Preconditions.checkArgument(!queryFactory.exists(QCbhsCailiao.cbhsCailiao, QCbhsCailiao.cbhsCailiao.name.eq(cailiao.getName().trim()).and(QCbhsCailiao.cbhsCailiao.style.eq(cailiao.getStyle()).and(QCbhsCailiao.cbhsCailiao.oid.ne(cailiao.getOid())))), "材料名称及规格已存在!");
 		queryFactory.saveOrUpdate(cailiao);
 		return cailiao;
 	}
@@ -182,10 +179,7 @@ public class BaseApisServiceImp implements BaseApisService {
 		jpaquery.where(request.getKemuOid(), query_.kemuOid.eq(request.getKemuOid()));
 		Integer isRy = request.getIsRy();
 		if (isRy != null && isRy > 0) {
-			jpaquery.where(
-					isRy,
-					query_.kemuOid.in(JPAExpressions.select(QCbhsCailiaoKemu.cbhsCailiaoKemu.oid).from(QCbhsCailiaoKemu.cbhsCailiaoKemu)
-							.where(QCbhsCailiaoKemu.cbhsCailiaoKemu.isRy.eq(isRy == 1 ? true : false))));
+			jpaquery.where(isRy, query_.kemuOid.in(JPAExpressions.select(QCbhsCailiaoKemu.cbhsCailiaoKemu.oid).from(QCbhsCailiaoKemu.cbhsCailiaoKemu).where(QCbhsCailiaoKemu.cbhsCailiaoKemu.isRy.eq(isRy == 1 ? true : false))));
 		}
 		// 查询总数
 		ResponseCailiaoFetch response = new ResponseCailiaoFetch();
@@ -199,9 +193,7 @@ public class BaseApisServiceImp implements BaseApisService {
 	@CacheEvict(cacheNames = "CbhsCailiaoKemu", allEntries = true)
 	public CbhsCailiaoKemu cailiaoKemuAdd(CbhsCailiaoKemu kemu, HttpServletRequest httpServletRequest) throws Exception {
 		Preconditions.checkArgument(StringUtils.isNotBlank(kemu.getName()), "材料科目名称不能为空!");
-		Preconditions.checkArgument(
-				!queryFactory.exists(QCbhsCailiaoKemu.cbhsCailiaoKemu, QCbhsCailiaoKemu.cbhsCailiaoKemu.name.eq(kemu.getName().trim()).and(QCbhsCailiaoKemu.cbhsCailiaoKemu.status.eq(true))),
-				"材料科目名称已存在!");
+		Preconditions.checkArgument(!queryFactory.exists(QCbhsCailiaoKemu.cbhsCailiaoKemu, QCbhsCailiaoKemu.cbhsCailiaoKemu.name.eq(kemu.getName().trim()).and(QCbhsCailiaoKemu.cbhsCailiaoKemu.status.eq(true))), "材料科目名称已存在!");
 		kemu = queryFactory.saveOrUpdate(kemu);
 		return kemu;
 	}
@@ -211,9 +203,7 @@ public class BaseApisServiceImp implements BaseApisService {
 	public CbhsCailiaoKemu cailiaoKemuUpdate(CbhsCailiaoKemu kemu, HttpServletRequest httpServletRequest) throws Exception {
 		Preconditions.checkArgument(kemu.getOid() > 0, "材料科目ID不能为空!");
 		Preconditions.checkArgument(StringUtils.isNotBlank(kemu.getName()), "材料科目名称不能为空!");
-		Preconditions.checkArgument(
-				!queryFactory.exists(QCbhsCailiaoKemu.cbhsCailiaoKemu, QCbhsCailiaoKemu.cbhsCailiaoKemu.name.eq(kemu.getName().trim()).and(QCbhsCailiaoKemu.cbhsCailiaoKemu.oid.ne(kemu.getOid()))),
-				"材料科目名称已存在!");
+		Preconditions.checkArgument(!queryFactory.exists(QCbhsCailiaoKemu.cbhsCailiaoKemu, QCbhsCailiaoKemu.cbhsCailiaoKemu.name.eq(kemu.getName().trim()).and(QCbhsCailiaoKemu.cbhsCailiaoKemu.oid.ne(kemu.getOid()))), "材料科目名称已存在!");
 		queryFactory.saveOrUpdate(kemu);
 		return kemu;
 	}
@@ -249,8 +239,7 @@ public class BaseApisServiceImp implements BaseApisService {
 	@CacheEvict(cacheNames = "CbhsFbCompany", allEntries = true)
 	public CbhsFbCompany fbCompanyAdd(CbhsFbCompany company, HttpServletRequest httpServletRequest) throws Exception {
 		Preconditions.checkArgument(StringUtils.isNotBlank(company.getName()), "分包公司名称不能为空!");
-		Preconditions.checkArgument(
-				!queryFactory.exists(QCbhsFbCompany.cbhsFbCompany, QCbhsFbCompany.cbhsFbCompany.name.eq(company.getName().trim()).and(QCbhsFbCompany.cbhsFbCompany.status.eq(true))), "分包公司名称已存在!");
+		Preconditions.checkArgument(!queryFactory.exists(QCbhsFbCompany.cbhsFbCompany, QCbhsFbCompany.cbhsFbCompany.name.eq(company.getName().trim()).and(QCbhsFbCompany.cbhsFbCompany.status.eq(true))), "分包公司名称已存在!");
 		company = queryFactory.saveOrUpdate(company);
 		return company;
 	}
@@ -260,10 +249,7 @@ public class BaseApisServiceImp implements BaseApisService {
 	public CbhsFbCompany fbCompanyUpdate(CbhsFbCompany company, HttpServletRequest httpServletRequest) throws Exception {
 		Preconditions.checkArgument(company.getOid() > 0, "分包公司ID不能为空!");
 		Preconditions.checkArgument(StringUtils.isNotBlank(company.getName()), "分包公司名称不能为空!");
-		Preconditions.checkArgument(
-				!queryFactory.exists(QCbhsFbCompany.cbhsFbCompany,
-						QCbhsFbCompany.cbhsFbCompany.name.eq(company.getName().trim()).and(QCbhsFbCompany.cbhsFbCompany.status.eq(true)).and(QCbhsFbCompany.cbhsFbCompany.oid.ne(company.getOid()))),
-				"分包公司名称已存在!");
+		Preconditions.checkArgument(!queryFactory.exists(QCbhsFbCompany.cbhsFbCompany, QCbhsFbCompany.cbhsFbCompany.name.eq(company.getName().trim()).and(QCbhsFbCompany.cbhsFbCompany.status.eq(true)).and(QCbhsFbCompany.cbhsFbCompany.oid.ne(company.getOid()))), "分包公司名称已存在!");
 		queryFactory.saveOrUpdate(company);
 		return company;
 	}
@@ -300,9 +286,7 @@ public class BaseApisServiceImp implements BaseApisService {
 	@CacheEvict(cacheNames = "CbhsMachineryType", allEntries = true)
 	public CbhsMachineryType machineryTypeAdd(CbhsMachineryType machineryType, HttpServletRequest httpServletRequest) throws Exception {
 		Preconditions.checkArgument(StringUtils.isNotBlank(machineryType.getName()), "机械设备种类名称不能为空!");
-		Preconditions.checkArgument(
-				!queryFactory.exists(QCbhsMachineryType.cbhsMachineryType,
-						QCbhsMachineryType.cbhsMachineryType.name.eq(machineryType.getName().trim()).and(QCbhsMachineryType.cbhsMachineryType.status.eq(true))), "机械设备种类名称已存在!");
+		Preconditions.checkArgument(!queryFactory.exists(QCbhsMachineryType.cbhsMachineryType, QCbhsMachineryType.cbhsMachineryType.name.eq(machineryType.getName().trim()).and(QCbhsMachineryType.cbhsMachineryType.status.eq(true))), "机械设备种类名称已存在!");
 		machineryType = queryFactory.saveOrUpdate(machineryType);
 		return machineryType;
 	}
@@ -312,9 +296,7 @@ public class BaseApisServiceImp implements BaseApisService {
 	public CbhsMachineryType machineryTypeUpdate(CbhsMachineryType machineryType, HttpServletRequest httpServletRequest) throws Exception {
 		Preconditions.checkArgument(machineryType.getOid() > 0, "机械设备种类ID不能为空!");
 		Preconditions.checkArgument(StringUtils.isNotBlank(machineryType.getName()), "机械设备种类名称不能为空!");
-		Preconditions.checkArgument(
-				!queryFactory.exists(QCbhsMachineryType.cbhsMachineryType,
-						QCbhsMachineryType.cbhsMachineryType.name.eq(machineryType.getName().trim()).and(QCbhsMachineryType.cbhsMachineryType.oid.ne(machineryType.getOid()))), "机械设备种类名称已存在!");
+		Preconditions.checkArgument(!queryFactory.exists(QCbhsMachineryType.cbhsMachineryType, QCbhsMachineryType.cbhsMachineryType.name.eq(machineryType.getName().trim()).and(QCbhsMachineryType.cbhsMachineryType.oid.ne(machineryType.getOid()))), "机械设备种类名称已存在!");
 		queryFactory.saveOrUpdate(machineryType);
 		return machineryType;
 	}
@@ -323,8 +305,7 @@ public class BaseApisServiceImp implements BaseApisService {
 	@CacheEvict(cacheNames = "CbhsMachineryType", allEntries = true)
 	public JSONObject machineryTypeDel(RequestMachineryTypeDel request, HttpServletRequest httpServletRequest) throws Exception {
 		Preconditions.checkArgument(request.getOids().size() > 0, "需要删除的机械设备种类ID不能为空!");
-		queryFactory.update(QCbhsMachineryType.cbhsMachineryType).set(QCbhsMachineryType.cbhsMachineryType.status, false).where(QCbhsMachineryType.cbhsMachineryType.oid.in(request.getOids()))
-				.execute();
+		queryFactory.update(QCbhsMachineryType.cbhsMachineryType).set(QCbhsMachineryType.cbhsMachineryType.status, false).where(QCbhsMachineryType.cbhsMachineryType.oid.in(request.getOids())).execute();
 		return CbhsResUtils.suc();
 	}
 
@@ -354,11 +335,7 @@ public class BaseApisServiceImp implements BaseApisService {
 		Preconditions.checkArgument(StringUtils.isNotBlank(machinery.getStyle()), "设备规格型号不能为空!");
 		BeanValidation bv = new BeanValidation(queryFactory);
 		bv.vali(BeanValidation.beanType.machineryType, BeanValidation.valiType.all, machinery.getMachineryTypeOid());
-		Preconditions.checkArgument(
-				!queryFactory.exists(
-						QCbhsMachinery.cbhsMachinery,
-						QCbhsMachinery.cbhsMachinery.name.eq(machinery.getName().trim()).and(
-								QCbhsMachinery.cbhsMachinery.style.eq(machinery.getStyle()).and(QCbhsMachinery.cbhsMachinery.status.eq(true)))), "设备规格型号已存在!");
+		Preconditions.checkArgument(!queryFactory.exists(QCbhsMachinery.cbhsMachinery, QCbhsMachinery.cbhsMachinery.name.eq(machinery.getName().trim()).and(QCbhsMachinery.cbhsMachinery.style.eq(machinery.getStyle()).and(QCbhsMachinery.cbhsMachinery.status.eq(true)))), "设备规格型号已存在!");
 		machinery = queryFactory.saveOrUpdate(machinery);
 		return machinery;
 	}
@@ -371,11 +348,7 @@ public class BaseApisServiceImp implements BaseApisService {
 		Preconditions.checkArgument(StringUtils.isNotBlank(machinery.getStyle()), "设备规格型号不能为空!");
 		BeanValidation bv = new BeanValidation(queryFactory);
 		bv.vali(BeanValidation.beanType.machineryType, BeanValidation.valiType.all, machinery.getMachineryTypeOid());
-		Preconditions.checkArgument(
-				!queryFactory.exists(
-						QCbhsMachinery.cbhsMachinery,
-						QCbhsMachinery.cbhsMachinery.name.eq(machinery.getName().trim()).and(
-								QCbhsMachinery.cbhsMachinery.style.eq(machinery.getStyle()).and(QCbhsMachinery.cbhsMachinery.oid.ne(machinery.getOid())))), "设备规格型号已存在!");
+		Preconditions.checkArgument(!queryFactory.exists(QCbhsMachinery.cbhsMachinery, QCbhsMachinery.cbhsMachinery.name.eq(machinery.getName().trim()).and(QCbhsMachinery.cbhsMachinery.style.eq(machinery.getStyle()).and(QCbhsMachinery.cbhsMachinery.oid.ne(machinery.getOid())))), "设备规格型号已存在!");
 		machinery = queryFactory.saveOrUpdate(machinery);
 		return machinery;
 	}
@@ -555,10 +528,7 @@ public class BaseApisServiceImp implements BaseApisService {
 				} catch (Exception e) {
 					throw new ServiceException(new ExceptionResponse(-1, "单价[" + value + "]必须为数字!"));
 				}
-				Preconditions.checkArgument(
-						!queryFactory.exists(QCbhsCailiao.cbhsCailiao,
-								QCbhsCailiao.cbhsCailiao.name.eq(cailiao.getName().trim()).and(QCbhsCailiao.cbhsCailiao.style.eq(cailiao.getStyle()).and(QCbhsCailiao.cbhsCailiao.status.eq(true)))),
-						"[" + cailiao.getName() + "|" + cailiao.getStyle() + "],材料及规格已存在!");
+				Preconditions.checkArgument(!queryFactory.exists(QCbhsCailiao.cbhsCailiao, QCbhsCailiao.cbhsCailiao.name.eq(cailiao.getName().trim()).and(QCbhsCailiao.cbhsCailiao.style.eq(cailiao.getStyle()).and(QCbhsCailiao.cbhsCailiao.status.eq(true)))), "[" + cailiao.getName() + "|" + cailiao.getStyle() + "],材料及规格已存在!");
 				cailiao.setStatus(true);
 				cailiaos.add(cailiao);
 			}
@@ -578,9 +548,7 @@ public class BaseApisServiceImp implements BaseApisService {
 		Preconditions.checkArgument(StringUtils.isNotBlank(ht.getHtName()), "合同名称不能为空!");
 		BeanValidation bv = new BeanValidation(queryFactory);
 		bv.vali(BeanValidation.beanType.fbCompany, BeanValidation.valiType.all, ht.getFbCompanyOid());
-		Preconditions.checkArgument(
-				!queryFactory.exists(QCbhsHt.cbhsHt, QCbhsHt.cbhsHt.htName.eq(ht.getHtName().trim()).and(QCbhsHt.cbhsHt.status.eq(true).and(QCbhsHt.cbhsHt.fbCompanyOid.eq(ht.getFbCompanyOid())))),
-				"该分包商合同名称已存在!");
+		Preconditions.checkArgument(!queryFactory.exists(QCbhsHt.cbhsHt, QCbhsHt.cbhsHt.htName.eq(ht.getHtName().trim()).and(QCbhsHt.cbhsHt.status.eq(true).and(QCbhsHt.cbhsHt.fbCompanyOid.eq(ht.getFbCompanyOid())))), "该分包商合同名称已存在!");
 		ht = queryFactory.saveOrUpdate(ht);
 		return ht;
 	}
@@ -591,11 +559,7 @@ public class BaseApisServiceImp implements BaseApisService {
 		Preconditions.checkArgument(StringUtils.isNotBlank(ht.getHtName()), "合同名称不能为空!");
 		BeanValidation bv = new BeanValidation(queryFactory);
 		bv.vali(BeanValidation.beanType.fbCompany, BeanValidation.valiType.all, ht.getFbCompanyOid());
-		Preconditions.checkArgument(
-				!queryFactory.exists(
-						QCbhsHt.cbhsHt,
-						QCbhsHt.cbhsHt.htName.eq(ht.getHtName().trim()).and(
-								QCbhsHt.cbhsHt.status.eq(true).and(QCbhsHt.cbhsHt.fbCompanyOid.eq(ht.getFbCompanyOid()).and(QCbhsHt.cbhsHt.oid.ne(ht.getOid()))))), "该分包商合同名称已存在!");
+		Preconditions.checkArgument(!queryFactory.exists(QCbhsHt.cbhsHt, QCbhsHt.cbhsHt.htName.eq(ht.getHtName().trim()).and(QCbhsHt.cbhsHt.status.eq(true).and(QCbhsHt.cbhsHt.fbCompanyOid.eq(ht.getFbCompanyOid()).and(QCbhsHt.cbhsHt.oid.ne(ht.getOid()))))), "该分包商合同名称已存在!");
 		ht = queryFactory.saveOrUpdate(ht);
 		return ht;
 	}
@@ -626,5 +590,119 @@ public class BaseApisServiceImp implements BaseApisService {
 		response.setTotal(pr.getTotal());
 		response.setResult(pr.getResult());
 		return response;
+	}
+
+	@Override
+	public CbhsContacts contactsAdd(CbhsContacts contacts, HttpServletRequest httpServletRequest) throws Exception {
+		Preconditions.checkArgument(StringUtils.isNotBlank(contacts.getName()), "联系人姓名不能为空!");
+		Preconditions.checkArgument(StringUtils.isNotBlank(contacts.getPhone()), "联系人电话不能为空!");
+		contacts = queryFactory.saveOrUpdate(contacts);
+		return contacts;
+	}
+
+	@Override
+	public CbhsContacts contactsUpdate(CbhsContacts contacts, HttpServletRequest httpServletRequest) throws Exception {
+		Preconditions.checkArgument(contacts.getOid() != null && contacts.getOid() > 0, "被修改联系人的ID不能为空!");
+		Preconditions.checkArgument(StringUtils.isNotBlank(contacts.getName()), "联系人姓名不能为空!");
+		Preconditions.checkArgument(StringUtils.isNotBlank(contacts.getPhone()), "联系人电话不能为空!");
+		contacts = queryFactory.saveOrUpdate(contacts);
+		return contacts;
+	}
+
+	@Override
+	public JSONObject contactsDel(RequestContactsDel request, HttpServletRequest httpServletRequest) throws Exception {
+		Preconditions.checkArgument(request.getOids().size() > 0, "联系人ID不能为空!");
+		queryFactory.delete(QCbhsContacts.cbhsContacts).where(QCbhsContacts.cbhsContacts.oid.in(request.getOids())).execute();
+		return CbhsResUtils.suc();
+	}
+
+	@Override
+	public ResponseContactsFetch contactsFetch(RequestContactsFetch request, HttpServletRequest httpServletRequest) throws Exception {
+		QCbhsContacts query_ = QCbhsContacts.cbhsContacts;
+		// 查询对象
+		MyJPAQuery<CbhsContacts> jpaquery = queryFactory.selectFrom(query_);
+		// 条件组合
+		jpaquery.where(request.getOid(), query_.oid.eq(request.getOid()));
+		jpaquery.where(request.getName(), query_.name.containsIgnoreCase(request.getName()));
+		jpaquery.where(request.getPhone(), query_.phone.containsIgnoreCase(request.getPhone()));
+		jpaquery.where(request.getPost(), query_.post.containsIgnoreCase(request.getPost()));
+		jpaquery.where(request.getStartOid(), query_.oid.gt(request.getStartOid()));
+		// 查询总数
+		ResponseContactsFetch response = new ResponseContactsFetch();
+		PagerResult pr = jpaquery.fetchPager(request.getPageNum(), request.getPageSize());
+		response.setTotal(pr.getTotal());
+		response.setResult(pr.getResult());
+		return response;
+	}
+
+	@Override
+	public JSONObject contactsImport(MultipartFile request, Integer projectOid, HttpServletRequest httpServletRequest) throws Exception {
+		// 判断文件是否为空
+		if (request == null) {
+			throw new ServiceException(new ExceptionResponse(ExceptionConstant.fileCannotBeEmpty, "文件不能为空!"));
+		}
+		// 获取文件名
+		String fileName = request.getOriginalFilename();
+		// 验证文件名是否合格
+		if (!FileFormatUtils.format(FileFormatUtils.excelReg, fileName)) {
+			throw new ServiceException(new ExceptionResponse(ExceptionConstant.fileFormatError, "文件格式错误!"));
+		}
+		// 进一步判断文件内容是否为空（即判断其大小是否为0或其名称是否为null）
+		long size = request.getSize();
+		if (StringUtils.isEmpty(fileName) || size == 0) {
+			throw new ServiceException(new ExceptionResponse(ExceptionConstant.fileCannotBeEmpty, "文件不能为空!"));
+		}
+		BatchInsertContactsByExcel(request, httpServletRequest);
+		return CbhsResUtils.suc();
+	}
+
+	public boolean BatchInsertContactsByExcel(MultipartFile file, HttpServletRequest httpServletRequest) {
+		try {
+			Workbook workbook = null;
+			try {
+				workbook = new XSSFWorkbook(file.getInputStream());
+			} catch (Exception ex) {
+				workbook = new HSSFWorkbook(file.getInputStream());
+			}
+			List<CbhsContacts> contactss = Lists.newArrayList();
+			Sheet sheet = workbook.getSheetAt(0);
+			int physicalNumberOfRows = sheet.getPhysicalNumberOfRows(); // 获得该sheet总行数
+			for (int j = 0; j < physicalNumberOfRows; j++) {
+				if (j < 1) { // 前两行是标题行
+					continue;
+				}
+				Row row = sheet.getRow(j);
+				// 项目
+				CbhsContacts contacts = new CbhsContacts();
+				Cell cell = row.getCell(0);
+				Preconditions.checkArgument(cell != null, "联系人姓名不能为空!");
+				cell.setCellType(Cell.CELL_TYPE_STRING);
+				String value = ExcelUtils.getCellValue(cell);
+				Preconditions.checkArgument(StringUtils.isNotBlank(value), "联系人姓名不能为空!");
+				contacts.setName(value);
+				cell = row.getCell(1);
+				Preconditions.checkArgument(cell != null, "联系人电话不能为空!");
+				cell.setCellType(Cell.CELL_TYPE_STRING);
+				value = ExcelUtils.getCellValue(cell);
+				Preconditions.checkArgument(StringUtils.isNotBlank(value), "联系人电话不能为空!!");
+				contacts.setPhone(value);
+				cell = row.getCell(2);
+				if (cell != null) {
+					cell.setCellType(Cell.CELL_TYPE_STRING);
+				}
+				value = ExcelUtils.getCellValue(cell);
+				contacts.setPost(value);
+				contactss.add(contacts);
+			}
+			if (contactss.size() > 0) {
+				queryFactory.delete(QCbhsContacts.cbhsContacts).execute();
+				queryFactory.batchSaveOrUpdate(contactss);
+			}
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new ServiceException(new ExceptionResponse(-1, e.getMessage()));
+		}
+
 	}
 }
