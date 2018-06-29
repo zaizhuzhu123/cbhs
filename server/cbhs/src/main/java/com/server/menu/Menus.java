@@ -28,6 +28,14 @@ public class Menus {
 		AppMenu_menu1_1.setIcon("qjys");
 		AppMenu_menu1_1.setParentMenuId("1");
 		AppMenu_menu1.getChidren().add(AppMenu_menu1_1);		AppMenu_menu1_1.setChidren(new ArrayList<MenuObj>());
+		MenuObj AppMenu_menu1_1_1 = new MenuObj();
+		AppMenu_menu1_1_1.setMenuId("1,1,1");
+		AppMenu_menu1_1_1.setMenuName("工程量清单查看价格");
+		AppMenu_menu1_1_1.setMenuOpName("xmys_qjys_gclqd_price_app");
+		AppMenu_menu1_1_1.setAction("");
+		AppMenu_menu1_1_1.setIcon("");
+		AppMenu_menu1_1_1.setParentMenuId("1,1");
+		AppMenu_menu1_1.getChidren().add(AppMenu_menu1_1_1);		AppMenu_menu1_1_1.setChidren(new ArrayList<MenuObj>());
 		MenuObj AppMenu_menu1_2 = new MenuObj();
 		AppMenu_menu1_2.setMenuId("1,2");
 		AppMenu_menu1_2.setMenuName("目标预算");

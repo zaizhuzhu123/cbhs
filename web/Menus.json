@@ -5,7 +5,17 @@
 			"chidren":[
 				{
 					"action":"com.lgx.price.accounting.budget.global.GlobalBudgetActivity.ACTION",
-					"chidren":[],
+					"chidren":[
+						{
+							"action":"",
+							"chidren":[],
+							"icon":"",
+							"menuId":"1,1,1",
+							"menuName":"工程量清单查看价格",
+							"menuOpName":"xmys_qjys_gclqd_price_app",
+							"parentMenuId":"1,1"
+						}
+					],
 					"icon":"qjys",
 					"menuId":"1,1",
 					"menuName":"全局预算",
