@@ -825,6 +825,15 @@
 									"chidren":[],
 									"icon":"",
 									"menuId":"2,1,2,1",
+									"menuName":"编辑",
+									"menuOpName":"xzsr_web_ed",
+									"parentMenuId":"2,1,2"
+								},
+								{
+									"action":"",
+									"chidren":[],
+									"icon":"",
+									"menuId":"2,1,2,2",
 									"menuName":"删除",
 									"menuOpName":"xzsr_web_del",
 									"parentMenuId":"2,1,2"
@@ -871,9 +880,18 @@
 									"action":"",
 									"chidren":[],
 									"icon":"",
-									"menuId":"2,1,3,1",
+									"menuId":"2,1,3,2",
 									"menuName":"删除",
-									"menuOpName":"xzsr_web_del",
+									"menuOpName":"xzsrjg_web_del",
+									"parentMenuId":"2,1,3"
+								},
+								{
+									"action":"",
+									"chidren":[],
+									"icon":"",
+									"menuId":"2,1,3,1",
+									"menuName":"编辑",
+									"menuOpName":"xzsrjg_web_ed",
 									"parentMenuId":"2,1,3"
 								}
 							],
@@ -951,15 +969,24 @@
 											"action":"",
 											"chidren":[],
 											"icon":"",
-											"menuId":"2,3,2,2,1",
+											"menuId":"2,3,2,2,2",
 											"menuName":"删除",
 											"menuOpName":"fbjggl_web_del",
+											"parentMenuId":"2,3,2,2"
+										},
+										{
+											"action":"",
+											"chidren":[],
+											"icon":"",
+											"menuId":"2,3,2,2,1",
+											"menuName":"编辑",
+											"menuOpName":"fbjggl_web_ed",
 											"parentMenuId":"2,3,2,2"
 										}
 									],
 									"icon":"left2",
 									"menuId":"2,3,2,2",
-									"menuName":"分包价格管理",
+									"menuName":"分包价格统计",
 									"menuOpName":"fbjggl_web",
 									"parentMenuId":"2,3,2"
 								},
@@ -978,7 +1005,7 @@
 									],
 									"icon":"left2",
 									"menuId":"2,3,2,3",
-									"menuName":"临建支出量",
+									"menuName":"临建支出量统计",
 									"menuOpName":"ljzc_web",
 									"parentMenuId":"2,3,2"
 								},
@@ -989,15 +1016,24 @@
 											"action":"",
 											"chidren":[],
 											"icon":"",
-											"menuId":"2,3,2,4,1",
+											"menuId":"2,3,2,4,2",
 											"menuName":"删除",
-											"menuOpName":"ljzcjg_web",
+											"menuOpName":"ljzcjg_web_del",
+											"parentMenuId":"2,3,2,4"
+										},
+										{
+											"action":"",
+											"chidren":[],
+											"icon":"",
+											"menuId":"2,3,2,4,1",
+											"menuName":"编辑",
+											"menuOpName":"ljzcjg_web_ed",
 											"parentMenuId":"2,3,2,4"
 										}
 									],
 									"icon":"left2",
 									"menuId":"2,3,2,4",
-									"menuName":"临建支出价格",
+									"menuName":"临建支出价格统计",
 									"menuOpName":"ljzcjg_web",
 									"parentMenuId":"2,3,2"
 								}
@@ -1480,6 +1516,15 @@
 									"action":"",
 									"chidren":[],
 									"icon":"",
+									"menuId":"6,3,3,3",
+									"menuName":"财务审核",
+									"menuOpName":"spgl_web_cw",
+									"parentMenuId":"6,3,3"
+								},
+								{
+									"action":"",
+									"chidren":[],
+									"icon":"",
 									"menuId":"6,3,3,2",
 									"menuName":"删除",
 									"menuOpName":"spgl_web_del",
@@ -1793,19 +1838,66 @@
 							"parentMenuId":"6,9"
 						}
 					],
-					"icon":"left",
+					"icon":"left1",
 					"menuId":"6,9",
 					"menuName":"合同管理",
 					"menuOpName":"htgl_web",
 					"parentMenuId":"6"
 				},
 				{
+					"action":"",
+					"chidren":[
+						{
+							"action":"../manage/phoneListImport.html",
+							"chidren":[],
+							"icon":"left2",
+							"menuId":"6,10,1",
+							"menuName":"通讯录导入",
+							"menuOpName":"txldr_web",
+							"parentMenuId":"6,10"
+						},
+						{
+							"action":"../manage/phoneList.html",
+							"chidren":[
+								{
+									"action":"",
+									"chidren":[],
+									"icon":"",
+									"menuId":"6,10,2,1",
+									"menuName":"编辑",
+									"menuOpName":"txllb_web_ed",
+									"parentMenuId":"6,10,2"
+								},
+								{
+									"action":"",
+									"chidren":[],
+									"icon":"",
+									"menuId":"6,10,2,2",
+									"menuName":"删除",
+									"menuOpName":"txllb_web_del",
+									"parentMenuId":"6,10,2"
+								}
+							],
+							"icon":"left2",
+							"menuId":"6,10,2",
+							"menuName":"通讯录列表",
+							"menuOpName":"txllb_web",
+							"parentMenuId":"6,10"
+						}
+					],
+					"icon":"left1",
+					"menuId":"6,10",
+					"menuName":"通讯录管理",
+					"menuOpName":"txlgl_web",
+					"parentMenuId":"6"
+				},
+				{
 					"action":"../manage/updateOpt.html",
 					"chidren":[],
 					"icon":"left1",
-					"menuId":"6,10",
-					"menuName":"升级管理",
-					"menuOpName":"sjgl_web",
+					"menuId":"6,11",
+					"menuName":"版本管理",
+					"menuOpName":"bbgl_web",
 					"parentMenuId":"6"
 				}
 			],
