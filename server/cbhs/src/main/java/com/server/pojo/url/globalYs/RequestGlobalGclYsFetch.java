@@ -23,7 +23,7 @@ public class RequestGlobalGclYsFetch implements Serializable {
 	private Integer startOid= 0;
 	@ApiModelProperty(value = "工程项目ID")
 	private Integer projectOid= 0;
-	@ApiModelProperty(value = "类型(1:大项|2:有单价的项)")
+	@ApiModelProperty(value = "类型(1:无单价的项|2:有单价的项|3大项)")
 	private Integer type= 0;
 
 	public Integer getOid() { 

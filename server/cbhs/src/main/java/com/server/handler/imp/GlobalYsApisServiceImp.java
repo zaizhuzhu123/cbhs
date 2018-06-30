@@ -102,7 +102,11 @@ public class GlobalYsApisServiceImp implements GlobalYsApisService {
 			case 2:
 				jpaquery.where(query_.unitPrice.gt(0.00));
 				break;
+			case 3:
+				jpaquery.where(query_.nodeId.notLike("%.%"));
+				break;
 			}
+
 		}
 		// ----------
 		jpaqueryPrice.where(request.getProjectOid(), query_.projectOid.eq(request.getProjectOid()));

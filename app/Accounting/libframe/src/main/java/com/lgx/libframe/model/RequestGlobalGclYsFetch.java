@@ -14,7 +14,7 @@ private int pageNum;// 页码
 private int pageSize;// 数量
 private int startOid;// 开始编号
 private int projectOid;// 工程项目ID
-private int type;// 类型(1:大项|2:有单价的项)
+private int type;// 类型(1:无单价的项|2:有单价的项|3大项)
 public int  getOid(){ 
 
     return this.oid;

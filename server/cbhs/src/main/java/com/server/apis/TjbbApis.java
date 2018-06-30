@@ -32,6 +32,8 @@ import com.server.pojo.bean.uiGrandTotalTj;
 import com.server.pojo.url.tjbb.RequestAbnormalFetch;
 import com.server.pojo.bean.uiAbnormal;
 import com.server.pojo.url.tjbb.RequestZybbAbnormalFetch;
+import com.server.pojo.url.tjbb.RequestCbAnalyze;
+import com.server.pojo.bean.uiCbAnalyze;
 
 @Api(tags = { "统计报表接口" }, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @RestController
@@ -115,6 +117,19 @@ public class TjbbApis {
 	@ResponseBody
 	public uiAbnormal zybbAbnormalFetch(@Validated @RequestBody RequestZybbAbnormalFetch request, HttpServletRequest httpServletRequest) throws Exception{
 		return tjbbApisService.zybbAbnormalFetch(request, httpServletRequest);
+	}
+
+
+	@RequestMapping(value = "/tjbb/cbAnalyze", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseStatus(code = HttpStatus.OK)
+	@ApiImplicitParams({
+		@ApiImplicitParam(name = "token", value = "鉴权信息", required = true, dataType = "String", paramType = "header"),
+	})
+	@ApiOperation(value = "查询-成本分析", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ApiResponse(code = 200, message = "操作成功后返回的视图")
+	@ResponseBody
+	public uiCbAnalyze cbAnalyze(@Validated @RequestBody RequestCbAnalyze request, HttpServletRequest httpServletRequest) throws Exception{
+		return tjbbApisService.cbAnalyze(request, httpServletRequest);
 	}
 
 

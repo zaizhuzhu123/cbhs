@@ -13,8 +13,8 @@ public class SheObject {
 	public static final int shType_zytj = 9; // 分包商统计
 	public static final int shType_fbgcljg = 10; // 分包工程价格统计
 	public static final int shType_zyjxcbry = 11; // 机械成本 燃油
-	public static final int shType_zytjry = 12;// 资源统计 燃油
-	public static final int shType_zytjzc = 13;// 资源统计 主材
+	public static final int shType_zytjry = 12;// 分包商统计 燃油
+	public static final int shType_zytjzc = 13;// 分包商统计 主材
 	public static final int shType_ssd = 14;// 对下结算
 	public static final int shType_reim = 15;// 财务报销
 	public static final int shType_fbljxmcount = 16;// 分包临建项目 数量

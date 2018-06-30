@@ -310,6 +310,15 @@
 					"menuName":"材料核销",
 					"menuOpName":"clhx_app",
 					"parentMenuId":"3"
+				},
+				{
+					"action":"com.lgx.price.accounting.analysis.cbfx.CbfxActivity.ACTION",
+					"chidren":[],
+					"icon":"cbfx",
+					"menuId":"3,5",
+					"menuName":"成本分析",
+					"menuOpName":"cbfx_app",
+					"parentMenuId":"3"
 				}
 			],
 			"icon":"",

@@ -286,6 +286,14 @@ public class Menus {
 		AppMenu_menu3_4_2.setIcon("");
 		AppMenu_menu3_4_2.setParentMenuId("3,4");
 		AppMenu_menu3_4.getChidren().add(AppMenu_menu3_4_2);
+		MenuObj AppMenu_menu3_5 = new MenuObj();
+		AppMenu_menu3_5.setMenuId("3,5");
+		AppMenu_menu3_5.setMenuName("成本分析");
+		AppMenu_menu3_5.setMenuOpName("cbfx_app");
+		AppMenu_menu3_5.setAction("com.lgx.price.accounting.analysis.cbfx.CbfxActivity.ACTION");
+		AppMenu_menu3_5.setIcon("cbfx");
+		AppMenu_menu3_5.setParentMenuId("3");
+		AppMenu_menu3.getChidren().add(AppMenu_menu3_5);
 		MenuObj AppMenu_menu4 = new MenuObj();
 		AppMenu_menu4.setMenuId("4");
 		AppMenu_menu4.setMenuName("财务");

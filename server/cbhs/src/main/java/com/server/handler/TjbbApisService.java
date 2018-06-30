@@ -15,6 +15,8 @@ import com.server.pojo.url.tjbb.RequestAbnormalFetch;
 import com.server.pojo.bean.uiAbnormal;
 import com.server.pojo.url.tjbb.RequestZybbAbnormalFetch;
 import com.server.pojo.bean.uiAbnormal;
+import com.server.pojo.url.tjbb.RequestCbAnalyze;
+import com.server.pojo.bean.uiCbAnalyze;
 
 public interface TjbbApisService {
 
@@ -29,5 +31,7 @@ public interface TjbbApisService {
 	public uiAbnormal abnormalFetch(RequestAbnormalFetch request, HttpServletRequest httpServletRequest) throws Exception;
 
 	public uiAbnormal zybbAbnormalFetch(RequestZybbAbnormalFetch request, HttpServletRequest httpServletRequest) throws Exception;
+
+	public uiCbAnalyze cbAnalyze(RequestCbAnalyze request, HttpServletRequest httpServletRequest) throws Exception;
 
 }
