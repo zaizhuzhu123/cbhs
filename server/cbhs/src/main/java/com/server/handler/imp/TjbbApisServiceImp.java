@@ -437,10 +437,24 @@ public class TjbbApisServiceImp implements TjbbApisService {
 						for (CbhsDaysJjcb jjcb : jjcbs) {
 							// 人力
 							response.setRlTotal(jjcb.getScry_gz().add(response.getRlTotal()));
+							response.setRlTotal(jjcb.getScry_zjjf().add(response.getRlTotal()));
+							response.setRlTotal(jjcb.getScry_ghjf().add(response.getRlTotal()));
+							response.setRlTotal(jjcb.getScry_dwbx().add(response.getRlTotal()));
+							response.setRlTotal(jjcb.getScry_qt().add(response.getRlTotal()));
 							response.setRlTotal(jjcb.getScry_wp_gz().add(response.getRlTotal()));
+							response.setRlTotal(jjcb.getScry_wp_zjjf().add(response.getRlTotal()));
+							response.setRlTotal(jjcb.getScry_wp_ghjf().add(response.getRlTotal()));
+							response.setRlTotal(jjcb.getScry_wp_qt().add(response.getRlTotal()));
 							// 人员工资
 							response.setRygztotal(jjcb.getGlry_gz().add(response.getRygztotal()));
+							response.setRygztotal(jjcb.getGlry_zjjf().add(response.getRygztotal()));
+							response.setRygztotal(jjcb.getGlry_ghjf().add(response.getRygztotal()));
+							response.setRygztotal(jjcb.getGlry_dwbx().add(response.getRygztotal()));
+							response.setRygztotal(jjcb.getGlry_qt().add(response.getRygztotal()));
 							response.setRygztotal(jjcb.getGlry_wp_gz().add(response.getRygztotal()));
+							response.setRygztotal(jjcb.getGlry_wp_zjjf().add(response.getRygztotal()));
+							response.setRygztotal(jjcb.getGlry_wp_ghjf().add(response.getRygztotal()));
+							response.setRygztotal(jjcb.getGlry_wp_qt().add(response.getRygztotal()));
 							response.setRygztotal(jjcb.getAqfy_ygsz().add(response.getRygztotal()));
 							response.setRygztotal(jjcb.getAqfy_ygsztc().add(response.getRygztotal()));
 							// 差旅费

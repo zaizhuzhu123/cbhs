@@ -1443,10 +1443,10 @@
 							"parentMenuId":"5,2"
 						}
 					],
-					"icon":"top2",
+					"icon":"",
 					"menuId":"5,2",
-					"menuName":"报销",
-					"menuOpName":"bx_web",
+					"menuName":"财务审核",
+					"menuOpName":"spgl_web_cw",
 					"parentMenuId":"5"
 				}
 			],
@@ -1519,15 +1519,6 @@
 									"menuId":"6,3,3,1",
 									"menuName":"编辑",
 									"menuOpName":"spgl_web_ed",
-									"parentMenuId":"6,3,3"
-								},
-								{
-									"action":"",
-									"chidren":[],
-									"icon":"",
-									"menuId":"6,3,3,3",
-									"menuName":"财务审核",
-									"menuOpName":"spgl_web_cw",
 									"parentMenuId":"6,3,3"
 								},
 								{
