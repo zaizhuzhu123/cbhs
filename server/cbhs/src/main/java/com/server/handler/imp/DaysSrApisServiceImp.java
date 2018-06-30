@@ -128,7 +128,7 @@ public class DaysSrApisServiceImp implements DaysSrApisService {
 					if (cbhsGclQdYs.getCompleteCount().add(ys.getCount()).compareTo(cbhsGclQdYs.getCount()) > 0) {
 						throw new ServiceException(new ExceptionResponse(-1, ys.getGlobalGclYsName() + "结算量已合计超过总工程清单总数量" + ys.getCount().stripTrailingZeros()));
 					}
-					queryFactory.update(QCbhsGclQdYs.cbhsGclQdYs).set(QCbhsGclQdYs.cbhsGclQdYs.completeCount, QCbhsGclQdYs.cbhsGclQdYs.completeCount.add(ys.getTotal()))
+					queryFactory.update(QCbhsGclQdYs.cbhsGclQdYs).set(QCbhsGclQdYs.cbhsGclQdYs.completeCount, QCbhsGclQdYs.cbhsGclQdYs.completeCount.add(ys.getCount()))
 							.where(QCbhsGclQdYs.cbhsGclQdYs.oid.eq(ys.getGlobalGclYsOid())).execute();
 					CbhsSr sr = JSON.parseObject(JSON.toJSONString(ys), CbhsSr.class);
 					sr.setCbOid(ys.getOid());
