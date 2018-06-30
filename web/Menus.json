@@ -1328,7 +1328,17 @@
 			"chidren":[
 				{
 					"action":"../manage/auditTaskList.html",
-					"chidren":[],
+					"chidren":[
+						{
+							"action":"",
+							"chidren":[],
+							"icon":"",
+							"menuId":"4,1,1",
+							"menuName":"财务审核",
+							"menuOpName":"spgl_web_cw",
+							"parentMenuId":"4,1"
+						}
+					],
 					"icon":"left2",
 					"menuId":"4,1",
 					"menuName":"审核任务",
@@ -1443,10 +1453,10 @@
 							"parentMenuId":"5,2"
 						}
 					],
-					"icon":"",
+					"icon":"top2",
 					"menuId":"5,2",
-					"menuName":"财务审核",
-					"menuOpName":"spgl_web_cw",
+					"menuName":"报销",
+					"menuOpName":"bx_web",
 					"parentMenuId":"5"
 				}
 			],
