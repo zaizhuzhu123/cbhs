@@ -545,7 +545,7 @@ public class TjbbApisServiceImp implements TjbbApisService {
 						.and(query_cb.dateTimeStamp.loe(request.getMonthEnd()))).fetchFirst();
 		response.setQttotal(qt != null ? qt : BigDecimal.ZERO);
 		if (response.getCbTotal().compareTo(BigDecimal.ZERO) > 0) {
-			response.setJxSpecific(response.getQttotal().divide(response.getCbTotal(), 4, BigDecimal.ROUND_HALF_UP).multiply(new BigDecimal(100)));
+			response.setQtSpecific(response.getQttotal().divide(response.getCbTotal(), 4, BigDecimal.ROUND_HALF_UP).multiply(new BigDecimal(100)));
 		}
 		// 分包工程费
 		BigDecimal fbgc = queryFactory
