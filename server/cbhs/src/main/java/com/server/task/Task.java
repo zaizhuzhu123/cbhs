@@ -9,5 +9,5 @@ public interface Task{
 	 * 任务运行接口
 	 * @throws Exception
 	 */
-	public void run()throws Exception;
+	public void run()throws Exception;  
 }

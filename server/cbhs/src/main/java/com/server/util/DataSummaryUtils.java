@@ -642,7 +642,7 @@ public class DataSummaryUtils {
 				throw new ExceedException("机械费用", exceedInfos);
 			}
 		}
-		if (zyJx.getRyOid() != null && zyJx.getRyOid() > 0 && zyJx.getRyUseCount().compareTo(BigDecimal.ZERO) > 0) {
+		if (zyJx.getRyOid() != null && zyJx.getRyOid() > 0 && zyJx.getRyUseCount() != null && zyJx.getRyUseCount().compareTo(BigDecimal.ZERO) > 0) {
 			CbhsDaysZyCailiaoCb cailiaoCb = new CbhsDaysZyCailiaoCb();
 			cailiaoCb.setCailiaoOid(zyJx.getRyOid());
 			cailiaoCb.setCount(zyJx.getRyUseCount());

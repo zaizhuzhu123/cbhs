@@ -30,6 +30,7 @@ import com.server.manager.PushManager;
  */
 @SpringBootApplication
 @ComponentScan(basePackages = "com.server")
+@ComponentScan(basePackages = "com.services")
 @EntityScan(basePackages = "com.server.pojo")
 @EnableJpaRepositories(basePackages = "com.server.jpa")
 @EnableConfigurationProperties
