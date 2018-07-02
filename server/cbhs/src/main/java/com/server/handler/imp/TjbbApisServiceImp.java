@@ -76,9 +76,13 @@ public class TjbbApisServiceImp implements TjbbApisService {
 		DateObj doo = new DateObj(request.getDaysStart(), request.getDaysEnd());
 		Preconditions.checkArgument(doo.getEndTime() >= doo.getStartTime(), "开始时间不能大于结束时间!");
 		QCbhsCb query_cb = QCbhsCb.cbhsCb;
-		List<uiCbSrTj> cbs = queryFactory.select(Projections.bean(uiCbSrTj.class, query_cb.dateStr, query_cb.total.sum().as("total"))).from(query_cb).where(query_cb.projectOid.eq(request.getProjectOid()).and(query_cb.dateTimeStamp.goe(doo.getStartTime())).and(query_cb.dateTimeStamp.loe(doo.getEndTime()))).groupBy(query_cb.dateStr).fetch();
+		List<uiCbSrTj> cbs = queryFactory.select(Projections.bean(uiCbSrTj.class, query_cb.dateStr, query_cb.total.sum().as("total"))).from(query_cb)
+				.where(query_cb.projectOid.eq(request.getProjectOid()).and(query_cb.dateTimeStamp.goe(doo.getStartTime())).and(query_cb.dateTimeStamp.loe(doo.getEndTime()))).groupBy(query_cb.dateStr)
+				.fetch();
 		QCbhsSr query_sr = QCbhsSr.cbhsSr;
-		List<uiCbSrTj> srs = queryFactory.select(Projections.bean(uiCbSrTj.class, query_sr.dateStr, query_sr.total.sum().as("total"))).from(query_sr).where(query_sr.projectOid.eq(request.getProjectOid()).and(query_sr.dateTimeStamp.goe(doo.getStartTime())).and(query_sr.dateTimeStamp.loe(doo.getEndTime()))).groupBy(query_sr.dateStr).fetch();
+		List<uiCbSrTj> srs = queryFactory.select(Projections.bean(uiCbSrTj.class, query_sr.dateStr, query_sr.total.sum().as("total"))).from(query_sr)
+				.where(query_sr.projectOid.eq(request.getProjectOid()).and(query_sr.dateTimeStamp.goe(doo.getStartTime())).and(query_sr.dateTimeStamp.loe(doo.getEndTime()))).groupBy(query_sr.dateStr)
+				.fetch();
 		List<String> daysList = doo.toDaysList();
 		Map<String, uiCbSrTj> cbsMap = Maps.uniqueIndex(cbs, new Function<uiCbSrTj, String>() {
 			public String apply(uiCbSrTj from) {
@@ -129,11 +133,16 @@ public class TjbbApisServiceImp implements TjbbApisService {
 		DateObj doo = new DateObj(request.getDaysStart(), request.getDaysEnd());
 		Preconditions.checkArgument(doo.getEndTime() >= doo.getStartTime(), "开始时间不能大于结束时间!");
 		QCbhsZytj query_cb = QCbhsZytj.cbhsZytj;
-		MyJPAQuery<uiCbSrTj> jpaQuery_cb = (MyJPAQuery<uiCbSrTj>) queryFactory.select(Projections.bean(uiCbSrTj.class, query_cb.dateStr, query_cb.total.sum().as("total"))).from(query_cb).where(query_cb.projectOid.eq(request.getProjectOid()).and(query_cb.dateTimeStamp.goe(doo.getStartTime())).and(query_cb.dateTimeStamp.loe(doo.getEndTime()))).groupBy(query_cb.dateStr);
+		MyJPAQuery<uiCbSrTj> jpaQuery_cb = (MyJPAQuery<uiCbSrTj>) queryFactory.select(Projections.bean(uiCbSrTj.class, query_cb.dateStr, query_cb.total.sum().as("total"))).from(query_cb)
+				.where(query_cb.projectOid.eq(request.getProjectOid()).and(query_cb.dateTimeStamp.goe(doo.getStartTime())).and(query_cb.dateTimeStamp.loe(doo.getEndTime()))).groupBy(query_cb.dateStr);
 		jpaQuery_cb.where(request.getFbCompanyOid(), query_cb.fbcompanyOid.eq(request.getFbCompanyOid()));
 		List<uiCbSrTj> cbs = jpaQuery_cb.fetch();
 		QCbhsDaysFbGclTj query_sr = QCbhsDaysFbGclTj.cbhsDaysFbGclTj;
-		MyJPAQuery<uiCbSrTj> jpaQuery_sr = (MyJPAQuery<uiCbSrTj>) queryFactory.select(Projections.bean(uiCbSrTj.class, query_sr.dateStr, query_sr.total.sum().as("total"))).from(query_sr).where(query_sr.projectOid.eq(request.getProjectOid()).and(query_sr.shStatus.eq(0)).and(query_sr.dateTimeStamp.goe(doo.getStartTime())).and(query_sr.dateTimeStamp.loe(doo.getEndTime()))).groupBy(query_sr.dateStr);
+		MyJPAQuery<uiCbSrTj> jpaQuery_sr = (MyJPAQuery<uiCbSrTj>) queryFactory
+				.select(Projections.bean(uiCbSrTj.class, query_sr.dateStr, query_sr.total.sum().as("total")))
+				.from(query_sr)
+				.where(query_sr.projectOid.eq(request.getProjectOid()).and(query_sr.shStatus.eq(0)).and(query_sr.dateTimeStamp.goe(doo.getStartTime()))
+						.and(query_sr.dateTimeStamp.loe(doo.getEndTime()))).groupBy(query_sr.dateStr);
 		jpaQuery_sr.where(request.getFbCompanyOid(), query_sr.fbCompanyOid.eq(request.getFbCompanyOid()));
 		List<uiCbSrTj> srs = jpaQuery_sr.fetch();
 		List<String> daysList = doo.toDaysList();
@@ -186,9 +195,11 @@ public class TjbbApisServiceImp implements TjbbApisService {
 		uiDaysCbDetailTj response = new uiDaysCbDetailTj();
 		// 总收入成本汇总
 		QCbhsCb query_cb = QCbhsCb.cbhsCb;
-		MyJPAQuery<BigDecimal> cbJpaQuery = (MyJPAQuery<BigDecimal>) queryFactory.select(query_cb.total.sum()).from(query_cb).where(query_cb.projectOid.eq(request.getProjectOid()).and(query_cb.dateTimeStamp.goe(doo.getStartTime())).and(query_cb.dateTimeStamp.loe(doo.getEndTime())));
+		MyJPAQuery<BigDecimal> cbJpaQuery = (MyJPAQuery<BigDecimal>) queryFactory.select(query_cb.total.sum()).from(query_cb)
+				.where(query_cb.projectOid.eq(request.getProjectOid()).and(query_cb.dateTimeStamp.goe(doo.getStartTime())).and(query_cb.dateTimeStamp.loe(doo.getEndTime())));
 		QCbhsSr query_sr = QCbhsSr.cbhsSr;
-		MyJPAQuery<BigDecimal> srJpaQuery = (MyJPAQuery<BigDecimal>) queryFactory.select(query_sr.total.sum().nullif(new BigDecimal(0))).from(query_sr).where(query_sr.projectOid.eq(request.getProjectOid()).and(query_sr.dateTimeStamp.goe(doo.getStartTime())).and(query_sr.dateTimeStamp.loe(doo.getEndTime())));
+		MyJPAQuery<BigDecimal> srJpaQuery = (MyJPAQuery<BigDecimal>) queryFactory.select(query_sr.total.sum().nullif(new BigDecimal(0))).from(query_sr)
+				.where(query_sr.projectOid.eq(request.getProjectOid()).and(query_sr.dateTimeStamp.goe(doo.getStartTime())).and(query_sr.dateTimeStamp.loe(doo.getEndTime())));
 		if (deptOid > 0) {
 			cbJpaQuery.where(query_cb.deptOid.eq(deptOid));
 			srJpaQuery.where(query_sr.deptOid.eq(deptOid));
@@ -199,7 +210,8 @@ public class TjbbApisServiceImp implements TjbbApisService {
 		response.setSrTotal(srTotal != null ? srTotal : BigDecimal.ZERO);
 		response.setYkTotal(response.getSrTotal().subtract(response.getCbTotal()));
 		// 成本明细汇总
-		MyJPAQuery<Tuple> detailJpaQuery = (MyJPAQuery<Tuple>) queryFactory.select(query_cb.type, query_cb.total.sum().nullif(new BigDecimal(0))).from(query_cb).where(query_cb.projectOid.eq(request.getProjectOid()).and(query_cb.dateTimeStamp.goe(doo.getStartTime())).and(query_cb.dateTimeStamp.loe(doo.getEndTime()))).groupBy(query_cb.type);
+		MyJPAQuery<Tuple> detailJpaQuery = (MyJPAQuery<Tuple>) queryFactory.select(query_cb.type, query_cb.total.sum().nullif(new BigDecimal(0))).from(query_cb)
+				.where(query_cb.projectOid.eq(request.getProjectOid()).and(query_cb.dateTimeStamp.goe(doo.getStartTime())).and(query_cb.dateTimeStamp.loe(doo.getEndTime()))).groupBy(query_cb.type);
 		if (deptOid > 0) {
 			detailJpaQuery.where(query_cb.deptOid.eq(deptOid));
 		}
@@ -255,9 +267,11 @@ public class TjbbApisServiceImp implements TjbbApisService {
 		uiGrandTotalTj response = new uiGrandTotalTj();
 		// 总收入成本汇总
 		QCbhsCb query_cb = QCbhsCb.cbhsCb;
-		MyJPAQuery<BigDecimal> cbJpaQuery = (MyJPAQuery<BigDecimal>) queryFactory.select(query_cb.total.sum()).from(query_cb).where(query_cb.projectOid.eq(request.getProjectOid()).and(query_cb.dateTimeStamp.goe(doo.getStartTime())).and(query_cb.dateTimeStamp.loe(doo.getEndTime())));
+		MyJPAQuery<BigDecimal> cbJpaQuery = (MyJPAQuery<BigDecimal>) queryFactory.select(query_cb.total.sum()).from(query_cb)
+				.where(query_cb.projectOid.eq(request.getProjectOid()).and(query_cb.dateTimeStamp.goe(doo.getStartTime())).and(query_cb.dateTimeStamp.loe(doo.getEndTime())));
 		QCbhsSr query_sr = QCbhsSr.cbhsSr;
-		MyJPAQuery<BigDecimal> srJpaQuery = (MyJPAQuery<BigDecimal>) queryFactory.select(query_sr.total.sum().nullif(new BigDecimal(0))).from(query_sr).where(query_sr.projectOid.eq(request.getProjectOid()).and(query_sr.dateTimeStamp.goe(doo.getStartTime())).and(query_sr.dateTimeStamp.loe(doo.getEndTime())));
+		MyJPAQuery<BigDecimal> srJpaQuery = (MyJPAQuery<BigDecimal>) queryFactory.select(query_sr.total.sum().nullif(new BigDecimal(0))).from(query_sr)
+				.where(query_sr.projectOid.eq(request.getProjectOid()).and(query_sr.dateTimeStamp.goe(doo.getStartTime())).and(query_sr.dateTimeStamp.loe(doo.getEndTime())));
 		BigDecimal cbTotal = cbJpaQuery.fetchFirst();
 		BigDecimal srTotal = srJpaQuery.fetchFirst();
 		response.setCbTotal(cbTotal != null ? cbTotal : BigDecimal.ZERO);
@@ -268,7 +282,9 @@ public class TjbbApisServiceImp implements TjbbApisService {
 		// 返回查询值
 		ArrayList<uiDeptGrandTotalTj> depts = (ArrayList<uiDeptGrandTotalTj>) queryFactory.getSqlRunner().query(sql, new BeanListHandler<>(uiDeptGrandTotalTj.class));
 		if (depts.size() > 0) {
-			List<uiDeptGrandTotalTj> cbs = queryFactory.select(Projections.bean(uiDeptGrandTotalTj.class, query_cb.deptOid, query_cb.total.sum().as("cbTotal"))).from(query_cb).where(query_cb.projectOid.eq(request.getProjectOid()).and(query_cb.dateTimeStamp.goe(doo.getStartTime())).and(query_cb.dateTimeStamp.loe(doo.getEndTime()))).groupBy(query_cb.deptOid).fetch();
+			List<uiDeptGrandTotalTj> cbs = queryFactory.select(Projections.bean(uiDeptGrandTotalTj.class, query_cb.deptOid, query_cb.total.sum().as("cbTotal"))).from(query_cb)
+					.where(query_cb.projectOid.eq(request.getProjectOid()).and(query_cb.dateTimeStamp.goe(doo.getStartTime())).and(query_cb.dateTimeStamp.loe(doo.getEndTime())))
+					.groupBy(query_cb.deptOid).fetch();
 			if (cbs.size() > 0) {
 				for (uiDeptGrandTotalTj cb : cbs) {
 					for (uiDeptGrandTotalTj dept : depts) {
@@ -390,15 +406,18 @@ public class TjbbApisServiceImp implements TjbbApisService {
 		Preconditions.checkArgument(request.getMonthEnd() >= request.getMonthStart(), "开始月份不能大于结束月份!");
 		// 总收入成本汇总
 		QCbhsCb query_cb = QCbhsCb.cbhsCb;
-		MyJPAQuery<BigDecimal> cbJpaQuery = (MyJPAQuery<BigDecimal>) queryFactory.select(query_cb.total.sum()).from(query_cb).where(query_cb.projectOid.eq(request.getProjectOid()).and(query_cb.dateTimeStamp.goe(request.getMonthStart())).and(query_cb.dateTimeStamp.loe(request.getMonthEnd())));
+		MyJPAQuery<BigDecimal> cbJpaQuery = (MyJPAQuery<BigDecimal>) queryFactory.select(query_cb.total.sum()).from(query_cb)
+				.where(query_cb.projectOid.eq(request.getProjectOid()).and(query_cb.dateTimeStamp.goe(request.getMonthStart())).and(query_cb.dateTimeStamp.loe(request.getMonthEnd())));
 		QCbhsSr query_sr = QCbhsSr.cbhsSr;
-		MyJPAQuery<BigDecimal> srJpaQuery = (MyJPAQuery<BigDecimal>) queryFactory.select(query_sr.total.sum().nullif(new BigDecimal(0))).from(query_sr).where(query_sr.projectOid.eq(request.getProjectOid()).and(query_sr.dateTimeStamp.goe(request.getMonthStart())).and(query_sr.dateTimeStamp.loe(request.getMonthEnd())));
+		MyJPAQuery<BigDecimal> srJpaQuery = (MyJPAQuery<BigDecimal>) queryFactory.select(query_sr.total.sum().nullif(new BigDecimal(0))).from(query_sr)
+				.where(query_sr.projectOid.eq(request.getProjectOid()).and(query_sr.dateTimeStamp.goe(request.getMonthStart())).and(query_sr.dateTimeStamp.loe(request.getMonthEnd())));
 		BigDecimal cbTotal = cbJpaQuery.fetchFirst();
 		BigDecimal srTotal = srJpaQuery.fetchFirst();
 		response.setCbTotal(cbTotal != null ? cbTotal : BigDecimal.ZERO);
 		response.setSrTotal(srTotal != null ? srTotal : BigDecimal.ZERO);
 		// 成本明细汇总
-		List<CbhsCb> cbs = queryFactory.selectFrom(query_cb).where(query_cb.projectOid.eq(request.getProjectOid()).and(query_cb.dateTimeStamp.goe(request.getMonthStart())).and(query_cb.dateTimeStamp.loe(request.getMonthEnd()))).fetch();
+		List<CbhsCb> cbs = queryFactory.selectFrom(query_cb)
+				.where(query_cb.projectOid.eq(request.getProjectOid()).and(query_cb.dateTimeStamp.goe(request.getMonthStart())).and(query_cb.dateTimeStamp.loe(request.getMonthEnd()))).fetch();
 		Map<Integer, List<Integer>> typeListsMap = Maps.newHashMap();
 		if (cbs != null && cbs.size() > 0) {
 			for (int i = 0; i < cbs.size(); i++) {
@@ -460,6 +479,8 @@ public class TjbbApisServiceImp implements TjbbApisService {
 							response.setQtfytotal(jjcb.getXlf_kyjf().add(response.getQtfytotal()));
 							response.setQtfytotal(jjcb.getXlf_cljbxf().add(response.getQtfytotal()));
 							response.setQtfytotal(jjcb.getXlf_qt().add(response.getQtfytotal()));
+							response.setQtfytotal(jjcb.getXlf_bhfy().add(response.getQtfytotal()));
+							response.setQtfytotal(jjcb.getXlf_gzzrx().add(response.getQtfytotal()));
 						}
 					}
 					break;
@@ -482,7 +503,11 @@ public class TjbbApisServiceImp implements TjbbApisService {
 			}
 		}
 		// 零星用工人力
-		BigDecimal lxyg = queryFactory.select(query_cb.total.sum()).from(query_cb).where(query_cb.projectOid.eq(request.getProjectOid()).and(query_cb.type.in(Lists.newArrayList(SheObject.shType_zylxyg))).and(query_cb.dateTimeStamp.goe(request.getMonthStart())).and(query_cb.dateTimeStamp.loe(request.getMonthEnd()))).fetchFirst();
+		BigDecimal lxyg = queryFactory
+				.select(query_cb.total.sum())
+				.from(query_cb)
+				.where(query_cb.projectOid.eq(request.getProjectOid()).and(query_cb.type.in(Lists.newArrayList(SheObject.shType_zylxyg))).and(query_cb.dateTimeStamp.goe(request.getMonthStart()))
+						.and(query_cb.dateTimeStamp.loe(request.getMonthEnd()))).fetchFirst();
 		response.setRlTotal(lxyg != null ? lxyg.add(response.getRlTotal()) : response.getRlTotal());
 		if (response.getCbTotal().compareTo(BigDecimal.ZERO) > 0) {
 			response.setRlSpecific(response.getRlTotal().divide(response.getCbTotal(), 4, BigDecimal.ROUND_HALF_UP).multiply(new BigDecimal(100)));
@@ -496,37 +521,61 @@ public class TjbbApisServiceImp implements TjbbApisService {
 			response.setSjSpecific(response.getSjtotal().divide(response.getCbTotal(), 4, BigDecimal.ROUND_HALF_UP).multiply(new BigDecimal(100)));
 		}
 		// 自营材料成本
-		BigDecimal zycailiao = queryFactory.select(query_cb.total.sum()).from(query_cb).where(query_cb.projectOid.eq(request.getProjectOid()).and(query_cb.type.in(Lists.newArrayList(SheObject.shType_zycailiaocb, SheObject.shType_zyjxcbry))).and(query_cb.dateTimeStamp.goe(request.getMonthStart())).and(query_cb.dateTimeStamp.loe(request.getMonthEnd()))).fetchFirst();
+		BigDecimal zycailiao = queryFactory
+				.select(query_cb.total.sum())
+				.from(query_cb)
+				.where(query_cb.projectOid.eq(request.getProjectOid()).and(query_cb.type.in(Lists.newArrayList(SheObject.shType_zycailiaocb, SheObject.shType_zyjxcbry)))
+						.and(query_cb.dateTimeStamp.goe(request.getMonthStart())).and(query_cb.dateTimeStamp.loe(request.getMonthEnd()))).fetchFirst();
 		response.setCailiaoTotal(zycailiao != null ? zycailiao : BigDecimal.ZERO);
 		if (response.getCbTotal().compareTo(BigDecimal.ZERO) > 0) {
 			response.setCailiaoSpecific(response.getCailiaoTotal().divide(response.getCbTotal(), 4, BigDecimal.ROUND_HALF_UP).multiply(new BigDecimal(100)));
 		}
 		// 自营机械成本
-		BigDecimal zyjx = queryFactory.select(query_cb.total.sum()).from(query_cb).where(query_cb.projectOid.eq(request.getProjectOid()).and(query_cb.type.in(Lists.newArrayList(SheObject.shType_zyjxcb))).and(query_cb.dateTimeStamp.goe(request.getMonthStart())).and(query_cb.dateTimeStamp.loe(request.getMonthEnd()))).fetchFirst();
+		BigDecimal zyjx = queryFactory
+				.select(query_cb.total.sum())
+				.from(query_cb)
+				.where(query_cb.projectOid.eq(request.getProjectOid()).and(query_cb.type.in(Lists.newArrayList(SheObject.shType_zyjxcb))).and(query_cb.dateTimeStamp.goe(request.getMonthStart()))
+						.and(query_cb.dateTimeStamp.loe(request.getMonthEnd()))).fetchFirst();
 		response.setJxTotal(zyjx != null ? zyjx : BigDecimal.ZERO);
 		if (response.getCbTotal().compareTo(BigDecimal.ZERO) > 0) {
 			response.setJxSpecific(response.getJxTotal().divide(response.getCbTotal(), 4, BigDecimal.ROUND_HALF_UP).multiply(new BigDecimal(100)));
 		}
 		// 其他成本
-		BigDecimal qt = queryFactory.select(query_cb.total.sum()).from(query_cb).where(query_cb.projectOid.eq(request.getProjectOid()).and(query_cb.type.in(Lists.newArrayList(SheObject.shType_qtcb))).and(query_cb.dateTimeStamp.goe(request.getMonthStart())).and(query_cb.dateTimeStamp.loe(request.getMonthEnd()))).fetchFirst();
+		BigDecimal qt = queryFactory
+				.select(query_cb.total.sum())
+				.from(query_cb)
+				.where(query_cb.projectOid.eq(request.getProjectOid()).and(query_cb.type.in(Lists.newArrayList(SheObject.shType_qtcb))).and(query_cb.dateTimeStamp.goe(request.getMonthStart()))
+						.and(query_cb.dateTimeStamp.loe(request.getMonthEnd()))).fetchFirst();
 		response.setQttotal(qt != null ? qt : BigDecimal.ZERO);
 		if (response.getCbTotal().compareTo(BigDecimal.ZERO) > 0) {
 			response.setQtSpecific(response.getQttotal().divide(response.getCbTotal(), 4, BigDecimal.ROUND_HALF_UP).multiply(new BigDecimal(100)));
 		}
 		// 分包工程费
-		BigDecimal fbgc = queryFactory.select(query_cb.total.sum()).from(query_cb).where(query_cb.projectOid.eq(request.getProjectOid()).and(query_cb.type.in(Lists.newArrayList(SheObject.shType_fbgcl, SheObject.shType_fbgcljg))).and(query_cb.dateTimeStamp.goe(request.getMonthStart())).and(query_cb.dateTimeStamp.loe(request.getMonthEnd()))).fetchFirst();
+		BigDecimal fbgc = queryFactory
+				.select(query_cb.total.sum())
+				.from(query_cb)
+				.where(query_cb.projectOid.eq(request.getProjectOid()).and(query_cb.type.in(Lists.newArrayList(SheObject.shType_fbgcl, SheObject.shType_fbgcljg)))
+						.and(query_cb.dateTimeStamp.goe(request.getMonthStart())).and(query_cb.dateTimeStamp.loe(request.getMonthEnd()))).fetchFirst();
 		response.setFbgctotal(fbgc != null ? fbgc : BigDecimal.ZERO);
 		if (response.getCbTotal().compareTo(BigDecimal.ZERO) > 0) {
 			response.setFbgcSpecific(response.getFbgctotal().divide(response.getCbTotal(), 4, BigDecimal.ROUND_HALF_UP).multiply(new BigDecimal(100)));
 		}
 		// 临建项目
-		BigDecimal fbljxm = queryFactory.select(query_cb.total.sum()).from(query_cb).where(query_cb.projectOid.eq(request.getProjectOid()).and(query_cb.type.in(Lists.newArrayList(SheObject.shType_fbljxm, SheObject.shType_fbljxmcount))).and(query_cb.dateTimeStamp.goe(request.getMonthStart())).and(query_cb.dateTimeStamp.loe(request.getMonthEnd()))).fetchFirst();
+		BigDecimal fbljxm = queryFactory
+				.select(query_cb.total.sum())
+				.from(query_cb)
+				.where(query_cb.projectOid.eq(request.getProjectOid()).and(query_cb.type.in(Lists.newArrayList(SheObject.shType_fbljxm, SheObject.shType_fbljxmcount)))
+						.and(query_cb.dateTimeStamp.goe(request.getMonthStart())).and(query_cb.dateTimeStamp.loe(request.getMonthEnd()))).fetchFirst();
 		response.setFbljxmtotal(fbljxm != null ? fbljxm : BigDecimal.ZERO);
 		if (response.getCbTotal().compareTo(BigDecimal.ZERO) > 0) {
 			response.setFbljxmSpecific(response.getFbljxmtotal().divide(response.getCbTotal(), 4, BigDecimal.ROUND_HALF_UP).multiply(new BigDecimal(100)));
 		}
 		// 分包商统计
-		BigDecimal fbstj = queryFactory.select(query_cb.total.sum()).from(query_cb).where(query_cb.projectOid.eq(request.getProjectOid()).and(query_cb.type.in(Lists.newArrayList(SheObject.shType_zytjry, SheObject.shType_zytjzc))).and(query_cb.dateTimeStamp.goe(request.getMonthStart())).and(query_cb.dateTimeStamp.loe(request.getMonthEnd()))).fetchFirst();
+		BigDecimal fbstj = queryFactory
+				.select(query_cb.total.sum())
+				.from(query_cb)
+				.where(query_cb.projectOid.eq(request.getProjectOid()).and(query_cb.type.in(Lists.newArrayList(SheObject.shType_zytjry, SheObject.shType_zytjzc)))
+						.and(query_cb.dateTimeStamp.goe(request.getMonthStart())).and(query_cb.dateTimeStamp.loe(request.getMonthEnd()))).fetchFirst();
 		response.setFbstjtotal(fbstj != null ? fbstj : BigDecimal.ZERO);
 		if (response.getCbTotal().compareTo(BigDecimal.ZERO) > 0) {
 			response.setFbstjSpecific(response.getFbstjtotal().divide(response.getCbTotal(), 4, BigDecimal.ROUND_HALF_UP).multiply(new BigDecimal(100)));

@@ -99,6 +99,8 @@ public class QCbhsDaysJjcb extends EntityPathBase<CbhsDaysJjcb> {
 
     public final NumberPath<java.math.BigDecimal> total = createNumber("total", java.math.BigDecimal.class);
 
+    public final NumberPath<java.math.BigDecimal> xlf_bhfy = createNumber("xlf_bhfy", java.math.BigDecimal.class);
+
     public final NumberPath<java.math.BigDecimal> xlf_cailiaofei = createNumber("xlf_cailiaofei", java.math.BigDecimal.class);
 
     public final NumberPath<java.math.BigDecimal> xlf_clf = createNumber("xlf_clf", java.math.BigDecimal.class);
@@ -108,6 +110,8 @@ public class QCbhsDaysJjcb extends EntityPathBase<CbhsDaysJjcb> {
     public final NumberPath<java.math.BigDecimal> xlf_dxf = createNumber("xlf_dxf", java.math.BigDecimal.class);
 
     public final NumberPath<java.math.BigDecimal> xlf_flf = createNumber("xlf_flf", java.math.BigDecimal.class);
+
+    public final NumberPath<java.math.BigDecimal> xlf_gzzrx = createNumber("xlf_gzzrx", java.math.BigDecimal.class);
 
     public final NumberPath<java.math.BigDecimal> xlf_kyjf = createNumber("xlf_kyjf", java.math.BigDecimal.class);
 

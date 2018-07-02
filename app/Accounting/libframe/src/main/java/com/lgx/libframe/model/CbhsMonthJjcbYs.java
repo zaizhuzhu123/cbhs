@@ -38,15 +38,17 @@ private double bg_dnhc;// 必填|办公-电脑耗材
 private double bg_qt;// 必填|办公-其他
 private double xlf_dxf;// 必填|修理费-大修费
 private double xlf_ybxlf;// 必填|修理费-一般修理费
-private double xlf_clf;// 必填|修理费-差旅费
-private double xlf_cailiaofei;// 必填|修理费-材料费
-private double xlf_flf;// 必填|修理费-福利费
-private double xlf_ywjf;// 必填|修理费-业务经费
-private double xlf_sdf;// 必填|修理费-水电费
-private double xlf_scf;// 必填|修理费-审车费
-private double xlf_kyjf;// 必填|修理费-科研经费
-private double xlf_cljbxf;// 必填|修理费-车辆及保险费
-private double xlf_qt;// 必填|修理费-其他
+private double xlf_clf;// 必填|其他费用-差旅费
+private double xlf_cailiaofei;// 必填|其他费用-材料费
+private double xlf_flf;// 必填|其他费用-福利费
+private double xlf_ywjf;// 必填|其他费用-业务经费
+private double xlf_sdf;// 必填|其他费用-水电费
+private double xlf_scf;// 必填|其他费用-审车费
+private double xlf_kyjf;// 必填|其他费用-科研经费
+private double xlf_cljbxf;// 必填|其他费用-车辆及保险费
+private double xlf_bhfy;// 必填|其他费用-保函费用
+private double xlf_gzzrx;// 必填|其他费用-雇主责任险
+private double xlf_qt;// 必填|其他费用-其他
 private double aqfy_ygsz;// 必填|安全费用-一岗双责
 private double aqfy_ygsztc;// 必填|安全费用-一岗双责调差
 private double aqfy_qt;// 必填|安全费用-其他
@@ -519,6 +521,30 @@ public double  getXlf_cljbxf(){
 public void setXlf_cljbxf(double xlf_cljbxf){
  
         this.xlf_cljbxf=xlf_cljbxf;
+
+}
+
+public double  getXlf_bhfy(){ 
+
+    return this.xlf_bhfy;
+
+}
+
+public void setXlf_bhfy(double xlf_bhfy){
+ 
+        this.xlf_bhfy=xlf_bhfy;
+
+}
+
+public double  getXlf_gzzrx(){ 
+
+    return this.xlf_gzzrx;
+
+}
+
+public void setXlf_gzzrx(double xlf_gzzrx){
+ 
+        this.xlf_gzzrx=xlf_gzzrx;
 
 }
 

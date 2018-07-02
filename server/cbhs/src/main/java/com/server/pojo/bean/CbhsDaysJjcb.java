@@ -127,32 +127,38 @@ public class CbhsDaysJjcb implements Serializable {
 	@ApiModelProperty(value = "必填|修理费-一般修理费",required=false)
 	private BigDecimal xlf_ybxlf= new BigDecimal(0);// 必填|修理费-一般修理费
 	@Column(name = "xlf_clf",precision = 19, scale = 4, columnDefinition="decimal(19,4) default 0", nullable = true, unique = false)
-	@ApiModelProperty(value = "必填|修理费-差旅费",required=false)
-	private BigDecimal xlf_clf= new BigDecimal(0);// 必填|修理费-差旅费
+	@ApiModelProperty(value = "必填|其他费用-差旅费",required=false)
+	private BigDecimal xlf_clf= new BigDecimal(0);// 必填|其他费用-差旅费
 	@Column(name = "xlf_cailiaofei",precision = 19, scale = 4, columnDefinition="decimal(19,4) default 0", nullable = true, unique = false)
-	@ApiModelProperty(value = "必填|修理费-材料费",required=false)
-	private BigDecimal xlf_cailiaofei= new BigDecimal(0);// 必填|修理费-材料费
+	@ApiModelProperty(value = "必填|其他费用-材料费",required=false)
+	private BigDecimal xlf_cailiaofei= new BigDecimal(0);// 必填|其他费用-材料费
 	@Column(name = "xlf_flf",precision = 19, scale = 4, columnDefinition="decimal(19,4) default 0", nullable = true, unique = false)
-	@ApiModelProperty(value = "必填|修理费-福利费",required=false)
-	private BigDecimal xlf_flf= new BigDecimal(0);// 必填|修理费-福利费
+	@ApiModelProperty(value = "必填|其他费用-福利费",required=false)
+	private BigDecimal xlf_flf= new BigDecimal(0);// 必填|其他费用-福利费
 	@Column(name = "xlf_ywjf",precision = 19, scale = 4, columnDefinition="decimal(19,4) default 0", nullable = true, unique = false)
-	@ApiModelProperty(value = "必填|修理费-业务经费",required=false)
-	private BigDecimal xlf_ywjf= new BigDecimal(0);// 必填|修理费-业务经费
+	@ApiModelProperty(value = "必填|其他费用-业务经费",required=false)
+	private BigDecimal xlf_ywjf= new BigDecimal(0);// 必填|其他费用-业务经费
 	@Column(name = "xlf_sdf",precision = 19, scale = 4, columnDefinition="decimal(19,4) default 0", nullable = true, unique = false)
-	@ApiModelProperty(value = "必填|修理费-水电费",required=false)
-	private BigDecimal xlf_sdf= new BigDecimal(0);// 必填|修理费-水电费
+	@ApiModelProperty(value = "必填|其他费用-水电费",required=false)
+	private BigDecimal xlf_sdf= new BigDecimal(0);// 必填|其他费用-水电费
 	@Column(name = "xlf_scf",precision = 19, scale = 4, columnDefinition="decimal(19,4) default 0", nullable = true, unique = false)
-	@ApiModelProperty(value = "必填|修理费-审车费",required=false)
-	private BigDecimal xlf_scf= new BigDecimal(0);// 必填|修理费-审车费
+	@ApiModelProperty(value = "必填|其他费用-审车费",required=false)
+	private BigDecimal xlf_scf= new BigDecimal(0);// 必填|其他费用-审车费
 	@Column(name = "xlf_kyjf",precision = 19, scale = 4, columnDefinition="decimal(19,4) default 0", nullable = true, unique = false)
-	@ApiModelProperty(value = "必填|修理费-科研经费",required=false)
-	private BigDecimal xlf_kyjf= new BigDecimal(0);// 必填|修理费-科研经费
+	@ApiModelProperty(value = "必填|其他费用-科研经费",required=false)
+	private BigDecimal xlf_kyjf= new BigDecimal(0);// 必填|其他费用-科研经费
 	@Column(name = "xlf_cljbxf",precision = 19, scale = 4, columnDefinition="decimal(19,4) default 0", nullable = true, unique = false)
-	@ApiModelProperty(value = "必填|修理费-车辆及保险费",required=false)
-	private BigDecimal xlf_cljbxf= new BigDecimal(0);// 必填|修理费-车辆及保险费
+	@ApiModelProperty(value = "必填|其他费用-车辆及保险费",required=false)
+	private BigDecimal xlf_cljbxf= new BigDecimal(0);// 必填|其他费用-车辆及保险费
+	@Column(name = "xlf_bhfy",precision = 19, scale = 4, columnDefinition="decimal(19,4) default 0", nullable = true, unique = false)
+	@ApiModelProperty(value = "必填|其他费用-保函费用",required=false)
+	private BigDecimal xlf_bhfy= new BigDecimal(0);// 必填|其他费用-保函费用
+	@Column(name = "xlf_gzzrx",precision = 19, scale = 4, columnDefinition="decimal(19,4) default 0", nullable = true, unique = false)
+	@ApiModelProperty(value = "必填|其他费用-雇主责任险",required=false)
+	private BigDecimal xlf_gzzrx= new BigDecimal(0);// 必填|其他费用-雇主责任险
 	@Column(name = "xlf_qt",precision = 19, scale = 4, columnDefinition="decimal(19,4) default 0", nullable = true, unique = false)
-	@ApiModelProperty(value = "必填|修理费-其他",required=false)
-	private BigDecimal xlf_qt= new BigDecimal(0);// 必填|修理费-其他
+	@ApiModelProperty(value = "必填|其他费用-其他",required=false)
+	private BigDecimal xlf_qt= new BigDecimal(0);// 必填|其他费用-其他
 	@Column(name = "aqfy_ygsz",precision = 19, scale = 4, columnDefinition="decimal(19,4) default 0", nullable = true, unique = false)
 	@ApiModelProperty(value = "必填|安全费用-一岗双责",required=false)
 	private BigDecimal aqfy_ygsz= new BigDecimal(0);// 必填|安全费用-一岗双责
@@ -670,6 +676,30 @@ public class CbhsDaysJjcb implements Serializable {
 	public void setXlf_cljbxf(BigDecimal xlf_cljbxf) {
  
         this.xlf_cljbxf = xlf_cljbxf;
+
+	}
+
+	public BigDecimal getXlf_bhfy() { 
+
+    	return this.xlf_bhfy;
+
+	}
+
+	public void setXlf_bhfy(BigDecimal xlf_bhfy) {
+ 
+        this.xlf_bhfy = xlf_bhfy;
+
+	}
+
+	public BigDecimal getXlf_gzzrx() { 
+
+    	return this.xlf_gzzrx;
+
+	}
+
+	public void setXlf_gzzrx(BigDecimal xlf_gzzrx) {
+ 
+        this.xlf_gzzrx = xlf_gzzrx;
 
 	}
 
