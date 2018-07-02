@@ -10,6 +10,7 @@ private static final long serialVersionUID = 10000001L;
 
 private List<CbhsMonthJjcbYs> result;;// 间接成本预算集合
 private long total;// 总条数
+private  CbhsMonthJjcbYs  jjcbTotal;// 合计对象
 public List<CbhsMonthJjcbYs>  getResult(){
     return this.result;
 }
@@ -26,6 +27,18 @@ public long  getTotal(){
 public void setTotal(long total){
  
         this.total=total;
+
+}
+
+public CbhsMonthJjcbYs  getJjcbTotal(){ 
+
+    return this.jjcbTotal;
+
+}
+
+public void setJjcbTotal(CbhsMonthJjcbYs jjcbTotal){
+ 
+        this.jjcbTotal=jjcbTotal;
 
 }
 

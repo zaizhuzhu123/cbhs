@@ -11,6 +11,8 @@ public class RequestTodayFetch implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@ApiModelProperty(value = "工程项目ID")
 	private Integer projectOid= 0;
+	@ApiModelProperty(value = "日期")
+	private Long daysStamp= 0L;
 
 	public Integer getProjectOid() { 
 
@@ -21,6 +23,18 @@ public class RequestTodayFetch implements Serializable {
 	public void setProjectOid(Integer projectOid) {
  
         this.projectOid = projectOid;
+
+	}
+
+	public Long getDaysStamp() { 
+
+    	return this.daysStamp;
+
+	}
+
+	public void setDaysStamp(Long daysStamp) {
+ 
+        this.daysStamp = daysStamp;
 
 	}
 

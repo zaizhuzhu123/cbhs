@@ -33,3 +33,17 @@
 2018-07-02 17:51:17,334 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.5.RELEASE, Spring v4.3.10.RELEASE
 2018-07-02 17:51:17,334 INFO (SpringApplication.java:597)- The following profiles are active: prod,test
 2018-07-02 17:51:32,524 INFO (StartupInfoLogger.java:57)- Started ServletInitializer in 15.561 seconds (JVM running for 15.906)
+2018-07-02 20:29:52,306 INFO (StartupInfoLogger.java:48)- Starting ServletInitializer on qmf-PC with PID 9904 (C:\Users\qmf\git\cbhs\server\cbhs\target\classes started by qmf in C:\Users\qmf\git\cbhs\server\cbhs)
+2018-07-02 20:29:52,308 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.5.RELEASE, Spring v4.3.10.RELEASE
+2018-07-02 20:29:52,309 INFO (SpringApplication.java:597)- The following profiles are active: prod,test
+2018-07-02 20:30:11,040 INFO (StartupInfoLogger.java:57)- Started ServletInitializer in 19.287 seconds (JVM running for 19.803)
+2018-07-02 20:36:40,754 INFO (StartupInfoLogger.java:48)- Starting ServletInitializer on qmf-PC with PID 11244 (C:\Users\qmf\git\cbhs\server\cbhs\target\classes started by qmf in C:\Users\qmf\git\cbhs\server\cbhs)
+2018-07-02 20:36:40,759 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.5.RELEASE, Spring v4.3.10.RELEASE
+2018-07-02 20:36:40,759 INFO (SpringApplication.java:597)- The following profiles are active: prod,test
+2018-07-02 20:36:58,898 INFO (StartupInfoLogger.java:57)- Started ServletInitializer in 18.6 seconds (JVM running for 19.094)
+2018-07-02 20:38:00,001 INFO (QuartzService.java:67)- 启动日志定时写入任务------>
+2018-07-02 20:38:00,058 INFO (QuartzService.java:79)- <-------日志定时写入任务完成
+2018-07-02 20:45:32,333 INFO (StartupInfoLogger.java:48)- Starting ServletInitializer on qmf-PC with PID 10884 (C:\Users\qmf\git\cbhs\server\cbhs\target\classes started by qmf in C:\Users\qmf\git\cbhs\server\cbhs)
+2018-07-02 20:45:32,336 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.5.RELEASE, Spring v4.3.10.RELEASE
+2018-07-02 20:45:32,336 INFO (SpringApplication.java:597)- The following profiles are active: prod,test
+2018-07-02 20:45:50,561 INFO (StartupInfoLogger.java:57)- Started ServletInitializer in 18.685 seconds (JVM running for 19.175)

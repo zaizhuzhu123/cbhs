@@ -18,6 +18,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
+import com.querydsl.core.types.Projections;
 import com.server.common.BeanValidation;
 import com.server.common.CbhsResUtils;
 import com.server.common.DateObj;
@@ -43,6 +44,7 @@ import com.server.pojo.bean.CbhsDaysZyJxCb;
 import com.server.pojo.bean.CbhsDaysZyLxygCb;
 import com.server.pojo.bean.CbhsDaysZyQtCb;
 import com.server.pojo.bean.CbhsGlfyRule;
+import com.server.pojo.bean.CbhsMonthJjcbYs;
 import com.server.pojo.bean.QCbhsDaysFbGclTj;
 import com.server.pojo.bean.QCbhsDaysFbLjxmCb;
 import com.server.pojo.bean.QCbhsDaysGclSr;
@@ -136,6 +138,10 @@ public class DaysCbApisServiceImp implements DaysCbApisService {
 		PagerResult pr = jpaquery.fetchPager(request.getPageNum(), request.getPageSize());
 		response.setTotal(pr.getTotal());
 		response.setResult(pr.getResult());
+		// 查询合计对象
+		CbhsDaysJjcb jjcbTotal = queryFactory.select(Projections.bean(CbhsDaysJjcb.class, query_.total.sum().as(query_.total), query_.glry_gz.sum().as(query_.glry_gz), query_.glry_zjjf.sum().as(query_.glry_zjjf), query_.glry_ghjf.sum().as(query_.glry_ghjf), query_.glry_dwbx.sum().as(query_.glry_dwbx), query_.glry_qt.sum().as(query_.glry_qt), query_.glry_wp_gz.sum().as(query_.glry_wp_gz), query_.glry_wp_zjjf.sum().as(query_.glry_wp_zjjf), query_.glry_wp_ghjf.sum().as(query_.glry_wp_ghjf), query_.glry_wp_qt.sum().as(query_.glry_wp_qt), query_.scry_gz.sum().as(query_.scry_gz), query_.scry_zjjf.sum().as(query_.scry_zjjf), query_.scry_ghjf.sum().as(query_.scry_ghjf), query_.scry_dwbx.sum().as(query_.scry_dwbx), query_.scry_qt.sum().as(query_.scry_qt), query_.scry_wp_gz.sum().as(query_.scry_wp_gz), query_.scry_wp_zjjf.sum().as(query_.scry_wp_zjjf), query_.scry_wp_ghjf.sum().as(query_.scry_wp_ghjf), query_.scry_wp_qt.sum().as(query_.scry_wp_qt), query_.bg_bgyp.sum().as(query_.bg_bgyp),
+				query_.bg_txf.sum().as(query_.bg_txf), query_.bg_dnhc.sum().as(query_.bg_dnhc), query_.bg_qt.sum().as(query_.bg_qt), query_.xlf_dxf.sum().as(query_.xlf_dxf), query_.xlf_ybxlf.sum().as(query_.xlf_ybxlf), query_.xlf_clf.sum().as(query_.xlf_clf), query_.xlf_cailiaofei.sum().as(query_.xlf_cailiaofei), query_.xlf_flf.sum().as(query_.xlf_flf), query_.xlf_ywjf.sum().as(query_.xlf_ywjf), query_.xlf_sdf.sum().as(query_.xlf_sdf), query_.xlf_scf.sum().as(query_.xlf_scf), query_.xlf_kyjf.sum().as(query_.xlf_kyjf), query_.xlf_cljbxf.sum().as(query_.xlf_cljbxf), query_.xlf_bhfy.sum().as(query_.xlf_bhfy), query_.xlf_gzzrx.sum().as(query_.xlf_gzzrx), query_.xlf_qt.sum().as(query_.xlf_qt), query_.aqfy_ygsz.sum().as(query_.aqfy_ygsz), query_.aqfy_ygsztc.sum().as(query_.aqfy_ygsztc), query_.aqfy_qt.sum().as(query_.aqfy_qt))).from(query_).where(jpaquery.getMetadata().getWhere()).fetchFirst();
+		response.setJjcbTotal(jjcbTotal);
 		return response;
 	}
 
@@ -981,7 +987,11 @@ public class DaysCbApisServiceImp implements DaysCbApisService {
 		Preconditions.checkArgument(request.getProjectOid() > 0, "工程项目ID不能为空!");
 		CbhsGlfyRule rule = queryFactory.selectFrom(QCbhsGlfyRule.cbhsGlfyRule).where(QCbhsGlfyRule.cbhsGlfyRule.projectOid.eq(request.getProjectOid())).fetchFirst();
 		Preconditions.checkArgument(rule != null, "未配置管理费用上缴公式!");
+
 		DateTime dt = new DateTime(System.currentTimeMillis());
+		if (request.getDaysStamp() != null && request.getDaysStamp() > 0) {
+			dt = new DateTime(request.getDaysStamp());
+		}
 		String dateStr = dt.toString("yyyy-MM-dd");
 		BigDecimal gcSrTotal = queryFactory.select(QCbhsDaysGclSr.cbhsDaysGclSr.total.sum()).from(QCbhsDaysGclSr.cbhsDaysGclSr).where(QCbhsDaysGclSr.cbhsDaysGclSr.projectOid.eq(request.getProjectOid()).and(QCbhsDaysGclSr.cbhsDaysGclSr.dateStr.eq(dateStr))).fetchFirst();
 		gcSrTotal = gcSrTotal == null ? new BigDecimal(0) : gcSrTotal;
