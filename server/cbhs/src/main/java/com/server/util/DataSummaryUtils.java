@@ -934,16 +934,23 @@ public class DataSummaryUtils {
 	 * @return
 	 */
 	public static Map<Integer, CbhsDaysFbGclTj> getThisMonthSubmitFbGclCb(MyQueryFactory queryFactory, RequestMbYsFetch request, List<Integer> globalGclOids) {
-		DateTime dt = new DateTime(request.getMonth());
-		long startTime = dt.getMillis();
-		long endTime = dt.plusMonths(1).getMillis();
+//		DateTime dt = new DateTime(request.getMonth());
+//		long startTime = dt.getMillis();
+//		long endTime = dt.plusMonths(1).getMillis();
+//		JPAQuery<CbhsDaysFbGclTj> jqcbhsMonthZyCailiaoCbYsTuple = queryFactory
+//				.select(Projections.bean(CbhsDaysFbGclTj.class, QCbhsDaysFbGclTj.cbhsDaysFbGclTj.fbGclYsOid, QCbhsDaysFbGclTj.cbhsDaysFbGclTj.count.sum().as(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.count),
+//						QCbhsDaysFbGclTj.cbhsDaysFbGclTj.total.sum().as(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.total)))
+//				.from(QCbhsDaysFbGclTj.cbhsDaysFbGclTj)
+//				.where(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.projectOid.eq(request.getProjectOid())
+//						.and(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.dateTimeStamp.goe(startTime).and(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.dateTimeStamp.loe(endTime)))
+//						.and(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.shStatus.eq(0)));
 		JPAQuery<CbhsDaysFbGclTj> jqcbhsMonthZyCailiaoCbYsTuple = queryFactory
 				.select(Projections.bean(CbhsDaysFbGclTj.class, QCbhsDaysFbGclTj.cbhsDaysFbGclTj.fbGclYsOid, QCbhsDaysFbGclTj.cbhsDaysFbGclTj.count.sum().as(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.count),
 						QCbhsDaysFbGclTj.cbhsDaysFbGclTj.total.sum().as(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.total)))
 				.from(QCbhsDaysFbGclTj.cbhsDaysFbGclTj)
 				.where(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.projectOid.eq(request.getProjectOid())
-						.and(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.dateTimeStamp.goe(startTime).and(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.dateTimeStamp.loe(endTime)))
 						.and(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.shStatus.eq(0)));
+		//2018-07-03 分包工程量 去掉月份 审批 保留    统计的量不超过清单工程量就可以
 		if (globalGclOids != null & globalGclOids.size() > 0) {
 			jqcbhsMonthZyCailiaoCbYsTuple.where(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.fbGclYsOid.in(globalGclOids));
 		}
@@ -1014,14 +1021,21 @@ public class DataSummaryUtils {
 	}
 
 	public static Map<Integer, CbhsMonthFbGcCbYs> getThisMonthFbGclCbYs(MyQueryFactory queryFactory, RequestMbYsFetch request, List<Integer> fbGclOids) {
+//		JPAQuery<CbhsMonthFbGcCbYs> jqcbhsMonthZyCailiaoCbYsTuple = queryFactory
+//				.select(Projections.bean(CbhsMonthFbGcCbYs.class, QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.oid,
+//						QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.count.sum().as(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.count),
+//						QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.total.sum().as(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.total))).from(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs)
+//				.where(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.projectOid.eq(request.getProjectOid()).and(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.monthTimeStamp.eq(request.getMonth())));
+		//2018-07-03 分包工程量 去掉月份 审批 保留    统计的量不超过清单工程量就可以
 		JPAQuery<CbhsMonthFbGcCbYs> jqcbhsMonthZyCailiaoCbYsTuple = queryFactory
 				.select(Projections.bean(CbhsMonthFbGcCbYs.class, QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.oid,
 						QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.count.sum().as(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.count),
 						QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.total.sum().as(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.total))).from(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs)
-				.where(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.projectOid.eq(request.getProjectOid()).and(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.monthTimeStamp.eq(request.getMonth())));
+				.where(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.projectOid.eq(request.getProjectOid()));
 		if (fbGclOids != null & fbGclOids.size() > 0) {
 			jqcbhsMonthZyCailiaoCbYsTuple.where(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.oid.in(fbGclOids));
 		}
+		
 		jqcbhsMonthZyCailiaoCbYsTuple.groupBy(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.oid);
 		List<CbhsMonthFbGcCbYs> list = jqcbhsMonthZyCailiaoCbYsTuple.fetch();
 		Map<Integer, CbhsMonthFbGcCbYs> map = Maps.uniqueIndex(list, new Function<CbhsMonthFbGcCbYs, Integer>() {
