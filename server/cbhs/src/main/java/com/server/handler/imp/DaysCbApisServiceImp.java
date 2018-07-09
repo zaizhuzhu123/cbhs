@@ -44,6 +44,7 @@ import com.server.pojo.bean.CbhsDaysZyJxCb;
 import com.server.pojo.bean.CbhsDaysZyLxygCb;
 import com.server.pojo.bean.CbhsDaysZyQtCb;
 import com.server.pojo.bean.CbhsGlfyRule;
+import com.server.pojo.bean.CbhsMonthFbGcCbYs;
 import com.server.pojo.bean.CbhsMonthJjcbYs;
 import com.server.pojo.bean.QCbhsDaysFbGclTj;
 import com.server.pojo.bean.QCbhsDaysFbLjxmCb;
@@ -843,8 +844,13 @@ public class DaysCbApisServiceImp implements DaysCbApisService {
 		bv.vali(BeanValidation.beanType.dept, BeanValidation.valiType.all, ys.getDeptOid());
 		bv.vali(BeanValidation.beanType.fbCompany, BeanValidation.valiType.all, ys.getFbCompanyOid());
 		bv.vali(BeanValidation.beanType.ht, BeanValidation.valiType.all, ys.getHtOid());
-		Preconditions.checkArgument(queryFactory.exists(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs, QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.oid.eq(ys.getFbGclYsOid())), "分包工程量项目不存在!");
+		CbhsMonthFbGcCbYs cbhsMonthFbGcCbYs = queryFactory.findOne(CbhsMonthFbGcCbYs.class, ys.getFbGclYsOid());
+		ys.setUnitPrice(cbhsMonthFbGcCbYs.getUnitPrice());
+		ys.setTotal(ys.getUnitPrice().multiply(ys.getCount()));
+		Preconditions.checkArgument(cbhsMonthFbGcCbYs != null, "分包工程量项目不存在!");
 		ys.setShStatus(0);
+		String ext = null;
+		ExceedException exception = null;
 		// 监测是否超出总预算
 		long time = ys.getDateTimeStamp() > 0 ? ys.getDateTimeStamp() : System.currentTimeMillis();
 		RequestMbYsFetch r1 = new RequestMbYsFetch();
@@ -856,7 +862,17 @@ public class DaysCbApisServiceImp implements DaysCbApisService {
 			globalGclOids.add(ys.getFbGclYsOid());
 			DataSummaryUtils.checkFbGclIsExceed(queryFactory, r1, ys, globalGclOids);
 		} catch (ExceedException e) {
-			throw new ServiceException(new ExceptionResponse(-1, ys.getFbGclYsName() + "已超出本月预算总量" + e.getInfo().getExceedInfos().get(0).getValue().abs() + e.getInfo().getExceedInfos().get(0).getUnit()));
+			// throw new ServiceException(new ExceptionResponse(-1,
+			// ys.getFbGclYsName() + "已超出本月预算总量" +
+			// e.getInfo().getExceedInfos().get(0).getValue().abs() +
+			// e.getInfo().getExceedInfos().get(0).getUnit()));
+			if (request.getSubmitType() == 0) { // 默认提交
+				throw e;
+			} else {
+				ext = JSON.toJSONString(e.getInfo().getExceedInfos());
+				ys.setShStatus(1);
+				exception = e;
+			}
 		}
 		DateTime dt = new DateTime(time);
 		DateTime curDt = new DateTime(System.currentTimeMillis());
@@ -869,14 +885,9 @@ public class DaysCbApisServiceImp implements DaysCbApisService {
 		ys.setOpTimeStr(curDt.toString("yyyy-MM-dd HH:mm:ss"));
 		ys.setOpTime(curDt.getMillis());
 		ys = queryFactory.saveOrUpdate(ys);
-		// if (ys.getShStatus() == 1) { // 审核提交 需要向审核者发送推送消息
-		// examinerManager.createExaminer(queryFactory, ys.getProjectOid(),
-		// SheObject.shType_fbgcl, ys.getOid(), ys.getDeptOid(),
-		// ys.getDeptName(), ext, exception.getInfo().getErrorMessage(),
-		// exception.getInfo().getErrorMessage(),
-		// TokenUtils.getTokenInfo(httpServletRequest).getUserOid(),
-		// TokenUtils.getTokenInfo(httpServletRequest).getUserName());
-		// }
+		if (ys.getShStatus() == 1) { // 审核提交 需要向审核者发送推送消息
+			examinerManager.createExaminer(queryFactory, ys.getProjectOid(), SheObject.shType_fbgcl, ys.getOid(), ys.getDeptOid(), ys.getDeptName(), ext, exception.getInfo().getErrorMessage(), exception.getInfo().getErrorMessage(), TokenUtils.getTokenInfo(httpServletRequest).getUserOid(), TokenUtils.getTokenInfo(httpServletRequest).getUserName());
+		}
 		return ys;
 	}
 
@@ -1018,39 +1029,48 @@ public class DaysCbApisServiceImp implements DaysCbApisService {
 	public CbhsDaysFbGclTj fbJgAdd(RequestFbJgAdd request, HttpServletRequest httpServletRequest) throws Exception {
 		Preconditions.checkArgument(request.getFbGclOid() > 0, "分包价格统计ID不能为空!");
 		CbhsDaysFbGclTj gclTj = queryFactory.findOne(CbhsDaysFbGclTj.class, request.getFbGclOid());
-		Preconditions.checkArgument(gclTj != null, "分包工程量不存在!");
-		Preconditions.checkArgument(gclTj.getShStatus() == 0, "分包工程量正在审核中!");
+		Preconditions.checkArgument(gclTj != null, "分包工程量统计不存在!");
+		Preconditions.checkArgument(gclTj.getShStatus() == 0, "分包工程量统计正在审核中!");
 		// 监测是否超出总预算
-		String ext = null;
-		RequestMbYsFetch r1 = new RequestMbYsFetch();
-		r1.setProjectOid(gclTj.getProjectOid());
-		r1.setDeptOid(gclTj.getDeptOid());
-		r1.setMonth(new SimpleDateFormat("yyyy-MM-01").parse(new SimpleDateFormat("yyyy-MM-01").format(new Date(gclTj.getDateTimeStamp()))).getTime());
-		ExceedException exception = null;
+		// String ext = null;
+		// RequestMbYsFetch r1 = new RequestMbYsFetch();
+		// r1.setProjectOid(gclTj.getProjectOid());
+		// r1.setDeptOid(gclTj.getDeptOid());
+		// r1.setMonth(new SimpleDateFormat("yyyy-MM-01").parse(new
+		// SimpleDateFormat("yyyy-MM-01").format(new
+		// Date(gclTj.getDateTimeStamp()))).getTime());
+		// ExceedException exception = null;
 		gclTj.setTotal(request.getFbPrice());
 		gclTj.setUnitPrice(request.getFbUnitPrice());
-		try {
-			DataSummaryUtils.checkFbGclPriceIsExceed(queryFactory, r1, gclTj, Lists.newArrayList(gclTj.getFbGclYsOid()));
-		} catch (ExceedException e) {
-			if (request.getSubmitType() == 0) { // 默认提交
-				throw e;
-			} else {
-				ext = JSON.toJSONString(e.getInfo().getExceedInfos());
-				gclTj.setShStatus(1);
-				exception = e;
-			}
-		}
+		// try {
+		// DataSummaryUtils.checkFbGclPriceIsExceed(queryFactory, r1, gclTj,
+		// Lists.newArrayList(gclTj.getFbGclYsOid()));
+		// } catch (ExceedException e) {
+		// if (request.getSubmitType() == 0) { // 默认提交
+		// throw e;
+		// } else {
+		// ext = JSON.toJSONString(e.getInfo().getExceedInfos());
+		// gclTj.setShStatus(1);
+		// exception = e;
+		// }
+		// }
 		gclTj = queryFactory.saveOrUpdate(gclTj);
-		if (gclTj.getShStatus() == 1) { // 审核提交 需要向审核者发送推送消息
-			queryFactory.update(QCbhsDaysFbGclTj.cbhsDaysFbGclTj).set(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.shStatus, 1).where(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.oid.eq(gclTj.getOid())).execute();
-			examinerManager.createExaminer(queryFactory, gclTj.getProjectOid(), SheObject.shType_fbgcljg, gclTj.getOid(), gclTj.getDeptOid(), gclTj.getDeptName(), ext, exception.getInfo().getErrorMessage(), exception.getInfo().getErrorMessage(), TokenUtils.getTokenInfo(httpServletRequest).getUserOid(), TokenUtils.getTokenInfo(httpServletRequest).getUserName());
-		} else {
-			CbhsCb cb = JSON.parseObject(JSON.toJSONString(gclTj), CbhsCb.class);
-			cb.setOid(null);
-			cb.setType(SheObject.shType_fbgcljg);
-			cb.setCbOid(gclTj.getOid());
-			cbSrManager.createCb(queryFactory, cb);
-		}
+		// if (gclTj.getShStatus() == 1) { // 审核提交 需要向审核者发送推送消息
+		// queryFactory.update(QCbhsDaysFbGclTj.cbhsDaysFbGclTj).set(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.shStatus,
+		// 1).where(QCbhsDaysFbGclTj.cbhsDaysFbGclTj.oid.eq(gclTj.getOid())).execute();
+		// examinerManager.createExaminer(queryFactory, gclTj.getProjectOid(),
+		// SheObject.shType_fbgcljg, gclTj.getOid(), gclTj.getDeptOid(),
+		// gclTj.getDeptName(), ext, exception.getInfo().getErrorMessage(),
+		// exception.getInfo().getErrorMessage(),
+		// TokenUtils.getTokenInfo(httpServletRequest).getUserOid(),
+		// TokenUtils.getTokenInfo(httpServletRequest).getUserName());
+		// } else {
+		CbhsCb cb = JSON.parseObject(JSON.toJSONString(gclTj), CbhsCb.class);
+		cb.setOid(null);
+		cb.setType(SheObject.shType_fbgcl);
+		cb.setCbOid(gclTj.getOid());
+		cbSrManager.createCb(queryFactory, cb);
+		// }
 		return gclTj;
 	}
 
