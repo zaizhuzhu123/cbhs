@@ -341,7 +341,17 @@
 				},
 				{
 					"action":"com.lgx.price.accounting.finance.bxjl.BxjlActivity.ACTION",
-					"chidren":[],
+					"chidren":[
+						{
+							"action":"",
+							"chidren":[],
+							"icon":"",
+							"menuId":"4,2,1",
+							"menuName":"财务审核",
+							"menuOpName":"cw_sh_app",
+							"parentMenuId":"4,2"
+						}
+					],
 					"icon":"bxjl",
 					"menuId":"4,2",
 					"menuName":"报销记录",

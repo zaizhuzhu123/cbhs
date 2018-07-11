@@ -319,6 +319,14 @@ public class Menus {
 		AppMenu_menu4_2.setIcon("bxjl");
 		AppMenu_menu4_2.setParentMenuId("4");
 		AppMenu_menu4.getChidren().add(AppMenu_menu4_2);		AppMenu_menu4_2.setChidren(new ArrayList<MenuObj>());
+		MenuObj AppMenu_menu4_2_1 = new MenuObj();
+		AppMenu_menu4_2_1.setMenuId("4,2,1");
+		AppMenu_menu4_2_1.setMenuName("财务审核");
+		AppMenu_menu4_2_1.setMenuOpName("cw_sh_app");
+		AppMenu_menu4_2_1.setAction("");
+		AppMenu_menu4_2_1.setIcon("");
+		AppMenu_menu4_2_1.setParentMenuId("4,2");
+		AppMenu_menu4_2.getChidren().add(AppMenu_menu4_2_1);		AppMenu_menu4_2_1.setChidren(new ArrayList<MenuObj>());
 		MenuObj AppMenu_menu4_3 = new MenuObj();
 		AppMenu_menu4_3.setMenuId("4,3");
 		AppMenu_menu4_3.setMenuName("对上结算");
