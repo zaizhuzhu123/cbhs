@@ -78,260 +78,307 @@ public class ZytjApisServiceImp implements ZytjApisService {
 
 	@Override
 	public ResponseZytjFetch zytjFetch(RequestZytjFetch request, HttpServletRequest httpServletRequest) throws Exception {
-		Preconditions.checkArgument(request.getProjectOid() > 0, "工程项目ID不能为空!");
-		QCbhsZytj query_ = QCbhsZytj.cbhsZytj;
-		// 查询对象
-		MyJPAQuery<CbhsZytj> jpaquery = queryFactory.selectFrom(query_);
-		// 条件组合
-		jpaquery.where(request.getProjectOid(), query_.projectOid.eq(request.getProjectOid()));
-		jpaquery.where(request.getOid(), query_.oid.eq(request.getOid()));
-		jpaquery.where(request.getDeptOid(), query_.deptOid.eq(request.getDeptOid()));
-		jpaquery.where(request.getDaysStart(), query_.dateTimeStamp.goe(request.getDaysStart()));
-		jpaquery.where(request.getDaysEnd(), query_.dateTimeStamp.loe(request.getDaysEnd()));
-		jpaquery.where(request.getStartOid(), query_.oid.gt(request.getStartOid()));
-		jpaquery.where(request.getGlobalGclYsOid(), query_.globalGclYsOid.eq(request.getGlobalGclYsOid()));
-		jpaquery.where(request.getFbCompanyOid(), query_.fbcompanyOid.eq(request.getFbCompanyOid()));
+		// Preconditions.checkArgument(request.getProjectOid() > 0,
+		// "工程项目ID不能为空!");
+		// QCbhsZytj query_ = QCbhsZytj.cbhsZytj;
+		// // 查询对象
+		// MyJPAQuery<CbhsZytj> jpaquery = queryFactory.selectFrom(query_);
+		// // 条件组合
+		// jpaquery.where(request.getProjectOid(),
+		// query_.projectOid.eq(request.getProjectOid()));
+		// jpaquery.where(request.getOid(), query_.oid.eq(request.getOid()));
+		// jpaquery.where(request.getDeptOid(),
+		// query_.deptOid.eq(request.getDeptOid()));
+		// jpaquery.where(request.getDaysStart(),
+		// query_.dateTimeStamp.goe(request.getDaysStart()));
+		// jpaquery.where(request.getDaysEnd(),
+		// query_.dateTimeStamp.loe(request.getDaysEnd()));
+		// jpaquery.where(request.getStartOid(),
+		// query_.oid.gt(request.getStartOid()));
+		// jpaquery.where(request.getGlobalGclYsOid(),
+		// query_.globalGclYsOid.eq(request.getGlobalGclYsOid()));
+		// jpaquery.where(request.getFbCompanyOid(),
+		// query_.fbcompanyOid.eq(request.getFbCompanyOid()));
 		// 查询总数
 		ResponseZytjFetch response = new ResponseZytjFetch();
-		PagerResult pr = jpaquery.fetchPager(request.getPageNum(), request.getPageSize());
-		response.setTotal(pr.getTotal());
-		response.setResult(pr.getResult());
-		// 补入主材 工种 辅材
-		if (pr.getTotal() > 0) {
-			List<Integer> zytjOids = Lists.newArrayList();
-			for (CbhsZytj zytj : response.getResult()) {
-				zytj.setGzs(Lists.newArrayList());
-				zytj.setZcs(Lists.newArrayList());
-				zytj.setFcs(Lists.newArrayList());
-				zytjOids.add(zytj.getOid());
-			}
-			Map<Integer, CbhsZytj> cbsMap = Maps.uniqueIndex(response.getResult(), new Function<CbhsZytj, Integer>() {
-				public Integer apply(CbhsZytj from) {
-					return from.getOid();
-				}
-			});
-			// 所有工种
-			List<CbhsZytjGZ> gzs = queryFactory.selectFrom(QCbhsZytjGZ.cbhsZytjGZ).where(QCbhsZytjGZ.cbhsZytjGZ.zytjOid.in(zytjOids)).fetch();
-			if (gzs.size() > 0) {
-				for (CbhsZytjGZ gz : gzs) {
-					cbsMap.get(gz.getZytjOid()).getGzs().add(gz);
-				}
-			}
-			// 所有主材
-			List<CbhsZytjZC> zcs = queryFactory.selectFrom(QCbhsZytjZC.cbhsZytjZC).where(QCbhsZytjZC.cbhsZytjZC.zytjOid.in(zytjOids)).fetch();
-			if (zcs.size() > 0) {
-				for (CbhsZytjZC zc : zcs) {
-					cbsMap.get(zc.getZytjOid()).getZcs().add(zc);
-				}
-			}
-			// 所有辅材
-			List<CbhsZytjFC> fcs = queryFactory.selectFrom(QCbhsZytjFC.cbhsZytjFC).where(QCbhsZytjFC.cbhsZytjFC.zytjOid.in(zytjOids)).fetch();
-			if (fcs.size() > 0) {
-				for (CbhsZytjFC fc : fcs) {
-					cbsMap.get(fc.getZytjOid()).getFcs().add(fc);
-				}
-			}
-		}
+		// PagerResult pr = jpaquery.fetchPager(request.getPageNum(),
+		// request.getPageSize());
+		// response.setTotal(pr.getTotal());
+		// response.setResult(pr.getResult());
+		// // 补入主材 工种 辅材
+		// if (pr.getTotal() > 0) {
+		// List<Integer> zytjOids = Lists.newArrayList();
+		// for (CbhsZytj zytj : response.getResult()) {
+		// zytj.setGzs(Lists.newArrayList());
+		// zytj.setZcs(Lists.newArrayList());
+		// zytj.setFcs(Lists.newArrayList());
+		// zytjOids.add(zytj.getOid());
+		// }
+		// Map<Integer, CbhsZytj> cbsMap =
+		// Maps.uniqueIndex(response.getResult(), new Function<CbhsZytj,
+		// Integer>() {
+		// public Integer apply(CbhsZytj from) {
+		// return from.getOid();
+		// }
+		// });
+		// // 所有工种
+		// List<CbhsZytjGZ> gzs =
+		// queryFactory.selectFrom(QCbhsZytjGZ.cbhsZytjGZ).where(QCbhsZytjGZ.cbhsZytjGZ.zytjOid.in(zytjOids)).fetch();
+		// if (gzs.size() > 0) {
+		// for (CbhsZytjGZ gz : gzs) {
+		// cbsMap.get(gz.getZytjOid()).getGzs().add(gz);
+		// }
+		// }
+		// // 所有主材
+		// List<CbhsZytjZC> zcs =
+		// queryFactory.selectFrom(QCbhsZytjZC.cbhsZytjZC).where(QCbhsZytjZC.cbhsZytjZC.zytjOid.in(zytjOids)).fetch();
+		// if (zcs.size() > 0) {
+		// for (CbhsZytjZC zc : zcs) {
+		// cbsMap.get(zc.getZytjOid()).getZcs().add(zc);
+		// }
+		// }
+		// // 所有辅材
+		// List<CbhsZytjFC> fcs =
+		// queryFactory.selectFrom(QCbhsZytjFC.cbhsZytjFC).where(QCbhsZytjFC.cbhsZytjFC.zytjOid.in(zytjOids)).fetch();
+		// if (fcs.size() > 0) {
+		// for (CbhsZytjFC fc : fcs) {
+		// cbsMap.get(fc.getZytjOid()).getFcs().add(fc);
+		// }
+		// }
+		// }
 		return response;
 	}
 
 	@Override
 	public CbhsZytj zytjUpdate(CbhsZytj zytj, HttpServletRequest httpServletRequest) throws Exception {
-		BeanValidation bv = new BeanValidation(queryFactory);
-		bv.vali(BeanValidation.beanType.project, BeanValidation.valiType.all, zytj.getProjectOid());
-		bv.vali(BeanValidation.beanType.dept, BeanValidation.valiType.all, zytj.getDeptOid());
-		bv.vali(BeanValidation.beanType.fbCompany, BeanValidation.valiType.all, zytj.getFbcompanyOid());
-		queryFactory.saveOrUpdate(zytj);
-		queryFactory.delete(QCbhsZytjGZ.cbhsZytjGZ).where(QCbhsZytjGZ.cbhsZytjGZ.zytjOid.in(zytj.getOid())).execute();
-		queryFactory.delete(QCbhsZytjZC.cbhsZytjZC).where(QCbhsZytjZC.cbhsZytjZC.zytjOid.in(zytj.getOid())).execute();
-		queryFactory.delete(QCbhsZytjFC.cbhsZytjFC).where(QCbhsZytjFC.cbhsZytjFC.zytjOid.in(zytj.getOid())).execute();
-		if (zytj.getGzs() != null && zytj.getGzs().size() > 0) {
-			for (CbhsZytjGZ gz : zytj.getGzs()) {
-				gz.setZytjOid(zytj.getOid());
-			}
-			queryFactory.batchSaveOrUpdate(zytj.getGzs());
-		}
-		if (zytj.getZcs() != null && zytj.getZcs().size() > 0) {
-			for (CbhsZytjZC zc : zytj.getZcs()) {
-				zc.setZytjOid(zytj.getOid());
-			}
-			queryFactory.batchSaveOrUpdate(zytj.getZcs());
-		}
-		if (zytj.getFcs() != null && zytj.getFcs().size() > 0) {
-			for (CbhsZytjFC fc : zytj.getFcs()) {
-				fc.setZytjOid(zytj.getOid());
-			}
-			queryFactory.batchSaveOrUpdate(zytj.getFcs());
-		}
-		cbSrManager.updateCb(queryFactory, SheObject.shType_zytj, zytj.getOid(), zytj.getTotal());
+		// BeanValidation bv = new BeanValidation(queryFactory);
+		// bv.vali(BeanValidation.beanType.project, BeanValidation.valiType.all,
+		// zytj.getProjectOid());
+		// bv.vali(BeanValidation.beanType.dept, BeanValidation.valiType.all,
+		// zytj.getDeptOid());
+		// bv.vali(BeanValidation.beanType.fbCompany,
+		// BeanValidation.valiType.all, zytj.getFbcompanyOid());
+		// queryFactory.saveOrUpdate(zytj);
+		// queryFactory.delete(QCbhsZytjGZ.cbhsZytjGZ).where(QCbhsZytjGZ.cbhsZytjGZ.zytjOid.in(zytj.getOid())).execute();
+		// queryFactory.delete(QCbhsZytjZC.cbhsZytjZC).where(QCbhsZytjZC.cbhsZytjZC.zytjOid.in(zytj.getOid())).execute();
+		// queryFactory.delete(QCbhsZytjFC.cbhsZytjFC).where(QCbhsZytjFC.cbhsZytjFC.zytjOid.in(zytj.getOid())).execute();
+		// if (zytj.getGzs() != null && zytj.getGzs().size() > 0) {
+		// for (CbhsZytjGZ gz : zytj.getGzs()) {
+		// gz.setZytjOid(zytj.getOid());
+		// }
+		// queryFactory.batchSaveOrUpdate(zytj.getGzs());
+		// }
+		// if (zytj.getZcs() != null && zytj.getZcs().size() > 0) {
+		// for (CbhsZytjZC zc : zytj.getZcs()) {
+		// zc.setZytjOid(zytj.getOid());
+		// }
+		// queryFactory.batchSaveOrUpdate(zytj.getZcs());
+		// }
+		// if (zytj.getFcs() != null && zytj.getFcs().size() > 0) {
+		// for (CbhsZytjFC fc : zytj.getFcs()) {
+		// fc.setZytjOid(zytj.getOid());
+		// }
+		// queryFactory.batchSaveOrUpdate(zytj.getFcs());
+		// }
+		// cbSrManager.updateCb(queryFactory, SheObject.shType_zytj,
+		// zytj.getOid(), zytj.getTotal());
 		return zytj;
 	}
 
 	@Override
 	public JSONObject zytjDel(RequestZytjDel request, HttpServletRequest httpServletRequest) throws Exception {
-		Preconditions.checkArgument(request.getOids().size() > 0, "资源统计ID不能为空!");
-		queryFactory.delete(QCbhsZytj.cbhsZytj).where(QCbhsZytj.cbhsZytj.oid.in(request.getOids())).execute();
-		queryFactory.delete(QCbhsZytjGZ.cbhsZytjGZ).where(QCbhsZytjGZ.cbhsZytjGZ.zytjOid.in(request.getOids())).execute();
-		queryFactory.delete(QCbhsZytjZC.cbhsZytjZC).where(QCbhsZytjZC.cbhsZytjZC.zytjOid.in(request.getOids())).execute();
-		queryFactory.delete(QCbhsZytjFC.cbhsZytjFC).where(QCbhsZytjFC.cbhsZytjFC.zytjOid.in(request.getOids())).execute();
-		cbSrManager.delCb(queryFactory, SheObject.shType_zytj, request.getOids());
+		// Preconditions.checkArgument(request.getOids().size() > 0,
+		// "资源统计ID不能为空!");
+		// queryFactory.delete(QCbhsZytj.cbhsZytj).where(QCbhsZytj.cbhsZytj.oid.in(request.getOids())).execute();
+		// queryFactory.delete(QCbhsZytjGZ.cbhsZytjGZ).where(QCbhsZytjGZ.cbhsZytjGZ.zytjOid.in(request.getOids())).execute();
+		// queryFactory.delete(QCbhsZytjZC.cbhsZytjZC).where(QCbhsZytjZC.cbhsZytjZC.zytjOid.in(request.getOids())).execute();
+		// queryFactory.delete(QCbhsZytjFC.cbhsZytjFC).where(QCbhsZytjFC.cbhsZytjFC.zytjOid.in(request.getOids())).execute();
+		// cbSrManager.delCb(queryFactory, SheObject.shType_zytj,
+		// request.getOids());
 		return CbhsResUtils.suc();
 	}
 
 	@Override
 	public CbhsZytj zytjAdd(RequestZytjAdd request, HttpServletRequest httpServletRequest) throws Exception {
-		BeanValidation bv = new BeanValidation(queryFactory);
-		bv.vali(BeanValidation.beanType.project, BeanValidation.valiType.all, request.getCb().getProjectOid());
-		bv.vali(BeanValidation.beanType.dept, BeanValidation.valiType.all, request.getCb().getDeptOid());
-		bv.vali(BeanValidation.beanType.fbCompany, BeanValidation.valiType.all, request.getCb().getFbcompanyOid());
-		CbhsZytj cb = request.getCb();
-		cb.setShStatus(0);
-		if (request.getSubmitType() == 0) {
-			if (cb.getZcs() != null && cb.getZcs().size() > 0) {
-				for (CbhsZytjZC c : cb.getZcs()) {
-					bv.vali(BeanValidation.beanType.cailiao, BeanValidation.valiType.all, c.getClOid());
-				}
-				// 监测是否超出总预算
-				RequestMbYsFetch r1 = new RequestMbYsFetch();
-				r1.setProjectOid(cb.getProjectOid());
-				// r1.setDeptOid(cb.getDeptOid());
-				r1.setMonth(new SimpleDateFormat("yyyy-MM-01").parse(new SimpleDateFormat("yyyy-MM-01").format(new Date(cb.getDateTimeStamp()))).getTime());
-				try {
-					DataSummaryUtils.checkFbCailiaoCbIsExceed(queryFactory, r1, cb, cb.getZcs(), Lists.newArrayList(), Lists.newArrayList(cb.getGlobalGclYsOid()));
-				} catch (ExceedException e) {
-					throw e;
-				}
-			}
-			long time = cb.getDateTimeStamp() > 0 ? cb.getDateTimeStamp() : System.currentTimeMillis();
-			DateTime dt = new DateTime(time);
-			DateTime curDt = new DateTime(System.currentTimeMillis());
-			cb.setDateStr(dt.toString("yyyy-MM-dd"));
-			cb.setDateTimeStamp(time);
-			cb.setMonthStr(dt.toString("yyyy-MM"));
-			cb.setMonthTimeStamp(new DateObj(time, DateObj.type_month).getStartTime());
-			cb.setOpUserOid(TokenUtils.getTokenInfo(httpServletRequest).getUserOid());
-			cb.setOpUserName(TokenUtils.getTokenInfo(httpServletRequest).getUserName());
-			cb.setOpTimeStr(curDt.toString("yyyy-MM-dd HH:mm:ss"));
-			cb.setOpTime(curDt.getMillis());
-			int cbOid = queryFactory.saveOrUpdate(cb).getOid();
-			cb.setOid(cbOid);
-			if (cb.getGzs() != null && cb.getGzs().size() > 0) {
-				for (CbhsZytjGZ gz : cb.getGzs()) {
-					gz.setZytjOid(cbOid);
-				}
-				queryFactory.batchSaveOrUpdate(cb.getGzs());
-			}
-			if (cb.getZcs() != null && cb.getZcs().size() > 0) {
-				for (CbhsZytjZC zc : cb.getZcs()) {
-					zc.setZytjOid(cbOid);
-				}
-				queryFactory.batchSaveOrUpdate(cb.getZcs());
-			}
-			if (cb.getFcs() != null && cb.getFcs().size() > 0) {
-				for (CbhsZytjFC fc : cb.getFcs()) {
-					fc.setZytjOid(cbOid);
-				}
-				queryFactory.batchSaveOrUpdate(cb.getFcs());
-			}
-			CbhsCb cb_ = JSON.parseObject(JSON.toJSONString(cb), CbhsCb.class);
-			cb_.setOid(null);
-			cb_.setType(SheObject.shType_zytj);
-			cb_.setCbOid(cb.getOid());
-			cbSrManager.createCb(queryFactory, cb_);
-			if (cb.getRyPrice().compareTo(BigDecimal.ZERO) > 0) {
-				CbhsCb shType_zytjry = JSON.parseObject(JSON.toJSONString(cb), CbhsCb.class);
-				shType_zytjry.setOid(null);
-				shType_zytjry.setType(SheObject.shType_zytjry);
-				shType_zytjry.setTotal(cb.getRyPrice());
-				shType_zytjry.setCbOid(cbOid);
-				cbSrManager.createCb(queryFactory, shType_zytjry);
-			}
-			if (cb.getZcTotal().compareTo(BigDecimal.ZERO) > 0) {
-				CbhsCb shType_zytjzc = JSON.parseObject(JSON.toJSONString(cb), CbhsCb.class);
-				shType_zytjzc.setOid(null);
-				shType_zytjzc.setType(SheObject.shType_zytjzc);
-				shType_zytjzc.setTotal(cb.getZcTotal());
-				shType_zytjzc.setCbOid(cbOid);
-				cbSrManager.createCb(queryFactory, shType_zytjzc);
-			}
-		} else {
-			ExceedException exception = null;
-			String ext = null;
-			if (cb.getZcs() != null && cb.getZcs().size() > 0) {
-				for (CbhsZytjZC c : cb.getZcs()) {
-					bv.vali(BeanValidation.beanType.cailiao, BeanValidation.valiType.all, c.getClOid());
-				}
-				// 监测是否超出总预算
-				RequestMbYsFetch r1 = new RequestMbYsFetch();
-				r1.setProjectOid(cb.getProjectOid());
-				r1.setDeptOid(cb.getDeptOid());
-				r1.setMonth(new SimpleDateFormat("yyyy-MM-01").parse(new SimpleDateFormat("yyyy-MM-01").format(new Date(System.currentTimeMillis()))).getTime());
-				try {
-					DataSummaryUtils.checkFbCailiaoCbIsExceed(queryFactory, r1, cb, cb.getZcs(), Lists.newArrayList(cb.getDeptOid()), Lists.newArrayList(cb.getGlobalGclYsOid()));
-				} catch (ExceedException e) {
-					ext = JSON.toJSONString(e.getInfo().getExceedInfos());
-					cb.setShStatus(1);
-					exception = e;
-				}
-			}
-			long time = cb.getDateTimeStamp() > 0 ? cb.getDateTimeStamp() : System.currentTimeMillis();
-			DateTime dt = new DateTime(time);
-			DateTime curDt = new DateTime(System.currentTimeMillis());
-			cb.setDateStr(dt.toString("yyyy-MM-dd"));
-			cb.setDateTimeStamp(time);
-			cb.setMonthStr(dt.toString("yyyy-MM"));
-			cb.setMonthTimeStamp(new DateObj(time, DateObj.type_month).getStartTime());
-			cb.setOpUserOid(TokenUtils.getTokenInfo(httpServletRequest).getUserOid());
-			cb.setOpUserName(TokenUtils.getTokenInfo(httpServletRequest).getUserName());
-			cb.setOpTimeStr(curDt.toString("yyyy-MM-dd HH:mm:ss"));
-			cb.setOpTime(curDt.getMillis());
-			int cbOid = queryFactory.saveOrUpdate(cb).getOid();
-			cb.setOid(cbOid);
-			if (cb.getGzs() != null && cb.getGzs().size() > 0) {
-				for (CbhsZytjGZ gz : cb.getGzs()) {
-					gz.setZytjOid(cbOid);
-				}
-				queryFactory.batchSaveOrUpdate(cb.getGzs());
-			}
-			if (cb.getZcs() != null && cb.getZcs().size() > 0) {
-				for (CbhsZytjZC zc : cb.getZcs()) {
-					zc.setZytjOid(cbOid);
-				}
-				queryFactory.batchSaveOrUpdate(cb.getZcs());
-			}
-			if (cb.getFcs() != null && cb.getFcs().size() > 0) {
-				for (CbhsZytjFC fc : cb.getFcs()) {
-					fc.setZytjOid(cbOid);
-				}
-				queryFactory.batchSaveOrUpdate(cb.getFcs());
-			}
-			if (cb.getShStatus() == 1) {
-				examinerManager.createExaminer(queryFactory, cb.getProjectOid(), SheObject.shType_zytj, cb.getOid(), cb.getDeptOid(), cb.getDeptName(), ext, exception.getInfo().getErrorMessage(), exception.getInfo().getErrorMessage(), TokenUtils.getTokenInfo(httpServletRequest).getUserOid(), TokenUtils.getTokenInfo(httpServletRequest).getUserName());
-			} else {
-				CbhsCb cb_ = JSON.parseObject(JSON.toJSONString(cb), CbhsCb.class);
-				cb_.setOid(null);
-				cb_.setType(SheObject.shType_zytj);
-				cb_.setCbOid(cb.getOid());
-				cbSrManager.createCb(queryFactory, cb_);
-				if (cb.getRyPrice().compareTo(BigDecimal.ZERO) > 0) {
-					CbhsCb shType_zytjry = JSON.parseObject(JSON.toJSONString(cb), CbhsCb.class);
-					shType_zytjry.setOid(null);
-					shType_zytjry.setType(SheObject.shType_zytjry);
-					shType_zytjry.setTotal(cb.getRyPrice());
-					shType_zytjry.setCbOid(cbOid);
-					cbSrManager.createCb(queryFactory, shType_zytjry);
-				}
-				if (cb.getZcTotal().compareTo(BigDecimal.ZERO) > 0) {
-					CbhsCb shType_zytjzc = JSON.parseObject(JSON.toJSONString(cb), CbhsCb.class);
-					shType_zytjzc.setOid(null);
-					shType_zytjzc.setType(SheObject.shType_zytjzc);
-					shType_zytjzc.setTotal(cb.getZcTotal());
-					shType_zytjzc.setCbOid(cbOid);
-					cbSrManager.createCb(queryFactory, shType_zytjzc);
-				}
-			}
-		}
-		return request.getCb();
+		// BeanValidation bv = new BeanValidation(queryFactory);
+		// bv.vali(BeanValidation.beanType.project, BeanValidation.valiType.all,
+		// request.getCb().getProjectOid());
+		// bv.vali(BeanValidation.beanType.dept, BeanValidation.valiType.all,
+		// request.getCb().getDeptOid());
+		// bv.vali(BeanValidation.beanType.fbCompany,
+		// BeanValidation.valiType.all, request.getCb().getFbcompanyOid());
+		// CbhsZytj cb = request.getCb();
+		// cb.setShStatus(0);
+		// if (request.getSubmitType() == 0) {
+		// if (cb.getZcs() != null && cb.getZcs().size() > 0) {
+		// for (CbhsZytjZC c : cb.getZcs()) {
+		// bv.vali(BeanValidation.beanType.cailiao, BeanValidation.valiType.all,
+		// c.getClOid());
+		// }
+		// // 监测是否超出总预算
+		// RequestMbYsFetch r1 = new RequestMbYsFetch();
+		// r1.setProjectOid(cb.getProjectOid());
+		// // r1.setDeptOid(cb.getDeptOid());
+		// r1.setMonth(new SimpleDateFormat("yyyy-MM-01").parse(new
+		// SimpleDateFormat("yyyy-MM-01").format(new
+		// Date(cb.getDateTimeStamp()))).getTime());
+		// try {
+		// DataSummaryUtils.checkFbCailiaoCbIsExceed(queryFactory, r1, cb,
+		// cb.getZcs(), Lists.newArrayList(),
+		// Lists.newArrayList(cb.getGlobalGclYsOid()));
+		// } catch (ExceedException e) {
+		// throw e;
+		// }
+		// }
+		// long time = cb.getDateTimeStamp() > 0 ? cb.getDateTimeStamp() :
+		// System.currentTimeMillis();
+		// DateTime dt = new DateTime(time);
+		// DateTime curDt = new DateTime(System.currentTimeMillis());
+		// cb.setDateStr(dt.toString("yyyy-MM-dd"));
+		// cb.setDateTimeStamp(time);
+		// cb.setMonthStr(dt.toString("yyyy-MM"));
+		// cb.setMonthTimeStamp(new DateObj(time,
+		// DateObj.type_month).getStartTime());
+		// cb.setOpUserOid(TokenUtils.getTokenInfo(httpServletRequest).getUserOid());
+		// cb.setOpUserName(TokenUtils.getTokenInfo(httpServletRequest).getUserName());
+		// cb.setOpTimeStr(curDt.toString("yyyy-MM-dd HH:mm:ss"));
+		// cb.setOpTime(curDt.getMillis());
+		// int cbOid = queryFactory.saveOrUpdate(cb).getOid();
+		// cb.setOid(cbOid);
+		// if (cb.getGzs() != null && cb.getGzs().size() > 0) {
+		// for (CbhsZytjGZ gz : cb.getGzs()) {
+		// gz.setZytjOid(cbOid);
+		// }
+		// queryFactory.batchSaveOrUpdate(cb.getGzs());
+		// }
+		// if (cb.getZcs() != null && cb.getZcs().size() > 0) {
+		// for (CbhsZytjZC zc : cb.getZcs()) {
+		// zc.setZytjOid(cbOid);
+		// }
+		// queryFactory.batchSaveOrUpdate(cb.getZcs());
+		// }
+		// if (cb.getFcs() != null && cb.getFcs().size() > 0) {
+		// for (CbhsZytjFC fc : cb.getFcs()) {
+		// fc.setZytjOid(cbOid);
+		// }
+		// queryFactory.batchSaveOrUpdate(cb.getFcs());
+		// }
+		// CbhsCb cb_ = JSON.parseObject(JSON.toJSONString(cb), CbhsCb.class);
+		// cb_.setOid(null);
+		// cb_.setType(SheObject.shType_zytj);
+		// cb_.setCbOid(cb.getOid());
+		// cbSrManager.createCb(queryFactory, cb_);
+		// if (cb.getRyPrice().compareTo(BigDecimal.ZERO) > 0) {
+		// CbhsCb shType_zytjry = JSON.parseObject(JSON.toJSONString(cb),
+		// CbhsCb.class);
+		// shType_zytjry.setOid(null);
+		// shType_zytjry.setType(SheObject.shType_zytjry);
+		// shType_zytjry.setTotal(cb.getRyPrice());
+		// shType_zytjry.setCbOid(cbOid);
+		// cbSrManager.createCb(queryFactory, shType_zytjry);
+		// }
+		// if (cb.getZcTotal().compareTo(BigDecimal.ZERO) > 0) {
+		// CbhsCb shType_zytjzc = JSON.parseObject(JSON.toJSONString(cb),
+		// CbhsCb.class);
+		// shType_zytjzc.setOid(null);
+		// shType_zytjzc.setType(SheObject.shType_zytjzc);
+		// shType_zytjzc.setTotal(cb.getZcTotal());
+		// shType_zytjzc.setCbOid(cbOid);
+		// cbSrManager.createCb(queryFactory, shType_zytjzc);
+		// }
+		// } else {
+		// ExceedException exception = null;
+		// String ext = null;
+		// if (cb.getZcs() != null && cb.getZcs().size() > 0) {
+		// for (CbhsZytjZC c : cb.getZcs()) {
+		// bv.vali(BeanValidation.beanType.cailiao, BeanValidation.valiType.all,
+		// c.getClOid());
+		// }
+		// // 监测是否超出总预算
+		// RequestMbYsFetch r1 = new RequestMbYsFetch();
+		// r1.setProjectOid(cb.getProjectOid());
+		// r1.setDeptOid(cb.getDeptOid());
+		// r1.setMonth(new SimpleDateFormat("yyyy-MM-01").parse(new
+		// SimpleDateFormat("yyyy-MM-01").format(new
+		// Date(System.currentTimeMillis()))).getTime());
+		// try {
+		// DataSummaryUtils.checkFbCailiaoCbIsExceed(queryFactory, r1, cb,
+		// cb.getZcs(), Lists.newArrayList(cb.getDeptOid()),
+		// Lists.newArrayList(cb.getGlobalGclYsOid()));
+		// } catch (ExceedException e) {
+		// ext = JSON.toJSONString(e.getInfo().getExceedInfos());
+		// cb.setShStatus(1);
+		// exception = e;
+		// }
+		// }
+		// long time = cb.getDateTimeStamp() > 0 ? cb.getDateTimeStamp() :
+		// System.currentTimeMillis();
+		// DateTime dt = new DateTime(time);
+		// DateTime curDt = new DateTime(System.currentTimeMillis());
+		// cb.setDateStr(dt.toString("yyyy-MM-dd"));
+		// cb.setDateTimeStamp(time);
+		// cb.setMonthStr(dt.toString("yyyy-MM"));
+		// cb.setMonthTimeStamp(new DateObj(time,
+		// DateObj.type_month).getStartTime());
+		// cb.setOpUserOid(TokenUtils.getTokenInfo(httpServletRequest).getUserOid());
+		// cb.setOpUserName(TokenUtils.getTokenInfo(httpServletRequest).getUserName());
+		// cb.setOpTimeStr(curDt.toString("yyyy-MM-dd HH:mm:ss"));
+		// cb.setOpTime(curDt.getMillis());
+		// int cbOid = queryFactory.saveOrUpdate(cb).getOid();
+		// cb.setOid(cbOid);
+		// if (cb.getGzs() != null && cb.getGzs().size() > 0) {
+		// for (CbhsZytjGZ gz : cb.getGzs()) {
+		// gz.setZytjOid(cbOid);
+		// }
+		// queryFactory.batchSaveOrUpdate(cb.getGzs());
+		// }
+		// if (cb.getZcs() != null && cb.getZcs().size() > 0) {
+		// for (CbhsZytjZC zc : cb.getZcs()) {
+		// zc.setZytjOid(cbOid);
+		// }
+		// queryFactory.batchSaveOrUpdate(cb.getZcs());
+		// }
+		// if (cb.getFcs() != null && cb.getFcs().size() > 0) {
+		// for (CbhsZytjFC fc : cb.getFcs()) {
+		// fc.setZytjOid(cbOid);
+		// }
+		// queryFactory.batchSaveOrUpdate(cb.getFcs());
+		// }
+		// if (cb.getShStatus() == 1) {
+		// examinerManager.createExaminer(queryFactory, cb.getProjectOid(),
+		// SheObject.shType_zytj, cb.getOid(), cb.getDeptOid(),
+		// cb.getDeptName(), ext, exception.getInfo().getErrorMessage(),
+		// exception.getInfo().getErrorMessage(),
+		// TokenUtils.getTokenInfo(httpServletRequest).getUserOid(),
+		// TokenUtils.getTokenInfo(httpServletRequest).getUserName());
+		// } else {
+		// CbhsCb cb_ = JSON.parseObject(JSON.toJSONString(cb), CbhsCb.class);
+		// cb_.setOid(null);
+		// cb_.setType(SheObject.shType_zytj);
+		// cb_.setCbOid(cb.getOid());
+		// cbSrManager.createCb(queryFactory, cb_);
+		// if (cb.getRyPrice().compareTo(BigDecimal.ZERO) > 0) {
+		// CbhsCb shType_zytjry = JSON.parseObject(JSON.toJSONString(cb),
+		// CbhsCb.class);
+		// shType_zytjry.setOid(null);
+		// shType_zytjry.setType(SheObject.shType_zytjry);
+		// shType_zytjry.setTotal(cb.getRyPrice());
+		// shType_zytjry.setCbOid(cbOid);
+		// cbSrManager.createCb(queryFactory, shType_zytjry);
+		// }
+		// if (cb.getZcTotal().compareTo(BigDecimal.ZERO) > 0) {
+		// CbhsCb shType_zytjzc = JSON.parseObject(JSON.toJSONString(cb),
+		// CbhsCb.class);
+		// shType_zytjzc.setOid(null);
+		// shType_zytjzc.setType(SheObject.shType_zytjzc);
+		// shType_zytjzc.setTotal(cb.getZcTotal());
+		// shType_zytjzc.setCbOid(cbOid);
+		// cbSrManager.createCb(queryFactory, shType_zytjzc);
+		// }
+		// }
+		// }
+		// return request.getCb();
+		return null;
 	}
 
 	@Override

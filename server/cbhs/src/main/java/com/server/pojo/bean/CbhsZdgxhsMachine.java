@@ -46,8 +46,11 @@ public class CbhsZdgxhsMachine implements Serializable {
 	@ApiModelProperty(value = "必填|工作时间",required=false)
 	private float  workTime;// 必填|工作时间
 	@Column(name = "p_zjf",precision = 19, scale = 4, columnDefinition="decimal(19,4) default 0", nullable = true, unique = false)
-	@ApiModelProperty(value = "必填|折旧费或租赁费",required=false)
-	private BigDecimal p_zjf= new BigDecimal(0);// 必填|折旧费或租赁费
+	@ApiModelProperty(value = "必填|折旧费",required=false)
+	private BigDecimal p_zjf= new BigDecimal(0);// 必填|折旧费
+	@Column(name = "p_zpf",precision = 19, scale = 4, columnDefinition="decimal(19,4) default 0", nullable = true, unique = false)
+	@ApiModelProperty(value = "必填|租赁费",required=false)
+	private BigDecimal p_zpf= new BigDecimal(0);// 必填|租赁费
 	@Column(name = "p_jxysf",precision = 19, scale = 4, columnDefinition="decimal(19,4) default 0", nullable = true, unique = false)
 	@ApiModelProperty(value = "必填|机械运输费",required=false)
 	private BigDecimal p_jxysf= new BigDecimal(0);// 必填|机械运输费
@@ -163,6 +166,18 @@ public class CbhsZdgxhsMachine implements Serializable {
 	public void setP_zjf(BigDecimal p_zjf) {
  
         this.p_zjf = p_zjf;
+
+	}
+
+	public BigDecimal getP_zpf() { 
+
+    	return this.p_zpf;
+
+	}
+
+	public void setP_zpf(BigDecimal p_zpf) {
+ 
+        this.p_zpf = p_zpf;
 
 	}
 

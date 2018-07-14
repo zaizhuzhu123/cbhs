@@ -33,8 +33,9 @@ import com.server.pojo.bean.QCbhsDaysZyJxCb;
 import com.server.pojo.bean.QCbhsGclQdYs;
 import com.server.pojo.bean.QCbhsMonthFbCailiaoCbYs;
 import com.server.pojo.bean.QCbhsMonthZyCailiaoCbYs;
-import com.server.pojo.bean.QCbhsZytj;
-import com.server.pojo.bean.QCbhsZytjZC;
+import com.server.pojo.bean.QCbhsZdgxhs;
+import com.server.pojo.bean.QCbhsZdgxhsMachine;
+import com.server.pojo.bean.QCbhsZdgxhsZC;
 import com.server.pojo.bean.uiClhxTj;
 import com.server.pojo.url.clhx.RequestFbClhxFetch;
 import com.server.pojo.url.clhx.RequestFbGclFetch;
@@ -105,10 +106,7 @@ public class ClhxApisServiceImp implements ClhxApisService {
 		Preconditions.checkArgument(request.getProjectOid() > 0, "工程项目ID不能为空!");
 		// 查询预算
 		QCbhsMonthZyCailiaoCbYs query_zyCailiaoys = QCbhsMonthZyCailiaoCbYs.cbhsMonthZyCailiaoCbYs;
-		MyJPAQuery<uiClhxTj> jpaquery_ys = (MyJPAQuery<uiClhxTj>) queryFactory.select(
-				Projections.bean(uiClhxTj.class, query_zyCailiaoys.monthStr.as("monthStr"), query_zyCailiaoys.globalGclYsOid.as("gclOid"), query_zyCailiaoys.globalGclYsName.as("gclName"),
-						query_zyCailiaoys.cailiaoKemuName.as("cailiaoKemuName"), query_zyCailiaoys.cailiaoOid.as("cailiaoOid"), query_zyCailiaoys.cailiaoName.as("cailiaoName"),
-						query_zyCailiaoys.style.as("style"), query_zyCailiaoys.unit.as("unit"), query_zyCailiaoys.count.sum().as("ysCount"))).from(query_zyCailiaoys);
+		MyJPAQuery<uiClhxTj> jpaquery_ys = (MyJPAQuery<uiClhxTj>) queryFactory.select(Projections.bean(uiClhxTj.class, query_zyCailiaoys.monthStr.as("monthStr"), query_zyCailiaoys.globalGclYsOid.as("gclOid"), query_zyCailiaoys.globalGclYsName.as("gclName"), query_zyCailiaoys.cailiaoKemuName.as("cailiaoKemuName"), query_zyCailiaoys.cailiaoOid.as("cailiaoOid"), query_zyCailiaoys.cailiaoName.as("cailiaoName"), query_zyCailiaoys.style.as("style"), query_zyCailiaoys.unit.as("unit"), query_zyCailiaoys.count.sum().as("ysCount"))).from(query_zyCailiaoys);
 		jpaquery_ys.where(request.getProjectOid(), query_zyCailiaoys.projectOid.eq(request.getProjectOid()));
 		jpaquery_ys.where(request.getDeptOid(), query_zyCailiaoys.deptOid.eq(request.getDeptOid()));
 		jpaquery_ys.where(request.getMonthStart(), query_zyCailiaoys.monthTimeStamp.goe(request.getMonthStart()));
@@ -126,10 +124,7 @@ public class ClhxApisServiceImp implements ClhxApisService {
 		Map<String, uiClhxTj> monthYsTjMap = Maps.newHashMap(monthYsTjMapTT);
 		// 查询机械成本中燃油的材料成本
 		QCbhsDaysZyJxCb query_zyJxCb = QCbhsDaysZyJxCb.cbhsDaysZyJxCb;
-		MyJPAQuery<uiClhxTj> jpaquery_jxcb = (MyJPAQuery<uiClhxTj>) queryFactory.select(
-				Projections.bean(uiClhxTj.class, query_zyJxCb.monthStr.as("monthStr"), query_zyJxCb.globalGclYsOid.as("gclOid"), query_zyJxCb.globalGclYsName.as("gclName"),
-						query_zyJxCb.ryKemuName.as("cailiaoKemuName"), query_zyJxCb.ryOid.as("cailiaoOid"), query_zyJxCb.ryName.as("cailiaoName"), query_zyJxCb.ryStyle.as("style"),
-						query_zyJxCb.ryUnit.as("unit"), query_zyJxCb.ryUseCount.sum().as("cbCount"))).from(query_zyJxCb);
+		MyJPAQuery<uiClhxTj> jpaquery_jxcb = (MyJPAQuery<uiClhxTj>) queryFactory.select(Projections.bean(uiClhxTj.class, query_zyJxCb.monthStr.as("monthStr"), query_zyJxCb.globalGclYsOid.as("gclOid"), query_zyJxCb.globalGclYsName.as("gclName"), query_zyJxCb.ryKemuName.as("cailiaoKemuName"), query_zyJxCb.ryOid.as("cailiaoOid"), query_zyJxCb.ryName.as("cailiaoName"), query_zyJxCb.ryStyle.as("style"), query_zyJxCb.ryUnit.as("unit"), query_zyJxCb.ryUseCount.sum().as("cbCount"))).from(query_zyJxCb);
 		jpaquery_jxcb.where(request.getProjectOid(), query_zyJxCb.projectOid.eq(request.getProjectOid()));
 		jpaquery_jxcb.where(request.getDeptOid(), query_zyJxCb.deptOid.eq(request.getDeptOid()));
 		jpaquery_jxcb.where(request.getMonthStart(), query_zyJxCb.monthTimeStamp.goe(request.getMonthStart()));
@@ -146,10 +141,7 @@ public class ClhxApisServiceImp implements ClhxApisService {
 		});
 		// 查询自营材料成本
 		QCbhsDaysZyCailiaoCb query_zyccCb = QCbhsDaysZyCailiaoCb.cbhsDaysZyCailiaoCb;
-		MyJPAQuery<uiClhxTj> jpaquery_zycccb = (MyJPAQuery<uiClhxTj>) queryFactory.select(
-				Projections.bean(uiClhxTj.class, query_zyccCb.monthStr.as("monthStr"), query_zyccCb.globalGclYsOid.as("gclOid"), query_zyccCb.globalGclYsName.as("gclName"),
-						query_zyccCb.cailiaoKemuName.as("cailiaoKemuName"), query_zyccCb.cailiaoOid.as("cailiaoOid"), query_zyccCb.cailiaoName.as("cailiaoName"), query_zyccCb.style.as("style"),
-						query_zyccCb.unit.as("unit"), query_zyccCb.count.sum().as("cbCount"))).from(query_zyccCb);
+		MyJPAQuery<uiClhxTj> jpaquery_zycccb = (MyJPAQuery<uiClhxTj>) queryFactory.select(Projections.bean(uiClhxTj.class, query_zyccCb.monthStr.as("monthStr"), query_zyccCb.globalGclYsOid.as("gclOid"), query_zyccCb.globalGclYsName.as("gclName"), query_zyccCb.cailiaoKemuName.as("cailiaoKemuName"), query_zyccCb.cailiaoOid.as("cailiaoOid"), query_zyccCb.cailiaoName.as("cailiaoName"), query_zyccCb.style.as("style"), query_zyccCb.unit.as("unit"), query_zyccCb.count.sum().as("cbCount"))).from(query_zyccCb);
 		jpaquery_zycccb.where(request.getProjectOid(), query_zyccCb.projectOid.eq(request.getProjectOid()));
 		jpaquery_zycccb.where(request.getDeptOid(), query_zyccCb.deptOid.eq(request.getDeptOid()));
 		jpaquery_zycccb.where(request.getMonthStart(), query_zyccCb.monthTimeStamp.goe(request.getMonthStart()));
@@ -228,7 +220,9 @@ public class ClhxApisServiceImp implements ClhxApisService {
 		Preconditions.checkArgument(request.getProjectOid() > 0, "工程项目ID不能为空!");
 		QCbhsGclQdYs query_ = QCbhsGclQdYs.cbhsGclQdYs;
 		QCbhsMonthFbCailiaoCbYs query_fbCailiao = QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs;
-		QCbhsZytj query_zytj = QCbhsZytj.cbhsZytj;
+		// QCbhsZytj query_zytj = QCbhsZytj.cbhsZytj;
+
+		QCbhsZdgxhs query_zytj = QCbhsZdgxhs.cbhsZdgxhs;
 		// 查询对象
 		MyJPAQuery<CbhsGclQdYs> jpaquery = (MyJPAQuery<CbhsGclQdYs>) queryFactory.selectFrom(query_);
 		JPQLQuery<Integer> fbgcOids = JPAExpressions.select(query_fbCailiao.globalGclYsOid).from(query_fbCailiao);
@@ -266,10 +260,7 @@ public class ClhxApisServiceImp implements ClhxApisService {
 		Preconditions.checkArgument(request.getProjectOid() > 0, "工程项目ID不能为空!");
 		// 查询预算
 		QCbhsMonthFbCailiaoCbYs query_fbCailiaoys = QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs;
-		MyJPAQuery<uiClhxTj> jpaquery_ys = (MyJPAQuery<uiClhxTj>) queryFactory.select(
-				Projections.bean(uiClhxTj.class, query_fbCailiaoys.monthStr.as("monthStr"), query_fbCailiaoys.globalGclYsOid.as("gclOid"), query_fbCailiaoys.globalGclYsName.max().as("gclName"),
-						query_fbCailiaoys.cailiaoKemuName.max().as("cailiaoKemuName"), query_fbCailiaoys.cailiaoOid.as("cailiaoOid"), query_fbCailiaoys.cailiaoName.max().as("cailiaoName"),
-						query_fbCailiaoys.style.max().as("style"), query_fbCailiaoys.unit.max().as("unit"), query_fbCailiaoys.count.sum().as("ysCount"))).from(query_fbCailiaoys);
+		MyJPAQuery<uiClhxTj> jpaquery_ys = (MyJPAQuery<uiClhxTj>) queryFactory.select(Projections.bean(uiClhxTj.class, query_fbCailiaoys.monthStr.as("monthStr"), query_fbCailiaoys.globalGclYsOid.as("gclOid"), query_fbCailiaoys.globalGclYsName.max().as("gclName"), query_fbCailiaoys.cailiaoKemuName.max().as("cailiaoKemuName"), query_fbCailiaoys.cailiaoOid.as("cailiaoOid"), query_fbCailiaoys.cailiaoName.max().as("cailiaoName"), query_fbCailiaoys.style.max().as("style"), query_fbCailiaoys.unit.max().as("unit"), query_fbCailiaoys.count.sum().as("ysCount"))).from(query_fbCailiaoys);
 		jpaquery_ys.where(request.getProjectOid(), query_fbCailiaoys.projectOid.eq(request.getProjectOid()));
 		jpaquery_ys.where(request.getDeptOid(), query_fbCailiaoys.deptOid.eq(request.getDeptOid()));
 		jpaquery_ys.where(request.getMonthStart(), query_fbCailiaoys.monthTimeStamp.goe(request.getMonthStart()));
@@ -286,19 +277,17 @@ public class ClhxApisServiceImp implements ClhxApisService {
 		// ImmutableMap无法修改 此时只能用hashmap
 		Map<String, uiClhxTj> monthYsTjMap = Maps.newHashMap(monthYsTjMapIm);
 		// 资源统计 燃油成本
-		QCbhsZytj query_zytj = QCbhsZytj.cbhsZytj;
-		MyJPAQuery<uiClhxTj> jpaquery_rycb = (MyJPAQuery<uiClhxTj>) queryFactory.select(
-				Projections.bean(uiClhxTj.class, query_zytj.monthStr.as("monthStr"), query_zytj.globalGclYsOid.as("gclOid"), query_zytj.globalGclYsName.max().as("gclName"), query_zytj.ryKemuName
-						.max().as("cailiaoKemuName"), query_zytj.ryID.as("cailiaoOid"), query_zytj.ryName.max().as("cailiaoName"), query_zytj.ryStyle.max().as("style"),
-						query_zytj.ryUnit.max().as("unit"), query_zytj.ryUseCount.sum().as("cbCount"))).from(query_zytj);
+		QCbhsZdgxhs query_zytj = QCbhsZdgxhs.cbhsZdgxhs;
+		QCbhsZdgxhsMachine query_zytjMachine = QCbhsZdgxhsMachine.cbhsZdgxhsMachine;
+		MyJPAQuery<uiClhxTj> jpaquery_rycb = (MyJPAQuery<uiClhxTj>) queryFactory.select(Projections.bean(uiClhxTj.class, query_zytj.monthStr.as("monthStr"), query_zytj.globalGclYsOid.as("gclOid"), query_zytj.globaGclYsName.max().as("gclName"), query_zytjMachine.ryKemuName.max().as("cailiaoKemuName"), query_zytjMachine.ryID.as("cailiaoOid"), query_zytjMachine.ryName.max().as("cailiaoName"), query_zytjMachine.ryStyle.max().as("style"), query_zytjMachine.ryUnit.max().as("unit"), query_zytjMachine.ryUseCount.sum().as("cbCount"))).from(query_zytj, query_zytjMachine);
 		jpaquery_rycb.where(request.getProjectOid(), query_zytj.projectOid.eq(request.getProjectOid()));
 		jpaquery_rycb.where(request.getDeptOid(), query_zytj.deptOid.eq(request.getDeptOid()));
 		jpaquery_rycb.where(request.getMonthStart(), query_zytj.monthTimeStamp.goe(request.getMonthStart()));
 		jpaquery_rycb.where(request.getMonthEnd(), query_zytj.monthTimeStamp.loe(request.getMonthEnd()));
 
 		jpaquery_rycb.where(request.getGlobalGclYsOid(), query_zytj.globalGclYsOid.eq(request.getGlobalGclYsOid()));
-		jpaquery_rycb.where(query_zytj.shStatus.eq(0));
-		jpaquery_rycb.groupBy(query_zytj.monthStr, query_zytj.globalGclYsOid, query_zytj.ryID);
+		// jpaquery_rycb.where(query_zytj.shStatus.eq(0));
+		jpaquery_rycb.groupBy(query_zytj.monthStr, query_zytj.globalGclYsOid, query_zytjMachine.ryID);
 		jpaquery_rycb.orderBy(query_zytj.monthStr.asc());
 		List<uiClhxTj> monthRycbTj = jpaquery_rycb.fetch();
 		Map<String, uiClhxTj> monthRycbTjMap = Maps.uniqueIndex(monthRycbTj, new Function<uiClhxTj, String>() {
@@ -307,18 +296,15 @@ public class ClhxApisServiceImp implements ClhxApisService {
 			}
 		});
 		// 资源统计 主材成本
-		QCbhsZytjZC query_zytjzc = QCbhsZytjZC.cbhsZytjZC;
-		MyJPAQuery<uiClhxTj> jpaquery_zccb = (MyJPAQuery<uiClhxTj>) queryFactory.select(
-				Projections.bean(uiClhxTj.class, query_zytj.monthStr.as("monthStr"), query_zytj.globalGclYsOid.as("gclOid"), query_zytj.globalGclYsName.max().as("gclName"), query_zytjzc.clKemuName
-						.max().as("cailiaoKemuName"), query_zytjzc.clOid.as("cailiaoOid"), query_zytjzc.clName.max().as("cailiaoName"), query_zytjzc.clStyle.max().as("style"), query_zytjzc.clUnit
-						.max().as("unit"), query_zytjzc.clCount.sum().as("cbCount"))).from(query_zytj, query_zytjzc);
+		QCbhsZdgxhsZC query_zytjzc = QCbhsZdgxhsZC.cbhsZdgxhsZC;
+		MyJPAQuery<uiClhxTj> jpaquery_zccb = (MyJPAQuery<uiClhxTj>) queryFactory.select(Projections.bean(uiClhxTj.class, query_zytj.monthStr.as("monthStr"), query_zytj.globalGclYsOid.as("gclOid"), query_zytj.globaGclYsName.max().as("gclName"), query_zytjzc.clKemuName.max().as("cailiaoKemuName"), query_zytjzc.clOid.as("cailiaoOid"), query_zytjzc.clName.max().as("cailiaoName"), query_zytjzc.clStyle.max().as("style"), query_zytjzc.clUnit.max().as("unit"), query_zytjzc.clCount.sum().as("cbCount"))).from(query_zytj, query_zytjzc);
 		jpaquery_zccb.where(request.getProjectOid(), query_zytj.projectOid.eq(request.getProjectOid()));
 		jpaquery_zccb.where(request.getDeptOid(), query_zytj.deptOid.eq(request.getDeptOid()));
 		jpaquery_zccb.where(request.getMonthStart(), query_zytj.monthTimeStamp.goe(request.getMonthStart()));
 		jpaquery_zccb.where(request.getMonthEnd(), query_zytj.monthTimeStamp.loe(request.getMonthEnd()));
 
 		jpaquery_zccb.where(request.getGlobalGclYsOid(), query_zytj.globalGclYsOid.eq(request.getGlobalGclYsOid()));
-		jpaquery_zccb.where(query_zytj.shStatus.eq(0));
+		// jpaquery_zccb.where(query_zytj.shStatus.eq(0));
 		jpaquery_zccb.groupBy(query_zytj.monthStr, query_zytj.globalGclYsOid, query_zytjzc.clOid);
 		jpaquery_zccb.orderBy(query_zytj.monthStr.asc());
 		List<uiClhxTj> monthZccbTj = jpaquery_rycb.fetch();

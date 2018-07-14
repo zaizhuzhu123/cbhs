@@ -67,8 +67,8 @@ import com.server.pojo.bean.CbhsMonthFbGcCbYs;
 import com.server.pojo.bean.CbhsMonthFbGcCbYs;
 import com.server.pojo.url.monthMbYs.RequestFbGcCbYsDel;
 import com.alibaba.fastjson.JSONObject;
-import com.server.pojo.bean.CbhsMonthFbGcCbYs;
-import com.server.pojo.bean.CbhsMonthFbGcCbYs;
+import com.server.pojo.url.monthMbYs.RequestFbGcCbYsAdd;
+import com.server.pojo.url.monthMbYs.ResponseFbGcCbYsAdd;
 import com.server.pojo.url.monthMbYs.RequestFbGcGlobalXmFetch;
 import com.server.pojo.url.monthMbYs.ResponseFbGcGlobalXmFetch;
 import com.server.pojo.url.monthMbYs.RequestFbGcFbCompanyFetch;
@@ -154,7 +154,7 @@ public interface MonthMbYsApisService {
 
 	public JSONObject fbGcCbYsDel(RequestFbGcCbYsDel request, HttpServletRequest httpServletRequest) throws Exception;
 
-	public CbhsMonthFbGcCbYs fbGcCbYsAdd(CbhsMonthFbGcCbYs request, HttpServletRequest httpServletRequest) throws Exception;
+	public ResponseFbGcCbYsAdd fbGcCbYsAdd(RequestFbGcCbYsAdd request, HttpServletRequest httpServletRequest) throws Exception;
 
 	public ResponseFbGcGlobalXmFetch fbGcGlobalXmFetch(RequestFbGcGlobalXmFetch request, HttpServletRequest httpServletRequest) throws Exception;
 

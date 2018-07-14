@@ -13,7 +13,8 @@ private int machineryOid;// 必填|设备ID
 private String  machineryName;// 必填|设备名称
 private double completeTotal;// 必填|完成方量
 private  float  workTime;// 必填|工作时间
-private double p_zjf;// 必填|折旧费或租赁费
+private double p_zjf;// 必填|折旧费
+private double p_zpf;// 必填|租赁费
 private double p_jxysf;// 必填|机械运输费
 private double p_jxdxf;// 必填|机械大修费
 private int ryID;// 必填|燃油ID
@@ -106,6 +107,18 @@ public double  getP_zjf(){
 public void setP_zjf(double p_zjf){
  
         this.p_zjf=p_zjf;
+
+}
+
+public double  getP_zpf(){ 
+
+    return this.p_zpf;
+
+}
+
+public void setP_zpf(double p_zpf){
+ 
+        this.p_zpf=p_zpf;
 
 }
 

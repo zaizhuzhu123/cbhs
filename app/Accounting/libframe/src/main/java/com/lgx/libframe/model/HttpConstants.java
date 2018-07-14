@@ -1678,8 +1678,8 @@ public class HttpConstants {
     HttpObj httpObj180= new HttpObj();
     httpObj180.setUrl("/monthMbYs/fbGcCbYsAdd");
     httpObj180.setReqMethod("POST");
-    httpObj180.setReqObjName("com.lgx.libframe.model.CbhsMonthFbGcCbYs");
-    httpObj180.setRespObjName("com.lgx.libframe.model.CbhsMonthFbGcCbYs");
+    httpObj180.setReqObjName("com.lgx.libframe.model.RequestFbGcCbYsAdd");
+    httpObj180.setRespObjName("com.lgx.libframe.model.ResponseFbGcCbYsAdd");
     httpObjs.put(MONTHMBYS_FBGCCBYSADD,httpObj180);
 
     HttpObj httpObj181= new HttpObj();

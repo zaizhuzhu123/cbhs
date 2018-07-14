@@ -69,6 +69,7 @@ import com.server.pojo.url.monthMbYs.RequestFbCailiaoCbYsAdd;
 import com.server.pojo.url.monthMbYs.RequestFbCailiaoCbYsCailiaoFetch;
 import com.server.pojo.url.monthMbYs.RequestFbCailiaoCbYsDel;
 import com.server.pojo.url.monthMbYs.RequestFbCailiaoCbYsFetch;
+import com.server.pojo.url.monthMbYs.RequestFbGcCbYsAdd;
 import com.server.pojo.url.monthMbYs.RequestFbGcCbYsDel;
 import com.server.pojo.url.monthMbYs.RequestFbGcCbYsFetch;
 import com.server.pojo.url.monthMbYs.RequestFbGcFbCompanyFetch;
@@ -94,6 +95,7 @@ import com.server.pojo.url.monthMbYs.RequestZyQtfyYsFetch;
 import com.server.pojo.url.monthMbYs.ResponseFbCailiaoCbYsAdd;
 import com.server.pojo.url.monthMbYs.ResponseFbCailiaoCbYsCailiaoFetch;
 import com.server.pojo.url.monthMbYs.ResponseFbCailiaoCbYsFetch;
+import com.server.pojo.url.monthMbYs.ResponseFbGcCbYsAdd;
 import com.server.pojo.url.monthMbYs.ResponseFbGcCbYsFetch;
 import com.server.pojo.url.monthMbYs.ResponseFbGcFbCompanyFetch;
 import com.server.pojo.url.monthMbYs.ResponseFbGcGlobalXmFetch;
@@ -627,31 +629,40 @@ public class MonthMbYsApisServiceImp implements MonthMbYsApisService {
 	}
 
 	@Override
-	public CbhsMonthFbGcCbYs fbGcCbYsAdd(CbhsMonthFbGcCbYs ys, HttpServletRequest httpServletRequest) throws Exception {
-		Preconditions.checkArgument(StringUtils.isNotBlank(ys.getMonthStr()), "月份不能为空!");
-		Preconditions.checkArgument(ys.getMonthTimeStamp() > 0, "月份时间戳不能为空!");
-		if (StringUtils.isBlank(ys.getPNodeId())) {
-			ys.setPNodeId("0");
+	public ResponseFbGcCbYsAdd fbGcCbYsAdd(RequestFbGcCbYsAdd request, HttpServletRequest httpServletRequest) throws Exception {
+		ResponseFbGcCbYsAdd response = new ResponseFbGcCbYsAdd();
+		if (request.getYss() != null && request.getYss().size() > 0) {
+			List<CbhsMonthFbGcCbYs> entitys = Lists.newArrayList();
+			for (CbhsMonthFbGcCbYs ys : request.getYss()) {
+				ys.setOid(null);
+				Preconditions.checkArgument(StringUtils.isNotBlank(ys.getMonthStr()), "月份不能为空!");
+				Preconditions.checkArgument(ys.getMonthTimeStamp() > 0, "月份时间戳不能为空!");
+				if (StringUtils.isBlank(ys.getPNodeId())) {
+					ys.setPNodeId("0");
+				}
+				BeanValidation bv = new BeanValidation(queryFactory);
+				bv.vali(BeanValidation.beanType.project, BeanValidation.valiType.all, ys.getProjectOid());
+				bv.vali(BeanValidation.beanType.fbCompany, BeanValidation.valiType.all, ys.getFbCompanyOid());
+				bv.vali(BeanValidation.beanType.dept, BeanValidation.valiType.all, ys.getDeptOid());
+				bv.vali(BeanValidation.beanType.ht, BeanValidation.valiType.all, ys.getHtOid());
+				ys.setDeptName(queryFactory.findOne(CbhsDept.class, ys.getDeptOid()).getName());
+				ys.setHtName(queryFactory.findOne(CbhsHt.class, ys.getHtOid()).getHtName());
+				ys.setFbCompanyName(queryFactory.findOne(CbhsFbCompany.class, ys.getFbCompanyOid()).getName());
+				Preconditions.checkArgument(ys.getGlobalGclYsOid() > 0, "工程量ID不能为空!");
+				Preconditions.checkArgument(queryFactory.exists(QCbhsGclQdYs.cbhsGclQdYs, QCbhsGclQdYs.cbhsGclQdYs.oid.eq(ys.getGlobalGclYsOid())), "工程量项目不存在!");
+				Preconditions.checkArgument(!queryFactory.exists(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs, QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.projectOid.eq(ys.getProjectOid()).and(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.monthStr.eq(ys.getMonthStr())).and(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.fbCompanyOid.eq(ys.getFbCompanyOid())).and(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.name.eq(ys.getName()).or(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.nodeId.eq(ys.getNodeId())))), "分包商在本月已创建过同名或同编号的分包工程");
+				long time = System.currentTimeMillis();
+				DateTime dt = new DateTime(time);
+				ys.setOpUserOid(TokenUtils.getTokenInfo(httpServletRequest).getUserOid());
+				ys.setOpUserName(TokenUtils.getTokenInfo(httpServletRequest).getUserName());
+				ys.setOpTimeStr(dt.toString("yyyy-MM-dd HH:mm:ss"));
+				ys.setOpTime(time);
+				entitys.add(ys);
+			}
+			queryFactory.batchSaveOrUpdate(entitys);
+			response.setYss(entitys);
 		}
-		BeanValidation bv = new BeanValidation(queryFactory);
-		bv.vali(BeanValidation.beanType.project, BeanValidation.valiType.all, ys.getProjectOid());
-		bv.vali(BeanValidation.beanType.fbCompany, BeanValidation.valiType.all, ys.getFbCompanyOid());
-		bv.vali(BeanValidation.beanType.dept, BeanValidation.valiType.all, ys.getDeptOid());
-		bv.vali(BeanValidation.beanType.ht, BeanValidation.valiType.all, ys.getHtOid());
-		ys.setDeptName(queryFactory.findOne(CbhsDept.class, ys.getDeptOid()).getName());
-		ys.setHtName(queryFactory.findOne(CbhsHt.class, ys.getHtOid()).getHtName());
-		ys.setFbCompanyName(queryFactory.findOne(CbhsFbCompany.class, ys.getFbCompanyOid()).getName());
-		Preconditions.checkArgument(ys.getGlobalGclYsOid() > 0, "工程量ID不能为空!");
-		Preconditions.checkArgument(queryFactory.exists(QCbhsGclQdYs.cbhsGclQdYs, QCbhsGclQdYs.cbhsGclQdYs.oid.eq(ys.getGlobalGclYsOid())), "工程量项目不存在!");
-		Preconditions.checkArgument(!queryFactory.exists(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs, QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.projectOid.eq(ys.getProjectOid()).and(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.monthStr.eq(ys.getMonthStr())).and(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.fbCompanyOid.eq(ys.getFbCompanyOid())).and(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.name.eq(ys.getName()).or(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.nodeId.eq(ys.getNodeId())))), "分包商在本月已创建过同名或同编号的分包工程");
-		long time = System.currentTimeMillis();
-		DateTime dt = new DateTime(time);
-		ys.setOpUserOid(TokenUtils.getTokenInfo(httpServletRequest).getUserOid());
-		ys.setOpUserName(TokenUtils.getTokenInfo(httpServletRequest).getUserName());
-		ys.setOpTimeStr(dt.toString("yyyy-MM-dd HH:mm:ss"));
-		ys.setOpTime(time);
-		queryFactory.saveOrUpdate(ys);
-		return ys;
+		return response;
 	}
 
 	@Override

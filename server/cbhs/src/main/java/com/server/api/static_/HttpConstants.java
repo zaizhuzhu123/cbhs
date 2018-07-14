@@ -2949,9 +2949,9 @@ public class HttpConstants {
     urlInfo180.setUrl("/cbhs/monthMbYs/fbGcCbYsAdd");
     urlInfo180.setOpCode("0");
     urlInfo180.setWorkClass("");
-    urlInfo180.setMsgReaquest("com.server.pojo.bean.CbhsMonthFbGcCbYs");
+    urlInfo180.setMsgReaquest("com.server.pojo.url.monthMbYs.RequestFbGcCbYsAdd");
     urlInfo180.setReaquestDepict("分包工程");
-    urlInfo180.setMsgResponse("com.server.pojo.bean.CbhsMonthFbGcCbYs");
+    urlInfo180.setMsgResponse("com.server.pojo.url.monthMbYs.ResponseFbGcCbYsAdd");
     urlInfo180.setResponseDepict("分包工程");
     urlInfo180.setTransation(true);
     urlInfo180.setRestClass("fbGcCbYsAdd");

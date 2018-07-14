@@ -35,6 +35,8 @@ public class QCbhsZdgxhsMachine extends EntityPathBase<CbhsZdgxhsMachine> {
 
     public final NumberPath<java.math.BigDecimal> p_zjf = createNumber("p_zjf", java.math.BigDecimal.class);
 
+    public final NumberPath<java.math.BigDecimal> p_zpf = createNumber("p_zpf", java.math.BigDecimal.class);
+
     public final NumberPath<Integer> ryID = createNumber("ryID", Integer.class);
 
     public final StringPath ryKemuName = createString("ryKemuName");

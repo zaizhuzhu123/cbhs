@@ -57,6 +57,8 @@ import com.server.pojo.url.monthMbYs.RequestFbGcCbYsFetch;
 import com.server.pojo.url.monthMbYs.ResponseFbGcCbYsFetch;
 import com.server.pojo.bean.CbhsMonthFbGcCbYs;
 import com.server.pojo.url.monthMbYs.RequestFbGcCbYsDel;
+import com.server.pojo.url.monthMbYs.RequestFbGcCbYsAdd;
+import com.server.pojo.url.monthMbYs.ResponseFbGcCbYsAdd;
 import com.server.pojo.url.monthMbYs.RequestFbGcGlobalXmFetch;
 import com.server.pojo.url.monthMbYs.ResponseFbGcGlobalXmFetch;
 import com.server.pojo.url.monthMbYs.RequestFbGcFbCompanyFetch;
@@ -505,7 +507,7 @@ public class MonthMbYsApis {
 	@ApiOperation(value = "分包工程-新增", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ApiResponse(code = 200, message = "操作成功后返回的视图")
 	@ResponseBody
-	public CbhsMonthFbGcCbYs fbGcCbYsAdd(@Validated @RequestBody CbhsMonthFbGcCbYs request, HttpServletRequest httpServletRequest) throws Exception{
+	public ResponseFbGcCbYsAdd fbGcCbYsAdd(@Validated @RequestBody RequestFbGcCbYsAdd request, HttpServletRequest httpServletRequest) throws Exception{
 		return monthMbYsApisService.fbGcCbYsAdd(request, httpServletRequest);
 	}
 
