@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.alibaba.fastjson.JSON;
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
@@ -33,30 +34,44 @@ import com.server.handler.CommonApisService;
 import com.server.handler.TjbbApisService;
 import com.server.jpa.MyJPAQuery;
 import com.server.jpa.MyQueryFactory;
+import com.server.jpa.MyJPAQuery.PagerResult;
 import com.server.pojo.bean.CbhsCb;
 import com.server.pojo.bean.CbhsDaysGlfyYs;
 import com.server.pojo.bean.CbhsDaysJjcb;
+import com.server.pojo.bean.CbhsZdgxhs;
+import com.server.pojo.bean.CbhsZdgxhsFC;
+import com.server.pojo.bean.CbhsZdgxhsGZ;
+import com.server.pojo.bean.CbhsZdgxhsMachine;
+import com.server.pojo.bean.CbhsZdgxhsZC;
 import com.server.pojo.bean.QCbhsCb;
 import com.server.pojo.bean.QCbhsDaysFbGclTj;
 import com.server.pojo.bean.QCbhsDaysGlfyYs;
 import com.server.pojo.bean.QCbhsDaysJjcb;
 import com.server.pojo.bean.QCbhsSr;
 import com.server.pojo.bean.QCbhsZdgxhs;
+import com.server.pojo.bean.QCbhsZdgxhsFC;
+import com.server.pojo.bean.QCbhsZdgxhsGZ;
+import com.server.pojo.bean.QCbhsZdgxhsMachine;
+import com.server.pojo.bean.QCbhsZdgxhsZC;
 import com.server.pojo.bean.uiAbnormal;
 import com.server.pojo.bean.uiCbAnalyze;
 import com.server.pojo.bean.uiCbSrTj;
 import com.server.pojo.bean.uiDaysCbDetailTj;
 import com.server.pojo.bean.uiDeptGrandTotalTj;
+import com.server.pojo.bean.uiFbCompanyTj;
 import com.server.pojo.bean.uiGrandTotalTj;
 import com.server.pojo.url.tjbb.RequestAbnormalFetch;
 import com.server.pojo.url.tjbb.RequestCbAnalyze;
 import com.server.pojo.url.tjbb.RequestCbsrbb;
 import com.server.pojo.url.tjbb.RequestDaysDetails;
+import com.server.pojo.url.tjbb.RequestFbCompanyTj;
 import com.server.pojo.url.tjbb.RequestGrandTotal;
 import com.server.pojo.url.tjbb.RequestZybb;
 import com.server.pojo.url.tjbb.RequestZybbAbnormalFetch;
 import com.server.pojo.url.tjbb.ResponseCbsrbb;
+import com.server.pojo.url.tjbb.ResponseFbCompanyTj;
 import com.server.pojo.url.tjbb.ResponseZybb;
+import com.server.pojo.url.zytj.ResponseZdgxhsFetch;
 
 @Service
 @Transactional(isolation = Isolation.DEFAULT, propagation = Propagation.REQUIRES_NEW, timeout = 60)
@@ -533,6 +548,67 @@ public class TjbbApisServiceImp implements TjbbApisService {
 		if (response.getCbTotal().compareTo(BigDecimal.ZERO) > 0) {
 			response.setFbstjSpecific(response.getFbstjtotal().divide(response.getCbTotal(), 4, BigDecimal.ROUND_HALF_UP).multiply(new BigDecimal(100)));
 		}
+		return response;
+	}
+
+	/**
+	 * @Title: fbCompanyTj @Description: TODO(这里用一句话描述这个方法的作用) @param @param
+	 *         request @param @param
+	 *         httpServletRequest @param @return @param @throws Exception
+	 *         设定文件 @return ResponseFbCompanyTj 返回类型 @throws
+	 */
+	@SuppressWarnings("rawtypes")
+	@Override
+	public ResponseFbCompanyTj fbCompanyTj(RequestFbCompanyTj request, HttpServletRequest httpServletRequest) throws Exception {
+		Preconditions.checkArgument(request.getProjectOid() > 0, "工程项目ID不能为空!");
+		QCbhsZdgxhs query_ = QCbhsZdgxhs.cbhsZdgxhs;
+		// 查询对象
+		MyJPAQuery<CbhsZdgxhs> jpaquery = queryFactory.selectFrom(query_);
+		// 条件组合
+		jpaquery.where(request.getProjectOid(), query_.projectOid.eq(request.getProjectOid()));
+		jpaquery.where(request.getDaysStart(), query_.dateTimeStamp.goe(request.getDaysStart()));
+		jpaquery.where(request.getDaysEnd(), query_.dateTimeStamp.loe(request.getDaysEnd()));
+		jpaquery.where(request.getStartOid(), query_.oid.gt(request.getStartOid()));
+		jpaquery.where(request.getFbGclYsOid(), query_.fbGclYsOid.eq(request.getFbGclYsOid()));
+		jpaquery.where(request.getFbCompanyOid(), query_.fbcompanyOid.eq(request.getFbCompanyOid()));
+		// 查询总数
+		ResponseFbCompanyTj response = new ResponseFbCompanyTj();
+		PagerResult pr = jpaquery.fetchPager(request.getPageNum(), request.getPageSize());
+		response.setTotal(pr.getTotal());
+		response.setResult(JSON.parseArray(JSON.toJSONString(pr.getResult()), uiFbCompanyTj.class));
+		// 补入主材 工种 辅材
+		if (pr.getTotal() > 0) {
+			List<Integer> zytjOids = Lists.newArrayList();
+			for (uiFbCompanyTj zytj : response.getResult()) {
+				zytjOids.add(zytj.getOid());
+			}
+			Map<Integer, uiFbCompanyTj> cbsMap = Maps.uniqueIndex(response.getResult(), new Function<uiFbCompanyTj, Integer>() {
+				@Override
+				public Integer apply(uiFbCompanyTj from) {
+					return from.getOid();
+				}
+			});
+
+			// 所有机械设备
+			List<CbhsZdgxhsMachine> machines = queryFactory.selectFrom(QCbhsZdgxhsMachine.cbhsZdgxhsMachine).where(QCbhsZdgxhsMachine.cbhsZdgxhsMachine.zytjOid.in(zytjOids)).fetch();
+			if (machines.size() > 0) {
+				for (CbhsZdgxhsMachine ma : machines) {
+					cbsMap.get(ma.getZytjOid()).setMachinerTotal(cbsMap.get(ma.getZytjOid()).getMachinerTotal().add(ma.getP_total()));
+					cbsMap.get(ma.getZytjOid()).setMachinerRyTotal(cbsMap.get(ma.getZytjOid()).getMachinerRyTotal().add(ma.getRyPrice()));
+				}
+			}
+		}
+		// 补入合计
+		uiFbCompanyTj hj = new uiFbCompanyTj();
+		for (uiFbCompanyTj zytj : response.getResult()) {
+			hj.setGzTotal(hj.getGzTotal().add(zytj.getGzTotal()));
+			hj.setZcTotal(hj.getZcTotal().add(zytj.getZcTotal()));
+			hj.setFcTotal(hj.getFcTotal().add(zytj.getFcTotal()));
+			hj.setMachinerRyTotal(hj.getMachinerRyTotal().add(zytj.getMachinerRyTotal()));
+			hj.setMachinerTotal(hj.getMachinerTotal().add(zytj.getMachinerTotal()));
+			hj.setTotal(hj.getTotal().add(zytj.getTotal()));
+		}
+		response.setHj(hj);
 		return response;
 	}
 }

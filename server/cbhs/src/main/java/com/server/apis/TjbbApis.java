@@ -34,6 +34,8 @@ import com.server.pojo.bean.uiAbnormal;
 import com.server.pojo.url.tjbb.RequestZybbAbnormalFetch;
 import com.server.pojo.url.tjbb.RequestCbAnalyze;
 import com.server.pojo.bean.uiCbAnalyze;
+import com.server.pojo.url.tjbb.RequestFbCompanyTj;
+import com.server.pojo.url.tjbb.ResponseFbCompanyTj;
 
 @Api(tags = { "统计报表接口" }, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @RestController
@@ -130,6 +132,19 @@ public class TjbbApis {
 	@ResponseBody
 	public uiCbAnalyze cbAnalyze(@Validated @RequestBody RequestCbAnalyze request, HttpServletRequest httpServletRequest) throws Exception{
 		return tjbbApisService.cbAnalyze(request, httpServletRequest);
+	}
+
+
+	@RequestMapping(value = "/tjbb/fbCompanyTj", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseStatus(code = HttpStatus.OK)
+	@ApiImplicitParams({
+		@ApiImplicitParam(name = "token", value = "鉴权信息", required = true, dataType = "String", paramType = "header"),
+	})
+	@ApiOperation(value = "查询-分包商统计", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ApiResponse(code = 200, message = "操作成功后返回的视图")
+	@ResponseBody
+	public ResponseFbCompanyTj fbCompanyTj(@Validated @RequestBody RequestFbCompanyTj request, HttpServletRequest httpServletRequest) throws Exception{
+		return tjbbApisService.fbCompanyTj(request, httpServletRequest);
 	}
 
 
