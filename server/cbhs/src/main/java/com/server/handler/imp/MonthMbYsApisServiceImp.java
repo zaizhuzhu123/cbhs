@@ -134,14 +134,26 @@ public class MonthMbYsApisServiceImp implements MonthMbYsApisService {
 		jpaquery.where(request.getDeptOid(), query_.deptOid.eq(request.getDeptOid()));
 		jpaquery.where(request.getMonth(), query_.monthTimeStamp.eq(request.getMonth()));
 		jpaquery.where(request.getStartOid(), query_.oid.gt(request.getStartOid()));
+		jpaquery.orderBy(query_.monthStr.desc());
 		// 查询总数
 		ResponseJjcbYsFetch response = new ResponseJjcbYsFetch();
 		PagerResult pr = jpaquery.fetchPager(request.getPageNum(), request.getPageSize());
 		response.setTotal(pr.getTotal());
 		response.setResult(pr.getResult());
 		// 查询合计对象
-		CbhsMonthJjcbYs jjcbTotal = queryFactory.select(Projections.bean(CbhsMonthJjcbYs.class, query_.total.sum().as(query_.total), query_.glry_gz.sum().as(query_.glry_gz), query_.glry_zjjf.sum().as(query_.glry_zjjf), query_.glry_ghjf.sum().as(query_.glry_ghjf), query_.glry_dwbx.sum().as(query_.glry_dwbx), query_.glry_qt.sum().as(query_.glry_qt), query_.glry_wp_gz.sum().as(query_.glry_wp_gz), query_.glry_wp_zjjf.sum().as(query_.glry_wp_zjjf), query_.glry_wp_ghjf.sum().as(query_.glry_wp_ghjf), query_.glry_wp_qt.sum().as(query_.glry_wp_qt), query_.scry_gz.sum().as(query_.scry_gz), query_.scry_zjjf.sum().as(query_.scry_zjjf), query_.scry_ghjf.sum().as(query_.scry_ghjf), query_.scry_dwbx.sum().as(query_.scry_dwbx), query_.scry_qt.sum().as(query_.scry_qt), query_.scry_wp_gz.sum().as(query_.scry_wp_gz), query_.scry_wp_zjjf.sum().as(query_.scry_wp_zjjf), query_.scry_wp_ghjf.sum().as(query_.scry_wp_ghjf), query_.scry_wp_qt.sum().as(query_.scry_wp_qt), query_.bg_bgyp.sum().as(query_.bg_bgyp),
-				query_.bg_txf.sum().as(query_.bg_txf), query_.bg_dnhc.sum().as(query_.bg_dnhc), query_.bg_qt.sum().as(query_.bg_qt), query_.xlf_dxf.sum().as(query_.xlf_dxf), query_.xlf_ybxlf.sum().as(query_.xlf_ybxlf), query_.xlf_clf.sum().as(query_.xlf_clf), query_.xlf_cailiaofei.sum().as(query_.xlf_cailiaofei), query_.xlf_flf.sum().as(query_.xlf_flf), query_.xlf_ywjf.sum().as(query_.xlf_ywjf), query_.xlf_sdf.sum().as(query_.xlf_sdf), query_.xlf_scf.sum().as(query_.xlf_scf), query_.xlf_kyjf.sum().as(query_.xlf_kyjf), query_.xlf_cljbxf.sum().as(query_.xlf_cljbxf), query_.xlf_bhfy.sum().as(query_.xlf_bhfy), query_.xlf_gzzrx.sum().as(query_.xlf_gzzrx), query_.xlf_qt.sum().as(query_.xlf_qt), query_.aqfy_ygsz.sum().as(query_.aqfy_ygsz), query_.aqfy_ygsztc.sum().as(query_.aqfy_ygsztc), query_.aqfy_qt.sum().as(query_.aqfy_qt))).from(query_).where(jpaquery.getMetadata().getWhere()).fetchFirst();
+		CbhsMonthJjcbYs jjcbTotal = queryFactory
+				.select(Projections.bean(CbhsMonthJjcbYs.class, query_.total.sum().as(query_.total), query_.glry_gz.sum().as(query_.glry_gz), query_.glry_zjjf.sum().as(query_.glry_zjjf),
+						query_.glry_ghjf.sum().as(query_.glry_ghjf), query_.glry_dwbx.sum().as(query_.glry_dwbx), query_.glry_qt.sum().as(query_.glry_qt), query_.glry_wp_gz.sum()
+								.as(query_.glry_wp_gz), query_.glry_wp_zjjf.sum().as(query_.glry_wp_zjjf), query_.glry_wp_ghjf.sum().as(query_.glry_wp_ghjf),
+						query_.glry_wp_qt.sum().as(query_.glry_wp_qt), query_.scry_gz.sum().as(query_.scry_gz), query_.scry_zjjf.sum().as(query_.scry_zjjf), query_.scry_ghjf.sum()
+								.as(query_.scry_ghjf), query_.scry_dwbx.sum().as(query_.scry_dwbx), query_.scry_qt.sum().as(query_.scry_qt), query_.scry_wp_gz.sum().as(query_.scry_wp_gz),
+						query_.scry_wp_zjjf.sum().as(query_.scry_wp_zjjf), query_.scry_wp_ghjf.sum().as(query_.scry_wp_ghjf), query_.scry_wp_qt.sum().as(query_.scry_wp_qt),
+						query_.bg_bgyp.sum().as(query_.bg_bgyp), query_.bg_txf.sum().as(query_.bg_txf), query_.bg_dnhc.sum().as(query_.bg_dnhc), query_.bg_qt.sum().as(query_.bg_qt), query_.xlf_dxf
+								.sum().as(query_.xlf_dxf), query_.xlf_ybxlf.sum().as(query_.xlf_ybxlf), query_.xlf_clf.sum().as(query_.xlf_clf), query_.xlf_cailiaofei.sum().as(query_.xlf_cailiaofei),
+						query_.xlf_flf.sum().as(query_.xlf_flf), query_.xlf_ywjf.sum().as(query_.xlf_ywjf), query_.xlf_sdf.sum().as(query_.xlf_sdf), query_.xlf_scf.sum().as(query_.xlf_scf),
+						query_.xlf_kyjf.sum().as(query_.xlf_kyjf), query_.xlf_cljbxf.sum().as(query_.xlf_cljbxf), query_.xlf_bhfy.sum().as(query_.xlf_bhfy), query_.xlf_gzzrx.sum()
+								.as(query_.xlf_gzzrx), query_.xlf_qt.sum().as(query_.xlf_qt), query_.aqfy_ygsz.sum().as(query_.aqfy_ygsz), query_.aqfy_ygsztc.sum().as(query_.aqfy_ygsztc),
+						query_.aqfy_qt.sum().as(query_.aqfy_qt))).from(query_).where(jpaquery.getMetadata().getWhere()).fetchFirst();
 		response.setJjcbTotal(jjcbTotal);
 		return response;
 	}
@@ -195,6 +207,7 @@ public class MonthMbYsApisServiceImp implements MonthMbYsApisService {
 		jpaquery.where(request.getMonth(), query_.monthTimeStamp.eq(request.getMonth()));
 		jpaquery.where(request.getStartOid(), query_.oid.gt(request.getStartOid()));
 		jpaquery.where(request.getDeptOid(), query_.deptOid.eq(request.getDeptOid()));
+		jpaquery.orderBy(query_.monthTimeStamp.desc());
 		// 查询总数
 		ResponseGlfyYsFetch response = new ResponseGlfyYsFetch();
 		PagerResult pr = jpaquery.fetchPager(request.getPageNum(), request.getPageSize());
@@ -227,7 +240,9 @@ public class MonthMbYsApisServiceImp implements MonthMbYsApisService {
 		BeanValidation bv = new BeanValidation(queryFactory);
 		bv.vali(BeanValidation.beanType.project, BeanValidation.valiType.all, ys.getProjectOid());
 		bv.vali(BeanValidation.beanType.dept, BeanValidation.valiType.all, ys.getDeptOid());
-		Preconditions.checkArgument(!queryFactory.exists(QCbhsMonthGlfyYs.cbhsMonthGlfyYs, QCbhsMonthGlfyYs.cbhsMonthGlfyYs.projectOid.eq(ys.getProjectOid()).and(QCbhsMonthGlfyYs.cbhsMonthGlfyYs.monthStr.eq(ys.getMonthStr()))), "该月已录入管理费用，不能重复录入!");
+		Preconditions.checkArgument(
+				!queryFactory.exists(QCbhsMonthGlfyYs.cbhsMonthGlfyYs,
+						QCbhsMonthGlfyYs.cbhsMonthGlfyYs.projectOid.eq(ys.getProjectOid()).and(QCbhsMonthGlfyYs.cbhsMonthGlfyYs.monthStr.eq(ys.getMonthStr()))), "该月已录入管理费用，不能重复录入!");
 		long time = System.currentTimeMillis();
 		DateTime dt = new DateTime(time);
 		ys.setOpUserOid(TokenUtils.getTokenInfo(httpServletRequest).getUserOid());
@@ -252,6 +267,8 @@ public class MonthMbYsApisServiceImp implements MonthMbYsApisService {
 		jpaquery.where(request.getMonth(), query_.monthTimeStamp.eq(request.getMonth()));
 		jpaquery.where(request.getGlobalGclYsOid(), query_.globalGclYsOid.eq(request.getGlobalGclYsOid()));
 		jpaquery.where(request.getStartOid(), query_.oid.gt(request.getStartOid()));
+		jpaquery.orderBy(query_.monthTimeStamp.desc());
+
 		// 查询总数
 		ResponseZyCailiaoCbYsFetch response = new ResponseZyCailiaoCbYsFetch();
 		PagerResult prResult = jpaquery.fetchPager(request.getPageNum(), request.getPageSize());
@@ -282,7 +299,10 @@ public class MonthMbYsApisServiceImp implements MonthMbYsApisService {
 			jpaquery2.where(QCbhsCailiao.cbhsCailiao.oid.in(cailiaoOids).and(QCbhsCailiao.cbhsCailiao.status.eq(true)));
 			Integer isRy = request.getIsRy();
 			if (isRy != null && isRy > 0) {
-				jpaquery2.where(isRy, QCbhsCailiao.cbhsCailiao.kemuOid.in(JPAExpressions.select(QCbhsCailiaoKemu.cbhsCailiaoKemu.oid).from(QCbhsCailiaoKemu.cbhsCailiaoKemu).where(QCbhsCailiaoKemu.cbhsCailiaoKemu.isRy.eq(isRy == 1 ? true : false))));
+				jpaquery2.where(
+						isRy,
+						QCbhsCailiao.cbhsCailiao.kemuOid.in(JPAExpressions.select(QCbhsCailiaoKemu.cbhsCailiaoKemu.oid).from(QCbhsCailiaoKemu.cbhsCailiaoKemu)
+								.where(QCbhsCailiaoKemu.cbhsCailiaoKemu.isRy.eq(isRy == 1 ? true : false))));
 			}
 			// 查询总数
 			PagerResult prResult = jpaquery2.fetchPager(request.getPageNum(), request.getPageSize());
@@ -363,6 +383,7 @@ public class MonthMbYsApisServiceImp implements MonthMbYsApisService {
 		jpaquery.where(request.getDeptOid(), query_.deptOid.eq(request.getDeptOid()));
 		jpaquery.where(request.getMonth(), query_.monthTimeStamp.eq(request.getMonth()));
 		jpaquery.where(request.getStartOid(), query_.oid.gt(request.getStartOid()));
+		jpaquery.orderBy(query_.monthTimeStamp.desc());
 		// 查询总数
 		ResponseZyLxygCbYsFetch response = new ResponseZyLxygCbYsFetch();
 		PagerResult prResult = jpaquery.fetchPager(request.getPageNum(), request.getPageSize());
@@ -420,6 +441,7 @@ public class MonthMbYsApisServiceImp implements MonthMbYsApisService {
 		jpaquery.where(request.getDeptOid(), query_.deptOid.eq(request.getDeptOid()));
 		jpaquery.where(request.getMonth(), query_.monthTimeStamp.eq(request.getMonth()));
 		jpaquery.where(request.getStartOid(), query_.oid.gt(request.getStartOid()));
+		jpaquery.orderBy(query_.monthTimeStamp.desc());
 		// 查询总数
 		ResponseZyJxCbYsFetch response = new ResponseZyJxCbYsFetch();
 		PagerResult prResult = jpaquery.fetchPager(request.getPageNum(), request.getPageSize());
@@ -477,6 +499,7 @@ public class MonthMbYsApisServiceImp implements MonthMbYsApisService {
 		jpaquery.where(request.getDeptOid(), query_.deptOid.eq(request.getDeptOid()));
 		jpaquery.where(request.getMonth(), query_.monthTimeStamp.eq(request.getMonth()));
 		jpaquery.where(request.getStartOid(), query_.oid.gt(request.getStartOid()));
+		jpaquery.orderBy(query_.monthTimeStamp.desc());
 		// 查询总数
 		ResponseZyQtfyYsFetch response = new ResponseZyQtfyYsFetch();
 		PagerResult prResult = jpaquery.fetchPager(request.getPageNum(), request.getPageSize());
@@ -534,6 +557,7 @@ public class MonthMbYsApisServiceImp implements MonthMbYsApisService {
 		jpaquery.where(request.getMonth(), query_.monthTimeStamp.eq(request.getMonth()));
 		jpaquery.where(request.getStartOid(), query_.oid.gt(request.getStartOid()));
 		jpaquery.where(request.getDeptOid(), query_.deptOid.eq(request.getDeptOid()));
+		jpaquery.orderBy(query_.monthTimeStamp.desc());
 		// 查询总数
 		ResponseFbLjxmCbYsFetch response = new ResponseFbLjxmCbYsFetch();
 		PagerResult prResult = jpaquery.fetchPager(request.getPageNum(), request.getPageSize());
@@ -593,6 +617,7 @@ public class MonthMbYsApisServiceImp implements MonthMbYsApisService {
 		jpaquery.where(request.getStartOid(), query_.oid.gt(request.getStartOid()));
 		jpaquery.where(request.getFbCompanyOid(), query_.fbCompanyOid.eq(request.getFbCompanyOid()));
 		jpaquery.where(request.getHtOid(), query_.htOid.eq(request.getHtOid()));
+		jpaquery.orderBy(query_.monthTimeStamp.desc());
 		// 查询总数
 		BigDecimal priceTotal = queryFactory.select(query_.total.sum()).from(query_).where(jpaquery.getQueryMixin().getMetadata().getWhere()).fetchFirst();
 		ResponseFbGcCbYsFetch response = new ResponseFbGcCbYsFetch();
@@ -616,7 +641,13 @@ public class MonthMbYsApisServiceImp implements MonthMbYsApisService {
 		bv.vali(BeanValidation.beanType.fbCompany, BeanValidation.valiType.all, ys.getFbCompanyOid());
 		Preconditions.checkArgument(ys.getGlobalGclYsOid() > 0, "工程量ID不能为空!");
 		Preconditions.checkArgument(queryFactory.exists(QCbhsGclQdYs.cbhsGclQdYs, QCbhsGclQdYs.cbhsGclQdYs.oid.eq(ys.getGlobalGclYsOid())), "工程量项目不存在!");
-		Preconditions.checkArgument(!queryFactory.exists(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs, QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.projectOid.eq(ys.getProjectOid()).and(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.monthStr.eq(ys.getMonthStr())).and(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.fbCompanyOid.eq(ys.getFbCompanyOid())).and(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.name.eq(ys.getName()).or(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.nodeId.eq(ys.getNodeId()))).and(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.oid.ne(ys.getOid()))), "分包商在本月已创建过同名或同编号的分包工程");
+		Preconditions.checkArgument(
+				!queryFactory.exists(
+						QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs,
+						QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.projectOid.eq(ys.getProjectOid()).and(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.monthStr.eq(ys.getMonthStr()))
+								.and(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.fbCompanyOid.eq(ys.getFbCompanyOid()))
+								.and(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.name.eq(ys.getName()).or(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.nodeId.eq(ys.getNodeId())))
+								.and(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.oid.ne(ys.getOid()))), "分包商在本月已创建过同名或同编号的分包工程");
 		queryFactory.saveOrUpdate(ys);
 		return ys;
 	}
@@ -650,7 +681,12 @@ public class MonthMbYsApisServiceImp implements MonthMbYsApisService {
 				ys.setFbCompanyName(queryFactory.findOne(CbhsFbCompany.class, ys.getFbCompanyOid()).getName());
 				Preconditions.checkArgument(ys.getGlobalGclYsOid() > 0, "工程量ID不能为空!");
 				Preconditions.checkArgument(queryFactory.exists(QCbhsGclQdYs.cbhsGclQdYs, QCbhsGclQdYs.cbhsGclQdYs.oid.eq(ys.getGlobalGclYsOid())), "工程量项目不存在!");
-				Preconditions.checkArgument(!queryFactory.exists(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs, QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.projectOid.eq(ys.getProjectOid()).and(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.monthStr.eq(ys.getMonthStr())).and(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.fbCompanyOid.eq(ys.getFbCompanyOid())).and(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.name.eq(ys.getName()).or(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.nodeId.eq(ys.getNodeId())))), "分包商在本月已创建过同名或同编号的分包工程");
+				Preconditions.checkArgument(
+						!queryFactory.exists(
+								QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs,
+								QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.projectOid.eq(ys.getProjectOid()).and(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.monthStr.eq(ys.getMonthStr()))
+										.and(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.fbCompanyOid.eq(ys.getFbCompanyOid()))
+										.and(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.name.eq(ys.getName()).or(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.nodeId.eq(ys.getNodeId())))), "分包商在本月已创建过同名或同编号的分包工程");
 				long time = System.currentTimeMillis();
 				DateTime dt = new DateTime(time);
 				ys.setOpUserOid(TokenUtils.getTokenInfo(httpServletRequest).getUserOid());
@@ -680,6 +716,7 @@ public class MonthMbYsApisServiceImp implements MonthMbYsApisService {
 		jpaquery.where(request.getGlobalGclYsOid(), query_.globalGclYsOid.eq(request.getGlobalGclYsOid()));
 		jpaquery.where(request.getFbCompanyOid(), query_.fbCompanyOid.eq(request.getFbCompanyOid()));
 		jpaquery.where(request.getStartOid(), query_.oid.gt(request.getStartOid()));
+		jpaquery.orderBy(query_.monthTimeStamp.desc());
 		// 查询总数
 		ResponseFbCailiaoCbYsFetch response = new ResponseFbCailiaoCbYsFetch();
 		PagerResult prResult = jpaquery.fetchPager(request.getPageNum(), request.getPageSize());
@@ -703,7 +740,15 @@ public class MonthMbYsApisServiceImp implements MonthMbYsApisService {
 		ys.setFbCompanyName(queryFactory.findOne(CbhsFbCompany.class, ys.getFbCompanyOid()).getName());
 		Preconditions.checkArgument(ys.getGlobalGclYsOid() > 0, "工程量ID不能为空!");
 		Preconditions.checkArgument(queryFactory.exists(QCbhsGclQdYs.cbhsGclQdYs, QCbhsGclQdYs.cbhsGclQdYs.oid.eq(ys.getGlobalGclYsOid())), "工程量项目不存在!");
-		Preconditions.checkArgument(!queryFactory.exists(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs, QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.projectOid.eq(ys.getProjectOid()).and(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.monthStr.eq(ys.getMonthStr())).and(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.deptOid.eq(ys.getDeptOid())).and(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.cailiaoOid.eq(ys.getCailiaoOid())).and(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.globalGclYsOid.eq(ys.getGlobalGclYsOid())).and(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.oid.ne(ys.getOid()))), "部门本月在该工程下已创建过这个材料的预算!");
+		Preconditions
+				.checkArgument(
+						!queryFactory.exists(
+								QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs,
+								QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.projectOid.eq(ys.getProjectOid()).and(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.monthStr.eq(ys.getMonthStr()))
+										.and(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.deptOid.eq(ys.getDeptOid()))
+										.and(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.cailiaoOid.eq(ys.getCailiaoOid()))
+										.and(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.globalGclYsOid.eq(ys.getGlobalGclYsOid()))
+										.and(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.oid.ne(ys.getOid()))), "部门本月在该工程下已创建过这个材料的预算!");
 
 		queryFactory.saveOrUpdate(ys);
 		return ys;
@@ -734,7 +779,13 @@ public class MonthMbYsApisServiceImp implements MonthMbYsApisService {
 				Preconditions.checkArgument(queryFactory.exists(QCbhsGclQdYs.cbhsGclQdYs, QCbhsGclQdYs.cbhsGclQdYs.oid.eq(ys.getGlobalGclYsOid())), "工程量项目不存在!");
 				Preconditions.checkArgument(StringUtils.isNotBlank(ys.getMonthStr()), "月份不能为空!");
 				Preconditions.checkArgument(ys.getMonthTimeStamp() > 0, "月份时间戳不能为空!");
-				Preconditions.checkArgument(!queryFactory.exists(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs, QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.projectOid.eq(ys.getProjectOid()).and(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.monthStr.eq(ys.getMonthStr())).and(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.deptOid.eq(ys.getDeptOid())).and(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.cailiaoOid.eq(ys.getCailiaoOid())).and(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.globalGclYsOid.eq(ys.getGlobalGclYsOid()))), "部门本月在该工程下已创建过这个材料的预算!");
+				Preconditions.checkArgument(
+						!queryFactory.exists(
+								QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs,
+								QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.projectOid.eq(ys.getProjectOid()).and(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.monthStr.eq(ys.getMonthStr()))
+										.and(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.deptOid.eq(ys.getDeptOid()))
+										.and(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.cailiaoOid.eq(ys.getCailiaoOid()))
+										.and(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.globalGclYsOid.eq(ys.getGlobalGclYsOid()))), "部门本月在该工程下已创建过这个材料的预算!");
 				long time = System.currentTimeMillis();
 				DateTime dt = new DateTime(time);
 				ys.setOpUserOid(TokenUtils.getTokenInfo(httpServletRequest).getUserOid());
@@ -774,7 +825,8 @@ public class MonthMbYsApisServiceImp implements MonthMbYsApisService {
 		response.setGlfyTotal(cbhsMonthGlfyYs);
 		// 直接成本-自营材料费
 		uiCbhsMonthZjCbTotal uicbhsMonthZjCbTotal = new uiCbhsMonthZjCbTotal();
-		JPAQuery<BigDecimal> jqp_zyCailiaoCb = queryFactory.select(QCbhsMonthZyCailiaoCbYs.cbhsMonthZyCailiaoCbYs.total.sum()).from(QCbhsMonthZyCailiaoCbYs.cbhsMonthZyCailiaoCbYs).where(QCbhsMonthZyCailiaoCbYs.cbhsMonthZyCailiaoCbYs.projectOid.eq(request.getProjectOid()).and(QCbhsMonthZyCailiaoCbYs.cbhsMonthZyCailiaoCbYs.monthTimeStamp.eq(request.getMonth())));
+		JPAQuery<BigDecimal> jqp_zyCailiaoCb = queryFactory.select(QCbhsMonthZyCailiaoCbYs.cbhsMonthZyCailiaoCbYs.total.sum()).from(QCbhsMonthZyCailiaoCbYs.cbhsMonthZyCailiaoCbYs)
+				.where(QCbhsMonthZyCailiaoCbYs.cbhsMonthZyCailiaoCbYs.projectOid.eq(request.getProjectOid()).and(QCbhsMonthZyCailiaoCbYs.cbhsMonthZyCailiaoCbYs.monthTimeStamp.eq(request.getMonth())));
 		if (request.getDeptOid() > 0) {
 			jqp_zyCailiaoCb.where(QCbhsMonthZyCailiaoCbYs.cbhsMonthZyCailiaoCbYs.deptOid.eq(request.getDeptOid()));
 		} else {
@@ -796,10 +848,15 @@ public class MonthMbYsApisServiceImp implements MonthMbYsApisService {
 		CbhsMonthZyQtfyYs cbhsMonthZyQtfyYs = DataSummaryUtils.getThisMonthZyQtCbYs(queryFactory, dsObj);
 		uicbhsMonthZjCbTotal.setP_zyQtfyCb(cbhsMonthZyQtfyYs.getTotal());
 		// 直接成本-分包成本
-		BigDecimal p_fbGcCb = queryFactory.select(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.total.sum()).from(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs).where(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.projectOid.eq(request.getProjectOid()).and(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.monthTimeStamp.eq(request.getMonth()).and(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.deptOid.in(deptOids)))).fetchOne();
+		BigDecimal p_fbGcCb = queryFactory
+				.select(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.total.sum())
+				.from(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs)
+				.where(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.projectOid.eq(request.getProjectOid()).and(
+						QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.monthTimeStamp.eq(request.getMonth()).and(QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs.deptOid.in(deptOids)))).fetchOne();
 		uicbhsMonthZjCbTotal.setP_fbGcCb(p_fbGcCb != null ? p_fbGcCb : new BigDecimal(0));
 		// 直接成本-分包材料成本
-		JPAQuery<BigDecimal> jqp_fbCailiaoCb = queryFactory.select(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.total.sum()).from(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs).where(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.projectOid.eq(request.getProjectOid()).and(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.monthTimeStamp.eq(request.getMonth())));
+		JPAQuery<BigDecimal> jqp_fbCailiaoCb = queryFactory.select(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.total.sum()).from(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs)
+				.where(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.projectOid.eq(request.getProjectOid()).and(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.monthTimeStamp.eq(request.getMonth())));
 		if (request.getDeptOid() > 0) {
 			jqp_fbCailiaoCb.where(QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs.deptOid.eq(request.getDeptOid()));
 		} else {
@@ -808,7 +865,11 @@ public class MonthMbYsApisServiceImp implements MonthMbYsApisService {
 		BigDecimal p_fbCailiaoCb = jqp_fbCailiaoCb.fetchOne();
 		uicbhsMonthZjCbTotal.setP_fbCailiaoCb(p_fbCailiaoCb != null ? p_fbCailiaoCb : new BigDecimal(0));
 		// 直接成本-临建项目
-		BigDecimal p_fbLjxmCb = queryFactory.select(QCbhsMonthFbLjxmCbYs.cbhsMonthFbLjxmCbYs.total.sum()).from(QCbhsMonthFbLjxmCbYs.cbhsMonthFbLjxmCbYs).where(QCbhsMonthFbLjxmCbYs.cbhsMonthFbLjxmCbYs.projectOid.eq(request.getProjectOid()).and(QCbhsMonthFbLjxmCbYs.cbhsMonthFbLjxmCbYs.monthTimeStamp.eq(request.getMonth()).and(QCbhsMonthFbLjxmCbYs.cbhsMonthFbLjxmCbYs.deptOid.in(deptOids)))).fetchOne();
+		BigDecimal p_fbLjxmCb = queryFactory
+				.select(QCbhsMonthFbLjxmCbYs.cbhsMonthFbLjxmCbYs.total.sum())
+				.from(QCbhsMonthFbLjxmCbYs.cbhsMonthFbLjxmCbYs)
+				.where(QCbhsMonthFbLjxmCbYs.cbhsMonthFbLjxmCbYs.projectOid.eq(request.getProjectOid()).and(
+						QCbhsMonthFbLjxmCbYs.cbhsMonthFbLjxmCbYs.monthTimeStamp.eq(request.getMonth()).and(QCbhsMonthFbLjxmCbYs.cbhsMonthFbLjxmCbYs.deptOid.in(deptOids)))).fetchOne();
 		uicbhsMonthZjCbTotal.setP_fbLjxmCb(p_fbLjxmCb != null ? p_fbLjxmCb : new BigDecimal(0));
 		response.setZjcbTotal(uicbhsMonthZjCbTotal);
 		return response;
@@ -821,41 +882,56 @@ public class MonthMbYsApisServiceImp implements MonthMbYsApisService {
 		Preconditions.checkArgument(request.getMonth() > 0, "月份不能为空!");
 		QCbhsMonthJjcbYs query_jjcb = QCbhsMonthJjcbYs.cbhsMonthJjcbYs; // 间接成本
 		List<Integer> deptOids = queryFactory.select(QCbhsDept.cbhsDept.oid).from(QCbhsDept.cbhsDept).where(QCbhsDept.cbhsDept.status.eq(true)).fetch();
-		JPAQuery<Tuple> jpaquery_jjcb = queryFactory.select(query_jjcb.monthStr, query_jjcb.deptOid, query_jjcb.deptName, query_jjcb.total.sum()).from(query_jjcb).where(query_jjcb.projectOid.eq(request.getProjectOid())).where(query_jjcb.deptOid.in(deptOids));
+		JPAQuery<Tuple> jpaquery_jjcb = queryFactory.select(query_jjcb.monthStr, query_jjcb.deptOid, query_jjcb.deptName, query_jjcb.total.sum()).from(query_jjcb)
+				.where(query_jjcb.projectOid.eq(request.getProjectOid())).where(query_jjcb.deptOid.in(deptOids));
 
 		QCbhsMonthFbCailiaoCbYs query_fbcc = QCbhsMonthFbCailiaoCbYs.cbhsMonthFbCailiaoCbYs; // 分包材料
-		JPAQuery<Tuple> jpaquery_fbcc = queryFactory.select(query_fbcc.monthStr, query_fbcc.deptOid, query_fbcc.deptName, query_fbcc.total.sum()).from(query_fbcc).where(query_fbcc.projectOid.eq(request.getProjectOid())).where(query_fbcc.deptOid.in(deptOids));
+		JPAQuery<Tuple> jpaquery_fbcc = queryFactory.select(query_fbcc.monthStr, query_fbcc.deptOid, query_fbcc.deptName, query_fbcc.total.sum()).from(query_fbcc)
+				.where(query_fbcc.projectOid.eq(request.getProjectOid())).where(query_fbcc.deptOid.in(deptOids));
 
 		QCbhsMonthZyCailiaoCbYs query_zycc = QCbhsMonthZyCailiaoCbYs.cbhsMonthZyCailiaoCbYs;// 自营材料
-		JPAQuery<Tuple> jpaquery_zycc = queryFactory.select(query_zycc.monthStr, query_zycc.deptOid, query_zycc.deptName, query_zycc.total.sum()).from(query_zycc).where(query_zycc.projectOid.eq(request.getProjectOid())).where(query_zycc.deptOid.in(deptOids));
+		JPAQuery<Tuple> jpaquery_zycc = queryFactory.select(query_zycc.monthStr, query_zycc.deptOid, query_zycc.deptName, query_zycc.total.sum()).from(query_zycc)
+				.where(query_zycc.projectOid.eq(request.getProjectOid())).where(query_zycc.deptOid.in(deptOids));
 
 		QCbhsMonthZyLxygCbYs query_zylxyg = QCbhsMonthZyLxygCbYs.cbhsMonthZyLxygCbYs;// 自营零星工程
-		JPAQuery<Tuple> jpaquery_zylxyg = queryFactory.select(query_zylxyg.monthStr, query_zylxyg.deptOid, query_zylxyg.deptName, query_zylxyg.total.sum()).from(query_zylxyg).where(query_zylxyg.projectOid.eq(request.getProjectOid())).where(query_zylxyg.deptOid.in(deptOids));
+		JPAQuery<Tuple> jpaquery_zylxyg = queryFactory.select(query_zylxyg.monthStr, query_zylxyg.deptOid, query_zylxyg.deptName, query_zylxyg.total.sum()).from(query_zylxyg)
+				.where(query_zylxyg.projectOid.eq(request.getProjectOid())).where(query_zylxyg.deptOid.in(deptOids));
 
 		QCbhsMonthZyJxCbYs query_zyjx = QCbhsMonthZyJxCbYs.cbhsMonthZyJxCbYs;// 自营机械成本
-		JPAQuery<Tuple> jpaquery_zyjx = queryFactory.select(query_zyjx.monthStr, query_zyjx.deptOid, query_zyjx.deptName, query_zyjx.total.sum()).from(query_zyjx).where(query_zyjx.projectOid.eq(request.getProjectOid())).where(query_zyjx.deptOid.in(deptOids));
+		JPAQuery<Tuple> jpaquery_zyjx = queryFactory.select(query_zyjx.monthStr, query_zyjx.deptOid, query_zyjx.deptName, query_zyjx.total.sum()).from(query_zyjx)
+				.where(query_zyjx.projectOid.eq(request.getProjectOid())).where(query_zyjx.deptOid.in(deptOids));
 
 		QCbhsMonthZyQtfyYs query_zyqtfy = QCbhsMonthZyQtfyYs.cbhsMonthZyQtfyYs;// 自营其他成本
-		JPAQuery<Tuple> jpaquery_zyqtfy = queryFactory.select(query_zyqtfy.monthStr, query_zyqtfy.deptOid, query_zyqtfy.deptName, query_zyqtfy.total.sum()).from(query_zyqtfy).where(query_zyqtfy.projectOid.eq(request.getProjectOid())).where(query_zyqtfy.deptOid.in(deptOids));
+		JPAQuery<Tuple> jpaquery_zyqtfy = queryFactory.select(query_zyqtfy.monthStr, query_zyqtfy.deptOid, query_zyqtfy.deptName, query_zyqtfy.total.sum()).from(query_zyqtfy)
+				.where(query_zyqtfy.projectOid.eq(request.getProjectOid())).where(query_zyqtfy.deptOid.in(deptOids));
 
 		QCbhsMonthGlfyYs query_glfy = QCbhsMonthGlfyYs.cbhsMonthGlfyYs;// 管理费用
-		JPAQuery<Tuple> jpaquery_glfy = queryFactory.select(query_glfy.monthStr, query_glfy.deptOid, query_glfy.deptName, query_glfy.total.sum()).from(query_glfy).where(query_glfy.projectOid.eq(request.getProjectOid()).and(query_glfy.deptOid.in(deptOids)));
+		JPAQuery<Tuple> jpaquery_glfy = queryFactory.select(query_glfy.monthStr, query_glfy.deptOid, query_glfy.deptName, query_glfy.total.sum()).from(query_glfy)
+				.where(query_glfy.projectOid.eq(request.getProjectOid()).and(query_glfy.deptOid.in(deptOids)));
 
 		QCbhsMonthFbGcCbYs query_fbgc = QCbhsMonthFbGcCbYs.cbhsMonthFbGcCbYs; // 分包工程
-		JPAQuery<Tuple> jpaquery_fbgc = queryFactory.select(query_fbgc.monthStr, query_fbgc.deptOid, query_fbgc.deptName, query_fbgc.total.sum()).from(query_fbgc).where(query_fbgc.projectOid.eq(request.getProjectOid()).and(query_fbgc.deptOid.in(deptOids)));
+		JPAQuery<Tuple> jpaquery_fbgc = queryFactory.select(query_fbgc.monthStr, query_fbgc.deptOid, query_fbgc.deptName, query_fbgc.total.sum()).from(query_fbgc)
+				.where(query_fbgc.projectOid.eq(request.getProjectOid()).and(query_fbgc.deptOid.in(deptOids)));
 
 		QCbhsMonthFbLjxmCbYs query_fbljxm = QCbhsMonthFbLjxmCbYs.cbhsMonthFbLjxmCbYs;// 分包临建项目
-		JPAQuery<Tuple> jpaquery_fbljxm = queryFactory.select(query_fbljxm.monthStr, query_fbljxm.deptOid, query_fbljxm.deptName, query_fbljxm.total.sum()).from(query_fbljxm).where(query_fbljxm.projectOid.eq(request.getProjectOid()).and(query_fbljxm.deptOid.in(deptOids)));
+		JPAQuery<Tuple> jpaquery_fbljxm = queryFactory.select(query_fbljxm.monthStr, query_fbljxm.deptOid, query_fbljxm.deptName, query_fbljxm.total.sum()).from(query_fbljxm)
+				.where(query_fbljxm.projectOid.eq(request.getProjectOid()).and(query_fbljxm.deptOid.in(deptOids)));
 
 		boolean hasDeptOid = request.getDeptOid() > 0;
 		// boolean hasMonth = request.getMonth() > 0;
 
-		jpaquery_jjcb.where(query_jjcb.projectOid.eq(request.getProjectOid())).groupBy(query_jjcb.deptOid, query_jjcb.deptName, query_jjcb.monthStr).orderBy(query_jjcb.deptOid.asc(), query_jjcb.monthStr.asc());
-		jpaquery_fbcc.where(query_fbcc.projectOid.eq(request.getProjectOid())).groupBy(query_fbcc.deptOid, query_fbcc.deptName, query_fbcc.monthStr).orderBy(query_fbcc.deptOid.asc(), query_fbcc.monthStr.asc());
-		jpaquery_zycc.where(query_zycc.projectOid.eq(request.getProjectOid())).groupBy(query_zycc.deptOid, query_zycc.deptName, query_zycc.monthStr).orderBy(query_zycc.deptOid.asc(), query_zycc.monthStr.asc());
-		jpaquery_zylxyg.where(query_zylxyg.projectOid.eq(request.getProjectOid())).groupBy(query_zylxyg.deptOid, query_zylxyg.deptName, query_zylxyg.monthStr).orderBy(query_zylxyg.deptOid.asc(), query_zylxyg.monthStr.asc());
-		jpaquery_zyjx.where(query_zyjx.projectOid.eq(request.getProjectOid())).groupBy(query_zyjx.deptOid, query_zyjx.deptName, query_zyjx.monthStr).orderBy(query_zyjx.deptOid.asc(), query_zyjx.monthStr.asc());
-		jpaquery_zyqtfy.where(query_zyqtfy.projectOid.eq(request.getProjectOid())).groupBy(query_zyqtfy.deptOid, query_zyqtfy.deptName, query_zyqtfy.monthStr).orderBy(query_zyqtfy.deptOid.asc(), query_zyqtfy.monthStr.asc());
+		jpaquery_jjcb.where(query_jjcb.projectOid.eq(request.getProjectOid())).groupBy(query_jjcb.deptOid, query_jjcb.deptName, query_jjcb.monthStr)
+				.orderBy(query_jjcb.deptOid.asc(), query_jjcb.monthStr.asc());
+		jpaquery_fbcc.where(query_fbcc.projectOid.eq(request.getProjectOid())).groupBy(query_fbcc.deptOid, query_fbcc.deptName, query_fbcc.monthStr)
+				.orderBy(query_fbcc.deptOid.asc(), query_fbcc.monthStr.asc());
+		jpaquery_zycc.where(query_zycc.projectOid.eq(request.getProjectOid())).groupBy(query_zycc.deptOid, query_zycc.deptName, query_zycc.monthStr)
+				.orderBy(query_zycc.deptOid.asc(), query_zycc.monthStr.asc());
+		jpaquery_zylxyg.where(query_zylxyg.projectOid.eq(request.getProjectOid())).groupBy(query_zylxyg.deptOid, query_zylxyg.deptName, query_zylxyg.monthStr)
+				.orderBy(query_zylxyg.deptOid.asc(), query_zylxyg.monthStr.asc());
+		jpaquery_zyjx.where(query_zyjx.projectOid.eq(request.getProjectOid())).groupBy(query_zyjx.deptOid, query_zyjx.deptName, query_zyjx.monthStr)
+				.orderBy(query_zyjx.deptOid.asc(), query_zyjx.monthStr.asc());
+		jpaquery_zyqtfy.where(query_zyqtfy.projectOid.eq(request.getProjectOid())).groupBy(query_zyqtfy.deptOid, query_zyqtfy.deptName, query_zyqtfy.monthStr)
+				.orderBy(query_zyqtfy.deptOid.asc(), query_zyqtfy.monthStr.asc());
 		jpaquery_glfy.where(query_glfy.projectOid.eq(request.getProjectOid())).groupBy(query_glfy.deptOid, query_glfy.deptName, query_glfy.monthStr).orderBy(query_glfy.monthStr.asc());
 		jpaquery_fbgc.where(query_fbgc.projectOid.eq(request.getProjectOid())).groupBy(query_fbgc.deptOid, query_fbgc.deptName, query_fbgc.monthStr).orderBy(query_fbgc.monthStr.asc());
 		jpaquery_fbljxm.where(query_fbljxm.projectOid.eq(request.getProjectOid())).groupBy(query_fbljxm.deptOid, query_fbljxm.deptName, query_fbljxm.monthStr).orderBy(query_fbljxm.monthStr.asc());
@@ -1192,7 +1268,10 @@ public class MonthMbYsApisServiceImp implements MonthMbYsApisService {
 			jpaquery2.where(QCbhsCailiao.cbhsCailiao.oid.in(cailiaoOids).and(QCbhsCailiao.cbhsCailiao.status.eq(true)));
 			Integer isRy = request.getIsRy();
 			if (isRy != null && isRy > 0) {
-				jpaquery2.where(isRy, QCbhsCailiao.cbhsCailiao.kemuOid.in(JPAExpressions.select(QCbhsCailiaoKemu.cbhsCailiaoKemu.oid).from(QCbhsCailiaoKemu.cbhsCailiaoKemu).where(QCbhsCailiaoKemu.cbhsCailiaoKemu.isRy.eq(isRy == 1 ? true : false))));
+				jpaquery2.where(
+						isRy,
+						QCbhsCailiao.cbhsCailiao.kemuOid.in(JPAExpressions.select(QCbhsCailiaoKemu.cbhsCailiaoKemu.oid).from(QCbhsCailiaoKemu.cbhsCailiaoKemu)
+								.where(QCbhsCailiaoKemu.cbhsCailiaoKemu.isRy.eq(isRy == 1 ? true : false))));
 			}
 			// 查询总数
 			PagerResult prResult = jpaquery2.fetchPager(request.getPageNum(), request.getPageSize());

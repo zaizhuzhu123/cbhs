@@ -99,3 +99,12 @@ com.server.exception.ServiceException: 密码错误!
 2018-07-15 10:12:34,129 INFO (StartupInfoLogger.java:57)- Started ServletInitializer in 18.067 seconds (JVM running for 18.52)
 2018-07-15 10:14:00,003 INFO (QuartzService.java:67)- 启动日志定时写入任务------>
 2018-07-15 10:14:00,037 INFO (QuartzService.java:79)- <-------日志定时写入任务完成
+2018-07-16 16:10:14,037 INFO (StartupInfoLogger.java:48)- Starting ServletInitializer on kj08 with PID 11744 (C:\Users\Administrator\Desktop\cbhs_git\server\cbhs\target\classes started by Administrator in C:\Users\Administrator\Desktop\cbhs_git\server\cbhs)
+2018-07-16 16:10:14,042 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.5.RELEASE, Spring v4.3.10.RELEASE
+2018-07-16 16:10:14,042 INFO (SpringApplication.java:597)- The following profiles are active: prod,test
+2018-07-16 16:12:01,446 INFO (StartupInfoLogger.java:48)- Starting ServletInitializer on kj08 with PID 2548 (C:\Users\Administrator\Desktop\cbhs_git\server\cbhs\target\classes started by Administrator in C:\Users\Administrator\Desktop\cbhs_git\server\cbhs)
+2018-07-16 16:12:01,448 DEBUG (StartupInfoLogger.java:51)- Running with Spring Boot v1.5.5.RELEASE, Spring v4.3.10.RELEASE
+2018-07-16 16:12:01,448 INFO (SpringApplication.java:597)- The following profiles are active: prod,test
+2018-07-16 16:12:16,576 INFO (StartupInfoLogger.java:57)- Started ServletInitializer in 15.492 seconds (JVM running for 15.824)
+2018-07-16 16:14:00,002 INFO (QuartzService.java:67)- 启动日志定时写入任务------>
+2018-07-16 16:14:00,090 INFO (QuartzService.java:79)- <-------日志定时写入任务完成

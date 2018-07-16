@@ -396,6 +396,7 @@ public class ZytjApisServiceImp implements ZytjApisService {
 		jpaquery.where(request.getStartOid(), query_.oid.gt(request.getStartOid()));
 		jpaquery.where(request.getFbGclYsOid(), query_.fbGclYsOid.eq(request.getFbGclYsOid()));
 		jpaquery.where(request.getFbCompanyOid(), query_.fbcompanyOid.eq(request.getFbCompanyOid()));
+		jpaquery.orderBy(query_.dateTimeStamp.desc());
 		// 查询总数
 		ResponseZdgxhsFetch response = new ResponseZdgxhsFetch();
 		PagerResult pr = jpaquery.fetchPager(request.getPageNum(), request.getPageSize());

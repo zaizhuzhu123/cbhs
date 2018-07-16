@@ -68,6 +68,7 @@ public class DaysSrApisServiceImp implements DaysSrApisService {
 		jpaquery.where(request.getDaysEnd(), query_.dateTimeStamp.loe(request.getDaysEnd()));
 		jpaquery.where(request.getGlobalGclYsOid(), query_.globalGclYsOid.eq(request.getGlobalGclYsOid()));
 		jpaquery.where(request.getStartOid(), query_.oid.gt(request.getStartOid()));
+		jpaquery.orderBy(query_.dateTimeStamp.desc());
 		// 查询总数
 		ResponseGcsrFetch response = new ResponseGcsrFetch();
 		PagerResult prResult = jpaquery.fetchPager(request.getPageNum(), request.getPageSize());
@@ -157,6 +158,7 @@ public class DaysSrApisServiceImp implements DaysSrApisService {
 		jpaquery.where(request.getDaysStart(), query_.dateTimeStamp.goe(request.getDaysStart()));
 		jpaquery.where(request.getDaysEnd(), query_.dateTimeStamp.loe(request.getDaysEnd()));
 		jpaquery.where(request.getStartOid(), query_.oid.gt(request.getStartOid()));
+		jpaquery.orderBy(query_.dateTimeStamp.desc());
 		// 查询总数
 		ResponseNewsrFetch response = new ResponseNewsrFetch();
 		PagerResult prResult = jpaquery.fetchPager(request.getPageNum(), request.getPageSize());
