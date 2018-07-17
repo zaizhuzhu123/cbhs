@@ -25,8 +25,6 @@ import com.server.common.DateObj;
 import com.server.common.SheObject;
 import com.server.common.TokenUtils;
 import com.server.exception.ExceedException;
-import com.server.exception.ExceptionResponse;
-import com.server.exception.ServiceException;
 import com.server.handler.DaysCbApisService;
 import com.server.jpa.MyJPAQuery;
 import com.server.jpa.MyJPAQuery.PagerResult;
@@ -45,7 +43,6 @@ import com.server.pojo.bean.CbhsDaysZyLxygCb;
 import com.server.pojo.bean.CbhsDaysZyQtCb;
 import com.server.pojo.bean.CbhsGlfyRule;
 import com.server.pojo.bean.CbhsMonthFbGcCbYs;
-import com.server.pojo.bean.CbhsMonthJjcbYs;
 import com.server.pojo.bean.QCbhsDaysFbGclTj;
 import com.server.pojo.bean.QCbhsDaysFbLjxmCb;
 import com.server.pojo.bean.QCbhsDaysGclSr;
@@ -887,10 +884,6 @@ public class DaysCbApisServiceImp implements DaysCbApisService {
 			globalGclOids.add(ys.getFbGclYsOid());
 			DataSummaryUtils.checkFbGclIsExceed(queryFactory, r1, ys, globalGclOids);
 		} catch (ExceedException e) {
-			// throw new ServiceException(new ExceptionResponse(-1,
-			// ys.getFbGclYsName() + "已超出本月预算总量" +
-			// e.getInfo().getExceedInfos().get(0).getValue().abs() +
-			// e.getInfo().getExceedInfos().get(0).getUnit()));
 			if (request.getSubmitType() == 0) { // 默认提交
 				throw e;
 			} else {
@@ -913,6 +906,12 @@ public class DaysCbApisServiceImp implements DaysCbApisService {
 		if (ys.getShStatus() == 1) { // 审核提交 需要向审核者发送推送消息
 			examinerManager.createExaminer(queryFactory, ys.getProjectOid(), SheObject.shType_fbgcl, ys.getOid(), ys.getDeptOid(), ys.getDeptName(), ext, exception.getInfo().getErrorMessage(),
 					exception.getInfo().getErrorMessage(), TokenUtils.getTokenInfo(httpServletRequest).getUserOid(), TokenUtils.getTokenInfo(httpServletRequest).getUserName());
+		} else {
+			CbhsCb cb = JSON.parseObject(JSON.toJSONString(ys), CbhsCb.class);
+			cb.setOid(null);
+			cb.setType(SheObject.shType_fbgcl);
+			cb.setCbOid(ys.getOid());
+			cbSrManager.createCb(queryFactory, cb);
 		}
 		return ys;
 	}
