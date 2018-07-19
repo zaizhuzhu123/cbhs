@@ -8,8 +8,9 @@ import com.lgx.libframe.*;
 public class ResponseZyQtCbFetch implements Serializable{
 private static final long serialVersionUID = 10000001L;
 
-private List<CbhsDaysZyQtCb> result;;// 自营其他成本集合
-private long total;// 总条数
+private List<CbhsDaysZyQtCb> result;;// 
+private long total;// 
+private  CbhsDaysZyQtCb  hj;// 
 public List<CbhsDaysZyQtCb>  getResult(){
     return this.result;
 }
@@ -26,6 +27,18 @@ public long  getTotal(){
 public void setTotal(long total){
  
         this.total=total;
+
+}
+
+public CbhsDaysZyQtCb  getHj(){ 
+
+    return this.hj;
+
+}
+
+public void setHj(CbhsDaysZyQtCb hj){
+ 
+        this.hj=hj;
 
 }
 

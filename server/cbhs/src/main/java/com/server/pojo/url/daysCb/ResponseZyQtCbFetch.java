@@ -9,10 +9,12 @@ import java.math.BigDecimal;
 import org.hibernate.validator.constraints.*;
 public class ResponseZyQtCbFetch implements Serializable {
 	private static final long serialVersionUID = 1L;
-	@ApiModelProperty(value = "自营其他成本集合")
+	@ApiModelProperty(value = "")
 	private List<CbhsDaysZyQtCb> result= new ArrayList<>();;
-	@ApiModelProperty(value = "总条数")
+	@ApiModelProperty(value = "")
 	private Long total= 0L;
+	@ApiModelProperty(value = "")
+	private CbhsDaysZyQtCb  hj;
 
 	public List<CbhsDaysZyQtCb> getResult() {
     	return this.result;
@@ -30,6 +32,18 @@ public class ResponseZyQtCbFetch implements Serializable {
 	public void setTotal(Long total) {
  
         this.total = total;
+
+	}
+
+	public CbhsDaysZyQtCb getHj() { 
+
+    	return this.hj;
+
+	}
+
+	public void setHj(CbhsDaysZyQtCb hj) {
+ 
+        this.hj = hj;
 
 	}
 

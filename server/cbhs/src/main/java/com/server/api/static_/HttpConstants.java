@@ -1708,7 +1708,7 @@ public class HttpConstants {
     urlInfo91.setMsgReaquest("com.server.pojo.url.daysCb.RequestGlfyFetch");
     urlInfo91.setReaquestDepict("主键,部门ID,工程项目ID,开始日期,结束日期,页码,数量,开始ID");
     urlInfo91.setMsgResponse("com.server.pojo.url.daysCb.ResponseGlfyFetch");
-    urlInfo91.setResponseDepict("管理费用集合,总条数");
+    urlInfo91.setResponseDepict("管理费用集合,总条数,合计");
     urlInfo91.setTransation(true);
     urlInfo91.setRestClass("glfyFetch");
     webCommands.put(urlInfo91.getUrl(),urlInfo91);
@@ -1778,7 +1778,7 @@ public class HttpConstants {
     urlInfo96.setMsgReaquest("com.server.pojo.url.daysCb.RequestZyLxygCbFetch");
     urlInfo96.setReaquestDepict("主键,部门ID,工程项目ID,开始日期,结束日期,页码,数量,开始ID");
     urlInfo96.setMsgResponse("com.server.pojo.url.daysCb.ResponseZyLxygCbFetch");
-    urlInfo96.setResponseDepict("自营零星用工成本集合,总条数");
+    urlInfo96.setResponseDepict("自营零星用工成本集合,总条数,合计");
     urlInfo96.setTransation(true);
     urlInfo96.setRestClass("zyLxygCbFetch");
     webCommands.put(urlInfo96.getUrl(),urlInfo96);
@@ -1946,7 +1946,7 @@ public class HttpConstants {
     urlInfo108.setMsgReaquest("com.server.pojo.url.daysCb.RequestZyCailiaoCbFetch");
     urlInfo108.setReaquestDepict("主键,部门ID,工程量ID,工程项目ID,开始日期,结束日期,页码,数量,开始ID");
     urlInfo108.setMsgResponse("com.server.pojo.url.daysCb.ResponseZyCailiaoCbFetch");
-    urlInfo108.setResponseDepict("自营材料成本集合,总条数");
+    urlInfo108.setResponseDepict("自营材料成本集合,总条数,合计");
     urlInfo108.setTransation(true);
     urlInfo108.setRestClass("zyCailiaoCbFetch");
     webCommands.put(urlInfo108.getUrl(),urlInfo108);
@@ -2002,7 +2002,7 @@ public class HttpConstants {
     urlInfo112.setMsgReaquest("com.server.pojo.url.daysCb.RequestFbGclTjCbFetch");
     urlInfo112.setReaquestDepict("主键,部门ID,工程量ID,工程项目ID,开始日期,结束日期,页码,数量,开始ID,类型(1:大项|2:有单价的项),审核状态 0所有 1 审核通过的,合同ID,合同名称,分包商ID,分包商名称,分包工程名称");
     urlInfo112.setMsgResponse("com.server.pojo.url.daysCb.ResponseFbGclTjCbFetch");
-    urlInfo112.setResponseDepict("分包工程量集合,总条数");
+    urlInfo112.setResponseDepict("分包工程量集合,总条数,合计");
     urlInfo112.setTransation(true);
     urlInfo112.setRestClass("fbGclTjCbFetch");
     webCommands.put(urlInfo112.getUrl(),urlInfo112);
@@ -2058,7 +2058,7 @@ public class HttpConstants {
     urlInfo116.setMsgReaquest("com.server.pojo.url.daysCb.RequestFbLjxmCbFetch");
     urlInfo116.setReaquestDepict("主键,部门ID,工程项目ID,月份时间戳,页码,数量,开始ID");
     urlInfo116.setMsgResponse("com.server.pojo.url.daysCb.ResponseFbLjxmCbFetch");
-    urlInfo116.setResponseDepict("分包临建项目集合,总条数");
+    urlInfo116.setResponseDepict("分包临建项目集合,总条数,合计");
     urlInfo116.setTransation(true);
     urlInfo116.setRestClass("fbLjxmCbFetch");
     webCommands.put(urlInfo116.getUrl(),urlInfo116);

@@ -13,6 +13,8 @@ public class ResponseZyCailiaoCbFetch implements Serializable {
 	private List<CbhsDaysZyCailiaoCb> result= new ArrayList<>();;
 	@ApiModelProperty(value = "总条数")
 	private Long total= 0L;
+	@ApiModelProperty(value = "合计")
+	private CbhsDaysZyCailiaoCb  hj;
 
 	public List<CbhsDaysZyCailiaoCb> getResult() {
     	return this.result;
@@ -30,6 +32,18 @@ public class ResponseZyCailiaoCbFetch implements Serializable {
 	public void setTotal(Long total) {
  
         this.total = total;
+
+	}
+
+	public CbhsDaysZyCailiaoCb getHj() { 
+
+    	return this.hj;
+
+	}
+
+	public void setHj(CbhsDaysZyCailiaoCb hj) {
+ 
+        this.hj = hj;
 
 	}
 
