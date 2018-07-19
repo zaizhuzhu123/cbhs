@@ -10,6 +10,7 @@ private static final long serialVersionUID = 10000001L;
 
 private List<CbhsMonthZyLxygCbYs> result;;// 自营零星用工成本集合
 private long total;// 总条数
+private  CbhsMonthZyLxygCbYs  hj;// 合计
 public List<CbhsMonthZyLxygCbYs>  getResult(){
     return this.result;
 }
@@ -26,6 +27,18 @@ public long  getTotal(){
 public void setTotal(long total){
  
         this.total=total;
+
+}
+
+public CbhsMonthZyLxygCbYs  getHj(){ 
+
+    return this.hj;
+
+}
+
+public void setHj(CbhsMonthZyLxygCbYs hj){
+ 
+        this.hj=hj;
 
 }
 

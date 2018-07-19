@@ -10,6 +10,7 @@ private static final long serialVersionUID = 10000001L;
 
 private List<CbhsDaysGclSr> result;;// 工程收入集合
 private long total;// 总条数
+private  CbhsDaysGclSr  hj;// 合计
 public List<CbhsDaysGclSr>  getResult(){
     return this.result;
 }
@@ -26,6 +27,18 @@ public long  getTotal(){
 public void setTotal(long total){
  
         this.total=total;
+
+}
+
+public CbhsDaysGclSr  getHj(){ 
+
+    return this.hj;
+
+}
+
+public void setHj(CbhsDaysGclSr hj){
+ 
+        this.hj=hj;
 
 }
 

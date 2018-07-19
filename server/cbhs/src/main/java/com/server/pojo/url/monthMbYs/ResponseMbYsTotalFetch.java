@@ -15,6 +15,8 @@ public class ResponseMbYsTotalFetch implements Serializable {
 	private Long total= 0L;
 	@ApiModelProperty(value = "月份所有部门总预算")
 	private BigDecimal monthYsTotal= new BigDecimal(0);
+	@ApiModelProperty(value = "合计")
+	private uiCbhsMonthWebTotal  hj;
 
 	public List<uiCbhsMonthWebTotal> getResult() {
     	return this.result;
@@ -44,6 +46,18 @@ public class ResponseMbYsTotalFetch implements Serializable {
 	public void setMonthYsTotal(BigDecimal monthYsTotal) {
  
         this.monthYsTotal = monthYsTotal;
+
+	}
+
+	public uiCbhsMonthWebTotal getHj() { 
+
+    	return this.hj;
+
+	}
+
+	public void setHj(uiCbhsMonthWebTotal hj) {
+ 
+        this.hj = hj;
 
 	}
 

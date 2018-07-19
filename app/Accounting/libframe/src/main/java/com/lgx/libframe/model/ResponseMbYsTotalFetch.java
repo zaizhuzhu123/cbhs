@@ -11,6 +11,7 @@ private static final long serialVersionUID = 10000001L;
 private List<uiCbhsMonthWebTotal> result;;// 结果
 private long total;// 总条数
 private double monthYsTotal;// 月份所有部门总预算
+private  uiCbhsMonthWebTotal  hj;// 合计
 public List<uiCbhsMonthWebTotal>  getResult(){
     return this.result;
 }
@@ -39,6 +40,18 @@ public double  getMonthYsTotal(){
 public void setMonthYsTotal(double monthYsTotal){
  
         this.monthYsTotal=monthYsTotal;
+
+}
+
+public uiCbhsMonthWebTotal  getHj(){ 
+
+    return this.hj;
+
+}
+
+public void setHj(uiCbhsMonthWebTotal hj){
+ 
+        this.hj=hj;
 
 }
 

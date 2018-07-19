@@ -30,6 +30,7 @@ import com.server.manager.CbSrManager;
 import com.server.pojo.bean.CbhsDaysGclSr;
 import com.server.pojo.bean.CbhsDaysQtSr;
 import com.server.pojo.bean.CbhsGclQdYs;
+import com.server.pojo.bean.CbhsMonthFbCailiaoCbYs;
 import com.server.pojo.bean.CbhsSr;
 import com.server.pojo.bean.QCbhsDaysGclSr;
 import com.server.pojo.bean.QCbhsDaysQtSr;
@@ -74,6 +75,13 @@ public class DaysSrApisServiceImp implements DaysSrApisService {
 		PagerResult prResult = jpaquery.fetchPager(request.getPageNum(), request.getPageSize());
 		response.setTotal(prResult.getTotal());
 		response.setResult(prResult.getResult());
+		CbhsDaysGclSr hj = new CbhsDaysGclSr();
+		if (response.getResult().size() > 0) {
+			for (CbhsDaysGclSr ys : response.getResult()) {
+				hj.setTotal(hj.getTotal().add(ys.getTotal()));
+			}
+		}
+		response.setHj(hj);
 		return response;
 	}
 
@@ -109,9 +117,7 @@ public class DaysSrApisServiceImp implements DaysSrApisService {
 					bv.vali(BeanValidation.beanType.project, BeanValidation.valiType.all, ys.getProjectOid());
 					bv.vali(BeanValidation.beanType.dept, BeanValidation.valiType.all, ys.getDeptOid());
 					Preconditions.checkArgument(ys.getGlobalGclYsOid() > 0, "工程量ID不能为空!");
-					Preconditions.checkArgument(
-							queryFactory.exists(QCbhsGclQdYs.cbhsGclQdYs, QCbhsGclQdYs.cbhsGclQdYs.oid.eq(ys.getGlobalGclYsOid()).and(QCbhsGclQdYs.cbhsGclQdYs.projectOid.eq(ys.getProjectOid()))),
-							"工程量项目不存在!");
+					Preconditions.checkArgument(queryFactory.exists(QCbhsGclQdYs.cbhsGclQdYs, QCbhsGclQdYs.cbhsGclQdYs.oid.eq(ys.getGlobalGclYsOid()).and(QCbhsGclQdYs.cbhsGclQdYs.projectOid.eq(ys.getProjectOid()))), "工程量项目不存在!");
 					long time = ys.getDateTimeStamp() > 0 ? ys.getDateTimeStamp() : System.currentTimeMillis();
 					DateTime dt = new DateTime(time);
 					DateTime curDt = new DateTime(System.currentTimeMillis());
@@ -129,8 +135,7 @@ public class DaysSrApisServiceImp implements DaysSrApisService {
 					if (cbhsGclQdYs.getCompleteCount().add(ys.getCount()).compareTo(cbhsGclQdYs.getCount()) > 0) {
 						throw new ServiceException(new ExceptionResponse(-1, ys.getGlobalGclYsName() + "结算量已合计超过总工程清单总数量" + ys.getCount().stripTrailingZeros()));
 					}
-					queryFactory.update(QCbhsGclQdYs.cbhsGclQdYs).set(QCbhsGclQdYs.cbhsGclQdYs.completeCount, QCbhsGclQdYs.cbhsGclQdYs.completeCount.add(ys.getCount()))
-							.where(QCbhsGclQdYs.cbhsGclQdYs.oid.eq(ys.getGlobalGclYsOid())).execute();
+					queryFactory.update(QCbhsGclQdYs.cbhsGclQdYs).set(QCbhsGclQdYs.cbhsGclQdYs.completeCount, QCbhsGclQdYs.cbhsGclQdYs.completeCount.add(ys.getCount())).where(QCbhsGclQdYs.cbhsGclQdYs.oid.eq(ys.getGlobalGclYsOid())).execute();
 					CbhsSr sr = JSON.parseObject(JSON.toJSONString(ys), CbhsSr.class);
 					sr.setCbOid(ys.getOid());
 					sr.setType(1);
@@ -164,6 +169,13 @@ public class DaysSrApisServiceImp implements DaysSrApisService {
 		PagerResult prResult = jpaquery.fetchPager(request.getPageNum(), request.getPageSize());
 		response.setTotal(prResult.getTotal());
 		response.setResult(prResult.getResult());
+		CbhsDaysQtSr hj = new CbhsDaysQtSr();
+		if (response.getResult().size() > 0) {
+			for (CbhsDaysQtSr ys : response.getResult()) {
+				hj.setTotal(hj.getTotal().add(ys.getTotal()));
+			}
+		}
+		response.setHj(hj);
 		return response;
 	}
 

@@ -10,6 +10,7 @@ private static final long serialVersionUID = 10000001L;
 
 private List<CbhsMonthFbCailiaoCbYs> result;;// 分包材料成本集合
 private long total;// 总条数
+private  CbhsMonthFbCailiaoCbYs  hj;// 合计
 public List<CbhsMonthFbCailiaoCbYs>  getResult(){
     return this.result;
 }
@@ -26,6 +27,18 @@ public long  getTotal(){
 public void setTotal(long total){
  
         this.total=total;
+
+}
+
+public CbhsMonthFbCailiaoCbYs  getHj(){ 
+
+    return this.hj;
+
+}
+
+public void setHj(CbhsMonthFbCailiaoCbYs hj){
+ 
+        this.hj=hj;
 
 }
 
